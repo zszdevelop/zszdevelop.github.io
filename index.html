@@ -93,8 +93,7 @@
 <p>这时候、我们必须赶在这一波潮流之前学好web开发</p>
 <p>这里粗略的讲解一下</p>
 <p>web：分成server端（服务器）和client（客户端）他们要通过浏览器进行传输数据，浏览器必须要支持http协议。</p>
-<p>web的工作原理：</p>
-<ul>
+<h2 id="web的工作原理：">web的工作原理：</h2><ul>
 <li><p>1.建立连接</p>
 </li>
 <li><p>2.client通过浏览器向server端发送request</p>
@@ -104,12 +103,22 @@
 <li><p>4.关闭连接</p>
 </li>
 </ul>
+<h2 id="server是怎么处理client发送上来的请求的呢">server是怎么处理client发送上来的请求的呢</h2><ul>
+<li>server创建一个servlet的实例（调用init（））；</li>
+<li>client的请求到达server；</li>
+<li>server将请求发送给servlet；</li>
+<li>servlet生成对应请求的相应；</li>
+<li>server激活Servlet的service()方法，传递请求和响应对象作为参数；</li>
+</ul>
+<h2 id="server是如何创建servlet的呢？">server是如何创建servlet的呢？</h2><p>通过jsp页面，也就是包含静态的html代码和动态的java程序以及其他脚本写在一起的页面，最终通过servlet容器编译成完servlet类（java类）。</p>
+<p>现在我们一般使用Tomcat作为servlet的容器。在我们执行jsp后进行第一次执行时。tomcat就先将jsp转化为了servlet</p>
+<p>重复一边jsp和servlet和tomcat<br>jsp：是一个带有java程序的html<br>servlet：是一个jsp执行后的java类<br>tomcat：是执行这个编译的容器</p>
 <p>其中的具体实现以后慢慢分享</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="ci9pohgln0000o8b21r22wlam" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="ci9psc2zf0000x8b28q4ix8un" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +164,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="ci9pohgn70002o8b2icukpkw4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="ci9psc3130002x8b2comyeut7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/hello-world/" data-id="ci9pohgmu0001o8b2wtdpws2h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/hello-world/" data-id="ci9psc30y0001x8b21m16brdd" class="article-share-link">Share</a>
       
       
     </footer>
