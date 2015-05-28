@@ -61,6 +61,88 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2015-5-27" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/05/27/2015-5-27/" class="article-date">
+  <time datetime="2015-05-27T13:14:38.000Z" itemprop="datePublished">2015-05-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/27/2015-5-27/">Android 非同步任務 - AsyncTask</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android_非同步任務_-_AsyncTask">Android 非同步任務 - AsyncTask</h1><h2 id="Android为什么要使用多线程">Android为什么要使用多线程</h2><ul>
+<li>提高用户体验或者避免ANR（如果在主线程（UI线程）操作一些耗时的操作容易造成卡顿<br>android 规定主线程中不可以做http 连接操作。）</li>
+<li>异步</li>
+<li>多任务</li>
+</ul>
+<p>当主线程（UI线程）操作到一些复杂的IO操作（文件操作，网络操作，数据库操作），复杂运算等耗时操作，容易造成卡顿。</p>
+<p>应用程序弹出“无响应”的对话框（ANR），那是因为在Android主线程中进行了超时的操作，过多的阻塞了主线程就会导致应用出现ANR的Waring。(android 规定主线程中不可以做http 连接操作)</p>
+<h2 id="AsyncTask是什么">AsyncTask是什么</h2><p>  AsyncTask,是android提供的輕量級的非同步類,可以直接繼承AsyncTask,在類中實現非同步操作,並提供介面反饋當前非同步執行的程度(可以通過介面實現UI進度更新),最後反饋執行的結果給UI主線程.</p>
+<h2 id="为什么使用AsyncTask">为什么使用AsyncTask</h2><ul>
+<li>AsyncTask能实现多线程，避免ANR</li>
+<li>简单快捷易操作</li>
+<li>过程可控</li>
+</ul>
+<h2 id="AsyncTask怎么使用">AsyncTask怎么使用</h2><p>AsyncTask定义了三种泛型类型 Params，Progress和Result。<br>Params 启动任务执行的输入参数，比如HTTP请求的URL。<br>Progress 后台任务执行的百分比。<br>Result 后台执行任务最终返回的结果，比如String。 </p>
+<pre><code>`private class <span class="type">TestAsyncTask</span> extends <span class="type">AsyncTask</span>&lt;<span class="type">String</span>, <span class="type">Void</span>, <span class="type">Boolean</span>&gt; 
+
+{
+
+ @<span class="type">Override</span>
+  protected <span class="type">void</span> onPreExecute() 
+  {
+    //最先执行的就是这个。一遍添加进度条
+ }
+
+  @<span class="type">Override</span>
+  protected <span class="type">Boolean</span> doInBackground(<span class="type">String</span>... params)
+  {
+    //这个是在后台执行的东西，就是说，它自动另外开了个线程运行，不影响你现在做的东西。
+    //复杂的<span class="type">IO</span>操作（文件操作，网络操作，数据库操作），复杂运算等耗时操作
+ }
+
+
+@<span class="type">Override</span>
+  protected <span class="type">void</span> onPostExecute(<span class="type">Boolean</span> <span class="literal">result</span>)
+  {
+    <span class="keyword">if</span> (<span class="literal">result</span>)
+    {
+      //后台执行的完毕后，它会用<span class="type">Result</span>通知这里，就是执行这里了。
+  }
+    <span class="keyword">else</span>
+    {
+      //所以最好判断一下<span class="literal">result</span>，写个<span class="keyword">else</span>，判断后台执行的东西是不是出问题了。
+  }
+  }
+}`
+</code></pre><p><a href="http://yuchen.blog.51cto.com/2739238/593019" title="如何在Android中用好多线程" target="_blank" rel="external">http://yuchen.blog.51cto.com/2739238/593019</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cia7jt07t0002fwb2vubxtsvq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2015-5-24" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/24/2015-5-24/" class="article-date">
@@ -108,7 +190,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cia2kb0k60002h8b2pt7qjprf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cia7jt07t0003fwb29z46e5jf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +245,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cia2kb0k80003h8b2gsz1xjv8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cia7jt07t0004fwb293fklgm1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -222,7 +304,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cia2kb0kb0004h8b2eu94yqq6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cia7jt07t0005fwb2ftmpoqqp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +371,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cia2kb0ju0000h8b2mk6gk7g5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cia7jt05n0000fwb2f33ilkpn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -340,7 +422,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cia2kb0k20001h8b2pkczm9p1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cia7jt06y0001fwb27aenvpiz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -365,7 +447,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">5</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">6</span></li></ul>
     </div>
   </div>
 
@@ -375,6 +457,10 @@
     <h3 class="widget-title">Recents</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2015/05/27/2015-5-27/">Android 非同步任務 - AsyncTask</a>
+          </li>
         
           <li>
             <a href="/2015/05/24/2015-5-24/">Dao模式</a>
@@ -390,10 +476,6 @@
         
           <li>
             <a href="/2015/05/15/2015-5-15/">web工作原理</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/14/First-Blog/">First Blog</a>
           </li>
         
       </ul>
