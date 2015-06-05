@@ -61,6 +61,450 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-2015-6-5-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/05/2015-6-5-2/" class="article-date">
+  <time datetime="2015-06-05T03:06:22.000Z" itemprop="datePublished">2015-06-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/05/2015-6-5-2/">java集合的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Java集合">Java集合</h1><p>java集合接口（接口不能直接实例化、要实例化他的子类）：</p>
+<ul>
+<li>Collection 接口</li>
+<li>List接口</li>
+<li>Set接口</li>
+<li>Iterator接口</li>
+<li>Map接口</li>
+</ul>
+<h2 id="接口之间的关系图">接口之间的关系图</h2><p><img src="http://cl.ly/image/1F3P3E42350q/IC$HBD%601%7BZ2A%60S3K]L@C05V.png" alt="接口之间关系"></p>
+<h2 id="集合">集合</h2><ul>
+<li>1.集合可以理解为一个动态的对象数组，不同的是集合的对象内容可以任意扩充</li>
+<li>2.集合的特点：<br> 性能高，容易扩展和修改<h2 id="List接口">List接口</h2>List继承自Collection</li>
+<li>1.List接口可以存放任意的数据，而且在List接口中内容是可以重复的</li>
+<li>2.List接口常用子类</li>
+<li><ul>
+<li>Arraylist</li>
+<li>Vector</li>
+</ul>
+</li>
+</ul>
+<p>Arraylist和Vector的实现差不多，他们之间的区别就是</p>
+<ul>
+<li>Arraylist：采用异步处理方式，性能高，属于非线程安全。</li>
+<li>Vector：采用同步处理方式，性能低，属于线程安全。</li>
+</ul>
+<p>ArrayList的简单实例</p>
+<pre><code><span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public</span> class ListTest {
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) {
+    <span class="comment">// TODO Auto-generated method stub</span>
+
+    <span class="comment">//List是一个接口，必须实例化其子类。</span>
+    List&lt;<span class="keyword">String</span>&gt; list=<span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();
+    <span class="comment">//集合使用add添加</span>
+    list.<span class="built_in">add</span>(<span class="string">"添加字符串"</span>);
+    list.<span class="built_in">add</span>(<span class="string">"A"</span>);
+    list.<span class="built_in">add</span>(<span class="string">"B"</span>);
+    list.<span class="built_in">add</span>(<span class="string">"C"</span>);
+
+    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt;list.<span class="built_in">size</span>(); i++) {
+        <span class="comment">//集合使用get方法来获取元素内容。</span>
+        System.out.<span class="built_in">println</span>(list.<span class="built_in">get</span>(i));
+    }
+    <span class="comment">//remove删除操作</span>
+    list.remove(<span class="number">0</span>);
+    System.out.<span class="built_in">println</span>(<span class="string">"删除后的操作"</span>);
+    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; list.<span class="built_in">size</span>(); i++) {
+        System.out.<span class="built_in">println</span>(list.<span class="built_in">get</span>(i));
+    }
+    System.out.<span class="built_in">println</span>(<span class="string">"判断集合是否为空"</span>+list.isEmpty());
+    <span class="comment">//indexOf返回值是元素的位置。</span>
+    System.out.<span class="built_in">println</span>(<span class="string">"判断元素是否存在，例如C: "</span>+list.indexOf(<span class="string">"C"</span>));
+}
+
+}
+</code></pre><h2 id="Set接口">Set接口</h2><ul>
+<li>1.Set接口中不能加入重复元素，但是可以排序</li>
+<li>2.常用子类：HashSet 和TreeSet </li>
+</ul>
+<p>HashSet：无順序性，查找速度快<br>（注意相同多个D，set只会读取一个）<br>TreeSet：有排序性(依字母)，由紅黑樹所建 </p>
+<pre><code>import java.util.TreeSet;
+
+public class SetTest {
+
+public static void main(String[] args) {
+    // TODO Auto-generated method stub
+
+//        <span class="operator"><span class="keyword">Set</span>&lt;<span class="keyword">String</span>&gt; <span class="keyword">set</span>=new HashSet&lt;<span class="keyword">String</span>&gt;();</span>
+    <span class="operator"><span class="keyword">Set</span>&lt;<span class="keyword">String</span>&gt; <span class="keyword">set</span>=new TreeSet&lt;<span class="keyword">String</span>&gt;();</span>
+    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"2"</span>);</span>
+    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"4"</span>);</span>
+    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"1"</span>);</span>
+    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"31"</span>);</span>
+    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"a"</span>);</span>
+    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"D"</span>);</span>
+    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"D"</span>);</span>
+
+    System.out.println(<span class="operator"><span class="keyword">set</span>);</span>
+}
+
+}
+</code></pre><h2 id="Iterator接口">Iterator接口</h2><p>1.集合输出的标准操作：标准做法，使用Iterator接口<br>2.操作原理：Iterator是专门的迭代输出接口，迭代输出就是将元素一个个进行判断，判断其是否有内容，如果有内容则把内容取出。</p>
+<p>Iterator的实例化比较特别：是通过集合来获得他的一个对象，来实例化。</p>
+<p>hasNext()：判断集合中元素是否遍历完毕，如果没有，就返回true<br>next() ：返回下一个元素 </p>
+<pre><code>package com.zsz.develop;
+
+<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
+<span class="keyword">import</span> java.util.<span class="type">Iterator</span>;
+<span class="keyword">import</span> java.util.<span class="type">List</span>;
+
+public class <span class="type">IteratorTest</span> {
+
+public <span class="keyword">static</span> <span class="type">void</span> main(<span class="type">String</span>[] args) {
+    // <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub
+
+    <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; list=new <span class="type">ArrayList</span>&lt;<span class="type">Integer</span>&gt;();
+    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
+        list.add(i);
+
+    }
+    //使用<span class="type">Iterator</span>标准输出格式来输出
+    <span class="type">Iterator</span>&lt;<span class="type">Integer</span>&gt; <span class="keyword">iterator</span>=list.<span class="keyword">iterator</span>();
+    <span class="keyword">while</span> (<span class="keyword">iterator</span>.hasNext()) {
+        <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="keyword">iterator</span>.next());
+    }
+}
+
+}
+</code></pre><h2 id="Map接口">Map接口</h2><p>1.保存形式：是以Key—value对的方式来保存<br>2.常用子类</p>
+<ul>
+<li>HashMap：无序存放，KEY不允许重复、</li>
+<li>Hashtable：无序存放，KEY不允许重复、</li>
+</ul>
+<p>在list，set中添加数据都是使用add，而map是使用put添加数据。<br>通过map.get（）可以得到Key中的Value。</p>
+<p>要得到所以的键：Map.keySet() 返回类型是set&lt;&gt;;<br>要得到所以的值：Map.Value 返回类型是Collection&lt;&gt;;</p>
+<p>map实例</p>
+<pre><code>package com.zsz.develop;
+
+<span class="keyword">import</span> java.util.<span class="type">Collection</span>;
+<span class="keyword">import</span> java.util.<span class="type">HashMap</span>;
+<span class="keyword">import</span> java.util.<span class="type">Iterator</span>;
+<span class="keyword">import</span> java.util.<span class="type">Map</span>;
+<span class="keyword">import</span> java.util.<span class="type">Set</span>;
+
+public class <span class="type">MapTest</span> {
+
+public <span class="keyword">static</span> <span class="type">void</span> main(<span class="type">String</span>[] args) {
+    // <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub
+
+    //键值对的形式来存储数据
+    <span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">String</span>&gt; map=new <span class="type">HashMap</span>&lt;<span class="type">String</span>, <span class="type">String</span>&gt;();
+    map.put(<span class="string">"key1"</span>, <span class="string">"first"</span>);
+    map.put(<span class="string">"key2"</span>, <span class="string">"first2"</span>);
+    map.put(<span class="string">"key3"</span>, <span class="string">"first3"</span>);
+    map.put(<span class="string">"key4"</span>, <span class="string">"first4"</span>);
+
+    //得到所以的键
+    <span class="type">Set</span>&lt;<span class="type">String</span>&gt; <span class="type">set</span>=map.keySet();
+    <span class="type">Iterator</span>&lt;<span class="type">String</span>&gt; <span class="keyword">iterator</span>=<span class="type">set</span>.<span class="keyword">iterator</span>();
+    <span class="keyword">while</span> (<span class="keyword">iterator</span>.hasNext()) {
+        <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="keyword">iterator</span>.next());
+    }
+
+    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"上面为全部键，下面为全部值"</span>);
+    //得到所有的值
+    <span class="type">Collection</span>&lt;<span class="type">String</span>&gt; collection=map.values();
+    <span class="type">Iterator</span>&lt;<span class="type">String</span>&gt; i=collection.<span class="keyword">iterator</span>();
+    <span class="keyword">while</span> (i.hasNext()) {
+        <span class="type">System</span>.<span class="keyword">out</span>.println(i.next());
+
+    }
+
+    //判断是否存在键
+    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"是否存在键： "</span>+map.containsKey(<span class="string">"key1"</span>));
+    //判断是否存在值
+    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"是否存在值： "</span>+map.containsKey(<span class="string">"first1"</span>));
+
+}
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="ciajapx4o0003qsb2kov6bl4y" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2015-6-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/04/2015-6-5/" class="article-date">
+  <time datetime="2015-06-04T13:40:35.000Z" itemprop="datePublished">2015-06-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/04/2015-6-5/">SharedPrefenences的使用</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SharedPrefenences是什么">SharedPrefenences是什么</h1><p>SharedPrefenences是一种轻型的数据存储方式，他的本质是基于XML文件存储<strong>Ket-Value键值对数据</strong>，通常用来存储一些简单的<strong>配置信息</strong>。</p>
+<p>存储位置在/data/data/&lt;包名&gt;/shared_prefs目录下。</p>
+<p>SharedPrefenences对象本身只能获取数据而<strong>不支持存储和修改，存储修改要通过Editor对象实现。</strong></p>
+<h1 id="SharedPrefenences的优势">SharedPrefenences的优势</h1><p>SharedPrefenences与SQLite数据库相比，免去了创建数据库，创建表，写SQL语句等操作，更加易用。</p>
+<p>支持的类型数据</p>
+<ul>
+<li>boolean</li>
+<li>int</li>
+<li>float</li>
+<li>long</li>
+<li>String</li>
+</ul>
+<p>但是无法进行条件查询。</p>
+<h1 id="SharedPrefenences的代码实现">SharedPrefenences的代码实现</h1><p>Activity：</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.sharedpreferencestest;
+
+<span class="keyword">import</span> android.content.SharedPreferences;
+<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.EditText;
+<span class="keyword">import</span> android.widget.Toast;
+
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
+
+<span class="keyword">private</span> EditText etData;
+<span class="keyword">private</span>  SharedPreferences sharedPreferences;
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    etData= (EditText) findViewById(R.id.etData);
+    sharedPreferences=getSharedPreferences(<span class="string">"sharedPrefXML"</span>,MODE_PRIVATE);
+    <span class="comment">//要编辑修改sharedPreferences就要使用Editor来修改</span>
+   <span class="keyword">final</span> SharedPreferences.Editor editor= sharedPreferences.edit();
+
+    <span class="comment">//读取SharedPreferences数据</span>
+    findViewById(R.id.btnRead).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+
+            <span class="comment">//得到sharedPreferences的值,传进去第一个参数是键，第二个是如果为空返回的值。</span>
+          String value=  sharedPreferences.getString(<span class="string">"key-name"</span>,<span class="string">"当前数值不存在"</span>);
+            Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+        }
+    });
+
+    <span class="comment">//写入SharedPreferences数据</span>
+    findViewById(R.id.btnWrite).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+
+            <span class="comment">//要修改存储什么类型数据就put什么类型,这里传进去的是Key-Value</span>
+            editor.putString(<span class="string">"key-name"</span>,etData.getText().toString().trim());
+            <span class="comment">//commit提交数据,commit返回值为boolean。进行判断</span>
+          <span class="keyword">if</span> (editor.commit()) {
+              Toast.makeText(getApplicationContext(), <span class="string">"写入成功"</span>, Toast.LENGTH_SHORT).show();
+          }
+        }
+    });
+
+
+
+}
+
+
+
+}
+</code></pre><p>layout档：</p>
+<pre><code>&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
+&lt;EditText
+   android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+   android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+   android:<span class="variable">id=</span><span class="string">"@+id/etData"</span>
+   /&gt;
+&lt;Button
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/btnRead"</span>
+    android:<span class="variable">text=</span><span class="string">"读取数据"</span>
+    /&gt;
+
+&lt;Button
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/btnWrite"</span>
+    android:<span class="variable">text=</span><span class="string">"写入数据"</span>
+    /&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>SharedPrefenences非常方便的使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="ciajapx4m0002qsb20nnuiezg" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="post-2015-6-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2015/06/04/2015-6-4/" class="article-date">
+  <time datetime="2015-06-04T08:03:24.000Z" itemprop="datePublished">2015-06-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/04/2015-6-4/">清除用户数据</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="清除用户数据">清除用户数据</h1><p>非常实用的清空数据函数。</p>
+<p>主要通过deleteFilesByDirectory（）函数删除文件，来达到清楚数据的功能。</p>
+<p>功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录</p>
+<pre><code>package com.fsd.zsz.manplan.main;
+
+/<span class="keyword">*</span><span class="keyword">*</span>
+ <span class="keyword">*</span> Created by shengzhong on 2015/6/3.
+ <span class="keyword">*</span>/
+
+
+import java.io.File;
+import android.content.Context;
+import android.os.Environment;
+/<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 本应用数据清除管理器 <span class="keyword">*</span>/
+public class DataCleanManager {
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
+    public static void cleanInternalCache(Context context) {
+        deleteFilesByDirectory(context.getCacheDir());
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
+    public static void cleanDatabases(Context context) {
+        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
+                + context.getPackageName() + <span class="string">"/databases"</span>));
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span>
+     <span class="keyword">*</span> <span class="keyword">*</span> 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
+     <span class="keyword">*</span> context
+     <span class="keyword">*</span>/
+    public static void cleanSharedPreference(Context context) {
+        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
+                + context.getPackageName() + <span class="string">"/shared_prefs"</span>));
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 按名字清除本应用数据库 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param dbName */</span>
+    public static void cleanDatabaseByName(Context context, String dbName) {
+        context.deleteDatabase(dbName);
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除/data/data/com.xxx.xxx/files下的内容 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
+    public static void cleanFiles(Context context) {
+        deleteFilesByDirectory(context.getFilesDir());
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span>
+     <span class="keyword">*</span> <span class="keyword">*</span> 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
+     <span class="keyword">*</span> context
+     <span class="keyword">*</span>/
+    public static void cleanExternalCache(Context context) {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            deleteFilesByDirectory(context.getExternalCacheDir());
+        }
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param filePath */</span>
+    public static void cleanCustomCache(String filePath) {
+        deleteFilesByDirectory(new File(filePath));
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有的数据 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param filepath */</span>
+    public static void cleanApplicationData(Context context, String... filepath) {
+        cleanInternalCache(context);
+        cleanExternalCache(context);
+        cleanDatabases(context);
+        cleanSharedPreference(context);
+        cleanFiles(context);
+        for (String filePath : filepath) {
+            cleanCustomCache(filePath);
+        }
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param directory */</span>
+    private static void deleteFilesByDirectory(File directory) {
+        if (directory != null &amp;&amp; directory.exists() &amp;&amp; directory.isDirectory()) {
+            for (File item : directory.listFiles()) {
+                item.delete();
+            }
+        }
+    }
+}
+</code></pre><p>出处：<a href="http://blog.csdn.net/berber78/article/details/38587567" target="_blank" rel="external">http://blog.csdn.net/berber78/article/details/38587567</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="ciajapx4q0004qsb2e3qxw48s" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-2015-5-31" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2015/05/31/2015-5-31/" class="article-date">
@@ -96,7 +540,28 @@
     <span class="comment">//得到时和分</span>
    <span class="keyword">final</span> <span class="built_in">int</span> <span class="built_in">hour</span>= calendar.<span class="built_in">get</span>(Calendar.HOUR_OF_DAY);
     <span class="keyword">final</span> <span class="built_in">int</span> <span class="built_in">minute</span>=calendar.<span class="built_in">get</span>(Calendar.MINUTE);
-</code></pre><h2 id="日期选择器">日期选择器</h2><pre><code>tvDate= (TextView) findViewById(R.id.tvDate);
+</code></pre><h2 id="时间选择器">时间选择器</h2><p>时间选择器：<br>TimePickerDialog(Contextcontext,TimePickerDialog.OnTimeSetListenercallBack, int hourOfDay, int minute, boolean is24HourView)</p>
+<ul>
+<li><p>其中TimePickerDialog.OnTimeSetListenercallBack是用户选择好时间后，通知应用的回调函数。监听用户更改时间参数，调用的方法。</p>
+</li>
+<li><p>is24HourView选择是否为24小时制</p>
+</li>
+<li></li>
+</ul>
+<pre><code>tvTime= (TextView) findViewById(R.id.tvTime);
+   tvTime.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+       <span class="annotation">@Override</span>
+       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+           <span class="keyword">new</span> TimePickerDialog(MainActivity.<span class="keyword">this</span>,<span class="keyword">new</span> TimePickerDialog.OnTimeSetListener() {
+               <span class="annotation">@Override</span>
+               <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onTimeSet</span><span class="params">(TimePicker timePicker, <span class="keyword">int</span> i, <span class="keyword">int</span> i2)</span> </span>{
+                   tvTime.setText(<span class="string">"shi"</span>+i+<span class="string">"fen"</span>+i2);
+               }
+           },<span class="number">10</span>,<span class="number">20</span>,<span class="keyword">true</span>).show();
+       }
+   });
+</code></pre><h2 id="日期选择器">日期选择器</h2><p>同理时间选择器</p>
+<pre><code>tvDate= (TextView) findViewById(R.id.tvDate);
    tvDate.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
        <span class="annotation">@Override</span>
        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
@@ -109,18 +574,6 @@
                }
 
            },<span class="number">2015</span>,<span class="number">6</span>,<span class="number">2</span>).show();
-       }
-   });
-</code></pre><h2 id="时间选择器">时间选择器</h2><pre><code>tvTime= (TextView) findViewById(R.id.tvTime);
-   tvTime.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
-       <span class="annotation">@Override</span>
-       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-           <span class="keyword">new</span> TimePickerDialog(MainActivity.<span class="keyword">this</span>,<span class="keyword">new</span> TimePickerDialog.OnTimeSetListener() {
-               <span class="annotation">@Override</span>
-               <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onTimeSet</span><span class="params">(TimePicker timePicker, <span class="keyword">int</span> i, <span class="keyword">int</span> i2)</span> </span>{
-                   tvTime.setText(<span class="string">"shi"</span>+i+<span class="string">"fen"</span>+i2);
-               }
-           },<span class="number">10</span>,<span class="number">20</span>,<span class="keyword">true</span>).show();
        }
    });
 </code></pre><p>Layout档</p>
@@ -141,7 +594,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="ciahw9bqc0002p4b2n4zmmj3h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="ciajapx4s0005qsb2dre4sazn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -223,7 +676,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="ciahw9bqe0003p4b250tdglfx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="ciajapx4u0006qsb2cbagc1s5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -280,7 +733,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="ciahw9bqg0004p4b2l3uvnmhv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="ciajapx4w0007qsb23h66rp98" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +788,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="ciahw9bqi0005p4b2jh0cxigd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="ciajapx4y0008qsb2u251qg0c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -394,7 +847,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="ciahw9bqk0006p4b2cvf77u5r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="ciajapx520009qsb23b39a5ju" class="article-share-link">Share</a>
       
       
     </footer>
@@ -461,7 +914,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="ciahw9boh0000p4b203gxvvy9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="ciajapx2h0000qsb2w82wkk3m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -512,7 +965,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="ciahw9bq20001p4b2g2qk0z0e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="ciajapx4b0001qsb28d0a4xo0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -537,7 +990,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">7</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/06/">June 2015</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/05/">May 2015</a><span class="archive-list-count">7</span></li></ul>
     </div>
   </div>
 
@@ -549,23 +1002,23 @@
       <ul>
         
           <li>
+            <a href="/2015/06/05/2015-6-5-2/">java集合的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/04/2015-6-5/">SharedPrefenences的使用</a>
+          </li>
+        
+          <li>
+            <a href="/2015/06/04/2015-6-4/">清除用户数据</a>
+          </li>
+        
+          <li>
             <a href="/2015/05/31/2015-5-31/">Android设置日期与时间</a>
           </li>
         
           <li>
             <a href="/2015/05/27/2015-5-27/">Android 非同步任務 - AsyncTask</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/24/2015-5-24/">Dao模式</a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/17/2015-5-17/">jsp两种设计模型 </a>
-          </li>
-        
-          <li>
-            <a href="/2015/05/16/2015-5-16/">jsp九大内置对象</a>
           </li>
         
       </ul>
