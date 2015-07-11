@@ -66,7 +66,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        10
+        12
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -92,6 +92,190 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/11/2015-7-11/">2015/7/11</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/11/2015-7-11/">
+    <time datetime="2015-07-11T10:25:33.000Z" itemprop="datePublished">2015-07-11</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="711问题集">711问题集</h1><ul>
+<li>1.The local variable conn may not have been initialized局部变量没有初始化问题？</li>
+</ul>
+<p>局部变量在进行读取操作之前必须进行初始化或进行赋值操作,否则会出现编译错误.</p>
+<ul>
+<li>2.连接数据库代码</li>
+</ul>
+<pre><code>package com.zsz.develop.util;
+<span class="preprocessor"><span class="keyword">import</span> java.sql.Connection;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.sql.DriverManager;</span>
+<span class="preprocessor"><span class="keyword">import</span> java.sql.SQLException;</span>
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseConnection</span> {</span>
+
+<span class="keyword">public</span> static Connection getConnection(){    
+
+    Connection conn=<span class="literal">null</span>;
+    <span class="keyword">try</span> {
+        <span class="class"><span class="keyword">Class</span>.<span class="title">forName</span>("<span class="title">com</span>.<span class="title">mysql</span>.<span class="title">jdbc</span>.<span class="title">Driver</span>");</span>
+        conn=DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test"</span>, <span class="string">"root"</span>, <span class="string">"SF948640."</span>);
+    } <span class="keyword">catch</span> (ClassNotFoundException e) {
+        // TODO Auto-generated <span class="keyword">catch</span> block
+        e.printStackTrace();
+    } <span class="keyword">catch</span> (SQLException e) {
+        // TODO Auto-generated <span class="keyword">catch</span> block
+        e.printStackTrace();
+    }
+
+    <span class="keyword">return</span> conn;
+}
+
+}
+</code></pre><ul>
+<li>3.为什么静态类方法可以直接调用？</li>
+</ul>
+<p>这是因为静态类方法实际上属于类，不同任何类实例相关，也不允许访问任何实例属性；因此这些方法可以共享，可以直接调用；而普通方法需要同类实例相关，因此必须在对应的实例中访问。</p>
+<pre><code>    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+<span class="comment">//当connection成为静态时、就可以直接调用。</span>
+<span class="comment">//        Connection conn=new BaseConnection().getConnection();</span>
+    Connection conn=BaseConnection.getConnection();
+    System.<span class="keyword">out</span>.println(conn);
+}
+</code></pre><ul>
+<li>4.PreparedStatement和Statement的使用</li>
+</ul>
+<p>PreparedStatement和Statement都是SQL执行器对象。PreparedStatement 对象已预编译过(所以第一次执行花费更多时间)，所以其执行速度要快于 Statement 对象。</p>
+<p>JDBC驱动的最佳化是基于使用的是什么功能. 选择PreparedStatement还是Statement取决于你要怎么使用它们. 对于只执行一次的SQL语句选择Statement是最好的. 相反, 如果SQL语句被多次执行选用PreparedStatement是最好的.</p>
+<ul>
+<li>5.结果集(ResultSet)用法<br>ResultSet，数据库结果集的数据表，通常通过执行查询数据库的语句生成。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cibz3bvq10002z0b29mhrdhs2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-6-8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/08/2015-6-8/">2015/6/8</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/06/08/2015-6-8/">
+    <time datetime="2015-06-08T07:24:12.000Z" itemprop="datePublished">2015-06-08</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android传数据到服务器端">Android传数据到服务器端</h1><p>在之前的博客中提到主线程中不能操作耗时的操作，例如网络操作。</p>
+<p>今天使用实例来使用AsnycTask。</p>
+<pre><code> public <span class="type">Robot</span> query(<span class="type">Robot</span> rqRobot) {
+
+    <span class="type">Gson</span> gson=<span class="keyword">new</span> <span class="type">Gson</span><span class="literal">()</span>;
+    <span class="type">String</span> url= <span class="type">MyData</span>.<span class="type">URL</span>+<span class="string">"RobotServlet"</span>;
+    <span class="type">HttpClient</span> client=<span class="keyword">new</span> <span class="type">DefaultHttpClient</span><span class="literal">()</span>;
+    <span class="type">HttpPost</span> post=<span class="keyword">new</span> <span class="type">HttpPost</span>(url);
+    <span class="type">List</span>&lt;<span class="type">NameValuePair</span>&gt; rqParmeter=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;<span class="literal">()</span>;
+    rqParmeter.add(<span class="keyword">new</span> <span class="type">BasicNameValuePair</span>(<span class="string">"input"</span>,gson.toJson(rqRobot)));
+    <span class="keyword">try</span> {
+        post.setEntity(<span class="keyword">new</span> <span class="type">UrlEncodedFormEntity</span>(rqParmeter, <span class="type">HTTP</span>.<span class="type">UTF_8</span>));
+
+    } catch (<span class="type">UnsupportedEncodingException</span> e) {
+        e.printStackTrace<span class="literal">()</span>;
+    }
+
+    <span class="type">Robot</span> rpRobot=null;
+    <span class="type">Log</span>.e(<span class="string">"niinin"</span>,<span class="string">"----------------------------"</span>);
+
+    <span class="keyword">try</span> {
+        <span class="type">HttpResponse</span> httpResponse=client.execute(post);
+        <span class="built_in">int</span> statusCode=  httpResponse.getStatusLine<span class="literal">()</span>.getStatusCode<span class="literal">()</span>;
+
+        <span class="type">Log</span>.e(<span class="string">"dsdsd"</span>,statusCode+<span class="string">""</span>);
+        <span class="keyword">if</span> (statusCode==<span class="number">200</span>){
+            <span class="type">HttpEntity</span> httpEntity= httpResponse.getEntity<span class="literal">()</span>;
+            <span class="type">Log</span>.e(<span class="string">"niinin"</span>,httpResponse.getEntity<span class="literal">()</span>.toString<span class="literal">()</span>);
+          rpRobot=gson.fromJson(<span class="type">EntityUtils</span>.toString(httpEntity),<span class="type">Robot</span>.<span class="keyword">class</span>);
+        }
+    } catch (<span class="type">IOException</span> e) {
+        e.printStackTrace<span class="literal">()</span>;
+    }
+
+    return rpRobot;
+}
+</code></pre><p> 执行client上传数据，接收到的就是返回值：<br>HttpResponse response = client.execute(post);</p>
+<p>得到返回值：response.getEntity()</p>
+<p>但是得到的返回值不是字符串，要先把他转为字符串：</p>
+<p>使用EntityUtils的方法来转化为字符串</p>
+<p>EntityUtils.toString(response.getEntity());</p>
+<pre><code> <span class="comment">// setting request parameters</span>
+    List&lt;NameValuePair&gt; requestParameters = <span class="keyword">new</span> ArrayList&lt;&gt;();
+    <span class="comment">// send imageSize parameter to server for recognition</span>
+    requestParameters.<span class="built_in">add</span>(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"action"</span>, <span class="string">"findById"</span>));
+    requestParameters.<span class="built_in">add</span>(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"imageSize"</span>, <span class="string">"400"</span>));
+    requestParameters.<span class="built_in">add</span>(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"id"</span>, Integer
+            .toString(spotId)));
+
+    <span class="keyword">try</span> {
+<span class="comment">//要将list转化为转化为Entity，可以调用UrlEncodedFormEntity方法转化</span>
+        post.setEntity(<span class="keyword">new</span> UrlEncodedFormEntity(requestParameters,
+                HTTP.UTF_8));
+</code></pre><p><a href="http://zszdevelop.github.io/2015/05/27/2015-5-27/" target="_blank" rel="external">http://zszdevelop.github.io/2015/05/27/2015-5-27/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cibz3bvq40003z0b23qc55ktb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-6-5-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -286,7 +470,7 @@ public <span class="keyword">static</span> <span class="type">void</span> main(<
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="ciajapx4o0003qsb2kov6bl4y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cibz3bvq80005z0b2ujoi1kh9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -423,7 +607,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="ciajapx4m0002qsb20nnuiezg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cibz3bvq60004z0b27fdfqp8i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -538,7 +722,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="ciajapx4q0004qsb2e3qxw48s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cibz3bvqd0006z0b2k2jgedfx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -641,7 +825,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="ciajapx4s0005qsb2dre4sazn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cibz3bvqg0007z0b2kxp1n97i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -727,7 +911,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="ciajapx4u0006qsb2cbagc1s5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cibz3bvqi0008z0b2648ofw0t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -788,7 +972,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="ciajapx4w0007qsb23h66rp98" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cibz3bvqk0009z0b20zes7u83" class="article-share-link">Share</a>
       
       
     </footer>
@@ -847,7 +1031,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="ciajapx4y0008qsb2u251qg0c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cibz3bvqm000az0b23p90rxhj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -910,7 +1094,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="ciajapx520009qsb23b39a5ju" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cibz3bvqp000bz0b2tsdmzwlg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -920,131 +1104,9 @@ public class DataCleanManager {
 
 
     
-      <article id="post-2015-5-15" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/15/2015-5-15/">web工作原理</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/05/15/2015-5-15/">
-    <time datetime="2015-05-15T13:01:21.000Z" itemprop="datePublished">2015-05-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Web的工作原理">Web的工作原理</h1><blockquote>
-<p>行业发展趋势：</p>
-<p>先有客户端迁移到<strong>移动端</strong></p>
-<p>再由移动端迁移到<strong>浏览器</strong></p>
-</blockquote>
-<p>随着云计算的迅速发展，网络速度的不断加快，浏览器的不断强大。云计算的普及已经越来越深入人心。这将会带来更大的发展空间，人们在网页上实现更多的操作。这也意味着未来十年内将迎来网页端的再一次高潮。</p>
-<p>我们这一代是最差的一代，似乎所有挣钱的行业都被抢占完了。<br>但我们这一代也是最幸运的一代，我们已经明确的知道了解网页端的开发能给我们带来的就业前景。</p>
-<p>这时候、我们必须赶在这一波潮流之前学好web开发</p>
-<p>这里粗略的讲解一下</p>
-<p>web：分成server端（服务器）和client（客户端）他们要通过浏览器进行传输数据，浏览器必须要支持http协议。</p>
-<h2 id="web的工作原理：">web的工作原理：</h2><ul>
-<li><p>1.建立连接</p>
-</li>
-<li><p>2.client通过浏览器向server端发送request</p>
-</li>
-<li><p>3.server再response返回给client</p>
-</li>
-<li><p>4.关闭连接</p>
-</li>
-</ul>
-<h2 id="server是怎么处理client发送上来的请求的呢">server是怎么处理client发送上来的请求的呢</h2><ul>
-<li>server创建一个servlet的实例（调用init（））；</li>
-<li>client的请求到达server；</li>
-<li>server将请求发送给servlet；</li>
-<li>servlet生成对应请求的相应；</li>
-<li>server激活Servlet的service()方法，传递请求和响应对象作为参数；</li>
-</ul>
-<h2 id="server是如何创建servlet的呢？">server是如何创建servlet的呢？</h2><p>通过jsp页面，也就是包含静态的html代码和动态的java程序以及其他脚本写在一起的页面，最终通过servlet容器编译成完servlet类（java类）。</p>
-<p>现在我们一般使用Tomcat作为servlet的容器。在我们执行jsp后进行第一次执行时。tomcat就先将jsp转化为了servlet</p>
-<p>重复一边jsp和servlet和tomcat<br>jsp：是一个带有java程序的html<br>servlet：是一个jsp执行后的java类<br>tomcat：是执行这个编译的容器</p>
-<p>其中的具体实现以后慢慢分享</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="ciajapx2h0000qsb2w82wkk3m" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-First-Blog" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/14/First-Blog/">First Blog</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/05/14/First-Blog/">
-    <time datetime="2015-05-14T12:36:21.000Z" itemprop="datePublished">2015-05-14</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="这是我的新博客">这是我的新博客</h2><h2 id="为什么要创建博客">为什么要创建博客</h2><ul>
-<li>对学习进行归纳总结</li>
-<li>纵观全局，对所学的知识扩散</li>
-<li>写博客的资源都源于网络，是我加以整理归纳得来。经过多方比对，一番思考，能加深我对问题的理解</li>
-<li><p>分享，收获最大的是自己</p>
-<h2 id="怎么写好博客">怎么写好博客</h2></li>
-<li><p>学习实践中遇到的问题，记录下来。</p>
-</li>
-<li>抽取时间，系统研究他的原理</li>
-<li>不盲从，不瞎编</li>
-<li>自己真正理解了再写博客</li>
-</ul>
-<blockquote>
-<p>人和人的差距源至业余时间。</p>
-</blockquote>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="ciajapx4b0001qsb28d0a4xo0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
+      <nav id="page-nav">
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      </nav>
     </section>
       
     </div>
