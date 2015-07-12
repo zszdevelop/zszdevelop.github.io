@@ -66,7 +66,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        12
+        13
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -92,6 +92,69 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-5-16" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/16/2015-5-16/">jsp九大内置对象</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/05/16/2015-5-16/">
+    <time datetime="2015-05-16T13:30:35.000Z" itemprop="datePublished">2015-05-16</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="jsp九大内置对象">jsp九大内置对象</h1><ul>
+<li>out 输出对象</li>
+<li>request 请求对象</li>
+<li>reponse 响应对象</li>
+<li>session 会话层对象</li>
+<li>application 应用层对象</li>
+<li>config 配置对象</li>
+<li>page 页面对象 </li>
+<li>pageContext  页面上下文对象</li>
+<li>Exception 异常对象</li>
+</ul>
+<h2 id="为什么要有内置对象">为什么要有内置对象</h2><p>因为这九大对象在jsp中使用太平繁，为了简化操作就事先内置在jsp中。程序员们就可以不用每次都去实例化操作。</p>
+<p>（程序编写的绝大部分原因都是为了提高效率）</p>
+<h2 id="out_（page）">out （page）</h2><p>out最常用的对象之一，代表了向客户端发送数据对象。</p>
+<h2 id="request_（request）">request （request）</h2><p>request 是客户端向服务器发出的请求。</p>
+<p>通过getParameter、getParameterNames和getParameterValues方法来获取请求对象中所包含的参数的值。</p>
+<p>也可以设置其属性值，setAttribute与getAttribute方法这两个方法先设置后取得。所以他们一般都是同时出现</p>
+<p>request的作用域只有在请求时，当请求结束时，得到响应后就销毁</p>
+<h2 id="response_（page）">response （page）</h2><p>response代表对客户端的响应。但一般比较少用，使用out直接输出</p>
+<h2 id="session（session）">session（session）</h2><p>session代表服务器与客户端所建立的会话。<br>一个完整的会话是：从客户端连到服务器的一个WebApplication开始，直到客户端与服务器断开连接为止。</p>
+<p>根据这个特性，session可以实现在线购物，密码安全等保存客户端状态信息操作</p>
+<h2 id="application（application）">application（application）</h2><p>application负责提供应用程序在服务器中运行时的一些全局信息。根据这个特性，他能实现浏览计数器</p>
+<h2 id="config（page）">config（page）</h2><h2 id="page（page）">page（page）</h2><h2 id="pageContext（page）">pageContext（page）</h2><h2 id="Exception（page）">Exception（page）</h2><p>括号中的为作用域<br>剩下的以后用到的时候再谈。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cic06o9tm000cicb2q66xjo1e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-5-15" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -153,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cibz3bvdi0000z0b282rgm06d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cic06o9s10000icb2laskj3ue" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cibz3bveb0001z0b26s80d6l3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cic06o9sp0001icb27s7hswwb" class="article-share-link">Share</a>
       
       
     </footer>

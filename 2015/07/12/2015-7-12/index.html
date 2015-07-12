@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015/7/12 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="7.12问题集For-Each循环Java[編輯]Java語言從JDK 1.5.0開始引入foreach循環。
+以下代碼用於循環列印myArray數組中的每個元素，java中的foreach循環使用for關鍵字，而非foreach。
+for (int x : myArray){
+  System.out.println(x);
+}
+他的语法如下
+for(type element: array)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015/7/12">
+<meta property="og:url" content="http://yoursite.com/2015/07/12/2015-7-12/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="7.12问题集For-Each循环Java[編輯]Java語言從JDK 1.5.0開始引入foreach循環。
+以下代碼用於循環列印myArray數組中的每個元素，java中的foreach循環使用for關鍵字，而非foreach。
+for (int x : myArray){
+  System.out.println(x);
+}
+他的语法如下
+for(type element: array)">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015/7/12">
+<meta name="twitter:description" content="7.12问题集For-Each循环Java[編輯]Java語言從JDK 1.5.0開始引入foreach循環。
+以下代碼用於循環列印myArray數組中的每個元素，java中的foreach循環使用for關鍵字，而非foreach。
+for (int x : myArray){
+  System.out.println(x);
+}
+他的语法如下
+for(type element: array)">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        13
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-7-12" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015/7/12
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/12/2015-7-12/">
+    <time datetime="2015-07-12T01:35:24.000Z" itemprop="datePublished">2015-07-12</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="7-12问题集">7.12问题集</h1><h2 id="For-Each循环">For-Each循环</h2><p>Java[編輯]<br>Java語言從JDK 1.5.0開始引入foreach循環。</p>
+<p>以下代碼用於循環列印myArray數組中的每個元素，java中的foreach循環使用for關鍵字，而非foreach。</p>
+<pre><code><span class="tag">for</span> (<span class="tag">int</span> <span class="rule"><span class="attribute">x </span>:<span class="value"> myArray){
+  System.out.<span class="function">println</span>(x)</span></span>;
+}
+</code></pre><p>他的语法如下</p>
+<pre><code><span class="tag">for</span>(<span class="tag">type</span> <span class="rule"><span class="attribute">element</span>:<span class="value"> array)
+
+　　{
+
+  　System.out.<span class="function">println</span>(element)</span></span>;
+
+　　}
+</code></pre><h2 id="两种方式实现插入">两种方式实现插入</h2><p>第一种直接书写sql语句。</p>
+<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(UserInfo userInfo)</span></span>{
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    <span class="keyword">try</span> {
+
+        String sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values('"</span>+userInfo.getName()+<span class="string">"','"</span>+userInfo.getPassword()+<span class="string">"')"</span>;
+        System.<span class="keyword">out</span>.println(sqlinsert);
+        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
+
+        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
+        <span class="keyword">int</span> i=ps.executeUpdate();
+        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
+            System.<span class="keyword">out</span>.println(<span class="string">"添加成功"</span>);
+        }<span class="keyword">else</span> {
+            System.<span class="keyword">out</span>.println(<span class="string">"添加失败"</span>);
+        }
+
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
+        <span class="keyword">try</span> {
+
+            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
+                ps.close();
+            }
+            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
+                conn.close();
+            }
+        } <span class="keyword">catch</span> (SQLException e) {
+            <span class="comment">// TODO Auto-generated catch block</span>
+            e.printStackTrace();
+
+        }
+    }
+}
+</code></pre><p>第二种使用占位符书写</p>
+<pre><code><span class="comment">/*
+ *占位符的优势。
+ *1.效率更高
+ *2.书写时不容易出错
+ *3.防止sql注入（安全问题） 
+ */</span>
+
+
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert2</span><span class="params">(UserInfo userInfo)</span></span>{
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    <span class="keyword">try</span> {
+
+        String sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values(?,?)"</span>;
+        System.<span class="keyword">out</span>.println(sqlinsert);
+        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
+        ps.setString(<span class="number">1</span>, userInfo.getName());
+        ps.setString(<span class="number">2</span>, userInfo.getPassword());
+        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
+        <span class="keyword">int</span> i=ps.executeUpdate();
+        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
+            System.<span class="keyword">out</span>.println(<span class="string">"添加成功"</span>);
+        }<span class="keyword">else</span> {
+            System.<span class="keyword">out</span>.println(<span class="string">"添加失败"</span>);
+        }
+
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
+        <span class="keyword">try</span> {
+
+            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
+                ps.close();
+            }
+            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
+                conn.close();
+            }
+            } <span class="keyword">catch</span> (SQLException e) {
+            <span class="comment">// TODO Auto-generated catch block</span>
+            e.printStackTrace();
+
+    }
+}
+}
+</code></pre><p>他的调用我也补充一下</p>
+<pre><code>public static void main(<span class="type">String</span><span class="literal">[]</span> args) {
+        <span class="type">ArrayList</span>&lt;<span class="type">UserInfo</span>&gt; arrayList= <span class="keyword">new</span> <span class="type">UserInfoDao</span><span class="literal">()</span>.getList<span class="literal">()</span>;
+        <span class="type">UserInfo</span> userInfo=<span class="keyword">new</span> <span class="type">UserInfo</span><span class="literal">()</span>;
+        userInfo.setName(<span class="string">"shan"</span>);
+        userInfo.setPassword(<span class="string">"123---"</span>);
+        <span class="keyword">new</span> <span class="type">UserInfoDao</span><span class="literal">()</span>.insert(userInfo);
+
+    }
+
+}
+</code></pre><h2 id="更新操作">更新操作</h2><pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(UserInfo userInfo)</span></span>{
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    String updateSQL=<span class="string">"update userinfo set name=?,password=?"</span>+<span class="string">"where id=?"</span>;
+
+    <span class="keyword">try</span> {
+        ps=(PreparedStatement) conn.prepareStatement(updateSQL);
+        ps.setString(<span class="number">1</span>, userInfo.getName());
+        ps.setString(<span class="number">2</span>, userInfo.getPassword());
+        ps.setInt(<span class="number">3</span>, userInfo.getId());
+        System.<span class="keyword">out</span>.println(updateSQL);
+
+        <span class="keyword">int</span> a=ps.executeUpdate();
+        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
+            System.<span class="keyword">out</span>.println(<span class="string">"更改完成"</span>);
+        }
+        <span class="keyword">if</span> (a&lt;<span class="number">0</span>) {
+            System.<span class="keyword">out</span>.println(<span class="string">"更改失败"</span>);
+
+        }
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+            <span class="keyword">try</span> {
+                <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
+                    ps.close();
+                }
+                <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
+                    conn.close();
+                }
+            } <span class="keyword">catch</span> (SQLException e) {
+                <span class="comment">// TODO Auto-generated catch block</span>
+                e.printStackTrace();
+            }
+
+    }
+
+}
+</code></pre><p>注意点：ps.setString(1, userInfo.getName());这是从1开始添加。</p>
+<h2 id="删除数据">删除数据</h2><pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    String deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
+
+    <span class="keyword">try</span> {
+        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
+        ps.setInt(<span class="number">1</span>, id);
+        <span class="keyword">int</span> a=ps.executeUpdate();
+        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
+            System.<span class="keyword">out</span>.println(<span class="string">"删除成功"</span>);
+        }<span class="keyword">else</span> {
+            System.<span class="keyword">out</span>.println(<span class="string">"删除失败"</span>);
+        }
+    } <span class="keyword">catch</span> (Exception e) {
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        <span class="keyword">try</span> {
+            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
+                ps.close();
+            }
+            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
+                conn.close();
+            }
+        } <span class="keyword">catch</span> (Exception e2) {
+            e2.printStackTrace();
+        }
+    }
+}
+</code></pre><h2 id="进行代码优化——1，关闭资源">进行代码优化——1，关闭资源</h2><p>注意：参数有两个或者三个的。这时候就要使用参数多态性</p>
+<p>当使用的时候就直接调用者两个函数就可以了<br>    public static void closeResource(PreparedStatement ps,Connection conn){</p>
+<pre><code>    <span class="keyword">try</span> {
+        <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
+            ps.close();
+        }
+        <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
+            conn.close();
+        }
+        } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+        }
+}
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">closeResource</span><span class="params">(ResultSet rs,PreparedStatement ps,Connection conn)</span></span>{
+
+    <span class="keyword">try</span> {
+        <span class="keyword">if</span> (rs!=<span class="keyword">null</span>) {
+        rs.close();
+
+        }
+        <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
+            ps.close();
+        }
+        <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
+            conn.close();
+        }
+        } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+        }
+}
+</code></pre><h2 id="代码优化之二———使用boolean值作为返回值来判断是否修改成功">代码优化之二———使用boolean值作为返回值来判断是否修改成功</h2><p>前面的修改例子中，修改成功是显示在控制台上。而这种方法修改成功是显示在返回值</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="keyword">delete</span>(<span class="keyword">int</span> id) {
+    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    String deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
+
+    <span class="keyword">try</span> {
+        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
+        ps.setInt(<span class="number">1</span>, id);
+        <span class="keyword">int</span> a=ps.executeUpdate();
+        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }<span class="keyword">else</span> {
+            System.out.<span class="keyword">println</span>(<span class="string">"删除失败"</span>);
+        }
+    } <span class="keyword">catch</span> (Exception e) {
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        BaseConnection.closeResource(ps, conn);
+    }
+    <span class="keyword">return</span> b;
+}
+</code></pre><h2 id="完整的JDBC代码">完整的JDBC代码</h2><pre><code><span class="keyword">package</span> com.zsz.develop.dao;
+
+<span class="keyword">import</span> java.sql.Connection;
+<span class="keyword">import</span> java.sql.ResultSet;
+<span class="keyword">import</span> java.sql.SQLException;
+<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.Iterator;
+
+<span class="keyword">import</span> org.omg.CORBA.portable.ValueBase;
+<span class="keyword">import</span> org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
+
+<span class="keyword">import</span> com.mysql.jdbc.PreparedStatement;
+<span class="keyword">import</span> com.zsz.develop.bean.UserInfo;
+<span class="keyword">import</span> com.zsz.develop.util.BaseConnection;
+
+<span class="keyword">public</span> class UserInfoDao {
+
+<span class="keyword">public</span> ArrayList&lt;UserInfo&gt; getList(){
+    ArrayList&lt;UserInfo&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;UserInfo&gt;();
+    Connection conn=BaseConnection.getConnection();
+    <span class="comment">//定义在外面是要让他成为全局变量</span>
+    PreparedStatement ps=<span class="keyword">null</span>;
+    ResultSet rs=<span class="keyword">null</span>;
+    <span class="keyword">String</span> sql=<span class="string">"select * from userinfo"</span>;
+
+    <span class="keyword">try</span> {
+        ps=(PreparedStatement) conn.prepareStatement(sql);
+         rs =ps.executeQuery();
+        <span class="keyword">while</span> (rs.next()) {
+<span class="comment">//                System.out.println(rs.getString("name")+"-----");</span>
+            <span class="comment">//把数据封装到实体类</span>
+            UserInfo userInfo=<span class="keyword">new</span> UserInfo();
+            userInfo.setId(rs.getInt(<span class="string">"id"</span>));
+            userInfo.setName(rs.getString(<span class="string">"name"</span>));
+            userInfo.setPassword(rs.getString(<span class="string">"password"</span>));
+            <span class="comment">//再把封装好的对象放到我们的集合中去</span>
+            arrayList.<span class="built_in">add</span>(userInfo);
+        }
+
+
+
+
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
+            BaseConnection.closeResource(rs, ps, conn);
+    }
+
+    <span class="keyword">return</span> arrayList;
+}
+
+<span class="keyword">public</span> <span class="built_in">boolean</span> insert(UserInfo userInfo){
+    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    <span class="keyword">try</span> {
+
+        <span class="keyword">String</span> sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values('"</span>+userInfo.getName()+<span class="string">"','"</span>+userInfo.getPassword()+<span class="string">"')"</span>;
+        System.out.<span class="built_in">println</span>(sqlinsert);
+        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
+
+        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
+        <span class="built_in">int</span> i=ps.executeUpdate();
+        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }
+
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        BaseConnection.closeResource( ps, conn);
+    }
+    <span class="keyword">return</span> b;
+}
+<span class="comment">/*
+ *占位符的优势。
+ *1.效率更高
+ *2.书写时不容易出错
+ *3.防止sql注入（安全问题） 
+ */</span>
+
+
+<span class="keyword">public</span> <span class="built_in">boolean</span> insert2(UserInfo userInfo){
+    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    <span class="keyword">try</span> {
+
+        <span class="keyword">String</span> sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values(?,?)"</span>;
+        System.out.<span class="built_in">println</span>(sqlinsert);
+        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
+        ps.setString(<span class="number">1</span>, userInfo.getName());
+        ps.setString(<span class="number">2</span>, userInfo.getPassword());
+        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
+        <span class="built_in">int</span> i=ps.executeUpdate();
+        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }<span class="keyword">else</span> {
+            System.out.<span class="built_in">println</span>(<span class="string">"添加失败"</span>);
+        }
+
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
+        BaseConnection.closeResource(ps, conn);
+
+    }
+    <span class="keyword">return</span> b;
+}
+
+
+<span class="keyword">public</span> <span class="built_in">boolean</span> update(UserInfo userInfo){
+    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    <span class="keyword">String</span> updateSQL=<span class="string">"update userinfo set name=?,password=?"</span>+<span class="string">"where id=?"</span>;
+
+    <span class="keyword">try</span> {
+        ps=(PreparedStatement) conn.prepareStatement(updateSQL);
+        ps.setString(<span class="number">1</span>, userInfo.getName());
+        ps.setString(<span class="number">2</span>, userInfo.getPassword());
+        ps.setInt(<span class="number">3</span>, userInfo.getId());
+        System.out.<span class="built_in">println</span>(updateSQL);
+
+        <span class="built_in">int</span> a=ps.executeUpdate();
+        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }
+
+
+
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+            BaseConnection.closeResource(ps, conn);
+
+    }
+    <span class="keyword">return</span> b;
+}
+
+<span class="keyword">public</span> <span class="built_in">boolean</span> delete(<span class="built_in">int</span> id) {
+    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=BaseConnection.getConnection();
+    PreparedStatement ps=<span class="keyword">null</span>;
+    <span class="keyword">String</span> deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
+
+    <span class="keyword">try</span> {
+        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
+        ps.setInt(<span class="number">1</span>, id);
+        <span class="built_in">int</span> a=ps.executeUpdate();
+        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }<span class="keyword">else</span> {
+            System.out.<span class="built_in">println</span>(<span class="string">"删除失败"</span>);
+        }
+    } <span class="keyword">catch</span> (Exception e) {
+        e.printStackTrace();
+    }<span class="keyword">finally</span>{
+        BaseConnection.closeResource(ps, conn);
+    }
+    <span class="keyword">return</span> b;
+}
+
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cic06o9ss0002icb2yc2p3x21" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/11/2015-7-11/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015/7/11</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
