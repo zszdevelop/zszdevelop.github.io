@@ -99,7 +99,7 @@ Exception 异常对象
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        13
+        14
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -163,21 +163,28 @@ Exception 异常对象
 </ul>
 <h2 id="为什么要有内置对象">为什么要有内置对象</h2><p>因为这九大对象在jsp中使用太平繁，为了简化操作就事先内置在jsp中。程序员们就可以不用每次都去实例化操作。</p>
 <p>（程序编写的绝大部分原因都是为了提高效率）</p>
-<h2 id="out_（page）">out （page）</h2><p>out最常用的对象之一，代表了向客户端发送数据对象。</p>
-<h2 id="request_（request）">request （request）</h2><p>request 是客户端向服务器发出的请求。</p>
+<h2 id="out_（page）">out （page）</h2><p>out最常用的对象之一，<strong>向客户端输出各种数据对象。</strong></p>
+<h2 id="request_（request）">request （request）</h2><p>request 是客户端向服务器发出的请求。<br><strong>封装了来自客户端的各种浏览信息</strong></p>
 <p>通过getParameter、getParameterNames和getParameterValues方法来获取请求对象中所包含的参数的值。</p>
 <p>也可以设置其属性值，setAttribute与getAttribute方法这两个方法先设置后取得。所以他们一般都是同时出现</p>
 <p>request的作用域只有在请求时，当请求结束时，得到响应后就销毁</p>
 <h2 id="response_（page）">response （page）</h2><p>response代表对客户端的响应。但一般比较少用，使用out直接输出</p>
-<h2 id="session（session）">session（session）</h2><p>session代表服务器与客户端所建立的会话。<br>一个完整的会话是：从客户端连到服务器的一个WebApplication开始，直到客户端与服务器断开连接为止。</p>
+<p><strong>封装了服务器的各种响应信息</strong></p>
+<h2 id="session（session）">session（session）</h2><p><strong>session是保存了会话信息，也就是说他可以在同一用户之前共享数据</strong></p>
+<p>session代表服务器与客户端所建立的会话。<br>一个完整的会话是：从客户端连到服务器的一个WebApplication开始，直到客户端与服务器断开连接为止。</p>
 <p>根据这个特性，session可以实现在线购物，密码安全等保存客户端状态信息操作</p>
-<h2 id="application（application）">application（application）</h2><p>application负责提供应用程序在服务器中运行时的一些全局信息。根据这个特性，他能实现浏览计数器</p>
-<h2 id="config（page）">config（page）</h2><h2 id="page（page）">page（page）</h2><h2 id="pageContext（page）">pageContext（page）</h2><h2 id="Exception（page）">Exception（page）</h2><p>括号中的为作用域<br>剩下的以后用到的时候再谈。</p>
+<h2 id="application（application）">application（application）</h2><p><strong>表示了上下文信息，他可以在不同的用户信息共享信息</strong></p>
+<p>application负责提供应用程序在服务器中运行时的一些全局信息。根据这个特性，他能实现浏览计数器</p>
+<h2 id="config（page）">config（page）</h2><p><strong>封装了应用程序的配置信息</strong></p>
+<h2 id="page（page）">page（page）</h2><p><strong>指向了jsp当前程序本身</strong></p>
+<h2 id="pageContext（page）">pageContext（page）</h2><p><strong>提供了对jsp所有对象的访问</strong></p>
+<h2 id="Exception（page）">Exception（page）</h2><p><strong>封装了程序执行中的异常或错误信息</strong></p>
+<p>括号中的为作用域<br>剩下的以后用到的时候再谈。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cic06o9tm000cicb2q66xjo1e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cic1j5zhd000ddgb2stn67o0r" class="article-share-link">Share</a>
       
       
     </footer>
