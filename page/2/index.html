@@ -66,7 +66,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        16
+        18
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -92,6 +92,224 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-6-4" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/04/2015-6-4/">清除用户数据</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/06/04/2015-6-4/">
+    <time datetime="2015-06-04T08:03:24.000Z" itemprop="datePublished">2015-06-04</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="清除用户数据">清除用户数据</h1><p>非常实用的清空数据函数。</p>
+<p>主要通过deleteFilesByDirectory（）函数删除文件，来达到清楚数据的功能。</p>
+<p>功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录</p>
+<pre><code>package com.fsd.zsz.manplan.main;
+
+/<span class="keyword">*</span><span class="keyword">*</span>
+ <span class="keyword">*</span> Created by shengzhong on 2015/6/3.
+ <span class="keyword">*</span>/
+
+
+import java.io.File;
+import android.content.Context;
+import android.os.Environment;
+/<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 本应用数据清除管理器 <span class="keyword">*</span>/
+public class DataCleanManager {
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
+    public static void cleanInternalCache(Context context) {
+        deleteFilesByDirectory(context.getCacheDir());
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
+    public static void cleanDatabases(Context context) {
+        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
+                + context.getPackageName() + <span class="string">"/databases"</span>));
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span>
+     <span class="keyword">*</span> <span class="keyword">*</span> 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
+     <span class="keyword">*</span> context
+     <span class="keyword">*</span>/
+    public static void cleanSharedPreference(Context context) {
+        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
+                + context.getPackageName() + <span class="string">"/shared_prefs"</span>));
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 按名字清除本应用数据库 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param dbName */</span>
+    public static void cleanDatabaseByName(Context context, String dbName) {
+        context.deleteDatabase(dbName);
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除/data/data/com.xxx.xxx/files下的内容 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
+    public static void cleanFiles(Context context) {
+        deleteFilesByDirectory(context.getFilesDir());
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span>
+     <span class="keyword">*</span> <span class="keyword">*</span> 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
+     <span class="keyword">*</span> context
+     <span class="keyword">*</span>/
+    public static void cleanExternalCache(Context context) {
+        if (Environment.getExternalStorageState().equals(
+                Environment.MEDIA_MOUNTED)) {
+            deleteFilesByDirectory(context.getExternalCacheDir());
+        }
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param filePath */</span>
+    public static void cleanCustomCache(String filePath) {
+        deleteFilesByDirectory(new File(filePath));
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有的数据 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param filepath */</span>
+    public static void cleanApplicationData(Context context, String... filepath) {
+        cleanInternalCache(context);
+        cleanExternalCache(context);
+        cleanDatabases(context);
+        cleanSharedPreference(context);
+        cleanFiles(context);
+        for (String filePath : filepath) {
+            cleanCustomCache(filePath);
+        }
+    }
+    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param directory */</span>
+    private static void deleteFilesByDirectory(File directory) {
+        if (directory != null &amp;&amp; directory.exists() &amp;&amp; directory.isDirectory()) {
+            for (File item : directory.listFiles()) {
+                item.delete();
+            }
+        }
+    }
+}
+</code></pre><p>出处：<a href="http://blog.csdn.net/berber78/article/details/38587567" target="_blank" rel="external">http://blog.csdn.net/berber78/article/details/38587567</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cicafo98b000cisb2bbuyie47" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-5-31" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/31/2015-5-31/">Android设置日期与时间</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/05/31/2015-5-31/">
+    <time datetime="2015-05-31T11:51:39.000Z" itemprop="datePublished">2015-05-31</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android设置日期与时间">Android设置日期与时间</h1><p>取得设置系统时间是Android非常实用的一个功能</p>
+<h2 id="取得系统时间">取得系统时间</h2><p>实例化Calendar时，他已经默认的设置了系统时间。<br>setTimeInMillis（）这个方法，会根据你传入的毫秒数对日历对象中的变量进行相应设置。System.currentTimeMillis()可以得到系统到距离1970年1月1日0时的毫秒数</p>
+<pre><code>      <span class="comment">//Calendar定义日历对象</span>
+<span class="keyword">private</span> Calendar calendar;
+    <span class="comment">//实例化日历对象</span>
+    calendar=Calendar.getInstance();
+    <span class="comment">//设置系统时间</span>
+    calendar.setTimeInMillis(System.currentTimeMillis());
+    <span class="comment">//得到系统时间</span>
+   <span class="keyword">final</span> Date time=calendar.getTime();
+    <span class="comment">//得到时和分</span>
+   <span class="keyword">final</span> <span class="built_in">int</span> <span class="built_in">hour</span>= calendar.<span class="built_in">get</span>(Calendar.HOUR_OF_DAY);
+    <span class="keyword">final</span> <span class="built_in">int</span> <span class="built_in">minute</span>=calendar.<span class="built_in">get</span>(Calendar.MINUTE);
+</code></pre><h2 id="时间选择器">时间选择器</h2><p>时间选择器：<br>TimePickerDialog(Contextcontext,TimePickerDialog.OnTimeSetListenercallBack, int hourOfDay, int minute, boolean is24HourView)</p>
+<ul>
+<li><p>其中TimePickerDialog.OnTimeSetListenercallBack是用户选择好时间后，通知应用的回调函数。监听用户更改时间参数，调用的方法。</p>
+</li>
+<li><p>is24HourView选择是否为24小时制</p>
+</li>
+<li></li>
+</ul>
+<pre><code>tvTime= (TextView) findViewById(R.id.tvTime);
+   tvTime.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+       <span class="annotation">@Override</span>
+       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+           <span class="keyword">new</span> TimePickerDialog(MainActivity.<span class="keyword">this</span>,<span class="keyword">new</span> TimePickerDialog.OnTimeSetListener() {
+               <span class="annotation">@Override</span>
+               <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onTimeSet</span><span class="params">(TimePicker timePicker, <span class="keyword">int</span> i, <span class="keyword">int</span> i2)</span> </span>{
+                   tvTime.setText(<span class="string">"shi"</span>+i+<span class="string">"fen"</span>+i2);
+               }
+           },<span class="number">10</span>,<span class="number">20</span>,<span class="keyword">true</span>).show();
+       }
+   });
+</code></pre><h2 id="日期选择器">日期选择器</h2><p>同理时间选择器</p>
+<pre><code>tvDate= (TextView) findViewById(R.id.tvDate);
+   tvDate.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+       <span class="annotation">@Override</span>
+       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+
+           <span class="keyword">new</span> DatePickerDialog(MainActivity.<span class="keyword">this</span>, <span class="keyword">new</span> DatePickerDialog.OnDateSetListener() {
+               <span class="annotation">@Override</span>
+               <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onDateSet</span><span class="params">(DatePicker view, <span class="keyword">int</span> year, <span class="keyword">int</span> monthOfYear, <span class="keyword">int</span> dayOfMonth)</span> </span>{
+
+                   tvDate.setText(String.format(<span class="string">"%d:%d:%d"</span>,year,monthOfYear,dayOfMonth));
+               }
+
+           },<span class="number">2015</span>,<span class="number">6</span>,<span class="number">2</span>).show();
+       }
+   });
+</code></pre><p>Layout档</p>
+<pre><code>   &lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">text=</span><span class="string">"0000:00:00"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/tvDate"</span>
+    /&gt;
+
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">text=</span><span class="string">"00:00:00"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/tvTime"</span>
+    /&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cicafo98e000disb2e0c0zjd8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-5-27" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -168,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cic4oak9p000c2wb23ncu0wrx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cicafo98i000eisb2c73ta2yt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -229,7 +447,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cic4oak9t000d2wb21f1mng8h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cicafo98m000fisb2ml75ldgq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -288,7 +506,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cic4oak9y000e2wb2a2yzpq5c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cicafo98p000gisb27lizktf5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -358,7 +576,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cic4oaka1000f2wb28hayojqk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cicafo98s000hisb2d8clgxd5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -429,7 +647,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cic4oak8900002wb2dup8efnp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cicafo96c0000isb2u4yynrtx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -484,7 +702,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cic4oak8s00012wb21gh2txm7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cicafo9750001isb2w5pe38rd" class="article-share-link">Share</a>
       
       
     </footer>

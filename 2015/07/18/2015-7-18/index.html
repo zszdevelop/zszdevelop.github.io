@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015-7-18 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="7.18日问题集ListView 可滚动与间隔设置1.可滚动设置：transcriptMode2.间隔设置：divider
+&amp;lt;ListView
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:layout_weight=&quot;1&quot;
+    android:transcriptMo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015-7-18">
+<meta property="og:url" content="http://yoursite.com/2015/07/18/2015-7-18/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="7.18日问题集ListView 可滚动与间隔设置1.可滚动设置：transcriptMode2.间隔设置：divider
+&amp;lt;ListView
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:layout_weight=&quot;1&quot;
+    android:transcriptMo">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015-7-18">
+<meta name="twitter:description" content="7.18日问题集ListView 可滚动与间隔设置1.可滚动设置：transcriptMode2.间隔设置：divider
+&amp;lt;ListView
+    android:layout_width=&quot;fill_parent&quot;
+    android:layout_height=&quot;0dp&quot;
+    android:layout_weight=&quot;1&quot;
+    android:transcriptMo">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        18
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-7-18" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015-7-18
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/18/2015-7-18/">
+    <time datetime="2015-07-18T14:16:28.000Z" itemprop="datePublished">2015-07-18</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="7-18日问题集">7.18日问题集</h1><h2 id="ListView_可滚动与间隔设置">ListView 可滚动与间隔设置</h2><p>1.可滚动设置：transcriptMode<br>2.间隔设置：divider</p>
+<pre><code>&lt;ListView
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"0dp"</span>
+    android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
+    android:<span class="variable">transcriptMode=</span><span class="string">"alwaysScroll"</span>
+    android:<span class="variable">divider=</span><span class="string">"@null"</span>
+    &gt;&lt;/ListView&gt;
+</code></pre><h2 id="图片设置内边距padding">图片设置内边距padding</h2><p>图片对其方式：layout_alignParentRight</p>
+<pre><code>&lt;ImageView
+     android:<span class="variable">layout_alignParentRight=</span><span class="string">"true"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"70dp"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"70dp"</span>
+    android:<span class="variable">padding=</span><span class="string">"10dp"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/iv"</span>
+    android:<span class="variable">src=</span><span class="string">"@drawable/robot"</span>
+    /&gt;
+</code></pre><h2 id="设置相对位置">设置相对位置</h2><p>如设置textview的右边：layout_toRightOf<br>设置与有边框的距离：android:layout_marginRight=”50dp”<br>设置在谁的下面：android:layout_below=”@+id/time”</p>
+<pre><code>&lt;TextView
+    android:<span class="variable">layout_below=</span><span class="string">"@+id/time"</span>
+    android:<span class="variable">layout_marginRight=</span><span class="string">"50dp"</span>
+    android:<span class="variable">layout_toRightOf=</span><span class="string">"@+id/iv"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/tv"</span>
+    android:<span class="variable">background=</span><span class="string">"@drawable/aio_friend_bg_nor_11"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    /&gt;
+</code></pre><h2 id="android_inflater_用法">android inflater 用法</h2><p>在实际开发中LayoutInflater这个类还是非常有用的，它的作用类似于findViewById()。不同点是LayoutInflater是用来找res/layout/下的xml布局文件，并且实例化；而findViewById()是找xml布局文件下的具体widget控件(如Button、TextView等)。 具体作用： 1、对于一个没有被载入或者想要动态载入的界面，都需要使用LayoutInflater.inflate()来载入；</p>
+<p>2、对于一个已经载入的界面，就可以使用Activiyt.findViewById()方法来获得其中的界面元素。</p>
+<p>LayoutInflater 是一个抽象类，在文档中如下声明：</p>
+<p>publicabstractclass LayoutInflater extends Object </p>
+<p>获得 LayoutInflater 实例的三种方式</p>
+<p>1.LayoutInflater inflater = getLayoutInflater();  //调用Activity的getLayoutInflater()</p>
+<p>2.LayoutInflater localinflater =(LayoutInflater)context.getSystemService</p>
+<pre><code><span class="list">(<span class="keyword">Context.LAYOUT_INFLATER_SERVICE</span>)</span><span class="comment">;</span>
+</code></pre><ol>
+<li>LayoutInflater inflater = LayoutInflater.from(context);</li>
+</ol>
+<h2 id="-9图片">.9图片</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cicafo97c0002isb2faxns1cz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/19/2015-7-18-adapter/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          adapter
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/15/2015-7-15/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015/7/15</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
