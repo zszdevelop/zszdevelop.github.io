@@ -66,7 +66,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        18
+        19
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -92,6 +92,143 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-6-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/06/04/2015-6-5/">SharedPrefenences的使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/06/04/2015-6-5/">
+    <time datetime="2015-06-04T13:40:35.000Z" itemprop="datePublished">2015-06-04</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="SharedPrefenences是什么">SharedPrefenences是什么</h1><p>SharedPrefenences是一种轻型的数据存储方式，他的本质是基于XML文件存储<strong>Ket-Value键值对数据</strong>，通常用来存储一些简单的<strong>配置信息</strong>。</p>
+<p>存储位置在/data/data/&lt;包名&gt;/shared_prefs目录下。</p>
+<p>SharedPrefenences对象本身只能获取数据而<strong>不支持存储和修改，存储修改要通过Editor对象实现。</strong></p>
+<h1 id="SharedPrefenences的优势">SharedPrefenences的优势</h1><p>SharedPrefenences与SQLite数据库相比，免去了创建数据库，创建表，写SQL语句等操作，更加易用。</p>
+<p>支持的类型数据</p>
+<ul>
+<li>boolean</li>
+<li>int</li>
+<li>float</li>
+<li>long</li>
+<li>String</li>
+</ul>
+<p>但是无法进行条件查询。</p>
+<h1 id="SharedPrefenences的代码实现">SharedPrefenences的代码实现</h1><p>Activity：</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.sharedpreferencestest;
+
+<span class="keyword">import</span> android.content.SharedPreferences;
+<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.EditText;
+<span class="keyword">import</span> android.widget.Toast;
+
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
+
+<span class="keyword">private</span> EditText etData;
+<span class="keyword">private</span>  SharedPreferences sharedPreferences;
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    etData= (EditText) findViewById(R.id.etData);
+    sharedPreferences=getSharedPreferences(<span class="string">"sharedPrefXML"</span>,MODE_PRIVATE);
+    <span class="comment">//要编辑修改sharedPreferences就要使用Editor来修改</span>
+   <span class="keyword">final</span> SharedPreferences.Editor editor= sharedPreferences.edit();
+
+    <span class="comment">//读取SharedPreferences数据</span>
+    findViewById(R.id.btnRead).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+
+            <span class="comment">//得到sharedPreferences的值,传进去第一个参数是键，第二个是如果为空返回的值。</span>
+          String value=  sharedPreferences.getString(<span class="string">"key-name"</span>,<span class="string">"当前数值不存在"</span>);
+            Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
+        }
+    });
+
+    <span class="comment">//写入SharedPreferences数据</span>
+    findViewById(R.id.btnWrite).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+
+            <span class="comment">//要修改存储什么类型数据就put什么类型,这里传进去的是Key-Value</span>
+            editor.putString(<span class="string">"key-name"</span>,etData.getText().toString().trim());
+            <span class="comment">//commit提交数据,commit返回值为boolean。进行判断</span>
+          <span class="keyword">if</span> (editor.commit()) {
+              Toast.makeText(getApplicationContext(), <span class="string">"写入成功"</span>, Toast.LENGTH_SHORT).show();
+          }
+        }
+    });
+
+
+
+}
+
+
+
+}
+</code></pre><p>layout档：</p>
+<pre><code>&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
+&lt;EditText
+   android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+   android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+   android:<span class="variable">id=</span><span class="string">"@+id/etData"</span>
+   /&gt;
+&lt;Button
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/btnRead"</span>
+    android:<span class="variable">text=</span><span class="string">"读取数据"</span>
+    /&gt;
+
+&lt;Button
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/btnWrite"</span>
+    android:<span class="variable">text=</span><span class="string">"写入数据"</span>
+    /&gt;
+&lt;/LinearLayout&gt;
+</code></pre><p>SharedPrefenences非常方便的使用。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cicbfch27000bakb2v0ah494j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-6-4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -197,7 +334,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cicafo98b000cisb2bbuyie47" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cicbfch2d000dakb2jl39epai" class="article-share-link">Share</a>
       
       
     </footer>
@@ -300,7 +437,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cicafo98e000disb2e0c0zjd8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cicbfch2g000eakb2ve930fzq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +523,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cicafo98i000eisb2c73ta2yt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cicbfch2j000fakb2j6kcj5yn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,7 +584,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cicafo98m000fisb2ml75ldgq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cicbfch2l000gakb2180dj4un" class="article-share-link">Share</a>
       
       
     </footer>
@@ -506,7 +643,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cicafo98p000gisb27lizktf5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cicbfch2p000hakb2a3tlo54h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -576,7 +713,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cicafo98s000hisb2d8clgxd5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cicbfch2r000iakb23vnp8odx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -647,7 +784,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cicafo96c0000isb2u4yynrtx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cicbfcgqa0000akb2aqmi6627" class="article-share-link">Share</a>
       
       
     </footer>
@@ -702,7 +839,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cicafo9750001isb2w5pe38rd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cicbfcgqx0001akb2zv40wdok" class="article-share-link">Share</a>
       
       
     </footer>
