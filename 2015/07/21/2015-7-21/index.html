@@ -95,7 +95,7 @@ URN：uniform resource n">
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        20
+        21
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -152,11 +152,95 @@ URN：uniform resource n">
 <li>URN：uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。</li>
 </ul>
 <p>也就是说，URI是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。</p>
+<h2 id="Android拍照功能">Android拍照功能</h2><pre><code>package com.zsz.develop.picturedemo;
 
+    <span class="keyword">import</span> java.io.BufferedOutputStream;
+    <span class="keyword">import</span> java.io.File;
+    <span class="keyword">import</span> java.io.FileNotFoundException;
+    <span class="keyword">import</span> java.io.FileOutputStream;
+    <span class="keyword">import</span> java.io.IOException;
+    <span class="keyword">import</span> java.util.Calendar;
+    <span class="keyword">import</span> java.util.Locale;
+
+    <span class="keyword">import</span> android.app.Activity;
+    <span class="keyword">import</span> android.content.Intent;
+    <span class="keyword">import</span> android.graphics.Bitmap;
+    <span class="keyword">import</span> android.os.Bundle;
+    <span class="keyword">import</span> android.os.Environment;
+    <span class="keyword">import</span> android.provider.MediaStore;
+    <span class="keyword">import</span> android.text.format.DateFormat;
+    <span class="keyword">import</span> android.util.Log;
+    <span class="keyword">import</span> android.view.View;
+    <span class="keyword">import</span> android.view.View.OnClickListener;
+    <span class="keyword">import</span> android.widget.Button;
+    <span class="keyword">import</span> android.widget.ImageView;
+    <span class="keyword">import</span> android.widget.Toast;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
+<span class="comment">/** Called when the activity is first created. */</span>
+private Button button;
+
+@Override
+public <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    button = (Button) findViewById(R.id.btnPicture);
+    button.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
+
+        @Override
+        public <span class="keyword">void</span> onClick(View v) {
+            <span class="comment">// TODO Auto-generated method stub</span>
+            Intent intent = <span class="keyword">new</span> Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            startActivityForResult(intent, <span class="number">1</span>);
+        }
+    });
+}
+
+@Override
+protected <span class="keyword">void</span> onActivityResult(int requestCode, int resultCode, Intent data) {
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);
+    <span class="keyword">if</span> (resultCode == Activity.RESULT_OK) {
+        <span class="built_in">String</span> sdStatus = Environment.getExternalStorageState();
+        <span class="keyword">if</span> (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { <span class="comment">// 检测sd是否可用</span>
+            Log.i(<span class="string">"TestFile"</span>,
+                    <span class="string">"SD card is not avaiable/writeable right now."</span>);
+            <span class="keyword">return</span>;
+        }
+        <span class="built_in">String</span> name = <span class="keyword">new</span> DateFormat().format(<span class="string">"yyyyMMdd_hhmmss"</span>,Calendar.getInstance(Locale.CHINA)) + <span class="string">".jpg"</span>;
+        Toast.makeText(<span class="keyword">this</span>, name, Toast.LENGTH_LONG).show();
+        Bundle bundle = data.getExtras();
+        Bitmap bitmap = (Bitmap) bundle.get(<span class="string">"data"</span>);<span class="comment">// 获取相机返回的数据，并转换为Bitmap图片格式</span>
+
+        FileOutputStream b = <span class="literal">null</span>;
+        <span class="comment">//???????????????????????????????为什么不能直接保存在系统相册位置呢？？？？？？？？？？？？</span>
+        File file = <span class="keyword">new</span> File(<span class="string">"/sdcard/myImage/"</span>);
+        file.mkdirs();<span class="comment">// 创建文件夹</span>
+        <span class="built_in">String</span> fileName = <span class="string">"/sdcard/myImage/"</span>+name;
+
+        <span class="keyword">try</span> {
+            b = <span class="keyword">new</span> FileOutputStream(fileName);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, <span class="number">100</span>, b);<span class="comment">// 把数据写入文件</span>
+        } <span class="keyword">catch</span> (FileNotFoundException e) {
+            e.printStackTrace();
+        } <span class="keyword">finally</span> {
+            <span class="keyword">try</span> {
+                b.flush();
+                b.close();
+            } <span class="keyword">catch</span> (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ((ImageView) findViewById(R.id.imageView)).setImageBitmap(bitmap);<span class="comment">// 将图片显示在ImageView里</span>
+    }
+}
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="ciccumk160002xob22uh2smqe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cicetw5zi0003u8b22sfwd7ad" class="article-share-link">Share</a>
       
       
     </footer>
@@ -164,6 +248,15 @@ URN：uniform resource n">
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/07/22/2015-7-22/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/7/22
+        
+      </div>
+    </a>
   
   
     <a href="/2015/07/20/2015-7-20/" id="article-nav-older" class="article-nav-link-wrap">
