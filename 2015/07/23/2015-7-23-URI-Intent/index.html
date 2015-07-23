@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title> 2015/7/23-URI-Intent | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="通过URI和Intent启动各种功能Uri就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：scheme://host:port/path举个实际的例子：
+
+现在大家应该知道data flag中那些属性的含义了吧，看下data flag
+但是我们在程序中一般是不直接用URI来标识CP的，是">
+<meta property="og:type" content="article">
+<meta property="og:title" content=" 2015/7/23-URI-Intent">
+<meta property="og:url" content="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="通过URI和Intent启动各种功能Uri就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：scheme://host:port/path举个实际的例子：
+
+现在大家应该知道data flag中那些属性的含义了吧，看下data flag
+但是我们在程序中一般是不直接用URI来标识CP的，是">
+<meta property="og:image" content="http://cl.ly/image/2l2F3K3b2W2n/36D61U2UNF%25SOXIFK2%60UN%25N.png">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content=" 2015/7/23-URI-Intent">
+<meta name="twitter:description" content="通过URI和Intent启动各种功能Uri就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：scheme://host:port/path举个实际的例子：
+
+现在大家应该知道data flag中那些属性的含义了吧，看下data flag
+但是我们在程序中一般是不直接用URI来标识CP的，是">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="/.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="/archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="/categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="/tags">Tags</a></td>
+      
+        <td><a class="main-nav-link" href="/about">About</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        23
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-7-23-URI-Intent" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+       2015/7/23-URI-Intent
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/23/2015-7-23-URI-Intent/">
+    <time datetime="2015-07-23T01:05:42.000Z" itemprop="datePublished">2015-07-23</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="通过URI和Intent启动各种功能">通过URI和Intent启动各种功能</h1><h2 id="Uri">Uri</h2><p>就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：<br>scheme://host:port/path<br>举个实际的例子：</p>
+<p><img src="http://cl.ly/image/2l2F3K3b2W2n/36D61U2UNF%25SOXIFK2%60UN%25N.png" alt=""></p>
+<p>现在大家应该知道data flag中那些属性的含义了吧，看下data flag<br><data android:host="string" android:mimetype="string" android:path="string" android:pathpattern="string" android:pathprefix="string" android:port="string" android:scheme="string"></data></p>
+<p>但是我们在程序中一般是不直接用URI来标识CP的，是的，正如我们通常见到的用定义的常量来标识。例如standard CP中的Contacts，我们就用Contacts.People.CONTENT_URI来标识Contacts CP中People这个表。那么要标识某个具体的人怎么办呢？ 这就用到了ContentUris.withAppendedId() 和 Uri.withAppendedPath()。例如我们要表示content://contacts/people/20，那么我们就可以用如下语句：<br>Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, 20); 或者<br>Uri uri = Uri.withAppendedPath(People.CONTENT_URI, “20”);</p>
+<p>举些例子，如：</p>
+<p>所有联系人的Uri： content://contacts/people</p>
+<p>某个联系人的Uri: content://contacts/people/5</p>
+<p>所有图片Uri: content://media/external</p>
+<p>某个图片的Uri：content://media/external/images/media/4</p>
+<p>下面是一些常用的Uri</p>
+<p><strong>显示网页:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“<a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>“);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW,uri);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>显示地图:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“geo:38.899533,-77.036476”);<ol>
+<li>Intent it = new Intent(Intent.Action_VIEW,uri);</li>
+<li>startActivity(it);</li>
+</ol>
+</li>
+</ol>
+<p><strong>路径规划:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“<a href="http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en" target="_blank" rel="external">http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en</a>“);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW,URI);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>拨打电话:<br>调用拨号程序</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“tel:xxxxxx”);</li>
+<li>Intent it = new Intent(Intent.ACTION_DIAL, uri);   </li>
+<li>startActivity(it);   </li>
+<li>Uri uri = Uri.parse(“tel.xxxxxx”);</li>
+<li>Intent it =new Intent(Intent.ACTION_CALL,uri);</li>
+<li>要使用这个必须在配置文件中加入<uses-permission id="Android.permission.CALL_PHONE"></uses-permission></li>
+</ol>
+<p><strong>发送SMS/MMS<br>调用发送短信的程序</strong></p>
+<ol>
+<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
+<li>it.putExtra(“sms_body”, “The SMS text”);</li>
+<li>it.setType(“vnd.android-dir/mms-sms”);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>发送短信</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“smsto:0800000123”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
+<li>it.putExtra(“sms_body”, “The SMS text”);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>发送彩信</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“content://media/external/images/media/23”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(“sms_body”, “some text”);</li>
+<li>it.putExtra(Intent.EXTRA_STREAM, uri);</li>
+<li>it.setType(“image/png”);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong><br>发送Email</strong></p>
+<p>  1.</p>
+<ol>
+<li>Uri uri = Uri.parse(“mailto:xxx@abc.com”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
+<li>startActivity(it);</li>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(Intent.EXTRA_EMAIL, “me@abc.com”);</li>
+<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);</li>
+<li>it.setType(“text/plain”);</li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));   </li>
+<li>Intent it=new Intent(Intent.ACTION_SEND);   </li>
+<li>String[] tos={“me@abc.com”};   </li>
+<li>String[] ccs={“you@abc.com”};   </li>
+<li>it.putExtra(Intent.EXTRA_EMAIL, tos);   </li>
+<li>it.putExtra(Intent.EXTRA_CC, ccs);   </li>
+<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);   </li>
+<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);   </li>
+<li>it.setType(“message/rfc822”);   </li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
+</ol>
+<p><strong>添加附件</strong></p>
+<ol>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);</li>
+<li>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/mysong.mp3[/url]”);</li>
+<li>sendIntent.setType(“audio/mp3”);</li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
+</ol>
+<p><strong>播放多媒体</strong></p>
+<ol>
+<li></li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
+<li>Uri uri = Uri.parse(“[url=]file:///sdcard/song.mp3[/url]”);</li>
+<li>it.setDataAndType(uri, “audio/mp3”);</li>
+<li>startActivity(it);</li>
+<li>Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, “1”);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW, uri);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>Uninstall 程序</strong></p>
+<ol>
+<li>Uri uri = Uri.fromParts(“package”, strPackageName, null);</li>
+<li>Intent it = new Intent(Intent.ACTION_DELETE, uri);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>//调用相册</strong></p>
+<p>public static final String MIME_TYPE_IMAGE_JPEG = “image/*”;<br>public static final int ACTIVITY_GET_IMAGE = 0;<br>Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);<br>getImage.addCategory(Intent.CATEGORY_OPENABLE);<br>getImage.setType(MIME_TYPE_IMAGE_JPEG);<br>startActivityForResult(getImage, ACTIVITY_GET_IMAGE);</p>
+<p><strong>//调用系统相机应用程序，并存储拍下来的照片</strong></p>
+<p>Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);<br>time = Calendar.getInstance().getTimeInMillis();<br>intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment<br>.getExternalStorageDirectory().getAbsolutePath()+”/tucue”, time + “.jpg”)));<br>startActivityForResult(intent, ACTIVITY_GET_CAMERA_IMAGE);</p>
+<p>uninstall apk</p>
+<p><strong>未测试</strong></p>
+<p>Uri uninstallUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_DELETE, uninstallUri);<br>*/<br>Uri packageURI = Uri.parse(“package:”+wistatmap);<br>Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);<br>startActivity(uninstallIntent);</p>
+<p>install apk<br>Uri installUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_PACKAGE_ADDED, installUri);<br>play audio<br>Uri playUri = Uri.parse(“[url=]file:///sdcard/download/everything.mp3[/url]”);<br>returnIt = new Intent(Intent.ACTION_VIEW, playUri);</p>
+<p><strong>//发送附件</strong></p>
+<p>Intent it = new Intent(Intent.ACTION_SEND);<br>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);<br>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/eoe.mp3[/url]”);<br>sendIntent.setType(“audio/mp3”);<br>startActivity(Intent.createChooser(it, “Choose Email Client”));</p>
+<p><strong>//搜索应用</strong></p>
+<p>Uri uri = Uri.parse(“market://search?q=pname:pkg_name”);<br>Intent it = new Intent(Intent.ACTION_VIEW, uri);<br>startActivity(it);<br>//where pkg_name is the full package path for an application</p>
+<p><strong>进入联系人页面</strong></p>
+<p>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(People.CONTENT_URI);<br>startActivity(intent);</p>
+<p><strong>查看指定联系人</strong></p>
+<p>Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, info.id);//info.id联系人ID<br>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(personUri);<br>startActivity(intent);</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicfpi9hp0003y0b2ya669cfo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/23/2015-7-23/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"> 2015/7/23</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
