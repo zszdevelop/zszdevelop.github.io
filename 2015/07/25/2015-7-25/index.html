@@ -3,26 +3,29 @@
 <head>
   <meta charset="utf-8">
   
-  <title>2015/7/20 | zszBlog</title>
+  <title>servlet与404错误，清空Tomcat缓存 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2015/7/20 问题集字节流如何转换为字符流FileInputStream fis = new FileInputStream(&quot;c:/abc.txt&quot;);// 字节流
- InputStreamReader isr = new InputStreamReader(fis);// 字符流
- BufferedReader br = new BufferedReader(isr);// 缓冲流
- S">
+  <meta name="description" content="2015/7/25被两个非代码错误折腾了一天！！！奔溃 
+servlet与404错误servlet在tomcat8之后无需自己配置信息。404错误是因为servlet没有找到控制的页面显示！！
+。。。。。。。。一上午！
+清空Tomcat缓存因为没有清空缓存，以至于一直显示错误的信息。明明已经没有代码在里面了。关闭eclipse也没用
+点击eclipse菜单栏中的project-选择clean">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2015/7/20">
-<meta property="og:url" content="http://yoursite.com/2015/07/20/2015-7-20/index.html">
+<meta property="og:title" content="servlet与404错误，清空Tomcat缓存">
+<meta property="og:url" content="http://yoursite.com/2015/07/25/2015-7-25/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="2015/7/20 问题集字节流如何转换为字符流FileInputStream fis = new FileInputStream(&quot;c:/abc.txt&quot;);// 字节流
- InputStreamReader isr = new InputStreamReader(fis);// 字符流
- BufferedReader br = new BufferedReader(isr);// 缓冲流
- S">
+<meta property="og:description" content="2015/7/25被两个非代码错误折腾了一天！！！奔溃 
+servlet与404错误servlet在tomcat8之后无需自己配置信息。404错误是因为servlet没有找到控制的页面显示！！
+。。。。。。。。一上午！
+清空Tomcat缓存因为没有清空缓存，以至于一直显示错误的信息。明明已经没有代码在里面了。关闭eclipse也没用
+点击eclipse菜单栏中的project-选择clean">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2015/7/20">
-<meta name="twitter:description" content="2015/7/20 问题集字节流如何转换为字符流FileInputStream fis = new FileInputStream(&quot;c:/abc.txt&quot;);// 字节流
- InputStreamReader isr = new InputStreamReader(fis);// 字符流
- BufferedReader br = new BufferedReader(isr);// 缓冲流
- S">
+<meta name="twitter:title" content="servlet与404错误，清空Tomcat缓存">
+<meta name="twitter:description" content="2015/7/25被两个非代码错误折腾了一天！！！奔溃 
+servlet与404错误servlet在tomcat8之后无需自己配置信息。404错误是因为servlet没有找到控制的页面显示！！
+。。。。。。。。一上午！
+清空Tomcat缓存因为没有清空缓存，以至于一直显示错误的信息。明明已经没有代码在里面了。关闭eclipse也没用
+点击eclipse菜单栏中的project-选择clean">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -120,7 +123,7 @@
     
   </div>
 </aside>
-      <section id="main"><article id="post-2015-7-20" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-2015-7-25" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -129,15 +132,15 @@
         
   
     <h1 class="article-title" itemprop="name">
-      2015/7/20
+      servlet与404错误，清空Tomcat缓存
     </h1>
   
 
         <div class="article-meta">
           <div class="article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/07/20/2015-7-20/">
-    <time datetime="2015-07-20T01:51:03.000Z" itemprop="datePublished">2015-07-20</time>
+  <a href="/2015/07/25/2015-7-25/">
+    <time datetime="2015-07-25T10:00:01.000Z" itemprop="datePublished">2015-07-25</time>
   </a>
 </div>
           
@@ -146,50 +149,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="2015/7/20_问题集">2015/7/20 问题集</h1><h2 id="字节流如何转换为字符流">字节流如何转换为字符流</h2><pre><code>FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"c:/abc.txt"</span>);<span class="comment">// 字节流</span>
- InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis);<span class="comment">// 字符流</span>
- <span class="keyword">BufferedReader</span> br = <span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);<span class="comment">// 缓冲流</span>
- <span class="keyword">String</span> <span class="built_in">str</span> = <span class="keyword">null</span>;
- <span class="keyword">if</span> ((<span class="built_in">str</span> = br.readLine()) != <span class="keyword">null</span>) {
-  System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);
- }
- br.close();
- isr.close();
- fis.close();
-}
-</code></pre><h2 id="去除文件中的空格和回车">去除文件中的空格和回车</h2><pre><code>  content_str=etSend.getText().<span class="keyword">toString</span>();
-<span class="comment">//去除空格</span>
-    String <span class="keyword">drop</span>=content_str.<span class="keyword">replace</span>(<span class="string">" "</span>,<span class="string">""</span>);
-<span class="comment">//    去除回车</span>
-    String droph=<span class="keyword">drop</span>.<span class="keyword">replace</span>(<span class="string">"\n"</span>,<span class="string">""</span>);
-</code></pre><h2 id="LayoutInflater加载布局">LayoutInflater加载布局</h2><p>findViewById加载控件，LayoutInflater加载布局</p>
-<pre><code>LayoutInflater <span class="variable">layoutInflater=</span>LayoutInflater.from(context);
+        <h1 id="2015/7/25">2015/7/25</h1><p>被两个非代码错误折腾了一天！！！奔溃 </p>
+<h2 id="servlet与404错误">servlet与404错误</h2><p>servlet在tomcat8之后无需自己配置信息。<br>404错误是因为servlet没有找到控制的页面显示！！</p>
+<p>。。。。。。。。一上午！</p>
+<h2 id="清空Tomcat缓存">清空Tomcat缓存</h2><p>因为没有清空缓存，以至于一直显示错误的信息。明明已经没有代码在里面了。关闭eclipse也没用</p>
+<p>点击eclipse菜单栏中的project-选择clean</p>
 
-     <span class="variable">layout=</span> (RelativeLayout) layoutInflater.inflate(R.layout.left_item,<span class="constant">null</span>);
-</code></pre><h2 id="新建http连接">新建http连接</h2><pre><code><span class="keyword">protected</span> <span class="keyword">String</span> doInBackground(<span class="keyword">String</span>... strings) {
-
- <span class="keyword">try</span> {
-     client=<span class="keyword">new</span> DefaultHttpClient();
-     httpGet=<span class="keyword">new</span> HttpGet(url);
-    httpResponse= client.execute(httpGet);
-    entity= httpResponse.getEntity();
-     InputStream is=entity.getContent();
-     InputStreamReader isr=<span class="keyword">new</span> InputStreamReader(is);
-     <span class="keyword">BufferedReader</span> br=<span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);
-     <span class="keyword">String</span> <span class="built_in">line</span>;
-     StringBuffer sb=<span class="keyword">new</span> StringBuffer();
-     <span class="keyword">while</span> ((<span class="built_in">line</span>=br.readLine())!=<span class="keyword">null</span>){
-         sb.<span class="built_in">append</span>(<span class="built_in">line</span>);
-     }
-     <span class="keyword">return</span> sb.toString();
- } <span class="keyword">catch</span> (IOException e) {
-     e.printStackTrace();
- }
-</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="ciciw62pp0007zsb24zzz0a7m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="ciciw62p80002zsb2no1nkbiu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -198,19 +167,10 @@
     
 <nav id="article-nav">
   
-    <a href="/2015/07/21/2015-7-21/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          2015-7-21
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/07/19/2015-7-18-adapter/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/07/23/2015-7-23-URI-Intent/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">adapter</div>
+      <div class="article-nav-title"> 2015/7/23-URI-Intent</div>
     </a>
   
 </nav>
