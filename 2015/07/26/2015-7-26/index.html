@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015/7/26 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2015/7/26问题集从服务器得到所有图片信息servlet
+package com.zsz.man;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015/7/26">
+<meta property="og:url" content="http://yoursite.com/2015/07/26/2015-7-26/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="2015/7/26问题集从服务器得到所有图片信息servlet
+package com.zsz.man;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+i">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015/7/26">
+<meta name="twitter:description" content="2015/7/26问题集从服务器得到所有图片信息servlet
+package com.zsz.man;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.ServletContext;
+i">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="/.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="/archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="/categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="/tags">Tags</a></td>
+      
+        <td><a class="main-nav-link" href="/about">About</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        27
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-7-26" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015/7/26
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/26/2015-7-26/">
+    <time datetime="2015-07-26T04:54:15.000Z" itemprop="datePublished">2015-07-26</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/26问题集">2015/7/26问题集</h1><h2 id="从服务器得到所有图片信息">从服务器得到所有图片信息</h2><p>servlet</p>
+<pre><code>package com.zsz.man;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.io.PrintWriter;
+<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">import</span> javax.servlet.ServletContext;
+<span class="keyword">import</span> javax.servlet.ServletException;
+<span class="keyword">import</span> javax.servlet.annotation.WebServlet;
+<span class="keyword">import</span> javax.servlet.http.HttpServlet;
+<span class="keyword">import</span> javax.servlet.http.HttpServletRequest;
+<span class="keyword">import</span> javax.servlet.http.HttpServletResponse;
+
+<span class="keyword">import</span> com.google.gson.Gson;
+<span class="keyword">import</span> com.zsz.develop.UserInfoBean;
+<span class="keyword">import</span> com.zsz.develop.UserinfoDao;
+<span class="keyword">import</span> com.zsz.main.ImageUtil;
+
+<span class="comment">/**
+ * Servlet implementation class GetAllManServlet
+ */</span>
+@WebServlet(<span class="string">"/GetAllManServlet"</span>)
+public <span class="class"><span class="keyword">class</span> <span class="title">GetAllManServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>{
+private static final long serialVersionUID = <span class="number">1</span>L;
+
+<span class="comment">/**
+ * @see HttpServlet#HttpServlet()
+ */</span>
+public GetAllManServlet() {
+    <span class="keyword">super</span>();
+    <span class="comment">// TODO Auto-generated constructor stub</span>
+}
+
+<span class="comment">/**
+ * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+ */</span>
+protected <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    <span class="comment">// TODO Auto-generated method stub</span>
+}
+
+<span class="comment">/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */</span>
+protected <span class="keyword">void</span> doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    ServletContext context = getServletContext();
+    <span class="built_in">String</span> contentType = context.getInitParameter(<span class="string">"contentType"</span>);
+    <span class="built_in">String</span> jsonAction = request.getParameter(<span class="string">"action"</span>);
+    int jsonImageSize =Integer.parseInt(request.getParameter(<span class="string">"imageSize"</span>)); 
+    <span class="built_in">String</span> jsonName = request.getParameter(<span class="string">"name"</span>);
+    System.out.println(<span class="string">"jsonName:"</span>+jsonName);
+    <span class="built_in">String</span> outStr = <span class="string">""</span>;
+    Gson gson = <span class="keyword">new</span> Gson();
+    ManDao manDao=<span class="keyword">new</span> ManDaoImpl();
+
+
+    <span class="keyword">if</span> (jsonAction.equals(<span class="string">"getAll"</span>)) {
+        List&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
+        <span class="comment">// 將所有照片縮小</span>
+        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; manList.size(); i++) {
+            ManBean manBean = manList.get(i);
+            manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
+        }
+        outStr = gson.toJson(manList);
+    }
+
+    response.setContentType(contentType);
+    PrintWriter out = response.getWriter();
+    System.out.println(outStr);
+    out.print(outStr);
+    out.close();
+
+    }
+
+}
+</code></pre><p><strong>重点</strong>在这一段：</p>
+<ul>
+<li>判断功能选项</li>
+<li>取得实体类集合</li>
+<li>循环取出每张图片、并对他进行压缩</li>
+<li><p>把压缩后的数据传递给实体类，并转为json格式输出</p>
+<p>  if (jsonAction.equals(“getAll”)) {</p>
+<pre><code>    <span class="built_in">List</span>&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
+    <span class="comment">// 將所有照片縮小</span>
+    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; manList.size(); i++) {
+        ManBean manBean = manList.<span class="literal">get</span>(i);
+        manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
+    }
+    outStr = gson.toJson(manList);
+}
+</code></pre><h2 id="图片压缩代码">图片压缩代码</h2></li>
+</ul>
+<p>调用方法：manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));</p>
+<pre><code><span class="keyword">package</span> com.zsz.main;
+
+<span class="keyword">import</span> java.awt.Graphics;
+<span class="keyword">import</span> java.awt.image.BufferedImage;
+<span class="keyword">import</span> java.io.ByteArrayInputStream;
+<span class="keyword">import</span> java.io.ByteArrayOutputStream;
+<span class="keyword">import</span> java.io.IOException;
+
+<span class="keyword">import</span> javax.imageio.ImageIO;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageUtil</span> </span>{
+
+<span class="javadoc">/**
+ * 將圖形縮小後回傳，如果發生錯誤就直接回傳原圖， 例如：imageSize值&lt;=1、無法取得圖的寬高、發生Exception
+ * 
+ *<span class="javadoctag"> @param</span> srcImageData
+ *            來源圖形資料
+ *<span class="javadoctag"> @param</span> scaleSize
+ *            欲將圖形縮至多少尺寸以下，50代表將尺寸縮小至50x50以內
+ *<span class="javadoctag"> @return</span> 縮小完畢的圖形資料
+ */</span>
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] shrink(<span class="keyword">byte</span>[] srcImageData, <span class="keyword">int</span> scaleSize) {
+    ByteArrayInputStream bais = <span class="keyword">new</span> ByteArrayInputStream(srcImageData);
+    <span class="comment">// 縮小比例，4代表除以4</span>
+    <span class="keyword">int</span> sampleSize = <span class="number">1</span>;
+    <span class="keyword">int</span> imageWidth = <span class="number">0</span>;
+    <span class="keyword">int</span> imageHeight = <span class="number">0</span>;
+
+    <span class="comment">// 如果imageSize為0、負數(代表錯誤)或1(1代表與原圖一樣大小)，就直接回傳原圖資料</span>
+    <span class="keyword">if</span> (scaleSize &lt;= <span class="number">1</span>) {
+        <span class="keyword">return</span> srcImageData;
+    }
+
+    <span class="keyword">try</span> {
+        BufferedImage srcBufferedImage = ImageIO.read(bais);
+        <span class="comment">// 如果無法識別圖檔格式(TYPE_CUSTOM)就回傳TYPE_INT_ARGB；否則回傳既有格式</span>
+        <span class="keyword">int</span> type = srcBufferedImage.getType() == BufferedImage.TYPE_CUSTOM ? BufferedImage.TYPE_INT_RGB
+                : srcBufferedImage.getType();
+        imageWidth = srcBufferedImage.getWidth();
+        imageHeight = srcBufferedImage.getHeight();
+        <span class="keyword">if</span> (imageWidth == <span class="number">0</span> || imageHeight == <span class="number">0</span>) {
+            <span class="keyword">return</span> srcImageData;
+        }
+        <span class="comment">// 只要圖檔較長的一邊超過指定長度(desireSize)，就計算欲縮小的比例</span>
+        <span class="comment">// 並將圖檔寬高都除以欲縮小比例</span>
+        <span class="keyword">int</span> longer = Math.max(imageWidth, imageHeight);
+        <span class="keyword">if</span> (longer &gt; scaleSize) {
+            sampleSize = longer / scaleSize;
+            imageWidth = srcBufferedImage.getWidth() / sampleSize;
+            imageHeight = srcBufferedImage.getHeight() / sampleSize;
+        }
+        BufferedImage scaledBufferedImage = <span class="keyword">new</span> BufferedImage(imageWidth,
+                imageHeight, type);
+        Graphics graphics = scaledBufferedImage.createGraphics();
+        graphics.drawImage(srcBufferedImage, <span class="number">0</span>, <span class="number">0</span>, imageWidth, imageHeight,
+                <span class="keyword">null</span>);
+        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();
+        ImageIO.write(scaledBufferedImage, <span class="string">"jpg"</span>, baos);
+        <span class="function"><span class="keyword">return</span> baos.<span class="title">toByteArray</span><span class="params">()</span></span>;
+    } <span class="keyword">catch</span> (IOException e) {
+        e.printStackTrace();
+        <span class="keyword">return</span> srcImageData;
+    }
+}
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicluhcrg00031ob22jxg1bkz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/26/2015-7-26-TabHost/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/7/26-TabHost
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/25/2015-7-25/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">servlet与404错误，清空Tomcat缓存</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
