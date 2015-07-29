@@ -107,7 +107,7 @@ AChartEngine（简称ACE）是Google的一个开源图表库（for Android）。
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        29
+        30
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -167,7 +167,113 @@ AChartEngine（简称ACE）是Google的一个开源图表库（for Android）。
 </ul>
 <p><strong>AChartEngine（简称ACE）</strong>是Google的一个开源图表库（for Android）。它功能强大，支持散点图、折线图、饼图、气泡图、柱状图、短棒图、仪表图等多种图表。</p>
 <p>参考文章：<a href="http://www.cnblogs.com/android100/p/Android-AChartEngine.html" target="_blank" rel="external">http://www.cnblogs.com/android100/p/Android-AChartEngine.html</a></p>
-<p><strong>先定义一个接口AChartAbstract</strong></p>
+<h2 id="achartengine的数据模型">achartengine的数据模型</h2><ul>
+<li><p>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</p>
+</li>
+<li><p>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</p>
+</li>
+<li><p>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</p>
+</li>
+<li><p>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</p>
+</li>
+<li><p>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</p>
+</li>
+<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
+</li>
+</ul>
+<p><strong>不同的数据模型用于不同的图表显示</strong>。XYSeries可以用于折线图、直方图。CategorySeries可以用于圆饼图。每种数据模型都提供了丰富的操作接口，用于插入删除数据等多种操作。我们可以根据需要将数据存为合适的数据模型。</p>
+<h2 id="绘制器（渲染器Renderer）">绘制器（渲染器Renderer）</h2><p>绘制器声明了绘制图表的类型。主要包括以下几种。</p>
+<p>SimpleSeriesRenderer、 XYSeriesRenderer用于设置每张图中每一个序列的绘制方法。而DefaultRenderer和 XYMultipleSeriesRenderer用于设置整张图的绘制格式。它们之间的关系类似于XYSeries 与XYMultipleSeriesDataset之间的关系。</p>
+<h2 id="画图概念"><strong>画图概念</strong></h2><p>要 画一张图，我们需要设置好需要绘制的数据及绘制的方法。确定好data model及renderer后，再调用合适的绘制方法绘制图形。库提供了两种绘制图形的方法，一种是get<strong><em>Intent( )（如getLineChartIntent()）直接新建一个Activity全屏显示生成的图表，另一种是get</em></strong>View( )（如getLineChartView()）生成一个View，用户可以自行设置它的显示。</p>
+<p>主要通过设置几个对象</p>
+<p>  1、XYSeries对象：用于存储一条线的数据信息；<br>  2、XYMultipleSeriesDataset对象：即数据集，可添加多个XYSeries对象，因为一个折线图中可能有多条线。<br>  3、XYSeriesRenderer对象：主要是用来设置一条线条的风格，颜色啊，粗细之类的。<br>  4、XYMultipleSeriesRenderer对象：主要用来定义一个图的整体风格，设置xTitle,yTitle,chartName等等整体性的风格，<br>    可添加多个XYSeriesRenderer对象，因为一个图中可以有多条折线。<br>设置完那些对象之后，可通过 org.achartengine.ChartFactory调用数据集XYMultipleSeriesDataset对象<br>  与XYMultipleSeriesRenderer对象来画图并将图加载到GraphicalView中，<br>  ChartFactory有多种api，通过这些api调用来决定是画折线图还是柱状图。</p>
+<h2 id="绘制基础">绘制基础</h2><p>1,ChartFactory ,传入XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,然后,我们只需用 getXXXChartIntent(Context context,XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,)方法就可以进行图表的显示</p>
+<p>2,XYMutilpleSeriesRenderer 用于进行绘制的设置,添加的XYSeriesRender对象,用于定义绘制的点集合设置,注意数量要和XYMutilpleSeriesDataset,添加的XYseries一致!!!</p>
+<p>3,XYMutilpleSeriesDataset 用于数据的存放,添加的XYseries对象,用于提供绘制的点集合的数据</p>
+<h2 id="绘制实例">绘制实例</h2><p>这个实例告诉我们，不必跟着AChartEngine也可以照样实现。只需要懂得原理就行。<br>原理就是</p>
+<ul>
+<li>1.构造渲染图</li>
+<li>2.进行显示（构建数据）</li>
+<li>3.对点的绘制进行设置</li>
+<li><p>/ 3.1设置颜色</p>
+<p> 3.2设置点的样式</p>
+<p> 3.3, 将要绘制的点添加到坐标绘制中</p>
+<p> 3.4,重复 1~3的步骤绘制第二个系列点</p>
+</li>
+</ul>
+<p>package com.zsz.develop.mychart;</p>
+<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/7/29.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
+
+    @Override
+    <span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+        <span class="comment">// TODO Auto-generated method stub</span>
+        <span class="keyword">super</span>.onCreate(savedInstanceState);
+        <span class="comment">// 1, 构造显示用渲染图</span>
+        XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+        <span class="comment">// 2,进行显示</span>
+        XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+        <span class="comment">// 2.1, 构建数据</span>
+        Random r = <span class="keyword">new</span> Random();
+        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
+            XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
+            <span class="comment">// 填充数据</span>
+            <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
+                <span class="comment">// 填x,y值</span>
+                series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
+            }
+            <span class="comment">// 需要绘制的点放进dataset中</span>
+            dataset.addSeries(series);
+        }
+        <span class="comment">// 3, 对点的绘制进行设置</span>
+        XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+        <span class="comment">// 3.1设置颜色</span>
+        xyRenderer.setColor(Color.BLUE);
+        <span class="comment">// 3.2设置点的样式</span>
+        xyRenderer.setPointStyle(PointStyle.SQUARE);
+        <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
+        renderer.addSeriesRenderer(xyRenderer);
+        <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
+        xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+        xyRenderer.setColor(Color.RED);
+        xyRenderer.setPointStyle(PointStyle.CIRCLE);
+        renderer.addSeriesRenderer(xyRenderer);
+        <span class="comment">// Intent intent = new LinChart().execute(this);</span>
+        Intent intent = ChartFactory
+                .getLineChartIntent(<span class="keyword">this</span>, dataset, renderer);
+        startActivity(intent);
+
+
+
+<span class="comment">//          GraphicalView graphicalView = ChartFactory.getLineChartView(this, dataset, renderer);</span>
+<span class="comment">//    llChart= (LinearLayout) findViewById(R.id.llChart);</span>
+  <span class="comment">//  llChart.addView(graphicalView);</span>
+    }
+
+}    
+</code></pre><hr>
+<h2 id="把得到的图标设置成View"><strong>把得到的图标设置成View</strong></h2><p>绑定layout后找到LinearLayout，把他添加到LinearLayout里去</p>
+<pre><code>  GraphicalView <span class="variable">graphicalView =</span> ChartFactory.getLineChartView(this, dataset, renderer);
+<span class="variable">llChart=</span> (LinearLayout) findViewById(R.id.llChart);
+llChart.addView(graphicalView);
+</code></pre><hr>
+<h2 id="构建一个柱状图实例">构建一个柱状图实例</h2><p><strong>先定义一个接口AChartAbstract</strong></p>
 <pre><code>package com.zsz.develop.chartdemo;
 
 <span class="keyword">import</span> android.content.Context;
@@ -824,7 +930,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicom90fb0002o4b27qjkhvfs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicovdg1k0002xkb272diis51" class="article-share-link">Share</a>
       
       
     </footer>
@@ -832,6 +938,15 @@ public <span class="class"><span class="keyword">class</span> <span class="title
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/07/29/2015-7-29-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/7/29
+        
+      </div>
+    </a>
   
   
     <a href="/2015/07/28/2015-7-28/" id="article-nav-older" class="article-nav-link-wrap">

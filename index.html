@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        29
+        30
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,171 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-29-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/29/2015-7-29-1/">2015/7/29</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/29/2015-7-29-1/">
+    <time datetime="2015-07-29T13:19:12.000Z" itemprop="datePublished">2015-07-29</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="AChartEngine超简单实例">AChartEngine超简单实例</h1><p>其实无非就在做三件事</p>
+<ul>
+<li>1.添加数据进图标</li>
+<li>2.线或条等设置</li>
+<li>3.制作成什么表。仅此而已</li>
+</ul>
+<p>package com.zsz.develop.mychart02;</p>
+<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.Button;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.LinearLayout;</span>
+
+
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.GraphicalView;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/7/29.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
+<span class="keyword">private</span> LinearLayout llChart;
+<span class="keyword">private</span> Button btn;
+@Override
+<span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.show_exam_activity);
+    <span class="comment">// 1, 构造显示用渲染图</span>
+    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+    <span class="comment">// 2,进行显示</span>
+    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+    <span class="comment">// 2.1, 构建数据</span>
+    Random r = <span class="keyword">new</span> Random();
+    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
+        XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
+        <span class="comment">// 填充数据</span>
+        <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
+            <span class="comment">// 填x,y值</span>
+            series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
+        }
+        <span class="comment">// 需要绘制的点放进dataset中</span>
+        dataset.addSeries(series);
+    }
+    <span class="comment">// 3, 对点的绘制进行设置</span>
+    XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+    <span class="comment">// 3.1设置颜色</span>
+    xyRenderer.setColor(Color.BLUE);
+    <span class="comment">// 3.2设置点的样式</span>
+    xyRenderer.setPointStyle(PointStyle.SQUARE);
+    <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
+    renderer.addSeriesRenderer(xyRenderer);
+    <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
+    xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+    xyRenderer.setColor(Color.RED);
+    xyRenderer.setPointStyle(PointStyle.CIRCLE);
+    renderer.addSeriesRenderer(xyRenderer);
+<span class="comment">//        Intent intent = new LinChart().execute(this);</span>
+<span class="comment">//        Intent intent = ChartFactory</span>
+<span class="comment">//                .getLineChartIntent(this, dataset, renderer);</span>
+    GraphicalView graphicalView = ChartFactory.getLineChartView(<span class="keyword">this</span>, dataset, renderer);
+    llChart= (LinearLayout) findViewById(R.id.llChart);
+    llChart.addView(graphicalView);
+<span class="comment">//                startActivity(intent);</span>
+
+}
+
+}
+</code></pre><h2 id="详细配置。">详细配置。</h2><p>上面的配置只配置了几个基础的，还要进行更多配置才能使得图标更加简单通熟易懂。</p>
+<ul>
+<li>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</li>
+<li>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</li>
+<li>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</li>
+<li>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</li>
+<li>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</li>
+<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
+</li>
+<li><p>XYSeriesRenderer，impleSeriesRenderer、用于设置每张图中每一个序列的绘制方法。- XYMultipleSeries，RendererDefaultRenderer用于设置整张图的绘制格式。</p>
+</li>
+</ul>
+<p>XYMultipleSeriesRenderer.setAxisTitleTextSize</p>
+<h2 id="详细配置">详细配置</h2><ul>
+<li>1.修改背景色或设置背景图片：<br>背景色设置需要设置两项：setMarginsColor（设置四边颜色）以及setBackgroundColor（设置中间背景色）</li>
+<li>设置背景图片：<pre><code><span class="symbol">http:</span>/<span class="regexp">/blog.csdn.net/kmyhy</span><span class="regexp">/article/details</span><span class="regexp">/6590294</span>
+</code></pre></li>
+</ul>
+<ol>
+<li>setAxisTitleTextSize(16);// 设置坐标轴标题文本大小</li>
+<li>setChartTitleTextSize(20); // 设置图表标题文本大小</li>
+<li>setLabelsTextSize(15); // 设置轴标签文本大小</li>
+<li>setLegendTextSize(15); // 设置图例文本大小</li>
+<li>renderer.setChartTitle( “个人收支表”);//设置柱图名称</li>
+<li>renderer.setXTitle( “名单” );//设置X轴名称</li>
+<li>renderer.setYTitle( “金额” );//设置Y轴名称</li>
+<li>renderer.setXAxisMin(0.5);//设置X轴的最小值为0.5</li>
+<li>renderer.setXAxisMax(5.5);//设置X轴的最大值为5</li>
+<li>renderer.setYAxisMin(0);//设置Y轴的最小值为0</li>
+<li>renderer.setYAxisMax(500);//设置Y轴最大值为500</li>
+<li>renderer.setDisplayChartValues(true);//设置是否在柱体上方显示值</li>
+<li>renderer.setShowGrid(true);//设置是否在图表中显示网格</li>
+<li>renderer.setXLabels(0);//设置X轴显示的刻度标签的个数</li>
+<li>如果想要在X轴显示自定义的标签，那么首先要设置renderer.setXLabels(0);  如果不设置为0，那么所设置的Labels会与原X坐标轴labels重叠<br>其次我们要renderer.addTextLabel()循环添加<br>eg：for(int i=0;i&lt;13;i++)<br>  {<pre><code><span class="keyword">renderer</span>.addTextLabel(i+<span class="number">1</span>,years[i]); <span class="comment">//循环添加Xlabel其中显示的label放在years数组中</span>
+</code></pre>  }</li>
+<li>renderer.setXLabelsAlign(Align.RIGHT);//设置刻度线与X轴之间的相对位置关系</li>
+<li>renderer.setYLabelsAlign(Align.RIGHT);//设置刻度线与Y轴之间的相对位置关系</li>
+<li>renderer.setZoomButtonsVisible(true);//设置可以缩放</li>
+<li>renderer.setPanLimits(newdouble[] { 0, 20, 0, 140 });//设置拉动的范围</li>
+<li>renderer.setZoomLimits(newdouble[] { 0.5, 20, 1, 150 });//设置缩放的范围</li>
+<li>renderer.setRange(newdouble[]{0d, 5d, 0d, 100d}); //设置chart的视图范围</li>
+<li>renderer.setFitLegend(true);// 调整合适的位置</li>
+<li>renderer.setClickEnabled(true)//设置是否可以滑动及放大缩小;</li>
+<li><p>Dataset和Render参数介绍：<br>  <a href="http://blog.csdn.net/lk_blog/article/details/7645661" target="_blank" rel="external">http://blog.csdn.net/lk_blog/article/details/7645661</a></p>
+</li>
+<li><p>ChartView.repaint()；是重新绘图的命令</p>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cicovdg1m0003xkb21ir5xh51" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-29" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -147,7 +312,113 @@
 </ul>
 <p><strong>AChartEngine（简称ACE）</strong>是Google的一个开源图表库（for Android）。它功能强大，支持散点图、折线图、饼图、气泡图、柱状图、短棒图、仪表图等多种图表。</p>
 <p>参考文章：<a href="http://www.cnblogs.com/android100/p/Android-AChartEngine.html" target="_blank" rel="external">http://www.cnblogs.com/android100/p/Android-AChartEngine.html</a></p>
-<p><strong>先定义一个接口AChartAbstract</strong></p>
+<h2 id="achartengine的数据模型">achartengine的数据模型</h2><ul>
+<li><p>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</p>
+</li>
+<li><p>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</p>
+</li>
+<li><p>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</p>
+</li>
+<li><p>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</p>
+</li>
+<li><p>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</p>
+</li>
+<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
+</li>
+</ul>
+<p><strong>不同的数据模型用于不同的图表显示</strong>。XYSeries可以用于折线图、直方图。CategorySeries可以用于圆饼图。每种数据模型都提供了丰富的操作接口，用于插入删除数据等多种操作。我们可以根据需要将数据存为合适的数据模型。</p>
+<h2 id="绘制器（渲染器Renderer）">绘制器（渲染器Renderer）</h2><p>绘制器声明了绘制图表的类型。主要包括以下几种。</p>
+<p>SimpleSeriesRenderer、 XYSeriesRenderer用于设置每张图中每一个序列的绘制方法。而DefaultRenderer和 XYMultipleSeriesRenderer用于设置整张图的绘制格式。它们之间的关系类似于XYSeries 与XYMultipleSeriesDataset之间的关系。</p>
+<h2 id="画图概念"><strong>画图概念</strong></h2><p>要 画一张图，我们需要设置好需要绘制的数据及绘制的方法。确定好data model及renderer后，再调用合适的绘制方法绘制图形。库提供了两种绘制图形的方法，一种是get<strong><em>Intent( )（如getLineChartIntent()）直接新建一个Activity全屏显示生成的图表，另一种是get</em></strong>View( )（如getLineChartView()）生成一个View，用户可以自行设置它的显示。</p>
+<p>主要通过设置几个对象</p>
+<p>  1、XYSeries对象：用于存储一条线的数据信息；<br>  2、XYMultipleSeriesDataset对象：即数据集，可添加多个XYSeries对象，因为一个折线图中可能有多条线。<br>  3、XYSeriesRenderer对象：主要是用来设置一条线条的风格，颜色啊，粗细之类的。<br>  4、XYMultipleSeriesRenderer对象：主要用来定义一个图的整体风格，设置xTitle,yTitle,chartName等等整体性的风格，<br>    可添加多个XYSeriesRenderer对象，因为一个图中可以有多条折线。<br>设置完那些对象之后，可通过 org.achartengine.ChartFactory调用数据集XYMultipleSeriesDataset对象<br>  与XYMultipleSeriesRenderer对象来画图并将图加载到GraphicalView中，<br>  ChartFactory有多种api，通过这些api调用来决定是画折线图还是柱状图。</p>
+<h2 id="绘制基础">绘制基础</h2><p>1,ChartFactory ,传入XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,然后,我们只需用 getXXXChartIntent(Context context,XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,)方法就可以进行图表的显示</p>
+<p>2,XYMutilpleSeriesRenderer 用于进行绘制的设置,添加的XYSeriesRender对象,用于定义绘制的点集合设置,注意数量要和XYMutilpleSeriesDataset,添加的XYseries一致!!!</p>
+<p>3,XYMutilpleSeriesDataset 用于数据的存放,添加的XYseries对象,用于提供绘制的点集合的数据</p>
+<h2 id="绘制实例">绘制实例</h2><p>这个实例告诉我们，不必跟着AChartEngine也可以照样实现。只需要懂得原理就行。<br>原理就是</p>
+<ul>
+<li>1.构造渲染图</li>
+<li>2.进行显示（构建数据）</li>
+<li>3.对点的绘制进行设置</li>
+<li><p>/ 3.1设置颜色</p>
+<p> 3.2设置点的样式</p>
+<p> 3.3, 将要绘制的点添加到坐标绘制中</p>
+<p> 3.4,重复 1~3的步骤绘制第二个系列点</p>
+</li>
+</ul>
+<p>package com.zsz.develop.mychart;</p>
+<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/7/29.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
+
+    @Override
+    <span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+        <span class="comment">// TODO Auto-generated method stub</span>
+        <span class="keyword">super</span>.onCreate(savedInstanceState);
+        <span class="comment">// 1, 构造显示用渲染图</span>
+        XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+        <span class="comment">// 2,进行显示</span>
+        XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+        <span class="comment">// 2.1, 构建数据</span>
+        Random r = <span class="keyword">new</span> Random();
+        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
+            XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
+            <span class="comment">// 填充数据</span>
+            <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
+                <span class="comment">// 填x,y值</span>
+                series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
+            }
+            <span class="comment">// 需要绘制的点放进dataset中</span>
+            dataset.addSeries(series);
+        }
+        <span class="comment">// 3, 对点的绘制进行设置</span>
+        XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+        <span class="comment">// 3.1设置颜色</span>
+        xyRenderer.setColor(Color.BLUE);
+        <span class="comment">// 3.2设置点的样式</span>
+        xyRenderer.setPointStyle(PointStyle.SQUARE);
+        <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
+        renderer.addSeriesRenderer(xyRenderer);
+        <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
+        xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+        xyRenderer.setColor(Color.RED);
+        xyRenderer.setPointStyle(PointStyle.CIRCLE);
+        renderer.addSeriesRenderer(xyRenderer);
+        <span class="comment">// Intent intent = new LinChart().execute(this);</span>
+        Intent intent = ChartFactory
+                .getLineChartIntent(<span class="keyword">this</span>, dataset, renderer);
+        startActivity(intent);
+
+
+
+<span class="comment">//          GraphicalView graphicalView = ChartFactory.getLineChartView(this, dataset, renderer);</span>
+<span class="comment">//    llChart= (LinearLayout) findViewById(R.id.llChart);</span>
+  <span class="comment">//  llChart.addView(graphicalView);</span>
+    }
+
+}    
+</code></pre><hr>
+<h2 id="把得到的图标设置成View"><strong>把得到的图标设置成View</strong></h2><p>绑定layout后找到LinearLayout，把他添加到LinearLayout里去</p>
+<pre><code>  GraphicalView <span class="variable">graphicalView =</span> ChartFactory.getLineChartView(this, dataset, renderer);
+<span class="variable">llChart=</span> (LinearLayout) findViewById(R.id.llChart);
+llChart.addView(graphicalView);
+</code></pre><hr>
+<h2 id="构建一个柱状图实例">构建一个柱状图实例</h2><p><strong>先定义一个接口AChartAbstract</strong></p>
 <pre><code>package com.zsz.develop.chartdemo;
 
 <span class="keyword">import</span> android.content.Context;
@@ -804,7 +1075,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicom90fb0002o4b27qjkhvfs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicovdg1k0002xkb272diis51" class="article-share-link">Share</a>
       
       
     </footer>
@@ -918,7 +1189,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cicom90fq0003o4b25gi5j5s5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cicovdg1q0004xkb2tdrhzmdv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -994,7 +1265,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cicom90ft0004o4b2f21zpkf2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cicovdg1v0005xkb248tx0yiv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1122,7 +1393,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cicom90g80006o4b2jsh1nyfq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cicovdg270007xkb26cs6vil4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1323,7 +1594,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicom90g50005o4b2ey32ps8a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicovdg250006xkb2kwc4kydc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1368,7 +1639,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cicom90g90007o4b2xunmfcx3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cicovdg290008xkb20d3stptz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1532,7 +1803,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicom90gd0009o4b2neeqe71p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicovdg2e000axkb2o9p2iwml" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1588,7 +1859,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cicom90gb0008o4b2wc5q77mi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cicovdg2b0009xkb23ed2ba3k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1775,137 +2046,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cicom90gg000ao4b2jp7skiey" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-21" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/21/2015-7-21/">URIs, URLs, and URNs之间的关系区别，Android拍照功能</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/21/2015-7-21/">
-    <time datetime="2015-07-21T00:48:01.000Z" itemprop="datePublished">2015-07-21</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/21问题集">2015/7/21问题集</h1><h2 id="URIs,_URLs,_and_URNs之间的关系区别">URIs, URLs, and URNs之间的关系区别</h2><ul>
-<li>URI：是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</li>
-<li>URL：是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</li>
-<li>URN：uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。</li>
-</ul>
-<p>也就是说，URI是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。</p>
-<h2 id="Android拍照功能">Android拍照功能</h2><pre><code>package com.zsz.develop.picturedemo;
-
-    <span class="keyword">import</span> java.io.BufferedOutputStream;
-    <span class="keyword">import</span> java.io.File;
-    <span class="keyword">import</span> java.io.FileNotFoundException;
-    <span class="keyword">import</span> java.io.FileOutputStream;
-    <span class="keyword">import</span> java.io.IOException;
-    <span class="keyword">import</span> java.util.Calendar;
-    <span class="keyword">import</span> java.util.Locale;
-
-    <span class="keyword">import</span> android.app.Activity;
-    <span class="keyword">import</span> android.content.Intent;
-    <span class="keyword">import</span> android.graphics.Bitmap;
-    <span class="keyword">import</span> android.os.Bundle;
-    <span class="keyword">import</span> android.os.Environment;
-    <span class="keyword">import</span> android.provider.MediaStore;
-    <span class="keyword">import</span> android.text.format.DateFormat;
-    <span class="keyword">import</span> android.util.Log;
-    <span class="keyword">import</span> android.view.View;
-    <span class="keyword">import</span> android.view.View.OnClickListener;
-    <span class="keyword">import</span> android.widget.Button;
-    <span class="keyword">import</span> android.widget.ImageView;
-    <span class="keyword">import</span> android.widget.Toast;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
-<span class="comment">/** Called when the activity is first created. */</span>
-private Button button;
-
-@Override
-public <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    button = (Button) findViewById(R.id.btnPicture);
-    button.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
-
-        @Override
-        public <span class="keyword">void</span> onClick(View v) {
-            <span class="comment">// TODO Auto-generated method stub</span>
-            Intent intent = <span class="keyword">new</span> Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            startActivityForResult(intent, <span class="number">1</span>);
-        }
-    });
-}
-
-@Override
-protected <span class="keyword">void</span> onActivityResult(int requestCode, int resultCode, Intent data) {
-    <span class="comment">// TODO Auto-generated method stub</span>
-    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);
-    <span class="keyword">if</span> (resultCode == Activity.RESULT_OK) {
-        <span class="built_in">String</span> sdStatus = Environment.getExternalStorageState();
-        <span class="keyword">if</span> (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { <span class="comment">// 检测sd是否可用</span>
-            Log.i(<span class="string">"TestFile"</span>,
-                    <span class="string">"SD card is not avaiable/writeable right now."</span>);
-            <span class="keyword">return</span>;
-        }
-        <span class="built_in">String</span> name = <span class="keyword">new</span> DateFormat().format(<span class="string">"yyyyMMdd_hhmmss"</span>,Calendar.getInstance(Locale.CHINA)) + <span class="string">".jpg"</span>;
-        Toast.makeText(<span class="keyword">this</span>, name, Toast.LENGTH_LONG).show();
-        Bundle bundle = data.getExtras();
-        Bitmap bitmap = (Bitmap) bundle.get(<span class="string">"data"</span>);<span class="comment">// 获取相机返回的数据，并转换为Bitmap图片格式</span>
-
-        FileOutputStream b = <span class="literal">null</span>;
-        <span class="comment">//???????????????????????????????为什么不能直接保存在系统相册位置呢？？？？？？？？？？？？</span>
-        File file = <span class="keyword">new</span> File(<span class="string">"/sdcard/myImage/"</span>);
-        file.mkdirs();<span class="comment">// 创建文件夹</span>
-        <span class="built_in">String</span> fileName = <span class="string">"/sdcard/myImage/"</span>+name;
-
-        <span class="keyword">try</span> {
-            b = <span class="keyword">new</span> FileOutputStream(fileName);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, <span class="number">100</span>, b);<span class="comment">// 把数据写入文件</span>
-        } <span class="keyword">catch</span> (FileNotFoundException e) {
-            e.printStackTrace();
-        } <span class="keyword">finally</span> {
-            <span class="keyword">try</span> {
-                b.flush();
-                b.close();
-            } <span class="keyword">catch</span> (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        ((ImageView) findViewById(R.id.imageView)).setImageBitmap(bitmap);<span class="comment">// 将图片显示在ImageView里</span>
-    }
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cicom90gi000bo4b2fo2d1uwa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cicovdg2h000bxkb2gv6avi8h" class="article-share-link">Share</a>
       
       
     </footer>
