@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015/7/30 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2015/8/5问题集android端乱码问题服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题
+把这句代码
+entity= EntityUtils.toString(response.getEntity());
+改成接收的时候也要转成UTF-8
+entity= EntityUtils.toString(response.getEntity(),&quot;UTF-8&quot;);
+RadioG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015/7/30">
+<meta property="og:url" content="http://yoursite.com/2015/07/30/2015-7-30/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="2015/8/5问题集android端乱码问题服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题
+把这句代码
+entity= EntityUtils.toString(response.getEntity());
+改成接收的时候也要转成UTF-8
+entity= EntityUtils.toString(response.getEntity(),&quot;UTF-8&quot;);
+RadioG">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015/7/30">
+<meta name="twitter:description" content="2015/8/5问题集android端乱码问题服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题
+把这句代码
+entity= EntityUtils.toString(response.getEntity());
+改成接收的时候也要转成UTF-8
+entity= EntityUtils.toString(response.getEntity(),&quot;UTF-8&quot;);
+RadioG">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="/.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="/archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="/categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="/tags">Tags</a></td>
+      
+        <td><a class="main-nav-link" href="/about">About</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        31
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-7-30" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015/7/30
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/30/2015-7-30/">
+    <time datetime="2015-07-30T00:38:24.000Z" itemprop="datePublished">2015-07-30</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/5问题集">2015/8/5问题集</h1><h2 id="android端乱码问题">android端乱码问题</h2><p>服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题</p>
+<p>把这句代码</p>
+<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity());
+</code></pre><p>改成接收的时候也要转成UTF-8</p>
+<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity(),<span class="string">"UTF-8"</span>);
+</code></pre><h2 id="RadioGroup多选一">RadioGroup多选一</h2><p>程序中常常要用到多选一的时候，例如男女</p>
+<p>就以男女为例</p>
+<p>XML</p>
+<pre><code> <span class="tag">&lt;<span class="title">LinearLayout</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">TextView</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:text</span>=<span class="value">"性别："</span>
+        /&gt;</span>
+    <span class="tag">&lt;<span class="title">TextView</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:text</span>=<span class="value">"男"</span>
+        <span class="attribute">android:id</span>=<span class="value">"@+id/etSex"</span>
+        /&gt;</span>
+    <span class="comment">&lt;!--&lt;EditText--&gt;</span>
+        <span class="comment">&lt;!--android:id="@+id/etSex"--&gt;</span>
+        <span class="comment">&lt;!--android:layout_width="fill_parent"--&gt;</span>
+        <span class="comment">&lt;!--android:layout_height="wrap_content"--&gt;</span>
+        <span class="comment">&lt;!--/&gt;--&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">RadioGroup</span> <span class="attribute">android:id</span>=<span class="value">"@+id/radioGroup"</span>
+        <span class="attribute">android:contentDescription</span>=<span class="value">"性别"</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+        <span class="tag">&lt;<span class="title">RadioButton</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:id</span>=<span class="value">"@+id/radioMale"</span>
+            <span class="attribute">android:text</span>=<span class="value">"男"</span>
+            <span class="attribute">android:checked</span>=<span class="value">"true"</span>&gt;</span>
+
+        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">RadioButton</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:id</span>=<span class="value">"@+id/radioFemale"</span>
+            <span class="attribute">android:text</span>=<span class="value">"女"</span>&gt;</span>
+
+        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">RadioGroup</span>&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre><p>Activty中的代码如下</p>
+<pre><code>etSex= (TextView) findViewById(R.id.etSex);
+
+   radioGroup= (RadioGroup) findViewById(R.id.radioGroup);
+   radioGroup.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() {
+       <span class="annotation">@Override</span>
+       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup radioGroup, <span class="keyword">int</span> i)</span> </span>{
+        <span class="keyword">int</span> radioButtonId = radioGroup.getCheckedRadioButtonId();
+           rb = (RadioButton)EditDataActicity.<span class="keyword">this</span>.findViewById(radioButtonId);
+           etSex.setText( rb.getText());
+       }
+   });
+</code></pre><h2 id="对比空字符">对比空字符</h2><p>对比空字符要用equals(“”)</p>
+<pre><code>etHeight.<span class="function"><span class="title">getText</span><span class="params">()</span></span>.<span class="function"><span class="title">toString</span><span class="params">()</span></span>.<span class="function"><span class="title">trim</span><span class="params">()</span></span>.<span class="function"><span class="title">equals</span><span class="params">(<span class="string">""</span>)</span></span>
+</code></pre><h2 id="4种方式实现java_保留2位小数点">4种方式实现java 保留2位小数点</h2><h3 id="方式一：">方式一：</h3><p>四舍五入<br>double   f   =   111231.5585;<br>BigDecimal   b   =   new   BigDecimal(f);<br>double   f1   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();<br>保留两位小数</p>
+<h3 id="方式二：">方式二：</h3><p>java.text.DecimalFormat   df   =new   java.text.DecimalFormat(”#.00″);<br>df.format(你要格式化的数字);<br>例：new java.text.DecimalFormat(”#.00″).format(3.1415926)</p>
+<p>（#.00 表示两位小数 #.0000四位小数 以此类推…</p>
+<h3 id="方式三：">方式三：</h3><p>double d = 3.1415926;<br>String result = String .format(”%.2f”);<br>%.2f %. 表示 小数点前任意位数   2 表示两位小数 格式后的结果为f 表示浮点型。</p>
+<h3 id="方式四：">方式四：</h3><p>此外如果使用struts标签做输出的话，有个format属性,设置为format=”0.00”就是保留两位小数<br>例如：<bean:write name="entity" property="dkhAFSumPl" format="0.00"></bean:write></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cicywjzhr000228b2za9q44g3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/29/2015-7-29-1/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015/7/29</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

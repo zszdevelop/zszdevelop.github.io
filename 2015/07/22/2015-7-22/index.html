@@ -89,7 +89,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        30
+        31
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -158,7 +158,23 @@
    <span class="comment">/*取出Intent中附加的数据*/</span>
   <span class="keyword">String</span> <span class="built_in">str</span>=intent.getStringExtra(<span class="string">"Main"</span>);
   tv.setText(<span class="string">"从其他Intent传过来的值"</span>+<span class="built_in">str</span>);
-</code></pre><h2 id="Intent的构造函数">Intent的构造函数</h2><p>公共构造函数：</p>
+</code></pre><hr>
+<h2 id="Intent-putExtra()传递Object对象或者ArrayList">Intent.putExtra()传递Object对象或者ArrayList<object></object></h2><p>Intent传递基本类型相信大家都十分熟悉，如何传递Object对象或者ArrayList<object>对象呢？</object></p>
+<p>可以通过：</p>
+<p>（1）public Intent putExtra (String name, Serializable value)</p>
+<p>（2）public Intent putExtra (String name, Parcelable value)</p>
+<pre><code><span class="keyword">public</span> <span class="type">Intent</span> putParcelableArrayListExtra(String <span class="keyword">name</span>, ArrayList&lt;? <span class="keyword">extends</span> Parcelable&gt; <span class="keyword">value</span>)
+</code></pre><p><strong>一、通过实现Serializable接口传递</strong></p>
+<p>实体类继承Serializable。然后</p>
+<p>通过Intent来进行传输，具体方法是：public Intent putExtra (String name, Serializable value)</p>
+<pre><code><span class="type">Intent</span> <span class="type">ToManChartIntent</span>=<span class="keyword">new</span> <span class="type">Intent</span><span class="literal">()</span>;
+
+         <span class="type">ToManChartIntent</span>.putExtra(<span class="string">"toManChartIntent"</span>,mans);
+         getContext<span class="literal">()</span>.startActivity(<span class="type">ToManChartIntent</span>);
+</code></pre><p><strong>二、通过实现Parcelable接口传递</strong></p>
+<p>同上，Person类实现Parcelable接口即可：</p>
+<p>传递Object用：public Intent putExtra (String name, Parcelable value)<br>传递ArrayList<object>用：public Intent putParcelableArrayListExtra(String name, ArrayList&lt;? extends Parcelable&gt; value)</object></p>
+<h2 id="Intent的构造函数">Intent的构造函数</h2><p>公共构造函数：</p>
 <ul>
 <li><p>1、Intent() 空构造函数</p>
 </li>
@@ -291,7 +307,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cicovdg2h000bxkb2gv6avi8h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cicywjzit000c28b28kdl7aty" class="article-share-link">Share</a>
       
       
     </footer>

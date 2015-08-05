@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        30
+        31
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,122 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-30" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/30/2015-7-30/">2015/7/30</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/30/2015-7-30/">
+    <time datetime="2015-07-30T00:38:24.000Z" itemprop="datePublished">2015-07-30</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/5问题集">2015/8/5问题集</h1><h2 id="android端乱码问题">android端乱码问题</h2><p>服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题</p>
+<p>把这句代码</p>
+<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity());
+</code></pre><p>改成接收的时候也要转成UTF-8</p>
+<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity(),<span class="string">"UTF-8"</span>);
+</code></pre><h2 id="RadioGroup多选一">RadioGroup多选一</h2><p>程序中常常要用到多选一的时候，例如男女</p>
+<p>就以男女为例</p>
+<p>XML</p>
+<pre><code> <span class="tag">&lt;<span class="title">LinearLayout</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">TextView</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:text</span>=<span class="value">"性别："</span>
+        /&gt;</span>
+    <span class="tag">&lt;<span class="title">TextView</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:text</span>=<span class="value">"男"</span>
+        <span class="attribute">android:id</span>=<span class="value">"@+id/etSex"</span>
+        /&gt;</span>
+    <span class="comment">&lt;!--&lt;EditText--&gt;</span>
+        <span class="comment">&lt;!--android:id="@+id/etSex"--&gt;</span>
+        <span class="comment">&lt;!--android:layout_width="fill_parent"--&gt;</span>
+        <span class="comment">&lt;!--android:layout_height="wrap_content"--&gt;</span>
+        <span class="comment">&lt;!--/&gt;--&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">RadioGroup</span> <span class="attribute">android:id</span>=<span class="value">"@+id/radioGroup"</span>
+        <span class="attribute">android:contentDescription</span>=<span class="value">"性别"</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+        <span class="tag">&lt;<span class="title">RadioButton</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:id</span>=<span class="value">"@+id/radioMale"</span>
+            <span class="attribute">android:text</span>=<span class="value">"男"</span>
+            <span class="attribute">android:checked</span>=<span class="value">"true"</span>&gt;</span>
+
+        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">RadioButton</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:id</span>=<span class="value">"@+id/radioFemale"</span>
+            <span class="attribute">android:text</span>=<span class="value">"女"</span>&gt;</span>
+
+        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">RadioGroup</span>&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre><p>Activty中的代码如下</p>
+<pre><code>etSex= (TextView) findViewById(R.id.etSex);
+
+   radioGroup= (RadioGroup) findViewById(R.id.radioGroup);
+   radioGroup.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() {
+       <span class="annotation">@Override</span>
+       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup radioGroup, <span class="keyword">int</span> i)</span> </span>{
+        <span class="keyword">int</span> radioButtonId = radioGroup.getCheckedRadioButtonId();
+           rb = (RadioButton)EditDataActicity.<span class="keyword">this</span>.findViewById(radioButtonId);
+           etSex.setText( rb.getText());
+       }
+   });
+</code></pre><h2 id="对比空字符">对比空字符</h2><p>对比空字符要用equals(“”)</p>
+<pre><code>etHeight.<span class="function"><span class="title">getText</span><span class="params">()</span></span>.<span class="function"><span class="title">toString</span><span class="params">()</span></span>.<span class="function"><span class="title">trim</span><span class="params">()</span></span>.<span class="function"><span class="title">equals</span><span class="params">(<span class="string">""</span>)</span></span>
+</code></pre><h2 id="4种方式实现java_保留2位小数点">4种方式实现java 保留2位小数点</h2><h3 id="方式一：">方式一：</h3><p>四舍五入<br>double   f   =   111231.5585;<br>BigDecimal   b   =   new   BigDecimal(f);<br>double   f1   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();<br>保留两位小数</p>
+<h3 id="方式二：">方式二：</h3><p>java.text.DecimalFormat   df   =new   java.text.DecimalFormat(”#.00″);<br>df.format(你要格式化的数字);<br>例：new java.text.DecimalFormat(”#.00″).format(3.1415926)</p>
+<p>（#.00 表示两位小数 #.0000四位小数 以此类推…</p>
+<h3 id="方式三：">方式三：</h3><p>double d = 3.1415926;<br>String result = String .format(”%.2f”);<br>%.2f %. 表示 小数点前任意位数   2 表示两位小数 格式后的结果为f 表示浮点型。</p>
+<h3 id="方式四：">方式四：</h3><p>此外如果使用struts标签做输出的话，有个format属性,设置为format=”0.00”就是保留两位小数<br>例如：<bean:write name="entity" property="dkhAFSumPl" format="0.00"></bean:write></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cicywjzhr000228b2za9q44g3" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-29-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -262,12 +378,13 @@
 </li>
 <li><p>ChartView.repaint()；是重新绘图的命令</p>
 </li>
+<li>renderer.setMargins(new int[] { 70, 70, 100, 70 });//设置图表的外边框(上/左/下/右)</li>
 </ol>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cicovdg1m0003xkb21ir5xh51" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cicywjzhw000428b2bo9je6ag" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1075,7 +1192,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicovdg1k0002xkb272diis51" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicywjzht000328b24i5qdy8w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1189,7 +1306,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cicovdg1q0004xkb2tdrhzmdv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cicywjzhz000528b2uzzjz588" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1265,7 +1382,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cicovdg1v0005xkb248tx0yiv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cicywjzi1000628b240b1ulex" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1393,7 +1510,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cicovdg270007xkb26cs6vil4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cicywjzic000828b2w6ttxw7e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1594,7 +1711,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicovdg250006xkb2kwc4kydc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicywjzi9000728b2ek0kies3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1639,7 +1756,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cicovdg290008xkb20d3stptz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cicywjzif000928b2imna0kix" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1803,7 +1920,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicovdg2e000axkb2o9p2iwml" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicywjzij000b28b2i78zsvha" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1859,194 +1976,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cicovdg2b0009xkb23ed2ba3k" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-22" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/22/2015-7-22/">putExtra()，Intent的构造函数，startActivityForResult的用法，onActivityResult</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/22/2015-7-22/">
-    <time datetime="2015-07-22T11:30:13.000Z" itemprop="datePublished">2015-07-22</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/22问题集">2015/7/22问题集</h1><h2 id="intent-putExtra()传值">intent.putExtra()传值</h2><p>putExtra(“A”,B)中，AB为键值对，第一个参数为键名，第二个参数为键对应的值。顺便提一下，如果想取出Intent对象中的这些值，需要在你的另一个Activity中用getXXXXXExtra方法，注意需要使用对应类型的方法，参数为键名</p>
-<p>第一个Activity，通过intent.putExtra(“key”,”value”);传给另一个Activity</p>
-<pre><code>btnIntent.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
-       <span class="annotation">@Override</span>
-       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-           Intent intent=<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,ToIntentActicity.class);
-           <span class="comment">//将要传递的值附加到Intent对象</span>
-           intent.putExtra(<span class="string">"Main"</span>,<span class="string">"66666"</span>);
-           startActivity(intent);
-       }
-   });
-</code></pre><p>另一个页面接收数据</p>
-<pre><code>tv= (TextView) findViewById(R.id.tv);
-  <span class="comment">//取得启动该Activity的Intent对象</span>
-  Intent intent=getIntent();
-   <span class="comment">/*取出Intent中附加的数据*/</span>
-  <span class="keyword">String</span> <span class="built_in">str</span>=intent.getStringExtra(<span class="string">"Main"</span>);
-  tv.setText(<span class="string">"从其他Intent传过来的值"</span>+<span class="built_in">str</span>);
-</code></pre><h2 id="Intent的构造函数">Intent的构造函数</h2><p>公共构造函数：</p>
-<ul>
-<li><p>1、Intent() 空构造函数</p>
-</li>
-<li><p>2、Intent(Intent o) 拷贝构造函数</p>
-</li>
-<li><p>3、Intent(String action) 指定action类型的构造函数</p>
-</li>
-<li><p>4、Intent(String action, Uri uri) 指定Action类型和Uri的构造函数，URI主要是结合程序之间的数据共享ContentProvider</p>
-</li>
-<li><p>5、Intent(Context packageContext, Class&lt;?&gt; cls) 传入组件的构造函数，也就是上文提到的</p>
-</li>
-<li><p>6、Intent(String action, Uri uri, Context packageContext, Class&lt;?&gt; cls) 前两种结合体</p>
-</li>
-</ul>
-<p>Intent有六种构造函数，3、4、5是最常用的，并不是其他没用！</p>
-<h2 id="startActivityForResult的用法：">startActivityForResult的用法：</h2><ul>
-<li><p>1、startActivity( )<br>仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。</p>
-</li>
-<li><p>2、startActivityForResult( )<br>可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个Text2Activity，而当这个Text2Activity调用了finish()方法以后，程序会自动跳转回T1Activity，并调用前一个T1Activity中的onActivityResult( )方法。</p>
-</li>
-</ul>
-<p>如果想在Activity中得到新打开Activity 关闭后返回的数据，需要使用系统提供的startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新的Activity 关闭后会向前面的Activity传回数据，为了得到传回的数据，必须在前面的Activity中重写onActivityResult(int requestCode, int resultCode, Intent data)方法。</p>
-<pre><code><span class="comment">//这里采用startActivityForResult来做跳转，此处的0为一个依据，可以写其他的值，但一定要&gt;=0</span>
-
-startActivityForResult<span class="comment">(intent, 0)</span>;
-</code></pre><h2 id="onActivityResult传值的使用">onActivityResult传值的使用</h2><p>多个activity之间的传值 其实就是onActivityResult，然后别忘了还有一个action的问题 就是在主xml中添加自己的action以便于识别，最后次activity别忘了finansh。</p>
-<h2 id="针对startActivityForResult实例代码">针对startActivityForResult实例代码</h2><pre><code><span class="keyword">package</span> com.ljq.activitys;
-
-<span class="keyword">import</span> android.app.Activity;
-<span class="keyword">import</span> android.content.Intent;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.util.Log;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.widget.Button;
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
-<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TAG=<span class="string">"MainActivity"</span>;
-
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
-
-    Button btnOpen=(Button)<span class="keyword">this</span>.findViewById(R.id.btnOpen);
-    btnOpen.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
-            <span class="comment">//得到新打开Activity关闭后返回的数据</span>
-            <span class="comment">//第二个参数为请求码，可以根据业务需求自己编号</span>
-            startActivityForResult(<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, OtherActivity.class), <span class="number">1</span>);
-        }
-    });
-}
-
-<span class="javadoc">/**
- * 为了得到传回的数据，必须在前面的Activity中（指MainActivity类）重写onActivityResult方法
- * 
- * requestCode 请求码，即调用startActivityForResult()传递过去的值
- * resultCode 结果码，结果码用于标识返回数据来自哪个新Activity
- */</span>
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
-    String result = data.getExtras().getString(<span class="string">"result"</span>);<span class="comment">//得到新Activity 关闭后返回的数据</span>
-    Log.i(TAG, result);
-}
-}
-</code></pre><p>当新Activity关闭后，新Activity返回的数据通过Intent进行传递，android平台会调用前面Activity 的onActivityResult()方法，把存放了返回数据的Intent作为第三个输入参数传入，在onActivityResult()方法中使用第三个输入参数可以取出新Activity返回的数据。</p>
-<h3 id="二、使用startActivityForResult(Intent_intent,_int_requestCode)方法打开新的Activity，新Activity关闭前需要向前面的Activity返回数据需要使用系统提供的setResult(int_resultCode,_Intent_data)方法实现：">二、使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新Activity关闭前需要向前面的Activity返回数据需要使用系统提供的setResult(int resultCode, Intent data)方法实现：</h3><pre><code><span class="keyword">package</span> com.ljq.activitys;
-
-<span class="keyword">import</span> android.app.<span class="type">Activity</span>;
-<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">View</span>;
-<span class="keyword">import</span> android.widget.<span class="type">Button</span>;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">OtherActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Activity</span> {</span>
-
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.other);
-
-    <span class="type">Button</span> btnClose=(<span class="type">Button</span>)findViewById(<span class="type">R</span>.id.btnClose);
-    btnClose.setOnClickListener(<span class="keyword">new</span> <span class="type">View</span>.<span class="type">OnClickListener</span>(){
-        public void onClick(<span class="type">View</span> v) {
-            <span class="comment">//数据是使用Intent返回</span>
-            <span class="type">Intent</span> intent = <span class="keyword">new</span> <span class="type">Intent</span>();
-            <span class="comment">//把返回数据存入Intent</span>
-            intent.putExtra(<span class="string">"result"</span>, <span class="string">"My name is linjiqin"</span>);
-            <span class="comment">//设置返回数据</span>
-            <span class="type">OtherActivity</span>.<span class="keyword">this</span>.setResult(<span class="type">RESULT_OK</span>, intent);
-            <span class="comment">//关闭Activity</span>
-            <span class="type">OtherActivity</span>.<span class="keyword">this</span>.finish();
-        }
-    });
-
-}
-
-}
-</code></pre><p>setResult()方法的第一个参数值可以根据业务需要自己定义，上面代码中使用到的RESULT_OK是系统Activity类定义的一个常量，值为-1，代码片断如下：<br>public class android.app.Activity extends ……{<br>  public static final int RESULT_CANCELED = 0;<br>  public static final int RESULT_OK = -1;<br>  public static final int RESULT_FIRST_USER = 1;<br>}</p>
-<h3 id="请求码的作用">请求码的作用</h3><p>使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，我们需要为startActivityForResult()方法传入一个请求码(第二个参数)。请求码的值是根据业务需要由自已设定，用于标识请求来源。例如：一个Activity有两个按钮，点击这两个按钮都会打开同一个Activity，不管是那个按钮打开新Activity，当这个新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。在onActivityResult()方法如果需要知道新Activity是由那个按钮打开的，并且要做出相应的业务处理，这时可以这样做：</p>
-<pre><code> @<span class="function">Override  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-        ....
-    button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
-            startActivityForResult (<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, NewActivity.<span class="keyword">class</span>), <span class="number">1</span>);
-
-       }
-
-    });
-    button2.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
-             startActivityForResult (<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, NewActivity.<span class="keyword">class</span>), <span class="number">2</span>);
-
-        }
-
-    });
-
-
-   @<span class="function">Override <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
-           <span class="keyword">switch</span>(requestCode){
-               <span class="keyword">case</span> <span class="number">1</span>:
-               <span class="comment">//来自按钮1的请求，作相应业务处理</span>
-               <span class="keyword">case</span> <span class="number">2</span>:
-               <span class="comment">//来自按钮2的请求，作相应业务处理</span>
-            }
-      }
-}
-</code></pre><h3 id="结果码的作用">结果码的作用</h3><p>在一个Activity中，可能会使用startActivityForResult()方法打开多个不同的Activity处理不同的业务，当这些新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。为了知道返回的数据来自于哪个新Activity，在onActivityResult()方法中可以这样做(ResultActivity和NewActivity为要打开的新Activity)：<br>public class ResultActivity extends Activity {<br>       …..<br>       ResultActivity.this.setResult(1, intent);<br>       ResultActivity.this.finish();<br>}<br>public class NewActivity extends Activity {<br>       ……<br>        NewActivity.this.setResult(2, intent);<br>        NewActivity.this.finish();<br>}<br>public class MainActivity extends Activity { // 在该Activity会打开ResultActivity和NewActivity<br>       @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {<br>               switch(resultCode){<br>                   case 1:<br>                   // ResultActivity的返回数据<br>                   case 2:<br>                    // NewActivity的返回数据<br>                }<br>          }<br>} </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cicovdg2h000bxkb2gv6avi8h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cicywjzih000a28b2a8vfwlue" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2057,7 +1987,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
     
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
       </nav>
     </section>
       
