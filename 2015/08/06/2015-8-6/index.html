@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015/8/6 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2015/8/6问题集px和dp的转换公式 px = dp * (dpi / 160)
+
+px：即像素，1px代表屏幕上一个物理的像素点；px单位不被建议使用，因为同样100px的图片，在不同手机上显示的实际大小可能不同
+
+dp：它与“像素密度”密切相关，所以首先我们解释一下什么是像素密度。假设有一部手机，屏幕的物理尺寸为1.5英寸x2英寸，屏幕分辨率为240x320，则我们可以计算出在这部手机的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015/8/6">
+<meta property="og:url" content="http://yoursite.com/2015/08/06/2015-8-6/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="2015/8/6问题集px和dp的转换公式 px = dp * (dpi / 160)
+
+px：即像素，1px代表屏幕上一个物理的像素点；px单位不被建议使用，因为同样100px的图片，在不同手机上显示的实际大小可能不同
+
+dp：它与“像素密度”密切相关，所以首先我们解释一下什么是像素密度。假设有一部手机，屏幕的物理尺寸为1.5英寸x2英寸，屏幕分辨率为240x320，则我们可以计算出在这部手机的">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015/8/6">
+<meta name="twitter:description" content="2015/8/6问题集px和dp的转换公式 px = dp * (dpi / 160)
+
+px：即像素，1px代表屏幕上一个物理的像素点；px单位不被建议使用，因为同样100px的图片，在不同手机上显示的实际大小可能不同
+
+dp：它与“像素密度”密切相关，所以首先我们解释一下什么是像素密度。假设有一部手机，屏幕的物理尺寸为1.5英寸x2英寸，屏幕分辨率为240x320，则我们可以计算出在这部手机的">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="/.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="/archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="/categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="/tags">Tags</a></td>
+      
+        <td><a class="main-nav-link" href="/about">About</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        32
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-8-6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015/8/6
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/06/2015-8-6/">
+    <time datetime="2015-08-06T01:07:34.000Z" itemprop="datePublished">2015-08-06</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/6问题集">2015/8/6问题集</h1><h2 id="px和dp的转换公式">px和dp的转换公式</h2><p> px = dp * (dpi / 160)</p>
+<ul>
+<li><p>px：即像素，1px代表屏幕上一个物理的像素点；px单位不被建议使用，因为同样100px的图片，在不同手机上显示的实际大小可能不同</p>
+</li>
+<li><p>dp：它与“像素密度”密切相关，所以首先我们解释一下什么是像素密度。假设有一部手机，屏幕的物理尺寸为1.5英寸x2英寸，屏幕分辨率为240x320，则我们可以计算出在这部手机的屏幕上，每英寸包含的像素点的数量为240/1.5=160dpi（横向）或320/2=160dpi（纵向），160dpi就是这部手机的像素密度，像素密度的单位dpi是Dots Per Inch的缩写，即每英寸像素数量。横向和纵向的这个值都是相同的，原因是大部分手机屏幕使用正方形的像素点。</p>
+</li>
+</ul>
+<ul>
+<li><p>四种像素密度：而ldpi指120，mdpi指160，hdpi指240，xhdpi指320。低（120dpi）、中（160dpi）、高（240dpi）和超高（320dpi），它们对应的dp到px的系数分别为0.75、1、1.5和2，这个系数乘以dp长度就是像素数。例如界面上有一个长度为“80dp”的图片，那么它在240dpi的手机上实际显示为80x1.5=120px，在320dpi的手机上实际显示为80x2=160px</p>
+</li>
+<li><p>dip：<br>与dp完全相同，只是名字不同而已。在早期的Android版本里多使用dip，后来为了与sp统一就建议使用dp这个名字了。</p>
+</li>
+<li><p>sp：<br>与缩放无关的抽象像素（Scale-independent Pixel）。sp和dp很类似但唯一的区别是，Android系统允许用户自定义文字尺寸大小（小、正常、大、超大等等），当文字尺寸是“正常”时1sp=1dp=0.00625英寸，而当文字尺寸是“大”或“超大”时，1sp&gt;1dp=0.00625英寸。类似我们在windows里调整字体尺寸以后的效果——窗口大小不变，只有文字大小改变。</p>
+</li>
+<li><p>mm：<br>即毫米；</p>
+</li>
+<li><p>in：<br>即英寸，1英寸=2.54厘米（约）；</p>
+</li>
+<li><p>pt：<br>1pt=1/72英寸=0.035厘米；</p>
+</li>
+</ul>
+<p>最佳实践，<strong>文字的尺寸一律用sp单位，非文字的尺寸一律使用dp单位</strong>。例如textSize=”16sp”、layout_width=”60dp”；偶尔需要使用px单位，例如需要在屏幕上画一条细的分隔线时：</p>
+<h2 id="如何加载一张大图bitmap如（4096*4096）">如何加载一张大图bitmap如（4096*4096）</h2><h2 id="加载一张大图，有什么注意事项">加载一张大图，有什么注意事项</h2><ul>
+<li><p>在展示高分辨率图片的时候，最好先将图片进行压缩。压缩后的图片大小应该和用来展示它的控件大小相近，在一个很小的ImageView上显示一张超大的图片不会带来任何视觉上的好处，但却会占用我们相当多宝贵的内存，而且在性能上还可能会带来负面影响。</p>
+</li>
+<li><p>为了避免OOM异常，最好在解析每张图片的时候都先检查一下图片的大小，除非你非常信任图片的来源，保证这些图片都不会超出你程序的可用内存。 </p>
+</li>
+</ul>
+<h2 id="Android_判断当前线程是否是主线程的方法">Android 判断当前线程是否是主线程的方法</h2><ul>
+<li><p>方法一：使用Looper类判断</p>
+<pre><code>Looper.<span class="function"><span class="title">myLooper</span><span class="params">()</span></span> != Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>  
+</code></pre></li>
+</ul>
+<p>方法二：通过查看Thread类的当前线程</p>
+<pre><code>Thread.<span class="function"><span class="title">currentThread</span><span class="params">()</span></span> == Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>.<span class="function"><span class="title">getThread</span><span class="params">()</span></span> 
+</code></pre><p>方法三：使用线程句柄判断，将主线程的Thread.currentThread()获取到主线程当前句柄，保存起来，在需要判断的时候调用Thread.currentThread()来与之比较，即可判断当前线程是否是主线程了，该方法可以参见Activity中</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">Thread</span> mUiThread;  
+</code></pre><p>另</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">final</span> void runOnUiThread(Runnable <span class="keyword">action</span>) {  
+    <span class="keyword">if</span> (Thread.currentThread() <span class="comment">!= mUiThread) {  </span>
+        mHandler.post(<span class="keyword">action</span>);  
+    } <span class="keyword">else</span> {  
+        <span class="keyword">action</span>.run();  
+    }  
+}  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cicznlcmu0002isb2p4zxuihn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/07/30/2015-7-30/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015/7/30</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

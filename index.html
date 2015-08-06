@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        31
+        32
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,91 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/06/2015-8-6/">2015/8/6</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/06/2015-8-6/">
+    <time datetime="2015-08-06T01:07:34.000Z" itemprop="datePublished">2015-08-06</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/6问题集">2015/8/6问题集</h1><h2 id="px和dp的转换公式">px和dp的转换公式</h2><p> px = dp * (dpi / 160)</p>
+<ul>
+<li><p>px：即像素，1px代表屏幕上一个物理的像素点；px单位不被建议使用，因为同样100px的图片，在不同手机上显示的实际大小可能不同</p>
+</li>
+<li><p>dp：它与“像素密度”密切相关，所以首先我们解释一下什么是像素密度。假设有一部手机，屏幕的物理尺寸为1.5英寸x2英寸，屏幕分辨率为240x320，则我们可以计算出在这部手机的屏幕上，每英寸包含的像素点的数量为240/1.5=160dpi（横向）或320/2=160dpi（纵向），160dpi就是这部手机的像素密度，像素密度的单位dpi是Dots Per Inch的缩写，即每英寸像素数量。横向和纵向的这个值都是相同的，原因是大部分手机屏幕使用正方形的像素点。</p>
+</li>
+</ul>
+<ul>
+<li><p>四种像素密度：而ldpi指120，mdpi指160，hdpi指240，xhdpi指320。低（120dpi）、中（160dpi）、高（240dpi）和超高（320dpi），它们对应的dp到px的系数分别为0.75、1、1.5和2，这个系数乘以dp长度就是像素数。例如界面上有一个长度为“80dp”的图片，那么它在240dpi的手机上实际显示为80x1.5=120px，在320dpi的手机上实际显示为80x2=160px</p>
+</li>
+<li><p>dip：<br>与dp完全相同，只是名字不同而已。在早期的Android版本里多使用dip，后来为了与sp统一就建议使用dp这个名字了。</p>
+</li>
+<li><p>sp：<br>与缩放无关的抽象像素（Scale-independent Pixel）。sp和dp很类似但唯一的区别是，Android系统允许用户自定义文字尺寸大小（小、正常、大、超大等等），当文字尺寸是“正常”时1sp=1dp=0.00625英寸，而当文字尺寸是“大”或“超大”时，1sp&gt;1dp=0.00625英寸。类似我们在windows里调整字体尺寸以后的效果——窗口大小不变，只有文字大小改变。</p>
+</li>
+<li><p>mm：<br>即毫米；</p>
+</li>
+<li><p>in：<br>即英寸，1英寸=2.54厘米（约）；</p>
+</li>
+<li><p>pt：<br>1pt=1/72英寸=0.035厘米；</p>
+</li>
+</ul>
+<p>最佳实践，<strong>文字的尺寸一律用sp单位，非文字的尺寸一律使用dp单位</strong>。例如textSize=”16sp”、layout_width=”60dp”；偶尔需要使用px单位，例如需要在屏幕上画一条细的分隔线时：</p>
+<h2 id="如何加载一张大图bitmap如（4096*4096）">如何加载一张大图bitmap如（4096*4096）</h2><h2 id="加载一张大图，有什么注意事项">加载一张大图，有什么注意事项</h2><ul>
+<li><p>在展示高分辨率图片的时候，最好先将图片进行压缩。压缩后的图片大小应该和用来展示它的控件大小相近，在一个很小的ImageView上显示一张超大的图片不会带来任何视觉上的好处，但却会占用我们相当多宝贵的内存，而且在性能上还可能会带来负面影响。</p>
+</li>
+<li><p>为了避免OOM异常，最好在解析每张图片的时候都先检查一下图片的大小，除非你非常信任图片的来源，保证这些图片都不会超出你程序的可用内存。 </p>
+</li>
+</ul>
+<h2 id="Android_判断当前线程是否是主线程的方法">Android 判断当前线程是否是主线程的方法</h2><ul>
+<li><p>方法一：使用Looper类判断</p>
+<pre><code>Looper.<span class="function"><span class="title">myLooper</span><span class="params">()</span></span> != Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>  
+</code></pre></li>
+</ul>
+<p>方法二：通过查看Thread类的当前线程</p>
+<pre><code>Thread.<span class="function"><span class="title">currentThread</span><span class="params">()</span></span> == Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>.<span class="function"><span class="title">getThread</span><span class="params">()</span></span> 
+</code></pre><p>方法三：使用线程句柄判断，将主线程的Thread.currentThread()获取到主线程当前句柄，保存起来，在需要判断的时候调用Thread.currentThread()来与之比较，即可判断当前线程是否是主线程了，该方法可以参见Activity中</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">Thread</span> mUiThread;  
+</code></pre><p>另</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">final</span> void runOnUiThread(Runnable <span class="keyword">action</span>) {  
+    <span class="keyword">if</span> (Thread.currentThread() <span class="comment">!= mUiThread) {  </span>
+        mHandler.post(<span class="keyword">action</span>);  
+    } <span class="keyword">else</span> {  
+        <span class="keyword">action</span>.run();  
+    }  
+}  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cicznlcmu0002isb2p4zxuihn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-30" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -218,7 +303,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cicywjzhr000228b2za9q44g3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cicznlcmw0003isb2avgujymy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -384,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cicywjzhw000428b2bo9je6ag" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cicznlcn50005isb28vajt4uh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1192,7 +1277,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicywjzht000328b24i5qdy8w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicznlcmy0004isb29ie6pl73" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1306,7 +1391,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cicywjzhz000528b2uzzjz588" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cicznlcn60006isb21rykxwtt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1382,7 +1467,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cicywjzi1000628b240b1ulex" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cicznlcn90007isb2xbeh7hqa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1510,7 +1595,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cicywjzic000828b2w6ttxw7e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cicznlcnl0009isb2b4wlgr2m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1711,7 +1796,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicywjzi9000728b2ek0kies3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicznlcni0008isb24x06j4ua" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1756,7 +1841,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cicywjzif000928b2imna0kix" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cicznlcnn000aisb23jlb3n7z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1920,63 +2005,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicywjzij000b28b2i78zsvha" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-23" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/23/2015-7-23/"> 注销，TaskStack，affinity</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/23/2015-7-23/">
-    <time datetime="2015-07-23T01:05:22.000Z" itemprop="datePublished">2015-07-23</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="7-23日问题集">7.23日问题集</h1><h2 id="Android注销流程">Android注销流程</h2><p>当我们点击注销按钮之后，一般都会重新返回登陆界面，这时候我们再按返回键是没有用的。这时候其实我们是将Android 的TaskStack清空。</p>
-<p>这里要设置Intent的FLAG,在执行完成Activity跳转的时候会清空TaskStack，并且将创建一个新的TaskStack</p>
-<p>注销</p>
-<pre><code><span class="type">Intent</span> logoutIntent = new <span class="type">Intent</span>(ctx, LoginActivity.<span class="keyword">class</span>);
-                logoutIntent.setFlags(<span class="type">Intent</span>.FLAG_ACTIVITY_CLEAR_TASK | <span class="type">Intent</span>.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(logoutIntent);
-</code></pre><h2 id="什么是Activity_Stack？">什么是Activity Stack？</h2><p>　　Activity承担了大量的显示和交互工作，从某种角度上将，我们看见的应用程序就是许多个Activity的组合。为了让这许多 Activity协同工作而不至于产生混乱，Android平台设计了一种堆栈机制用于管理Activity，其遵循先进后出的原则，系统总是显示位于栈 顶的Activity，从逻辑上将，位于栈顶的Activity也就是最后打开的Activity，这也是符合逻辑的。</p>
-<p>　　在操作应用程序时，每次启动新的Activity，都会将此压入Activity Stack，当用户执行返回操作时，移除Activity Stack顶上的Activity，这样就实现了返回上一个Activty的功能。直到用户一直返回到Home Screen，这时候可以理解为移除了Activity Stack所有的Activity，这个Activity Stack不再存在，应用程序也结束了运行。</p>
-<h2 id="什么是Task？">什么是Task？</h2><p>　　Task是指将相关的Activity组合到一起，以Activity Stack的方式进行管理。从用户体验上讲，一个“应用程序”就是一个Task，但是从根本上讲，一个Task是可以有一个或多个Android Application组成的。例如：你想在发送短信时，拍一张照并作为彩信发出去，这时你首先停留在短信应用程序的的Acitivity上，然后跳转到 Camera应用程序的Activity上，当完成拍照功能后，再返回到短信应用程序的Activity。这实际上是两个Android Application协同合作后完成的工作，但为了更好的用户体验，Android平台加入了Task这么一种机制，让用户没有感觉到应用的中断，让用 户感觉在一“应用程序”里就完成了想完成的工作。</p>
-<h2 id="Activity的affinity(亲和力)">Activity的affinity(亲和力)</h2><p>task对于Activity来说就好像它的身份证一样，可以告诉所在的task，自己属于这个task中的一员；拥有相同affinity的多个Activity理论同属于一个task，task自身的affinity决定于根Activity的affinity值。affinity在什么场合应用呢？1.根据affinity重新为Activity选择宿主task（与allowTaskReparenting属性配合工作）；2.启动一个Activity过程中Intent使用了FLAG_ACTIVITY_NEW_TASK标记，根据affinity查找或创建一个新的具有对应affinity的task。我们会在后面进行详细讲解。</p>
-<p>默认情况下，一个应用内的所有Activity都具有相同的affinity，都是从Application（参考<application>的taskAffinity属性）继承而来，而Application默认的affinity是<manifest>中的包名，我们可以为<application>设置taskAffinity属性值，这样可以应用到<application>下的所有<activity>，也可以单独为某个Activity设置taskAffinity。</activity></application></application></manifest></application></p>
-<h2 id="Intent几种常见的flags：">Intent几种常见的flags：</h2><h3 id="FLAG_ACTIVITY_CLEAR_TASK">FLAG_ACTIVITY_CLEAR_TASK</h3><p><strong>FLAG_ACTIVITY_CLEAR_TASK </strong>:如果在调用Context.startActivity时传递这个标记，将会导致任何用来放置该activity的已经存在的task里面的已经存在的activity先清空，然后该activity再在该task中启动，也就是说，这个新启动的activity变为了这个空tas的根activity.所有老的activity都结束掉。该标志必须和FLAG_ACTIVITY_NEW_TASK一起使用。</p>
-<h3 id="-FLAG_ACTIVITY_CLEAR_TOP">.FLAG_ACTIVITY_CLEAR_TOP</h3><p>当Intent对象包含这个标记时，如果在栈中发现存在Activity实例，则清空这个实例之上的Activity，使其处于栈顶。例如：我们的FirstActivity跳转到SecondActivity，SecondActivity跳转到ThirdActivity，而ThirdActivity又跳到SecondActivity，那么ThirdActivity实例将被弹出栈，使SecondActivity处于栈顶，显示到幕前，栈内只剩下FirstActivity和SecondActivity。这个SecondActivity既可以在onNewIntent()中接收到传来的Intent，也可以把自己销毁之后重新启动来接受这个Intent。在使用默认的“standard”启动模式下，如果没有在Intent使用到FLAG_ACTIVITY_SINGLE_TOP标记，那么它将关闭后重建，如果使用了这个FLAG_ACTIVITY_SINGLE_TOP标记，则会使用已存在的实例；对于其他启动模式，无需再使用FLAG_ACTIVITY_SINGLE_TOP，它都将使用已存在的实例，Intent会被传递到这个实例的onNewIntent()中。</p>
-<h3 id="FLAG_ACTIVITY_SINGLE_TOP">FLAG_ACTIVITY_SINGLE_TOP</h3><p>当task中存在目标Activity实例并且位于栈的顶端时，不再创建一个新的，直接利用这个实例。我们在上边的例子中也有讲到。</p>
-<h3 id="FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET">FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET</h3><p>如果一个Intent中包含此属性，则它转向的那个Activity以及在那个Activity其上的所有Activity都会在task重置时被清除出task。当我们将一个后台的task重新回到前台时，系统会在特定情况下为这个动作附带一个FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记，意味着必要时重置task，这时FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET就会生效。经过测试发现，对于一个处于后台的应用，如果在主选单点击应用，这个动作中含有FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记，长按Home键，然后点击最近记录，这个动作不含FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记,所以前者会清除，后者不会</p>
-<h3 id="FLAG_ACTIVITY_RESET_TASK_IF_NEEDED">FLAG_ACTIVITY_RESET_TASK_IF_NEEDED</h3><p>这个标记在以下情况下会生效：1.启动Activity时创建新的task来放置Activity实例；2.已存在的task被放置于前台。系统会根据affinity对指定的task进行重置操作，task会压入某些Activity实例或移除某些Activity实例。我们结合上面的CLEAR_WHEN_TASK_RESET可以加深理解。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cicywjzih000a28b2a8vfwlue" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicznlcnu000cisb2f7yo0p9q" class="article-share-link">Share</a>
       
       
     </footer>
