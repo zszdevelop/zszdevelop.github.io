@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        32
+        34
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,417 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-15" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/15/2015-8-15/">Android手机的通讯录</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/15/2015-8-15/">
+    <time datetime="2015-08-15T12:16:59.000Z" itemprop="datePublished">2015-08-15</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android手机的通讯录">Android手机的通讯录</h1><p>Android手机的通讯录联系人全部都存在系统的数据库中，如果须要获得通讯里联系人的信息就须要访问系统的数据库，才能将信息拿出来。</p>
+<h2 id="contacts_表">contacts 表</h2><ul>
+<li>_id ：表的ID，主要用于其它表通过contacts 表中的ID可以查到相应的数据。</li>
+<li>display_name:  联系人名称</li>
+<li>photo_id:头像的ID，如果没有设置联系人头像，这个字段就为空</li>
+<li>times_contacted:通话记录的次数</li>
+<li>last_time_contacted: 最后的通话时间 </li>
+<li>lookup :是一个持久化的储存 因为用户可能会改名子 但是它改不了lookup</li>
+</ul>
+<h2 id="简单实例">简单实例</h2><p>要先添加权限</p>
+<pre><code><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.READ_CONTACTS"</span>&gt;</span><span class="tag">&lt;/<span class="title">uses-permission</span>&gt;</span>
+</code></pre><p>这个简单实例只是把数据显示在控制台上。</p>
+<pre><code>package com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.ContentResolver;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.database.Cursor;
+<span class="keyword">import</span> android.provider.ContactsContract;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/15.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">GetNumber</span> </span>{
+
+public static <span class="built_in">String</span> getNumber(Context context){
+    <span class="comment">/**得到手机通讯录联系人信息**/</span>
+    ContentResolver resolver= context.getContentResolver();
+    <span class="comment">// 获取手机联系人</span>
+   Cursor phoneCursor= resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
+    <span class="keyword">if</span> (phoneCursor!=<span class="literal">null</span>){
+
+        <span class="built_in">String</span> phoneNumber;
+        <span class="built_in">String</span> phoneName;
+        <span class="keyword">while</span> (phoneCursor.moveToNext()){
+            <span class="comment">//得到手机号码和名字</span>
+             phoneNumber=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            phoneName=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+
+            System.out.println(<span class="string">"联系人："</span>+phoneName +<span class="string">"     电话号码："</span>+phoneNumber);
+        }
+
+
+    }
+
+
+    <span class="keyword">return</span> <span class="literal">null</span>;
+}
+}
+</code></pre><h2 id="把通讯录显示在页面上">把通讯录显示在页面上</h2><p>MainActivity中的代码：主要加载页面信息</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
+
+<span class="keyword">import</span> java.util.<span class="type">List</span>;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
+<span class="keyword">private</span> <span class="type">ListView</span> lv;
+<span class="keyword">private</span> <span class="type">MyAdapter</span> adapter;
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_main);
+    <span class="type">GetNumber</span>.getNumber(<span class="keyword">this</span>);
+
+    lv= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lv);
+    adapter=<span class="keyword">new</span> <span class="type">MyAdapter</span>(<span class="type">GetNumber</span>.lists,<span class="keyword">this</span>);
+    lv.setAdapter(adapter);
+}
+}
+</code></pre><p>GetNumber中的代码主要获得通讯录信息</p>
+<pre><code>package com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.ContentResolver;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.database.Cursor;
+<span class="keyword">import</span> android.provider.ContactsContract;
+
+<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.List;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/15.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">GetNumber</span> </span>{
+
+public static List&lt;PhoneInfo&gt; lists=<span class="keyword">new</span> ArrayList&lt;PhoneInfo&gt;();
+
+public static <span class="built_in">String</span> getNumber(Context context){
+    <span class="comment">/**得到手机通讯录联系人信息**/</span>
+    ContentResolver resolver= context.getContentResolver();
+    <span class="comment">// 获取手机联系人</span>
+   Cursor phoneCursor= resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
+    <span class="keyword">if</span> (phoneCursor!=<span class="literal">null</span>){
+
+        <span class="built_in">String</span> phoneNumber;
+        <span class="built_in">String</span> phoneName;
+        <span class="keyword">while</span> (phoneCursor.moveToNext()){
+            <span class="comment">//得到手机号码和名字</span>
+             phoneNumber=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            phoneName=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            PhoneInfo phoneInfo=<span class="keyword">new</span> PhoneInfo(phoneName,phoneNumber);
+            lists.add(phoneInfo);
+            System.out.println(<span class="string">"联系人："</span>+phoneName +<span class="string">"     电话号码："</span>+phoneNumber);
+        }
+    }
+    <span class="keyword">return</span> <span class="literal">null</span>;
+}
+}
+</code></pre><p>PhoneInfo对数据进行封装</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/16.
+ */</span>
+<span class="keyword">public</span> class PhoneInfo {
+
+   <span class="keyword">private</span> <span class="keyword">String</span> phoneName;
+<span class="keyword">private</span> <span class="keyword">String</span> phoneNumber;
+
+<span class="keyword">public</span> PhoneInfo(<span class="keyword">String</span> phoneName,<span class="keyword">String</span> phoneNumber){
+    setPhoneName(phoneName);
+    setPhoneNumber(phoneNumber);
+}
+
+
+<span class="keyword">public</span> <span class="keyword">String</span> getPhoneName() {
+    <span class="keyword">return</span> phoneName;
+}
+
+<span class="keyword">public</span> <span class="keyword">void</span> setPhoneName(<span class="keyword">String</span> phoneName) {
+    <span class="keyword">this</span>.phoneName = phoneName;
+}
+
+<span class="keyword">public</span> <span class="keyword">String</span> getPhoneNumber() {
+    <span class="keyword">return</span> phoneNumber;
+}
+
+<span class="keyword">public</span> <span class="keyword">void</span> setPhoneNumber(<span class="keyword">String</span> phoneNumber) {
+    <span class="keyword">this</span>.phoneNumber = phoneNumber;
+}
+}
+</code></pre><p>MyAdapter对listview进行适配。</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.view.LayoutInflater;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.ViewGroup;
+<span class="keyword">import</span> android.widget.BaseAdapter;
+<span class="keyword">import</span> android.widget.LinearLayout;
+<span class="keyword">import</span> android.widget.ListView;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">import</span> java.util.List;
+
+<span class="javadoc">/**
+ * Created by shengzhong on 2015/8/16.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
+<span class="keyword">private</span> List&lt;PhoneInfo&gt; lists;
+<span class="keyword">private</span> Context context;
+<span class="keyword">private</span> LayoutInflater layoutInflater;
+<span class="keyword">private</span> LinearLayout layout;
+
+<span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(List&lt;PhoneInfo&gt; lists, Context context)</span></span>{
+    <span class="keyword">this</span>.lists=lists;
+    <span class="keyword">this</span>.context=context;
+}
+
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">size</span><span class="params">()</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">get</span><span class="params">(i)</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="keyword">return</span> i;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
+    layoutInflater=LayoutInflater.from(context);
+    layout= (LinearLayout) layoutInflater.inflate(R.layout.call,<span class="keyword">null</span>);
+    TextView tvName= (TextView) layout.findViewById(R.id.tvName);
+    TextView tvNumber= (TextView) layout.findViewById(R.id.tvNumber);
+    tvName.setText(lists.get(i).getPhoneName());
+    tvNumber.setText(lists.get(i).getPhoneNumber());
+
+    <span class="keyword">return</span> layout;
+}
+}
+</code></pre><p>call的layout。在main中有一个list</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span> android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
+
+&lt;LinearLayout
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+    &gt;
+    &lt;ImageView
+        android:<span class="variable">layout_width=</span><span class="string">"45dp"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"45dp"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/jiamin"</span>
+        /&gt;
+    &lt;LinearLayout
+        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
+        &gt;
+        &lt;TextView
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/tvName"</span>
+            /&gt;
+        &lt;TextView
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/tvNumber"</span>
+            /&gt;
+
+
+    &lt;/LinearLayout&gt;
+
+
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h2 id="listView优化">listView优化</h2><p>使用holder新建textview来操作。</p>
+<p>重用了convertView，很大程度上的减少了内存的消耗。通过判断convertView是否为null，是的话就需要产生一个视图出来，然后给这个视图数据，最后将这个视图返回给底层，呈献给用户。<br>特点：如果当前的convertView为null，则通过LayoutInflat产生一个view。</p>
+<p>其中converView会反复使用，目的是为了提高ListView效率。</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.view.LayoutInflater;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.ViewGroup;
+<span class="keyword">import</span> android.widget.BaseAdapter;
+<span class="keyword">import</span> android.widget.LinearLayout;
+<span class="keyword">import</span> android.widget.ListView;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">import</span> java.util.List;
+
+<span class="javadoc">/**
+ * Created by shengzhong on 2015/8/16.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
+<span class="keyword">private</span> List&lt;PhoneInfo&gt; lists;
+<span class="keyword">private</span> Context context;
+<span class="keyword">private</span> LayoutInflater layoutInflater;
+<span class="keyword">private</span> LinearLayout layout;
+
+<span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(List&lt;PhoneInfo&gt; lists, Context context)</span></span>{
+    <span class="keyword">this</span>.lists=lists;
+    <span class="keyword">this</span>.context=context;
+}
+
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">size</span><span class="params">()</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">get</span><span class="params">(i)</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="keyword">return</span> i;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
+<span class="comment">//        layoutInflater=LayoutInflater.from(context);</span>
+<span class="comment">//        layout= (LinearLayout) layoutInflater.inflate(R.layout.call,null);</span>
+<span class="comment">//        TextView tvName= (TextView) layout.findViewById(R.id.tvName);</span>
+<span class="comment">//        TextView tvNumber= (TextView) layout.findViewById(R.id.tvNumber);</span>
+<span class="comment">//        tvName.setText(lists.get(i).getPhoneName());</span>
+<span class="comment">//        tvNumber.setText(lists.get(i).getPhoneNumber());</span>
+<span class="comment">//</span>
+    ViewHolder holder;
+    <span class="keyword">if</span> (view==<span class="keyword">null</span>){
+        view=LayoutInflater.from(context).inflate(R.layout.call,<span class="keyword">null</span>);
+        holder=<span class="keyword">new</span> ViewHolder();
+        holder.tvName= (TextView) view.findViewById(R.id.tvName);
+        holder.tvNumber= (TextView) view.findViewById(R.id.tvNumber);
+        holder.tvName.setText(lists.get(i).getPhoneName());
+        holder.tvNumber.setText(lists.get(i).getPhoneNumber());
+        view.setTag(holder);
+
+    }<span class="keyword">else</span> {
+        holder= (ViewHolder) view.getTag();
+        holder.tvName.setText(lists.get(i).getPhoneName());
+        holder.tvNumber.setText(lists.get(i).getPhoneNumber());
+
+    }
+
+    <span class="keyword">return</span> view;
+}
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span></span>{
+
+    TextView tvName;
+    TextView tvNumber;
+}
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cide307hq00031ob29d46a0c7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/10/2015-8-10/">部署代码到CentOS云服务器</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/10/2015-8-10/">
+    <time datetime="2015-08-10T01:31:22.000Z" itemprop="datePublished">2015-08-10</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="部署代码到CentOS云服务器">部署代码到CentOS云服务器</h1><h2 id="FTP通道">FTP通道</h2><p>用户需要使用FTP通道，将应用程序从用户自己的服务器上传到云服务器上。</p>
+<blockquote>
+<p>FTP（File Transfer Protocol，文件传输协议） 是 TCP/IP 协议组中的协议之一。FTP协议包括两个组成部分，其一为FTP服务器，其二为FTP客户端。其中FTP服务器用来存储文件，用户可以使用FTP客户端通过FTP协议访问位于FTP服务器上的资源。在开发网站的时候，通常利用FTP协议把网页或程序传到Web服务器上。此外，由于FTP传输效率非常高，在网络上传输大的文件时，一般也采用该协议。</p>
+<p>默认情况下FTP协议使用TCP端口中的 20和21这两个端口，其中20用于传输数据，21用于传输控制信息。但是，是否使用20作为传输数据的端口与FTP使用的传输模式有关，如果采用主动模式，那么数据传输端口就是20；如果采用被动模式，则具体最终使用哪个端口要服务器端和客户端协商决定。</p>
+</blockquote>
+<p><a href="http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="external">http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cide307hs00041ob2isg6ixzl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -121,7 +532,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/06/2015-8-6/">2015/8/6</a>
+      <a class="article-title" href="/2015/08/06/2015-8-6/">px和dp的转换公式， Android 判断当前线程是否是主线程的方法</a>
     </h1>
   
 
@@ -187,7 +598,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cicznlcmu0002isb2p4zxuihn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cide307hn00021ob26vkolo1k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +617,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/30/2015-7-30/">2015/7/30</a>
+      <a class="article-title" href="/2015/07/30/2015-7-30/">android端乱码问题，RadioGroup多选一，对比空字符，4种方式实现java 保留2位小数点</a>
     </h1>
   
 
@@ -303,7 +714,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cicznlcmw0003isb2avgujymy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cide307hw00051ob2nxpuw9ca" class="article-share-link">Share</a>
       
       
     </footer>
@@ -322,7 +733,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/29/2015-7-29-1/">2015/7/29</a>
+      <a class="article-title" href="/2015/07/29/2015-7-29-1/">AChartEngine超简单实例</a>
     </h1>
   
 
@@ -469,7 +880,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cicznlcn50005isb28vajt4uh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cide307i800071ob2bhwxso9y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -488,7 +899,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/29/2015-7-29/">2015/7/29</a>
+      <a class="article-title" href="/2015/07/29/2015-7-29/">Android中图表AChartEngine</a>
     </h1>
   
 
@@ -1277,7 +1688,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cicznlcmy0004isb29ie6pl73" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cide307i500061ob2e7v61ppx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1296,7 +1707,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/2015-7-28/">2015/7/28</a>
+      <a class="article-title" href="/2015/07/28/2015-7-28/">json转化异常，JDBC查询之感悟</a>
     </h1>
   
 
@@ -1391,7 +1802,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cicznlcn60006isb21rykxwtt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cide307ia00081ob2ozlt74ka" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1467,7 +1878,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cicznlcn90007isb2xbeh7hqa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cide307ic00091ob2dii3effa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1595,7 +2006,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cicznlcnl0009isb2b4wlgr2m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cide307io000b1ob2joufaswn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1796,216 +2207,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cicznlcni0008isb24x06j4ua" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-25" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/25/2015-7-25/">servlet与404错误，清空Tomcat缓存</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/25/2015-7-25/">
-    <time datetime="2015-07-25T10:00:01.000Z" itemprop="datePublished">2015-07-25</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/25">2015/7/25</h1><p>被两个非代码错误折腾了一天！！！奔溃 </p>
-<h2 id="servlet与404错误">servlet与404错误</h2><p>servlet在tomcat8之后无需自己配置信息。<br>404错误是因为servlet没有找到控制的页面显示！！</p>
-<p>。。。。。。。。一上午！</p>
-<h2 id="清空Tomcat缓存">清空Tomcat缓存</h2><p>因为没有清空缓存，以至于一直显示错误的信息。明明已经没有代码在里面了。关闭eclipse也没用</p>
-<p>点击eclipse菜单栏中的project-选择clean</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cicznlcnn000aisb23jlb3n7z" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-23-URI-Intent" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/23/2015-7-23-URI-Intent/"> 2015/7/23-URI-Intent</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/23/2015-7-23-URI-Intent/">
-    <time datetime="2015-07-23T01:05:42.000Z" itemprop="datePublished">2015-07-23</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="通过URI和Intent启动各种功能">通过URI和Intent启动各种功能</h1><h2 id="Uri">Uri</h2><p>就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：<br>scheme://host:port/path<br>举个实际的例子：</p>
-<p><img src="http://cl.ly/image/2l2F3K3b2W2n/36D61U2UNF%25SOXIFK2%60UN%25N.png" alt=""></p>
-<p>现在大家应该知道data flag中那些属性的含义了吧，看下data flag<br><data android:host="string" android:mimetype="string" android:path="string" android:pathpattern="string" android:pathprefix="string" android:port="string" android:scheme="string"></data></p>
-<p>但是我们在程序中一般是不直接用URI来标识CP的，是的，正如我们通常见到的用定义的常量来标识。例如standard CP中的Contacts，我们就用Contacts.People.CONTENT_URI来标识Contacts CP中People这个表。那么要标识某个具体的人怎么办呢？ 这就用到了ContentUris.withAppendedId() 和 Uri.withAppendedPath()。例如我们要表示content://contacts/people/20，那么我们就可以用如下语句：<br>Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, 20); 或者<br>Uri uri = Uri.withAppendedPath(People.CONTENT_URI, “20”);</p>
-<p>举些例子，如：</p>
-<p>所有联系人的Uri： content://contacts/people</p>
-<p>某个联系人的Uri: content://contacts/people/5</p>
-<p>所有图片Uri: content://media/external</p>
-<p>某个图片的Uri：content://media/external/images/media/4</p>
-<p>下面是一些常用的Uri</p>
-<p><strong>显示网页:</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“<a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>“);</li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW,uri);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong>显示地图:</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“geo:38.899533,-77.036476”);<ol>
-<li>Intent it = new Intent(Intent.Action_VIEW,uri);</li>
-<li>startActivity(it);</li>
-</ol>
-</li>
-</ol>
-<p><strong>路径规划:</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“<a href="http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en" target="_blank" rel="external">http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en</a>“);</li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW,URI);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong>拨打电话:<br>调用拨号程序</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“tel:xxxxxx”);</li>
-<li>Intent it = new Intent(Intent.ACTION_DIAL, uri);   </li>
-<li>startActivity(it);   </li>
-<li>Uri uri = Uri.parse(“tel.xxxxxx”);</li>
-<li>Intent it =new Intent(Intent.ACTION_CALL,uri);</li>
-<li>要使用这个必须在配置文件中加入<uses-permission id="Android.permission.CALL_PHONE"></uses-permission></li>
-</ol>
-<p><strong>发送SMS/MMS<br>调用发送短信的程序</strong></p>
-<ol>
-<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
-<li>it.putExtra(“sms_body”, “The SMS text”);</li>
-<li>it.setType(“vnd.android-dir/mms-sms”);</li>
-<li>startActivity(it);   </li>
-</ol>
-<p><strong>发送短信</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“smsto:0800000123”);</li>
-<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
-<li>it.putExtra(“sms_body”, “The SMS text”);</li>
-<li>startActivity(it);   </li>
-</ol>
-<p><strong>发送彩信</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“content://media/external/images/media/23”);</li>
-<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
-<li>it.putExtra(“sms_body”, “some text”);</li>
-<li>it.putExtra(Intent.EXTRA_STREAM, uri);</li>
-<li>it.setType(“image/png”);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong><br>发送Email</strong></p>
-<p>  1.</p>
-<ol>
-<li>Uri uri = Uri.parse(“mailto:xxx@abc.com”);</li>
-<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
-<li>startActivity(it);</li>
-<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
-<li>it.putExtra(Intent.EXTRA_EMAIL, “me@abc.com”);</li>
-<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);</li>
-<li>it.setType(“text/plain”);</li>
-<li>startActivity(Intent.createChooser(it, “Choose Email Client”));   </li>
-<li>Intent it=new Intent(Intent.ACTION_SEND);   </li>
-<li>String[] tos={“me@abc.com”};   </li>
-<li>String[] ccs={“you@abc.com”};   </li>
-<li>it.putExtra(Intent.EXTRA_EMAIL, tos);   </li>
-<li>it.putExtra(Intent.EXTRA_CC, ccs);   </li>
-<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);   </li>
-<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);   </li>
-<li>it.setType(“message/rfc822”);   </li>
-<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
-</ol>
-<p><strong>添加附件</strong></p>
-<ol>
-<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
-<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);</li>
-<li>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/mysong.mp3[/url]”);</li>
-<li>sendIntent.setType(“audio/mp3”);</li>
-<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
-</ol>
-<p><strong>播放多媒体</strong></p>
-<ol>
-<li></li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
-<li>Uri uri = Uri.parse(“[url=]file:///sdcard/song.mp3[/url]”);</li>
-<li>it.setDataAndType(uri, “audio/mp3”);</li>
-<li>startActivity(it);</li>
-<li>Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, “1”);</li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW, uri);</li>
-<li>startActivity(it);   </li>
-</ol>
-<p><strong>Uninstall 程序</strong></p>
-<ol>
-<li>Uri uri = Uri.fromParts(“package”, strPackageName, null);</li>
-<li>Intent it = new Intent(Intent.ACTION_DELETE, uri);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong>//调用相册</strong></p>
-<p>public static final String MIME_TYPE_IMAGE_JPEG = “image/*”;<br>public static final int ACTIVITY_GET_IMAGE = 0;<br>Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);<br>getImage.addCategory(Intent.CATEGORY_OPENABLE);<br>getImage.setType(MIME_TYPE_IMAGE_JPEG);<br>startActivityForResult(getImage, ACTIVITY_GET_IMAGE);</p>
-<p><strong>//调用系统相机应用程序，并存储拍下来的照片</strong></p>
-<p>Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);<br>time = Calendar.getInstance().getTimeInMillis();<br>intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment<br>.getExternalStorageDirectory().getAbsolutePath()+”/tucue”, time + “.jpg”)));<br>startActivityForResult(intent, ACTIVITY_GET_CAMERA_IMAGE);</p>
-<p>uninstall apk</p>
-<p><strong>未测试</strong></p>
-<p>Uri uninstallUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_DELETE, uninstallUri);<br>*/<br>Uri packageURI = Uri.parse(“package:”+wistatmap);<br>Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);<br>startActivity(uninstallIntent);</p>
-<p>install apk<br>Uri installUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_PACKAGE_ADDED, installUri);<br>play audio<br>Uri playUri = Uri.parse(“[url=]file:///sdcard/download/everything.mp3[/url]”);<br>returnIt = new Intent(Intent.ACTION_VIEW, playUri);</p>
-<p><strong>//发送附件</strong></p>
-<p>Intent it = new Intent(Intent.ACTION_SEND);<br>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);<br>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/eoe.mp3[/url]”);<br>sendIntent.setType(“audio/mp3”);<br>startActivity(Intent.createChooser(it, “Choose Email Client”));</p>
-<p><strong>//搜索应用</strong></p>
-<p>Uri uri = Uri.parse(“market://search?q=pname:pkg_name”);<br>Intent it = new Intent(Intent.ACTION_VIEW, uri);<br>startActivity(it);<br>//where pkg_name is the full package path for an application</p>
-<p><strong>进入联系人页面</strong></p>
-<p>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(People.CONTENT_URI);<br>startActivity(intent);</p>
-<p><strong>查看指定联系人</strong></p>
-<p>Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, info.id);//info.id联系人ID<br>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(personUri);<br>startActivity(intent);</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cicznlcnu000cisb2f7yo0p9q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cide307im000a1ob2owsyht1h" class="article-share-link">Share</a>
       
       
     </footer>
