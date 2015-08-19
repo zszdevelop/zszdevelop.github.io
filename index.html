@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        34
+        37
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,427 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/19/2015-8-19/">2015/8/19</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/19/2015-8-19/">
+    <time datetime="2015-08-19T08:36:41.000Z" itemprop="datePublished">2015-08-19</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/19问题集">2015/8/19问题集</h1><h2 id="volley的简单使用">volley的简单使用</h2><p>MyApplication中的代码：主要是建立一个queue对列。并给出一个调用方法</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.volleydemo;
+
+<span class="keyword">import</span> android.app.<span class="type">Application</span>;
+
+<span class="keyword">import</span> com.android.volley.<span class="type">RequestQueue</span>;
+<span class="keyword">import</span> com.android.volley.toolbox.<span class="type">Volley</span>;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/19.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Application</span> {</span>
+
+public static <span class="type">RequestQueue</span> queue;
+
+<span class="annotation">@Override</span>
+public void onCreate() {
+    <span class="keyword">super</span>.onCreate();
+    queue= <span class="type">Volley</span>.newRequestQueue(getApplicationContext());
+}
+
+public static <span class="type">RequestQueue</span> getHttpQueue(){
+    <span class="keyword">return</span> queue;
+}
+
+}
+</code></pre><p>=</p>
+<p>MainActivity中的代码。调用和实现volley的post和get方法</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.volleydemo;
+
+<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> com.android.volley.AuthFailureError;
+<span class="keyword">import</span> com.android.volley.Request;
+<span class="keyword">import</span> com.android.volley.Response;
+<span class="keyword">import</span> com.android.volley.VolleyError;
+<span class="keyword">import</span> com.android.volley.toolbox.StringRequest;
+
+<span class="keyword">import</span> java.lang.reflect.Method;
+<span class="keyword">import</span> java.util.<span class="keyword">HashMap</span>;
+<span class="keyword">import</span> java.util.Map;
+
+
+<span class="keyword">public</span> class MainActivity extends ActionBarActivity {
+
+@Override
+<span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+<span class="comment">//        volley_Get();</span>
+    volley_Post();
+}
+
+<span class="keyword">private</span> <span class="keyword">void</span> volley_Post() {
+    <span class="keyword">String</span> url=<span class="string">"http://apis.juhe.cn/mobile/get?"</span>;
+    StringRequest request=<span class="keyword">new</span> StringRequest(Request.Method.POST,url,<span class="keyword">new</span> Response.Listener&lt;<span class="keyword">String</span>&gt;() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onResponse(<span class="keyword">String</span> s) {
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,s,Toast.LENGTH_LONG).show();
+        }
+    },<span class="keyword">new</span> Response.ErrorListener() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onErrorResponse(VolleyError volleyError) {
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"网络请求失败"</span>,Toast.LENGTH_LONG).show();
+        }
+    }){
+        <span class="comment">//与get最大的不同就是在这后面要添加getParams的方法来传递参数</span>
+        @Override
+        <span class="keyword">protected</span> Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; getParams() <span class="keyword">throws</span> AuthFailureError {
+            <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>,<span class="keyword">String</span>&gt; <span class="built_in">map</span>=<span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;&gt;();
+            <span class="built_in">map</span>.put(<span class="string">"phone"</span>,<span class="string">"13616008640"</span>);
+            <span class="built_in">map</span>.put(<span class="string">"key"</span>,<span class="string">"a8d4ff7a12cabef64ac6fe7871baf073"</span>);
+            <span class="comment">//返回map就好了</span>
+            <span class="keyword">return</span> <span class="built_in">map</span>;
+        }
+    };
+    request.setTag(<span class="string">"abcPost"</span>);
+    MyApplication.getHttpQueue().<span class="built_in">add</span>(request);
+}
+
+<span class="keyword">private</span> <span class="keyword">void</span> volley_Get() {
+    <span class="keyword">String</span> url=<span class="string">"http://apis.juhe.cn/mobile/get?phone=13616008640&amp;key=a8d4ff7a12cabef64ac6fe7871baf073"</span>;
+    StringRequest request=<span class="keyword">new</span> StringRequest(Request.Method.GET,url,<span class="keyword">new</span> Response.Listener&lt;<span class="keyword">String</span>&gt;() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onResponse(<span class="keyword">String</span> s) {
+
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,s,Toast.LENGTH_LONG).show();
+        }
+    },<span class="keyword">new</span> Response.ErrorListener() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onErrorResponse(VolleyError volleyError) {
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"网络请求失败"</span>,Toast.LENGTH_LONG).show();
+        }
+    });
+    <span class="comment">//添加标签，当取消这个请求的时候可以取消这个标签</span>
+    request.setTag(<span class="string">"abcGET"</span>);
+    <span class="comment">//将我们的请求添加到我们的对列里面</span>
+    MyApplication.getHttpQueue().<span class="built_in">add</span>(request);
+
+}
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cidixhxzm0003esb27ecvq3sy" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-17" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/17/2015-8-17/">2015/8/17</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/17/2015-8-17/">
+    <time datetime="2015-08-17T09:29:48.000Z" itemprop="datePublished">2015-08-17</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/17问题集">2015/8/17问题集</h1><h2 id="Android日志系统">Android日志系统</h2><p>这个类比较常用的打印日志的方法有5个,这5个方法都会把日志打印到LogCat中: </p>
+<ul>
+<li>Log.v(tag,message);        //verbose模式,打印最详细的日志 </li>
+<li>Log.d(tag,message);        //debug级别的日志 </li>
+<li>Log.i(tag,message);        //info级别的日志 </li>
+<li>Log.w(tag,message);        //warn级别的日志 </li>
+<li>Log.e(tag,message);        //error级别的日志 </li>
+</ul>
+<p>其中tag和message分别是两个String值.从android开发帮助文档中来看,tag和message的定义分别是:</p>
+<ul>
+<li>tag ：    Used to identify the source of a log message. It usually identifies the class or activity where the log call occurs. </li>
+<li>msg ：    The message you would like logged. </li>
+</ul>
+<p>可看出tag用来标记log消息的源头的.而message则是这条log的内容. </p>
+<p>从日志的输出数量来算,error,warn,info,debug,verbose,数量从少到多.</p>
+<h2 id="Android_Studio中获取SHA1或MD5的方法">Android Studio中获取SHA1或MD5的方法</h2><p>第一步、打开Android Studio的Tools-&gt;Open Terminal…</p>
+<p>第二步、输入命令：keytool -v -list -keystore keystore.jks</p>
+<p>【一定要记得加上 -v 参数，不然只能看到SHA1，没有MD5】【keystore.jks，需要替换为你自己的密钥所在路径和文件名】</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cidixhxzp0004esb2lpt382sb" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-16" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/16/2015-8-16/">2015/8/15</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/16/2015-8-16/">
+    <time datetime="2015-08-16T10:56:23.000Z" itemprop="datePublished">2015-08-16</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/16问题集">2015/8/16问题集</h1><h2 id="聚合数据API使用">聚合数据API使用</h2><p>MainActivity里的代码：使用的时候只需要更改Parameters</p>
+<pre><code><span class="keyword">package</span> com.thinkland.juheapi.demo;
+
+<span class="keyword">import</span> android.app.Activity;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.Button;
+<span class="keyword">import</span> android.widget.TextView;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> com.thinkland.sdk.android.DataCallBack;
+<span class="keyword">import</span> com.thinkland.sdk.android.JuheData;
+<span class="keyword">import</span> com.thinkland.sdk.android.Parameters;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
+
+<span class="keyword">private</span> Context mContext;
+TextView tv;
+<span class="keyword">private</span> Button btn,btnWeather;
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    mContext = <span class="keyword">this</span>;
+    tv = (TextView) findViewById(R.id.tv);
+
+
+
+    <span class="javadoc">/**
+     * 请不要添加key参数.
+     */</span>
+    Parameters params = <span class="keyword">new</span> Parameters();
+    params.add(<span class="string">"ip"</span>, <span class="string">"www.juhe.cn"</span>);
+    params.add(<span class="string">"dtype"</span>, <span class="string">"xml"</span>);
+    <span class="javadoc">/**
+     * 请求的方法 参数: 第一个参数 当前请求的context;
+     *                   第二个参数 接口id;
+     *                   第三个参数 接口请求的url;
+     *                   第四个参数 接口请求的方式;
+     *                   第五个参数 接口请求的参数,键值对com.thinkland.sdk.android.Parameters类型;
+     *                   第六个参数请求的回调方法,com.thinkland.sdk.android.DataCallBack;
+     * 
+     */</span>
+    JuheData.executeWithAPI(mContext, <span class="number">1</span>, <span class="string">"http://apis.juhe.cn/ip/ip2addr"</span>,
+            JuheData.GET, params, <span class="keyword">new</span> DataCallBack() {
+                <span class="javadoc">/**
+                 * 请求成功时调用的方法 statusCode为http状态码,responseString为请求返回数据.
+                 */</span>
+                <span class="annotation">@Override</span>
+                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(<span class="keyword">int</span> statusCode, String responseString)</span> </span>{
+                    <span class="comment">// TODO Auto-generated method stub</span>
+                    tv.append(responseString + <span class="string">"\n"</span>);
+                }
+
+                <span class="javadoc">/**
+                 * 请求完成时调用的方法,无论成功或者失败都会调用.
+                 */</span>
+                <span class="annotation">@Override</span>
+                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFinish</span><span class="params">()</span> </span>{
+                    <span class="comment">// TODO Auto-generated method stub</span>
+                    Toast.makeText(getApplicationContext(), <span class="string">"finish"</span>,
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                <span class="javadoc">/**
+                 * 请求失败时调用的方法,statusCode为http状态码,throwable为捕获到的异常
+                 * statusCode:30002 没有检测到当前网络.
+                 *               30003 没有进行初始化.
+                 *               0 未明异常,具体查看Throwable信息.
+                 *               其他异常请参照http状态码.
+                 */</span>
+                <span class="annotation">@Override</span>
+                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> statusCode,
+                        String responseString, Throwable throwable)</span> </span>{
+                    <span class="comment">// TODO Auto-generated method stub</span>
+                    tv.append(throwable.getMessage() + <span class="string">"\n"</span>);
+                }
+            });
+
+}
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>{
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onDestroy();
+    <span class="javadoc">/**
+     * 关闭当前页面正在进行中的请求.
+     */</span>
+    JuheData.cancelRequests(mContext);
+}
+
+}
+</code></pre><p>需要继承Application</p>
+<pre><code><span class="keyword">package</span> com.thinkland.juheapi.demo;
+
+<span class="keyword">import</span> com.thinkland.sdk.android.<span class="type">JuheSDKInitializer</span>;
+
+<span class="keyword">import</span> android.app.<span class="type">Application</span>;
+<span class="keyword">import</span> android.widget.<span class="type">Button</span>;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Application</span> {</span>
+
+
+
+<span class="annotation">@Override</span>
+public void onCreate() {
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onCreate();
+    <span class="type">JuheSDKInitializer</span>.initialize(getApplicationContext());
+
+}
+}
+</code></pre><p>更改manifest的设置即可</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;manifest xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+<span class="variable">package=</span><span class="string">"com.thinkland.juheapi.demo"</span>
+android:<span class="variable">versionCode=</span><span class="string">"1"</span>
+android:<span class="variable">versionName=</span><span class="string">"1.0"</span> &gt;
+
+&lt;uses-sdk
+    android:<span class="variable">minSdkVersion=</span><span class="string">"9"</span>
+    android:<span class="variable">targetSdkVersion=</span><span class="string">"15"</span> /&gt;
+
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.READ_PHONE_STATE"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.INTERNET"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span> /&gt;
+
+&lt;android:uses-permission
+    android:<span class="variable">name=</span><span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>
+    android:<span class="variable">maxSdkVersion=</span><span class="string">"18"</span> /&gt;
+&lt;android:uses-permission
+    android:<span class="variable">name=</span><span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span>
+    android:<span class="variable">maxSdkVersion=</span><span class="string">"18"</span> /&gt;
+
+&lt;application
+    android:<span class="variable">name=</span><span class="string">".MyApplication"</span>
+    android:<span class="variable">allowBackup=</span><span class="string">"true"</span>
+    android:<span class="variable">icon=</span><span class="string">"@drawable/ic_launcher"</span>
+    android:<span class="variable">label=</span><span class="string">"@string/app_name"</span>
+    android:<span class="variable">theme=</span><span class="string">"@style/AppTheme"</span> &gt;
+    &lt;meta-data
+        android:<span class="variable">name=</span><span class="string">"com.thinkland.juheapi.openid"</span>
+        android:<span class="variable">value=</span><span class="string">"JHf2946fb83e4a9d7dbd854fa65bd130b1"</span> /&gt;
+
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".MainActivity"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/app_name"</span> &gt;
+        &lt;intent-filter&gt;
+            &lt;action android:<span class="variable">name=</span><span class="string">"android.intent.action.MAIN"</span> /&gt;
+
+            &lt;category android:<span class="variable">name=</span><span class="string">"android.intent.category.LAUNCHER"</span> /&gt;
+        &lt;/intent-filter&gt;
+    &lt;/activity&gt;
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".CaptchaActicity"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/title_activity_captcha_acticity"</span> &gt;
+    &lt;/activity&gt;
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".Captcha"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/title_activity_captcha"</span> &gt;
+    &lt;/activity&gt;
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".WeatherActivity"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/title_activity_weather"</span> &gt;
+    &lt;/activity&gt;
+&lt;/application&gt;
+
+&lt;/manifest&gt;
+</code></pre><h2 id="Activity继承错误">Activity继承错误</h2><p>错误代码提示：</p>
+<pre><code>java<span class="class">.lang</span><span class="class">.IllegalStateException</span>: You need to use <span class="tag">a</span> Theme<span class="class">.AppCompat</span> theme (or descendant) with this activity.
+</code></pre><p>原因：<br>从错误提示中提到Theme.AppCompat theme，这是因为我们的activity一定是继承了兼容包中的类，<br>比如我这里就无意中继承了ActionBarActivity，它来自android.support.v7.app.ActionBarActivity。<br>所以就要使用与其配合的AppCompat的theme才行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cidixhxzv0005esb2zsdypr4c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-15" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -467,7 +888,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cide307hq00031ob29d46a0c7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cidixhxzx0006esb23hrp8nht" class="article-share-link">Share</a>
       
       
     </footer>
@@ -513,7 +934,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cide307hs00041ob2isg6ixzl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cidixhy000007esb2s4wyfago" class="article-share-link">Share</a>
       
       
     </footer>
@@ -598,7 +1019,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cide307hn00021ob26vkolo1k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cidixhxzk0002esb2ztbrvukl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -714,7 +1135,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cide307hw00051ob2nxpuw9ca" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cidixhy020008esb2a2ovqx9c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -880,7 +1301,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cide307i800071ob2bhwxso9y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cidixhy08000aesb2ylkz7rq9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1688,7 +2109,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cide307i500061ob2e7v61ppx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cidixhy050009esb22koorz4u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1802,412 +2223,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cide307ia00081ob2ozlt74ka" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-27" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/26/2015-7-27/">控件对齐方式 </a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/26/2015-7-27/">
-    <time datetime="2015-07-26T13:24:57.000Z" itemprop="datePublished">2015-07-26</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="控件对齐方式">控件对齐方式</h1><p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>&lt;!—</p>
-<ul>
-<li><p>android:layout_above 将该控件的底部至于给定ID的控件之上</p>
-</li>
-<li><p>android:layout_below 将该控件的顶部至于给定ID的控件之下</p>
-</li>
-<li>android:layout_toLeftOf 将该控件的右边缘和给定ID的控件的左边缘对齐</li>
-<li><p>android:layout_toRightOf 将该控件的左边缘和给定ID的控件的右边缘对齐</p>
-</li>
-<li><p>android:layout_alignBaseline 该控件的baseline和给定ID的控件的baseline对齐</p>
-</li>
-<li>android:layout_alignBottom 将该控件的底部边缘与给定ID控件的底部边缘</li>
-<li>android:layout_alignLeft 将该控件的左边缘与给定ID控件的左边缘对齐</li>
-<li>android:layout_alignRight 将该控件的右边缘与给定ID控件的右边缘对齐</li>
-<li>android:layout_alignTop 将给定控件的顶部边缘与给定ID控件的顶部对齐</li>
-</ul>
-<ul>
-<li>android:alignParentBottom 如果该值为true，则将该控件的底部和父控件的底部对齐</li>
-<li>android:layout_alignParentLeft 如果该值为true，则将该控件的左边与父控件的左边对齐</li>
-<li>android:layout_alignParentRight 如果该值为true，则将该控件的右边与父控件的右边对齐</li>
-<li><p>android:layout_alignParentTop 如果该值为true，则将空间的顶部与父控件的顶部对齐</p>
-</li>
-<li><p>android:layout_centerHorizontal 如果值为真，该控件将被至于水平方向的中央</p>
-</li>
-<li>android:layout_centerInParent 如果值为真，该控件将被至于父控件水平方向和垂直方向的中央</li>
-<li>android:layout_centerVertical 如果值为真，该控件将被至于垂直方向的中央</li>
-</ul>
-<ul>
-<li>android:padding和android:layout_margin    通俗的理解 Padding 为内边框，Margin 为外边框</li>
-<li><p>android:padding和android:layout_margin的区别，其实概念很简单，padding是站在父view的角度描述问题，它规定它里面的内容必须与这个父view边界的距离。margin则是站在自己的角度描述问题，规定自己和其他（上下左右）的view之间的距离，如果同一级只有一个view，那么它的效果基本上就和padding一样了。</p>
-</li>
-<li><p>android:layout_gravity=”center”</p>
-</li>
-<li>android:gravity　属性是对该view 内容的限定．比如一个button 上面的text.  你可以设置该text 在view的靠左，靠右等位置．．</li>
-<li>android:layout_gravity是用来设置该view相对与起父view 的位置．比如一个button 在linearlayout里，你想把该button放在靠左　　靠右等位置就可以通过该属性设置．</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cide307ic00091ob2dii3effa" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-26-TabHost" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/26/2015-7-26-TabHost/">TabHost实现</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/26/2015-7-26-TabHost/">
-    <time datetime="2015-07-26T12:17:29.000Z" itemprop="datePublished">2015-07-26</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="TabHost实现">TabHost实现</h1><p>layout布局文件中的设置</p>
-<pre><code><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
-<span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span>
-<span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-<span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> 
-<span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>
-<span class="attribute">tools:context</span>=<span class="value">".MainActivity"</span> &gt;</span>
-<span class="tag">&lt;<span class="title">Button</span>
-    <span class="attribute">android:id</span>=<span class="value">"@+id/button1"</span>
-    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-    <span class="attribute">android:text</span>=<span class="value">"Button"</span> /&gt;</span>
- <span class="tag">&lt;<span class="title">TabHost</span>
-    <span class="attribute">android:id</span>=<span class="value">"@+id/tabhost"</span>
-    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
-
-    <span class="tag">&lt;<span class="title">LinearLayout</span>
-        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>
-        <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span> &gt;</span>
-
-        <span class="tag">&lt;<span class="title">TabWidget</span>
-            <span class="attribute">android:id</span>=<span class="value">"@android:id/tabs"</span>
-            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span> &gt;</span>
-        <span class="tag">&lt;/<span class="title">TabWidget</span>&gt;</span>
-
-        <span class="tag">&lt;<span class="title">FrameLayout</span>
-            <span class="attribute">android:id</span>=<span class="value">"@android:id/tabcontent"</span>
-            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-            <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
-
-            <span class="comment">&lt;!-- 第一个tab的布局 --&gt;</span>
-            <span class="tag">&lt;<span class="title">LinearLayout</span>
-                <span class="attribute">android:id</span>=<span class="value">"@+id/tab1"</span>
-                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
-
-                <span class="tag">&lt;<span class="title">TextView</span>
-                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView1"</span>
-                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-                    <span class="attribute">android:text</span>=<span class="value">"林炳东"</span> /&gt;</span>
-
-            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-
-            <span class="comment">&lt;!-- 第二个tab的布局 --&gt;</span>
-            <span class="tag">&lt;<span class="title">LinearLayout</span>
-                <span class="attribute">android:id</span>=<span class="value">"@+id/tab2"</span>
-                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
-
-                <span class="tag">&lt;<span class="title">TextView</span>
-                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView2"</span>
-                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-                    <span class="attribute">android:text</span>=<span class="value">"张小媛"</span> /&gt;</span>
-
-            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-
-            <span class="comment">&lt;!-- 第三个tab的布局 --&gt;</span>
-            <span class="tag">&lt;<span class="title">LinearLayout</span>
-                <span class="attribute">android:id</span>=<span class="value">"@+id/tab3"</span>
-                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
-                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
-
-                <span class="tag">&lt;<span class="title">TextView</span>
-                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView3"</span>
-                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-                    <span class="attribute">android:text</span>=<span class="value">"马贝贝"</span> /&gt;</span>
-
-            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-        <span class="tag">&lt;/<span class="title">FrameLayout</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">TabHost</span>&gt;</span> 
-
-<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-</code></pre><p>于此同时也要在Activiyt中设置</p>
-<pre><code><span class="keyword">th</span>= (TabHost) findViewById(R.id.tabHost);
-  <span class="keyword">th</span>.setup();//初始化TabHost容器  
-
-   //在TabHost创建标签，然后设置：标题／图标／标签页布局 
-  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag1"</span>).setIndicator(<span class="string">"主页"</span>,getResources().getDrawable(R.drawable.notification_template_icon_bg)).setContent(R.id.tab1));
-  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag2"</span>).setIndicator(<span class="string">"历史"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab2));
-  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag3"</span>).setIndicator(<span class="string">"机器人"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab3));
-  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag3"</span>).setIndicator(<span class="string">"设置"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab4));
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cide307io000b1ob2joufaswn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-26" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/26/2015-7-26/">从服务器得到所有图片信息，图片压缩代码</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/26/2015-7-26/">
-    <time datetime="2015-07-26T04:54:15.000Z" itemprop="datePublished">2015-07-26</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/26问题集">2015/7/26问题集</h1><h2 id="从服务器得到所有图片信息">从服务器得到所有图片信息</h2><p>servlet</p>
-<pre><code>package com.zsz.man;
-
-<span class="keyword">import</span> java.io.IOException;
-<span class="keyword">import</span> java.io.PrintWriter;
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.List;
-
-<span class="keyword">import</span> javax.servlet.ServletContext;
-<span class="keyword">import</span> javax.servlet.ServletException;
-<span class="keyword">import</span> javax.servlet.annotation.WebServlet;
-<span class="keyword">import</span> javax.servlet.http.HttpServlet;
-<span class="keyword">import</span> javax.servlet.http.HttpServletRequest;
-<span class="keyword">import</span> javax.servlet.http.HttpServletResponse;
-
-<span class="keyword">import</span> com.google.gson.Gson;
-<span class="keyword">import</span> com.zsz.develop.UserInfoBean;
-<span class="keyword">import</span> com.zsz.develop.UserinfoDao;
-<span class="keyword">import</span> com.zsz.main.ImageUtil;
-
-<span class="comment">/**
- * Servlet implementation class GetAllManServlet
- */</span>
-@WebServlet(<span class="string">"/GetAllManServlet"</span>)
-public <span class="class"><span class="keyword">class</span> <span class="title">GetAllManServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>{
-private static final long serialVersionUID = <span class="number">1</span>L;
-
-<span class="comment">/**
- * @see HttpServlet#HttpServlet()
- */</span>
-public GetAllManServlet() {
-    <span class="keyword">super</span>();
-    <span class="comment">// TODO Auto-generated constructor stub</span>
-}
-
-<span class="comment">/**
- * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
- */</span>
-protected <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    <span class="comment">// TODO Auto-generated method stub</span>
-}
-
-<span class="comment">/**
- * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
- */</span>
-protected <span class="keyword">void</span> doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-    ServletContext context = getServletContext();
-    <span class="built_in">String</span> contentType = context.getInitParameter(<span class="string">"contentType"</span>);
-    <span class="built_in">String</span> jsonAction = request.getParameter(<span class="string">"action"</span>);
-    int jsonImageSize =Integer.parseInt(request.getParameter(<span class="string">"imageSize"</span>)); 
-    <span class="built_in">String</span> jsonName = request.getParameter(<span class="string">"name"</span>);
-    System.out.println(<span class="string">"jsonName:"</span>+jsonName);
-    <span class="built_in">String</span> outStr = <span class="string">""</span>;
-    Gson gson = <span class="keyword">new</span> Gson();
-    ManDao manDao=<span class="keyword">new</span> ManDaoImpl();
-
-
-    <span class="keyword">if</span> (jsonAction.equals(<span class="string">"getAll"</span>)) {
-        List&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
-        <span class="comment">// 將所有照片縮小</span>
-        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; manList.size(); i++) {
-            ManBean manBean = manList.get(i);
-            manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
-        }
-        outStr = gson.toJson(manList);
-    }
-
-    response.setContentType(contentType);
-    PrintWriter out = response.getWriter();
-    System.out.println(outStr);
-    out.print(outStr);
-    out.close();
-
-    }
-
-}
-</code></pre><p><strong>重点</strong>在这一段：</p>
-<ul>
-<li>判断功能选项</li>
-<li>取得实体类集合</li>
-<li>循环取出每张图片、并对他进行压缩</li>
-<li><p>把压缩后的数据传递给实体类，并转为json格式输出</p>
-<p>  if (jsonAction.equals(“getAll”)) {</p>
-<pre><code>    <span class="built_in">List</span>&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
-    <span class="comment">// 將所有照片縮小</span>
-    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; manList.size(); i++) {
-        ManBean manBean = manList.<span class="literal">get</span>(i);
-        manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
-    }
-    outStr = gson.toJson(manList);
-}
-</code></pre><h2 id="图片压缩代码">图片压缩代码</h2></li>
-</ul>
-<p>调用方法：manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));</p>
-<pre><code><span class="keyword">package</span> com.zsz.main;
-
-<span class="keyword">import</span> java.awt.Graphics;
-<span class="keyword">import</span> java.awt.image.BufferedImage;
-<span class="keyword">import</span> java.io.ByteArrayInputStream;
-<span class="keyword">import</span> java.io.ByteArrayOutputStream;
-<span class="keyword">import</span> java.io.IOException;
-
-<span class="keyword">import</span> javax.imageio.ImageIO;
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageUtil</span> </span>{
-
-<span class="javadoc">/**
- * 將圖形縮小後回傳，如果發生錯誤就直接回傳原圖， 例如：imageSize值&lt;=1、無法取得圖的寬高、發生Exception
- * 
- *<span class="javadoctag"> @param</span> srcImageData
- *            來源圖形資料
- *<span class="javadoctag"> @param</span> scaleSize
- *            欲將圖形縮至多少尺寸以下，50代表將尺寸縮小至50x50以內
- *<span class="javadoctag"> @return</span> 縮小完畢的圖形資料
- */</span>
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] shrink(<span class="keyword">byte</span>[] srcImageData, <span class="keyword">int</span> scaleSize) {
-    ByteArrayInputStream bais = <span class="keyword">new</span> ByteArrayInputStream(srcImageData);
-    <span class="comment">// 縮小比例，4代表除以4</span>
-    <span class="keyword">int</span> sampleSize = <span class="number">1</span>;
-    <span class="keyword">int</span> imageWidth = <span class="number">0</span>;
-    <span class="keyword">int</span> imageHeight = <span class="number">0</span>;
-
-    <span class="comment">// 如果imageSize為0、負數(代表錯誤)或1(1代表與原圖一樣大小)，就直接回傳原圖資料</span>
-    <span class="keyword">if</span> (scaleSize &lt;= <span class="number">1</span>) {
-        <span class="keyword">return</span> srcImageData;
-    }
-
-    <span class="keyword">try</span> {
-        BufferedImage srcBufferedImage = ImageIO.read(bais);
-        <span class="comment">// 如果無法識別圖檔格式(TYPE_CUSTOM)就回傳TYPE_INT_ARGB；否則回傳既有格式</span>
-        <span class="keyword">int</span> type = srcBufferedImage.getType() == BufferedImage.TYPE_CUSTOM ? BufferedImage.TYPE_INT_RGB
-                : srcBufferedImage.getType();
-        imageWidth = srcBufferedImage.getWidth();
-        imageHeight = srcBufferedImage.getHeight();
-        <span class="keyword">if</span> (imageWidth == <span class="number">0</span> || imageHeight == <span class="number">0</span>) {
-            <span class="keyword">return</span> srcImageData;
-        }
-        <span class="comment">// 只要圖檔較長的一邊超過指定長度(desireSize)，就計算欲縮小的比例</span>
-        <span class="comment">// 並將圖檔寬高都除以欲縮小比例</span>
-        <span class="keyword">int</span> longer = Math.max(imageWidth, imageHeight);
-        <span class="keyword">if</span> (longer &gt; scaleSize) {
-            sampleSize = longer / scaleSize;
-            imageWidth = srcBufferedImage.getWidth() / sampleSize;
-            imageHeight = srcBufferedImage.getHeight() / sampleSize;
-        }
-        BufferedImage scaledBufferedImage = <span class="keyword">new</span> BufferedImage(imageWidth,
-                imageHeight, type);
-        Graphics graphics = scaledBufferedImage.createGraphics();
-        graphics.drawImage(srcBufferedImage, <span class="number">0</span>, <span class="number">0</span>, imageWidth, imageHeight,
-                <span class="keyword">null</span>);
-        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();
-        ImageIO.write(scaledBufferedImage, <span class="string">"jpg"</span>, baos);
-        <span class="function"><span class="keyword">return</span> baos.<span class="title">toByteArray</span><span class="params">()</span></span>;
-    } <span class="keyword">catch</span> (IOException e) {
-        e.printStackTrace();
-        <span class="keyword">return</span> srcImageData;
-    }
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cide307im000a1ob2owsyht1h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cidixhy0a000besb28bvcv6op" class="article-share-link">Share</a>
       
       
     </footer>
