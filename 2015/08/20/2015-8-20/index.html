@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Fragment的产生与介绍，Fragment的生命周期，Fragment相当于一个控件，静态Fragment的简单实例 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2015/8/20问题集Fragment的产生与介绍Fragment支持在不同的Activity中使用并且可以处理自己的输入事件以及生命周期方法等。可以看做是一个子Activity。
+Android运行在各种各样的设备中，有小屏幕的手机，超大屏的平板甚至电视。针对屏幕尺寸的差距，很多情况下，都是先针对手机开发一套App，然后拷贝一份，修改布局以适应平板神马超级大屏的。难道无法做到一个App可以同时">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fragment的产生与介绍，Fragment的生命周期，Fragment相当于一个控件，静态Fragment的简单实例">
+<meta property="og:url" content="http://yoursite.com/2015/08/20/2015-8-20/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="2015/8/20问题集Fragment的产生与介绍Fragment支持在不同的Activity中使用并且可以处理自己的输入事件以及生命周期方法等。可以看做是一个子Activity。
+Android运行在各种各样的设备中，有小屏幕的手机，超大屏的平板甚至电视。针对屏幕尺寸的差距，很多情况下，都是先针对手机开发一套App，然后拷贝一份，修改布局以适应平板神马超级大屏的。难道无法做到一个App可以同时">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Fragment的产生与介绍，Fragment的生命周期，Fragment相当于一个控件，静态Fragment的简单实例">
+<meta name="twitter:description" content="2015/8/20问题集Fragment的产生与介绍Fragment支持在不同的Activity中使用并且可以处理自己的输入事件以及生命周期方法等。可以看做是一个子Activity。
+Android运行在各种各样的设备中，有小屏幕的手机，超大屏的平板甚至电视。针对屏幕尺寸的差距，很多情况下，都是先针对手机开发一套App，然后拷贝一份，修改布局以适应平板神马超级大屏的。难道无法做到一个App可以同时">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="/.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="/archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="/categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="/tags">Tags</a></td>
+      
+        <td><a class="main-nav-link" href="/about">About</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        39
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-8-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Fragment的产生与介绍，Fragment的生命周期，Fragment相当于一个控件，静态Fragment的简单实例
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/20/2015-8-20/">
+    <time datetime="2015-08-20T06:01:14.000Z" itemprop="datePublished">2015-08-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/20问题集">2015/8/20问题集</h1><h2 id="Fragment的产生与介绍">Fragment的产生与介绍</h2><p>Fragment支持在不同的Activity中使用并且可以处理自己的输入事件以及生命周期方法等。可以看做是一个子Activity。</p>
+<p>Android运行在各种各样的设备中，有小屏幕的手机，超大屏的平板甚至电视。针对屏幕尺寸的差距，很多情况下，都是先针对手机开发一套App，然后拷贝一份，修改布局以适应平板神马超级大屏的。难道无法做到一个App可以同时适应手机和平板么，当然了，必须有啊。Fragment的出现就是为了解决这样的问题。你可以把Fragment当成Activity的一个界面的一个组成部分，甚至Activity的界面可以完全有不同的Fragment组成，更帅气的是Fragment拥有自己的生命周期和接收、处理用户的事件，这样就不必在Activity写一堆控件的事件处理的代码了。更为重要的是，你可以动态的添加、替换和移除某个Fragment。</p>
+<h2 id="Fragment的生命周期">Fragment的生命周期</h2><p>Fragment必须是依存与Activity而存在的，因此Activity的生命周期会直接影响到Fragment的生命周期。官网这张图很好的说明了两者生命周期的关系：</p>
+<p>可以看到Fragment比Activity多了几个额外的生命周期回调方法：<br>onAttach(Activity)<br>当Fragment与Activity发生关联时调用。<br>onCreateView(LayoutInflater, ViewGroup,Bundle)<br>创建该Fragment的视图<br>onActivityCreated(Bundle)<br>当Activity的onCreate方法返回时调用<br>onDestoryView()<br>与onCreateView想对应，当该Fragment的视图被移除时调用<br>onDetach()<br>与onAttach相对应，当Fragment与Activity关联被取消时调用<br>注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现，</p>
+<h2 id="Fragment相当于一个控件">Fragment相当于一个控件</h2><p>Fragment可以被多个Activity重用，但是您也必须把Fragment关联到一个FragmentActivity上</p>
+<h2 id="静态Fragment的简单实例">静态Fragment的简单实例</h2><p>先自己定义一个Fragment的view的layout。</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span> android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>&gt;
+
+&lt;ImageButton
+    android:<span class="variable">id=</span><span class="string">"@+id/id_title_left_btn"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_centerVertical=</span><span class="string">"true"</span>
+    android:<span class="variable">background=</span><span class="string">"@drawable/my_icon"</span> /&gt;
+
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    android:<span class="variable">text=</span><span class="string">"我是Fragment"</span>
+     /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>再定义Fragment，这个Fragment就相当于一个小Activity，Activity可以包含多个Fragment</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
+
+<span class="keyword">import</span> android.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
+<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ImageButton</span>;
+<span class="keyword">import</span> android.widget.<span class="type">Toast</span>;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/20.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">FragmentTest</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
+
+<span class="keyword">private</span> <span class="type">ImageButton</span> mButton;
+
+<span class="annotation">@Nullable</span>
+<span class="annotation">@Override</span>
+public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
+
+    <span class="type">View</span> view = inflater.inflate(<span class="type">R</span>.layout.title_fragment, container, <span class="literal">false</span>);
+    mButton = (<span class="type">ImageButton</span>)view.findViewById(<span class="type">R</span>.id.id_title_left_btn);
+    mButton.setOnClickListener(<span class="keyword">new</span> <span class="type">View</span>.<span class="type">OnClickListener</span>() {
+
+        <span class="annotation">@Override</span>
+        public void onClick(<span class="type">View</span> v) {
+            <span class="type">Toast</span>.makeText(getActivity(),
+                    <span class="string">"i am an ImageButton in TitleFragment ! "</span>,
+                    <span class="type">Toast</span>.<span class="type">LENGTH_SHORT</span>).show();
+        }
+    });
+    <span class="keyword">return</span> view;
+}
+}
+</code></pre><p>在Mainlayout里面添加Fragment，这就相当于一个view的使用</p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span> android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span> tools:<span class="variable">context=</span><span class="string">".MainActivity"</span>&gt;
+
+&lt;TextView android:<span class="variable">text=</span><span class="string">"@string/hello_world"</span> android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span> /&gt;
+&lt;fragment
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"45dp"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/fragmentTitle"</span>
+    android:<span class="variable">name=</span><span class="string">"com.zsz.develop.firstfragment.FragmentTest"</span>
+    &gt;&lt;/fragment&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>在Main里调用</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
+
+<span class="keyword">import</span> android.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">View</span> fragmentTitle;
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_main);
+    fragmentTitle=findViewById(<span class="type">R</span>.id.fragmentTitle);
+}
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cidjyo6vj0003ukb2tkkh3d13" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/08/20/2015-8-20-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          动态加载Fragment，Fragment常用的API
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/08/19/2015-8-19/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015/8/19</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>
