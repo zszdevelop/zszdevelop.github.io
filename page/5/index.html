@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        43
+        44
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,65 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-5-17" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/17/2015-5-17/">jsp两种设计模型 </a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/05/17/2015-5-17/">
+    <time datetime="2015-05-17T11:14:59.000Z" itemprop="datePublished">2015-05-17</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="jsp两种设计模型">jsp两种设计模型</h1><ul>
+<li>jsp+javaBean</li>
+<li>jsp+javaBean+Servlet</li>
+</ul>
+<p>其实还有第三种，纯粹用jsp来编写。由jsp来处理业务逻辑，显示页面，控制流程。由于这种代码繁琐，可重复性差、不易于维护所以很快被市场抛弃了</p>
+<h2 id="jsp+javaBean">jsp+javaBean</h2><p>页面显示和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现商业逻辑</p>
+<p> 工作原理是：当浏览器发出请求时，jsp接受请求并访问javabean。若需要访问数据库后台服务器，则通过javaBean连接数据库或后台服务器，执行相应的处理。javaBean将处理的结果数据交给jsp。jsp提取结果并重新组织后，动态生成HRML页面，返回给浏览器。用户从浏览器显示的页面中得到交互的结果</p>
+<h2 id="jsp+javaBean+Servlet">jsp+javaBean+Servlet</h2><p>把流程控制代码和部分的逻辑处理代码提取到servlet中去。</p>
+<p>mvc架构：model层  +view层 controller层</p>
+<ul>
+<li>model：实现业务逻辑，包括了web应用程序功能的核心，负责存储与<br>应用程序相关的数据</li>
+<li>view：用于用户的页面显示，他可以访问model层数据，但不能更改这些数据</li>
+<li>Controller：主要负责model和view的控制关系，负责处理http的请求等</li>
+</ul>
+<p>并不是说mvc架构就更好。<br>根据实际来选择：</p>
+<ul>
+<li>当事务逻辑比较负责、分支较多或需要涉及很多JavaBean组件时，由于JSP和JavaBean+Servlet模型比JSP和JavaBean模型有更清晰的页面表现、更明确的开发模块的划分，所以使用JSP和JavaBean+Servlet模型比较适合</li>
+<li>对于简单的交互处理，利用JSP和JavaBean模型，JSP主要是使用HTML工具开发，然后再插入少量的Java代码就可以实现动态交互。在这种情况下，使用JSP和JavaBean模型更加方便快捷</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cidr7k9mo001660b2pi9f5p2b" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-5-16" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,7 +231,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cidpso0l00016ucb28tgq48xm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cidr7k9mr001760b2blfaghk4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +302,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cidpso0g00000ucb2q1rubs52" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cidr7k94h000060b2oagndh58" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +357,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cidpso0gb0001ucb24xghz72t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cidr7k95e000160b2am5sdif9" class="article-share-link">Share</a>
       
       
     </footer>

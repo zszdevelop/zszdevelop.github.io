@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        43
+        44
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,144 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-25" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/25/2015-8-25/">2015/8/25</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/25/2015-8-25/">
+    <time datetime="2015-08-25T02:12:35.000Z" itemprop="datePublished">2015-08-25</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/25问题集">2015/8/25问题集</h1><h2 id="pager页面加载顺序问题">pager页面加载顺序问题</h2><p>ViewPager页面加载时要先把Pager加载进来，然后才能加载里面的控件</p>
+<h2 id="pager先加载进来的layout">pager先加载进来的layout</h2><p>用pager加载的页面，只预先加载了一个页面。<br>而其他页面的控件并没有加载进来，这就导致了null指针异常。</p>
+<p>解决办法：在前面先加上一个view名称。</p>
+<pre><code><span class="keyword">ll</span>= (LinearLayout) myView.findViewById(R.id.<span class="keyword">ll</span>);
+</code></pre><h2 id="listview绑定adapter">listview绑定adapter</h2><p>这回竟然是因为忘记吧List  NEW出来了</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.my;
+
+<span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ArrayAdapter</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
+
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
+
+<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
+<span class="keyword">import</span> java.util.<span class="type">List</span>;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MyHomeActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">ListView</span> lvMyHome;
+<span class="keyword">private</span> <span class="type">MyHomeAdapter</span> adapter;
+<span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">MyHomeData</span>&gt; myHomeLists;
+<span class="keyword">private</span> <span class="type">MyHomeData</span> myHomeData;
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_my_home);
+    lvMyHome= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lvMyHome);
+    lvMyHome=<span class="keyword">new</span> <span class="type">ListView</span>(<span class="keyword">this</span>);
+    myHomeLists=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+    <span class="keyword">for</span> (int i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++){
+        myHomeData=<span class="keyword">new</span> <span class="type">MyHomeData</span>(i+<span class="string">" 父子"</span>,<span class="string">"天大地大"</span>,<span class="string">"审核中"</span>);
+
+        myHomeLists.add(myHomeData);
+
+    }
+
+    adapter=<span class="keyword">new</span> <span class="type">MyHomeAdapter</span>(<span class="type">MyHomeActivity</span>.<span class="keyword">this</span>,myHomeLists);
+    lvMyHome.setAdapter(adapter);
+
+    setContentView(lvMyHome);
+}
+
+
+}
+</code></pre><h2 id="listview绑定adapter之感悟">listview绑定adapter之感悟</h2><p>首先在这里面的设置：</p>
+<ul>
+<li>1.首先需要准备的数据listview承载数据，Adapter适配数据，data是数据。还需要一个装data的list集合</li>
+<li>找到listview并实例化。</li>
+<li>实例化list和data，并把data装进list中</li>
+<li>把list装进adapter中</li>
+<li>绑定adapter</li>
+<li>setContentView(lvMyHome)；</li>
+</ul>
+<p>-</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.my;
+<span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ArrayAdapter</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
+
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
+
+<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
+<span class="keyword">import</span> java.util.<span class="type">List</span>;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MyHomeActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">ListView</span> lvMyHome;
+<span class="keyword">private</span> <span class="type">MyHomeAdapter</span> adapter;
+<span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">MyHomeData</span>&gt; myHomeLists;
+<span class="keyword">private</span> <span class="type">MyHomeData</span> myHomeData;
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_my_home);
+    lvMyHome= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lvMyHome);
+    lvMyHome=<span class="keyword">new</span> <span class="type">ListView</span>(<span class="keyword">this</span>);
+    myHomeLists=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+    <span class="keyword">for</span> (int i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++){
+        myHomeData=<span class="keyword">new</span> <span class="type">MyHomeData</span>(<span class="string">" 父子"</span>,i+<span class="string">"天大地大"</span>,<span class="string">"审核中"</span>);
+
+        myHomeLists.add(myHomeData);
+
+    }
+
+    adapter=<span class="keyword">new</span> <span class="type">MyHomeAdapter</span>(<span class="type">MyHomeActivity</span>.<span class="keyword">this</span>,myHomeLists);
+    lvMyHome.setAdapter(adapter);
+
+    setContentView(lvMyHome);
+}
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cidr7k9jm000360b2iscb8y88" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-24" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -176,7 +314,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cidpso0gj0003ucb25a8j3cs2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cidr7k9jp000460b2aukxu967" class="article-share-link">Share</a>
       
       
     </footer>
@@ -218,7 +356,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cidpso0gv0005ucb2arbjzz3y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cidr7k9jz000660b2hkyjhi4c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +427,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cidpso0gn0004ucb2tge0u8cq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cidr7k9jw000560b2v5hsm3i9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -512,7 +650,7 @@ tools:context=<span class="string">".MainActivity"</span> &gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cidpso0h40007ucb2hxzw2j3d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cidr7k9k4000860b2vmc14n0s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -707,7 +845,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cidpso0h80008ucb2egja7yhb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cidr7k9k7000960b2wuee6y00" class="article-share-link">Share</a>
       
       
     </footer>
@@ -851,7 +989,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cidpso0gz0006ucb299mo1bz7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cidr7k9k1000760b2atkfopvq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -998,7 +1136,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cidpso0hb0009ucb25jzwt27k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cidr7k9k9000a60b2v7918y6m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1056,7 +1194,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cidpso0hf000aucb2xuduuain" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cidr7k9kb000b60b2u8grt9mc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1272,372 +1410,7 @@ android:<span class="variable">versionName=</span><span class="string">"1.0"</sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cidpso0hi000bucb204hsiztw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-15" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/15/2015-8-15/">Android手机的通讯录</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/15/2015-8-15/">
-    <time datetime="2015-08-15T12:16:59.000Z" itemprop="datePublished">2015-08-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android手机的通讯录">Android手机的通讯录</h1><p>Android手机的通讯录联系人全部都存在系统的数据库中，如果须要获得通讯里联系人的信息就须要访问系统的数据库，才能将信息拿出来。</p>
-<h2 id="contacts_表">contacts 表</h2><ul>
-<li>_id ：表的ID，主要用于其它表通过contacts 表中的ID可以查到相应的数据。</li>
-<li>display_name:  联系人名称</li>
-<li>photo_id:头像的ID，如果没有设置联系人头像，这个字段就为空</li>
-<li>times_contacted:通话记录的次数</li>
-<li>last_time_contacted: 最后的通话时间 </li>
-<li>lookup :是一个持久化的储存 因为用户可能会改名子 但是它改不了lookup</li>
-</ul>
-<h2 id="简单实例">简单实例</h2><p>要先添加权限</p>
-<pre><code><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.READ_CONTACTS"</span>&gt;</span><span class="tag">&lt;/<span class="title">uses-permission</span>&gt;</span>
-</code></pre><p>这个简单实例只是把数据显示在控制台上。</p>
-<pre><code>package com.zsz.develop.getmyphonenumber;
-
-<span class="keyword">import</span> android.content.ContentResolver;
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.database.Cursor;
-<span class="keyword">import</span> android.provider.ContactsContract;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/8/15.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">GetNumber</span> </span>{
-
-public static <span class="built_in">String</span> getNumber(Context context){
-    <span class="comment">/**得到手机通讯录联系人信息**/</span>
-    ContentResolver resolver= context.getContentResolver();
-    <span class="comment">// 获取手机联系人</span>
-   Cursor phoneCursor= resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
-    <span class="keyword">if</span> (phoneCursor!=<span class="literal">null</span>){
-
-        <span class="built_in">String</span> phoneNumber;
-        <span class="built_in">String</span> phoneName;
-        <span class="keyword">while</span> (phoneCursor.moveToNext()){
-            <span class="comment">//得到手机号码和名字</span>
-             phoneNumber=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            phoneName=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-
-            System.out.println(<span class="string">"联系人："</span>+phoneName +<span class="string">"     电话号码："</span>+phoneNumber);
-        }
-
-
-    }
-
-
-    <span class="keyword">return</span> <span class="literal">null</span>;
-}
-}
-</code></pre><h2 id="把通讯录显示在页面上">把通讯录显示在页面上</h2><p>MainActivity中的代码：主要加载页面信息</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
-
-<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
-<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
-<span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
-
-<span class="keyword">import</span> java.util.<span class="type">List</span>;
-
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
-<span class="keyword">private</span> <span class="type">ListView</span> lv;
-<span class="keyword">private</span> <span class="type">MyAdapter</span> adapter;
-
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.activity_main);
-    <span class="type">GetNumber</span>.getNumber(<span class="keyword">this</span>);
-
-    lv= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lv);
-    adapter=<span class="keyword">new</span> <span class="type">MyAdapter</span>(<span class="type">GetNumber</span>.lists,<span class="keyword">this</span>);
-    lv.setAdapter(adapter);
-}
-}
-</code></pre><p>GetNumber中的代码主要获得通讯录信息</p>
-<pre><code>package com.zsz.develop.getmyphonenumber;
-
-<span class="keyword">import</span> android.content.ContentResolver;
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.database.Cursor;
-<span class="keyword">import</span> android.provider.ContactsContract;
-
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.List;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/8/15.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">GetNumber</span> </span>{
-
-public static List&lt;PhoneInfo&gt; lists=<span class="keyword">new</span> ArrayList&lt;PhoneInfo&gt;();
-
-public static <span class="built_in">String</span> getNumber(Context context){
-    <span class="comment">/**得到手机通讯录联系人信息**/</span>
-    ContentResolver resolver= context.getContentResolver();
-    <span class="comment">// 获取手机联系人</span>
-   Cursor phoneCursor= resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
-    <span class="keyword">if</span> (phoneCursor!=<span class="literal">null</span>){
-
-        <span class="built_in">String</span> phoneNumber;
-        <span class="built_in">String</span> phoneName;
-        <span class="keyword">while</span> (phoneCursor.moveToNext()){
-            <span class="comment">//得到手机号码和名字</span>
-             phoneNumber=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-            phoneName=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
-            PhoneInfo phoneInfo=<span class="keyword">new</span> PhoneInfo(phoneName,phoneNumber);
-            lists.add(phoneInfo);
-            System.out.println(<span class="string">"联系人："</span>+phoneName +<span class="string">"     电话号码："</span>+phoneNumber);
-        }
-    }
-    <span class="keyword">return</span> <span class="literal">null</span>;
-}
-}
-</code></pre><p>PhoneInfo对数据进行封装</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/8/16.
- */</span>
-<span class="keyword">public</span> class PhoneInfo {
-
-   <span class="keyword">private</span> <span class="keyword">String</span> phoneName;
-<span class="keyword">private</span> <span class="keyword">String</span> phoneNumber;
-
-<span class="keyword">public</span> PhoneInfo(<span class="keyword">String</span> phoneName,<span class="keyword">String</span> phoneNumber){
-    setPhoneName(phoneName);
-    setPhoneNumber(phoneNumber);
-}
-
-
-<span class="keyword">public</span> <span class="keyword">String</span> getPhoneName() {
-    <span class="keyword">return</span> phoneName;
-}
-
-<span class="keyword">public</span> <span class="keyword">void</span> setPhoneName(<span class="keyword">String</span> phoneName) {
-    <span class="keyword">this</span>.phoneName = phoneName;
-}
-
-<span class="keyword">public</span> <span class="keyword">String</span> getPhoneNumber() {
-    <span class="keyword">return</span> phoneNumber;
-}
-
-<span class="keyword">public</span> <span class="keyword">void</span> setPhoneNumber(<span class="keyword">String</span> phoneNumber) {
-    <span class="keyword">this</span>.phoneNumber = phoneNumber;
-}
-}
-</code></pre><p>MyAdapter对listview进行适配。</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
-
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.view.LayoutInflater;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.view.ViewGroup;
-<span class="keyword">import</span> android.widget.BaseAdapter;
-<span class="keyword">import</span> android.widget.LinearLayout;
-<span class="keyword">import</span> android.widget.ListView;
-<span class="keyword">import</span> android.widget.TextView;
-
-<span class="keyword">import</span> java.util.List;
-
-<span class="javadoc">/**
- * Created by shengzhong on 2015/8/16.
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
-<span class="keyword">private</span> List&lt;PhoneInfo&gt; lists;
-<span class="keyword">private</span> Context context;
-<span class="keyword">private</span> LayoutInflater layoutInflater;
-<span class="keyword">private</span> LinearLayout layout;
-
-<span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(List&lt;PhoneInfo&gt; lists, Context context)</span></span>{
-    <span class="keyword">this</span>.lists=lists;
-    <span class="keyword">this</span>.context=context;
-}
-
-
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
-    <span class="function"><span class="keyword">return</span> lists.<span class="title">size</span><span class="params">()</span></span>;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
-    <span class="function"><span class="keyword">return</span> lists.<span class="title">get</span><span class="params">(i)</span></span>;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
-    <span class="keyword">return</span> i;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
-    layoutInflater=LayoutInflater.from(context);
-    layout= (LinearLayout) layoutInflater.inflate(R.layout.call,<span class="keyword">null</span>);
-    TextView tvName= (TextView) layout.findViewById(R.id.tvName);
-    TextView tvNumber= (TextView) layout.findViewById(R.id.tvNumber);
-    tvName.setText(lists.get(i).getPhoneName());
-    tvNumber.setText(lists.get(i).getPhoneNumber());
-
-    <span class="keyword">return</span> layout;
-}
-}
-</code></pre><p>call的layout。在main中有一个list</p>
-<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
-&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
-android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span> android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
-android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
-
-&lt;LinearLayout
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
-    &gt;
-    &lt;ImageView
-        android:<span class="variable">layout_width=</span><span class="string">"45dp"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"45dp"</span>
-        android:<span class="variable">src=</span><span class="string">"@drawable/jiamin"</span>
-        /&gt;
-    &lt;LinearLayout
-        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
-        &gt;
-        &lt;TextView
-            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-            android:<span class="variable">id=</span><span class="string">"@+id/tvName"</span>
-            /&gt;
-        &lt;TextView
-            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-            android:<span class="variable">id=</span><span class="string">"@+id/tvNumber"</span>
-            /&gt;
-
-
-    &lt;/LinearLayout&gt;
-
-
-&lt;/LinearLayout&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><h2 id="listView优化">listView优化</h2><p>使用holder新建textview来操作。</p>
-<p>重用了convertView，很大程度上的减少了内存的消耗。通过判断convertView是否为null，是的话就需要产生一个视图出来，然后给这个视图数据，最后将这个视图返回给底层，呈献给用户。<br>特点：如果当前的convertView为null，则通过LayoutInflat产生一个view。</p>
-<p>其中converView会反复使用，目的是为了提高ListView效率。</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
-
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.view.LayoutInflater;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.view.ViewGroup;
-<span class="keyword">import</span> android.widget.BaseAdapter;
-<span class="keyword">import</span> android.widget.LinearLayout;
-<span class="keyword">import</span> android.widget.ListView;
-<span class="keyword">import</span> android.widget.TextView;
-
-<span class="keyword">import</span> java.util.List;
-
-<span class="javadoc">/**
- * Created by shengzhong on 2015/8/16.
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
-<span class="keyword">private</span> List&lt;PhoneInfo&gt; lists;
-<span class="keyword">private</span> Context context;
-<span class="keyword">private</span> LayoutInflater layoutInflater;
-<span class="keyword">private</span> LinearLayout layout;
-
-<span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(List&lt;PhoneInfo&gt; lists, Context context)</span></span>{
-    <span class="keyword">this</span>.lists=lists;
-    <span class="keyword">this</span>.context=context;
-}
-
-
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
-    <span class="function"><span class="keyword">return</span> lists.<span class="title">size</span><span class="params">()</span></span>;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
-    <span class="function"><span class="keyword">return</span> lists.<span class="title">get</span><span class="params">(i)</span></span>;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
-    <span class="keyword">return</span> i;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
-<span class="comment">//        layoutInflater=LayoutInflater.from(context);</span>
-<span class="comment">//        layout= (LinearLayout) layoutInflater.inflate(R.layout.call,null);</span>
-<span class="comment">//        TextView tvName= (TextView) layout.findViewById(R.id.tvName);</span>
-<span class="comment">//        TextView tvNumber= (TextView) layout.findViewById(R.id.tvNumber);</span>
-<span class="comment">//        tvName.setText(lists.get(i).getPhoneName());</span>
-<span class="comment">//        tvNumber.setText(lists.get(i).getPhoneNumber());</span>
-<span class="comment">//</span>
-    ViewHolder holder;
-    <span class="keyword">if</span> (view==<span class="keyword">null</span>){
-        view=LayoutInflater.from(context).inflate(R.layout.call,<span class="keyword">null</span>);
-        holder=<span class="keyword">new</span> ViewHolder();
-        holder.tvName= (TextView) view.findViewById(R.id.tvName);
-        holder.tvNumber= (TextView) view.findViewById(R.id.tvNumber);
-        holder.tvName.setText(lists.get(i).getPhoneName());
-        holder.tvNumber.setText(lists.get(i).getPhoneNumber());
-        view.setTag(holder);
-
-    }<span class="keyword">else</span> {
-        holder= (ViewHolder) view.getTag();
-        holder.tvName.setText(lists.get(i).getPhoneName());
-        holder.tvNumber.setText(lists.get(i).getPhoneNumber());
-
-    }
-
-    <span class="keyword">return</span> view;
-}
-
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span></span>{
-
-    TextView tvName;
-    TextView tvNumber;
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cidpso0hp000cucb2g8gdi9et" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cidr7k9kd000c60b2ouin9kqr" class="article-share-link">Share</a>
       
       
     </footer>
