@@ -3,24 +3,23 @@
 <head>
   <meta charset="utf-8">
   
-  <title>获取上下文路径，get和post | zszBlog</title>
+  <title>2015/8/26 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="问题集request.getContextPath()获取上下文路径超级实用的小技巧
-《form action=”&amp;lt;%=request.getContextPath() %&amp;gt;/loginServlet” method=”post”&amp;gt;
-Servlet添加到web。xml中的信息其中url中的值要与上面相对应。              LoginServlet          c">
+  <meta name="description" content="2015/8/26问题集让控制置于底部android 让一个控件按钮居于底部的几种方法
+
+1.采用linearlayout布局：android:layout_height=”0dp” !— 这里不能设置fill_parent —&amp;gt;android:layout_weight=”1” !— 这里设置layout_weight=1是最关键的，否则底部的LinearLayout无法到底部 —&amp;gt;">
 <meta property="og:type" content="article">
-<meta property="og:title" content="获取上下文路径，get和post">
-<meta property="og:url" content="http://yoursite.com/2015/07/13/2015-7-13-2/index.html">
+<meta property="og:title" content="2015/8/26">
+<meta property="og:url" content="http://yoursite.com/2015/08/26/2015-8-26/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="问题集request.getContextPath()获取上下文路径超级实用的小技巧
-《form action=”&amp;lt;%=request.getContextPath() %&amp;gt;/loginServlet” method=”post”&amp;gt;
-Servlet添加到web。xml中的信息其中url中的值要与上面相对应。              LoginServlet          c">
-<meta property="og:image" content="http://cl.ly/image/2A2O3e2H3v27/E%7BKO]~HE348]90%252~9%7D9HGS.png">
+<meta property="og:description" content="2015/8/26问题集让控制置于底部android 让一个控件按钮居于底部的几种方法
+
+1.采用linearlayout布局：android:layout_height=”0dp” !— 这里不能设置fill_parent —&amp;gt;android:layout_weight=”1” !— 这里设置layout_weight=1是最关键的，否则底部的LinearLayout无法到底部 —&amp;gt;">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="获取上下文路径，get和post">
-<meta name="twitter:description" content="问题集request.getContextPath()获取上下文路径超级实用的小技巧
-《form action=”&amp;lt;%=request.getContextPath() %&amp;gt;/loginServlet” method=”post”&amp;gt;
-Servlet添加到web。xml中的信息其中url中的值要与上面相对应。              LoginServlet          c">
+<meta name="twitter:title" content="2015/8/26">
+<meta name="twitter:description" content="2015/8/26问题集让控制置于底部android 让一个控件按钮居于底部的几种方法
+
+1.采用linearlayout布局：android:layout_height=”0dp” !— 这里不能设置fill_parent —&amp;gt;android:layout_weight=”1” !— 这里设置layout_weight=1是最关键的，否则底部的LinearLayout无法到底部 —&amp;gt;">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -118,7 +117,7 @@ Servlet添加到web。xml中的信息其中url中的值要与上面相对应。 
     
   </div>
 </aside>
-      <section id="main"><article id="post-2015-7-13-2" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-2015-8-26" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -127,15 +126,15 @@ Servlet添加到web。xml中的信息其中url中的值要与上面相对应。 
         
   
     <h1 class="article-title" itemprop="name">
-      获取上下文路径，get和post
+      2015/8/26
     </h1>
   
 
         <div class="article-meta">
           <div class="article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/07/13/2015-7-13-2/">
-    <time datetime="2015-07-13T09:09:29.000Z" itemprop="datePublished">2015-07-13</time>
+  <a href="/2015/08/26/2015-8-26/">
+    <time datetime="2015-08-26T00:56:15.000Z" itemprop="datePublished">2015-08-26</time>
   </a>
 </div>
           
@@ -144,19 +143,25 @@ Servlet添加到web。xml中的信息其中url中的值要与上面相对应。 
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="问题集">问题集</h1><h2 id="request-getContextPath()获取上下文路径">request.getContextPath()获取上下文路径</h2><p>超级实用的小技巧</p>
-<p>《form action=”&lt;%=request.getContextPath() %&gt;/loginServlet” method=”post”&gt;</p>
-<h2 id="Servlet添加到web。xml中的信息">Servlet添加到web。xml中的信息</h2><p>其中url中的值要与上面相对应。<br>    <servlet><br>          <servlet-name>LoginServlet</servlet-name><br>          <servlet-class>com.zsz.develop.servlet.LoginServlet</servlet-class><br>      </servlet></p>
-<pre><code><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>LoginServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/loginServlet<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span>
-</code></pre><h2 id="get和post">get和post</h2><p><img src="http://cl.ly/image/2A2O3e2H3v27/E%7BKO]~HE348]90%252~9%7D9HGS.png" alt=""></p>
-
+        <h1 id="2015/8/26问题集">2015/8/26问题集</h1><h2 id="让控制置于底部">让控制置于底部</h2><p>android 让一个控件按钮居于底部的几种方法</p>
+<ul>
+<li><p>1.采用linearlayout布局：<br>android:layout_height=”0dp” !— 这里不能设置fill_parent —&gt;<br>android:layout_weight=”1” !— 这里设置layout_weight=1是最关键的，否则底部的LinearLayout无法到底部 —&gt;</p>
+</li>
+<li><p>2：采用relativelayout布局：<br>android:layout_alignParentBottom=”true” !— 这里设置layout_alignParentBottom=true是最关键的，这个属性上级必须是RelativeLayout —&gt;</p>
+</li>
+<li><p>3： 采用 fragment 布局(activitygroup 已经被弃用不建议使用)</p>
+</li>
+</ul>
+<p><a href="http://www.cnblogs.com/zdz8207/archive/2012/12/13/2816906.html" target="_blank" rel="external">http://www.cnblogs.com/zdz8207/archive/2012/12/13/2816906.html</a></p>
+<h2 id="与底部之间的距离">与底部之间的距离</h2><p>这个要设置在布局文件中（learnlayout之类的）</p>
+<pre><code><span class="label">android:</span>layout_marginBottom=<span class="string">"100dp"</span>
+</code></pre><h2 id="将控件底部与父类底部对齐">将控件底部与父类底部对齐</h2><pre><code><span class="label">android:</span>layout_alignParentBottom=<span class="string">"true"</span>
+</code></pre><h2 id="将控件底部与父类右边对齐">将控件底部与父类右边对齐</h2><pre><code><span class="label">android:</span>layout_alignParentRight=<span class="string">"true"</span>
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cidsk54wy000yskb2eud45r2h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cidsk54ug0003skb221bms0vv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -165,19 +170,19 @@ Servlet添加到web。xml中的信息其中url中的值要与上面相对应。 
     
 <nav id="article-nav">
   
-    <a href="/2015/07/15/2015-7-15/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/08/26/2015-8-26-2/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          Android通过httpClient获取网络请求，响应状态码含义，Http请求时要添加权限
+          2015/8/26-2
         
       </div>
     </a>
   
   
-    <a href="/2015/07/12/2015-7-13/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/08/25/2015-8-25/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">JDBC API，JDBC Driver API，JDBC的操作流程，事务的四个特征，JDBC事务处理</div>
+      <div class="article-nav-title">2015/8/25</div>
     </a>
   
 </nav>

@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        44
+        46
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,335 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-26-TabHost" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/26/2015-7-26-TabHost/">TabHost实现</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/26/2015-7-26-TabHost/">
+    <time datetime="2015-07-26T12:17:29.000Z" itemprop="datePublished">2015-07-26</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TabHost实现">TabHost实现</h1><p>layout布局文件中的设置</p>
+<pre><code><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+<span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span>
+<span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+<span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> 
+<span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>
+<span class="attribute">tools:context</span>=<span class="value">".MainActivity"</span> &gt;</span>
+<span class="tag">&lt;<span class="title">Button</span>
+    <span class="attribute">android:id</span>=<span class="value">"@+id/button1"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:text</span>=<span class="value">"Button"</span> /&gt;</span>
+ <span class="tag">&lt;<span class="title">TabHost</span>
+    <span class="attribute">android:id</span>=<span class="value">"@+id/tabhost"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">LinearLayout</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>
+        <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span> &gt;</span>
+
+        <span class="tag">&lt;<span class="title">TabWidget</span>
+            <span class="attribute">android:id</span>=<span class="value">"@android:id/tabs"</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span> &gt;</span>
+        <span class="tag">&lt;/<span class="title">TabWidget</span>&gt;</span>
+
+        <span class="tag">&lt;<span class="title">FrameLayout</span>
+            <span class="attribute">android:id</span>=<span class="value">"@android:id/tabcontent"</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+            <span class="comment">&lt;!-- 第一个tab的布局 --&gt;</span>
+            <span class="tag">&lt;<span class="title">LinearLayout</span>
+                <span class="attribute">android:id</span>=<span class="value">"@+id/tab1"</span>
+                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+                <span class="tag">&lt;<span class="title">TextView</span>
+                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView1"</span>
+                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:text</span>=<span class="value">"林炳东"</span> /&gt;</span>
+
+            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+
+            <span class="comment">&lt;!-- 第二个tab的布局 --&gt;</span>
+            <span class="tag">&lt;<span class="title">LinearLayout</span>
+                <span class="attribute">android:id</span>=<span class="value">"@+id/tab2"</span>
+                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+                <span class="tag">&lt;<span class="title">TextView</span>
+                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView2"</span>
+                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:text</span>=<span class="value">"张小媛"</span> /&gt;</span>
+
+            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+
+            <span class="comment">&lt;!-- 第三个tab的布局 --&gt;</span>
+            <span class="tag">&lt;<span class="title">LinearLayout</span>
+                <span class="attribute">android:id</span>=<span class="value">"@+id/tab3"</span>
+                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+                <span class="tag">&lt;<span class="title">TextView</span>
+                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView3"</span>
+                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:text</span>=<span class="value">"马贝贝"</span> /&gt;</span>
+
+            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">FrameLayout</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">TabHost</span>&gt;</span> 
+
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre><p>于此同时也要在Activiyt中设置</p>
+<pre><code><span class="keyword">th</span>= (TabHost) findViewById(R.id.tabHost);
+  <span class="keyword">th</span>.setup();//初始化TabHost容器  
+
+   //在TabHost创建标签，然后设置：标题／图标／标签页布局 
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag1"</span>).setIndicator(<span class="string">"主页"</span>,getResources().getDrawable(R.drawable.notification_template_icon_bg)).setContent(R.id.tab1));
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag2"</span>).setIndicator(<span class="string">"历史"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab2));
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag3"</span>).setIndicator(<span class="string">"机器人"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab3));
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag3"</span>).setIndicator(<span class="string">"设置"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab4));
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cidsk54w5000nskb2d2f8snto" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-26" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/26/2015-7-26/">从服务器得到所有图片信息，图片压缩代码</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/26/2015-7-26/">
+    <time datetime="2015-07-26T04:54:15.000Z" itemprop="datePublished">2015-07-26</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/26问题集">2015/7/26问题集</h1><h2 id="从服务器得到所有图片信息">从服务器得到所有图片信息</h2><p>servlet</p>
+<pre><code>package com.zsz.man;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.io.PrintWriter;
+<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">import</span> javax.servlet.ServletContext;
+<span class="keyword">import</span> javax.servlet.ServletException;
+<span class="keyword">import</span> javax.servlet.annotation.WebServlet;
+<span class="keyword">import</span> javax.servlet.http.HttpServlet;
+<span class="keyword">import</span> javax.servlet.http.HttpServletRequest;
+<span class="keyword">import</span> javax.servlet.http.HttpServletResponse;
+
+<span class="keyword">import</span> com.google.gson.Gson;
+<span class="keyword">import</span> com.zsz.develop.UserInfoBean;
+<span class="keyword">import</span> com.zsz.develop.UserinfoDao;
+<span class="keyword">import</span> com.zsz.main.ImageUtil;
+
+<span class="comment">/**
+ * Servlet implementation class GetAllManServlet
+ */</span>
+@WebServlet(<span class="string">"/GetAllManServlet"</span>)
+public <span class="class"><span class="keyword">class</span> <span class="title">GetAllManServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>{
+private static final long serialVersionUID = <span class="number">1</span>L;
+
+<span class="comment">/**
+ * @see HttpServlet#HttpServlet()
+ */</span>
+public GetAllManServlet() {
+    <span class="keyword">super</span>();
+    <span class="comment">// TODO Auto-generated constructor stub</span>
+}
+
+<span class="comment">/**
+ * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+ */</span>
+protected <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    <span class="comment">// TODO Auto-generated method stub</span>
+}
+
+<span class="comment">/**
+ * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+ */</span>
+protected <span class="keyword">void</span> doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+    ServletContext context = getServletContext();
+    <span class="built_in">String</span> contentType = context.getInitParameter(<span class="string">"contentType"</span>);
+    <span class="built_in">String</span> jsonAction = request.getParameter(<span class="string">"action"</span>);
+    int jsonImageSize =Integer.parseInt(request.getParameter(<span class="string">"imageSize"</span>)); 
+    <span class="built_in">String</span> jsonName = request.getParameter(<span class="string">"name"</span>);
+    System.out.println(<span class="string">"jsonName:"</span>+jsonName);
+    <span class="built_in">String</span> outStr = <span class="string">""</span>;
+    Gson gson = <span class="keyword">new</span> Gson();
+    ManDao manDao=<span class="keyword">new</span> ManDaoImpl();
+
+
+    <span class="keyword">if</span> (jsonAction.equals(<span class="string">"getAll"</span>)) {
+        List&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
+        <span class="comment">// 將所有照片縮小</span>
+        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; manList.size(); i++) {
+            ManBean manBean = manList.get(i);
+            manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
+        }
+        outStr = gson.toJson(manList);
+    }
+
+    response.setContentType(contentType);
+    PrintWriter out = response.getWriter();
+    System.out.println(outStr);
+    out.print(outStr);
+    out.close();
+
+    }
+
+}
+</code></pre><p><strong>重点</strong>在这一段：</p>
+<ul>
+<li>判断功能选项</li>
+<li>取得实体类集合</li>
+<li>循环取出每张图片、并对他进行压缩</li>
+<li><p>把压缩后的数据传递给实体类，并转为json格式输出</p>
+<p>  if (jsonAction.equals(“getAll”)) {</p>
+<pre><code>    <span class="built_in">List</span>&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
+    <span class="comment">// 將所有照片縮小</span>
+    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; manList.size(); i++) {
+        ManBean manBean = manList.<span class="literal">get</span>(i);
+        manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
+    }
+    outStr = gson.toJson(manList);
+}
+</code></pre><h2 id="图片压缩代码">图片压缩代码</h2></li>
+</ul>
+<p>调用方法：manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));</p>
+<pre><code><span class="keyword">package</span> com.zsz.main;
+
+<span class="keyword">import</span> java.awt.Graphics;
+<span class="keyword">import</span> java.awt.image.BufferedImage;
+<span class="keyword">import</span> java.io.ByteArrayInputStream;
+<span class="keyword">import</span> java.io.ByteArrayOutputStream;
+<span class="keyword">import</span> java.io.IOException;
+
+<span class="keyword">import</span> javax.imageio.ImageIO;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageUtil</span> </span>{
+
+<span class="javadoc">/**
+ * 將圖形縮小後回傳，如果發生錯誤就直接回傳原圖， 例如：imageSize值&lt;=1、無法取得圖的寬高、發生Exception
+ * 
+ *<span class="javadoctag"> @param</span> srcImageData
+ *            來源圖形資料
+ *<span class="javadoctag"> @param</span> scaleSize
+ *            欲將圖形縮至多少尺寸以下，50代表將尺寸縮小至50x50以內
+ *<span class="javadoctag"> @return</span> 縮小完畢的圖形資料
+ */</span>
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] shrink(<span class="keyword">byte</span>[] srcImageData, <span class="keyword">int</span> scaleSize) {
+    ByteArrayInputStream bais = <span class="keyword">new</span> ByteArrayInputStream(srcImageData);
+    <span class="comment">// 縮小比例，4代表除以4</span>
+    <span class="keyword">int</span> sampleSize = <span class="number">1</span>;
+    <span class="keyword">int</span> imageWidth = <span class="number">0</span>;
+    <span class="keyword">int</span> imageHeight = <span class="number">0</span>;
+
+    <span class="comment">// 如果imageSize為0、負數(代表錯誤)或1(1代表與原圖一樣大小)，就直接回傳原圖資料</span>
+    <span class="keyword">if</span> (scaleSize &lt;= <span class="number">1</span>) {
+        <span class="keyword">return</span> srcImageData;
+    }
+
+    <span class="keyword">try</span> {
+        BufferedImage srcBufferedImage = ImageIO.read(bais);
+        <span class="comment">// 如果無法識別圖檔格式(TYPE_CUSTOM)就回傳TYPE_INT_ARGB；否則回傳既有格式</span>
+        <span class="keyword">int</span> type = srcBufferedImage.getType() == BufferedImage.TYPE_CUSTOM ? BufferedImage.TYPE_INT_RGB
+                : srcBufferedImage.getType();
+        imageWidth = srcBufferedImage.getWidth();
+        imageHeight = srcBufferedImage.getHeight();
+        <span class="keyword">if</span> (imageWidth == <span class="number">0</span> || imageHeight == <span class="number">0</span>) {
+            <span class="keyword">return</span> srcImageData;
+        }
+        <span class="comment">// 只要圖檔較長的一邊超過指定長度(desireSize)，就計算欲縮小的比例</span>
+        <span class="comment">// 並將圖檔寬高都除以欲縮小比例</span>
+        <span class="keyword">int</span> longer = Math.max(imageWidth, imageHeight);
+        <span class="keyword">if</span> (longer &gt; scaleSize) {
+            sampleSize = longer / scaleSize;
+            imageWidth = srcBufferedImage.getWidth() / sampleSize;
+            imageHeight = srcBufferedImage.getHeight() / sampleSize;
+        }
+        BufferedImage scaledBufferedImage = <span class="keyword">new</span> BufferedImage(imageWidth,
+                imageHeight, type);
+        Graphics graphics = scaledBufferedImage.createGraphics();
+        graphics.drawImage(srcBufferedImage, <span class="number">0</span>, <span class="number">0</span>, imageWidth, imageHeight,
+                <span class="keyword">null</span>);
+        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();
+        ImageIO.write(scaledBufferedImage, <span class="string">"jpg"</span>, baos);
+        <span class="function"><span class="keyword">return</span> baos.<span class="title">toByteArray</span><span class="params">()</span></span>;
+    } <span class="keyword">catch</span> (IOException e) {
+        e.printStackTrace();
+        <span class="keyword">return</span> srcImageData;
+    }
+}
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cidsk54w2000mskb2dne5hciu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-25" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -147,7 +476,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cidr7k9l9000m60b2weko8mk3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cidsk54w7000oskb2ak6ulza5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -311,7 +640,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cidr7k9ld000o60b2h4azpmbx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cidsk54wd000qskb2nhwy1t8d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -367,7 +696,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cidr7k9lb000n60b2wfdylh0t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cidsk54wa000pskb2ns59ahhx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -570,7 +899,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cidr7k9lf000p60b2h6a1mjja" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cidsk54wh000rskb2qr03wdcb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -700,7 +1029,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cidr7k9lh000q60b286rtbmj7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cidsk54wk000sskb2qlxvr903" class="article-share-link">Share</a>
       
       
     </footer>
@@ -779,7 +1108,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cidr7k9lm000r60b23ahusw4s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cidsk54wm000tskb2tjxr7o8m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -871,7 +1200,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cidr7k9lq000t60b2j3ue5f8d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cidsk54ws000vskb2xxw38g94" class="article-share-link">Share</a>
       
       
     </footer>
@@ -950,117 +1279,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cidr7k9lo000s60b2bnghcu1g" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-15" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/15/2015-7-15/">Android通过httpClient获取网络请求，响应状态码含义，Http请求时要添加权限</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/15/2015-7-15/">
-    <time datetime="2015-07-15T00:50:03.000Z" itemprop="datePublished">2015-07-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android通过httpClient获取网络请求">Android通过httpClient获取网络请求</h1><p>在HttpClient模块中用到了两个重要的类：HttpGet和HttpPost。这两个类分别用来提交HTTP GET和HTTP POST请求。</p>
-<p>无论是使用HttpGet，还是使用HttpPost，都必须通过如下3步来访问HTTP资源。</p>
-<ul>
-<li>1.创建HttpGet或HttpPost对象，将要请求的URL通过构造方法传入HttpGet或HttpPost对象。</li>
-<li>2.使用DefaultHttpClient类的execute方法发送HTTP GET或HTTP POST请求，并返回HttpResponse对象。</li>
-<li>3.通过HttpResponse接口的getEntity方法返回响应信息，并进行相应的处理。（判断请求响应状态码，状态码为200表示服务端成功响应了客户端的请求。</li>
-</ul>
-<h2 id="响应状态码含义">响应状态码含义</h2><ul>
-<li>◆200 (OK): 找到了该资源，并且一切正常。</li>
-<li>◆304 (NOT MODIFIED): 该资源在上次请求之后没有任何修改。这通常用于浏览器的缓存机制。</li>
-<li>◆401 (UNAUTHORIZED): 客户端无权访问该资源。这通常会使得浏览器要求用户输入用户名和密码，以登录到服务器。</li>
-<li>◆403 (FORBIDDEN): 客户端未能获得授权。这通常是在401之后输入了不正确的用户名或密码。</li>
-<li>◆404 (NOT FOUND): 在指定的位置不存在所申请的资源。<br>）。</li>
-</ul>
-<h2 id="Http请求时要添加权限！！！">Http请求时要添加权限！！！</h2><p>找了一下午真是活该！<br>没加权限竟然。</p>
-<pre><code><span class="number">07</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">05</span>:<span class="number">31.824</span>    <span class="number">1781</span>-<span class="number">1794</span>/com<span class="class">.zsz</span><span class="class">.develop</span><span class="class">.myrobot</span> E/AndroidRuntime﹕ FATAL EXCEPTION: AsyncTask #<span class="number">1</span>
-java<span class="class">.lang</span><span class="class">.RuntimeException</span>: An error occured while executing <span class="function"><span class="title">doInBackground</span><span class="params">()</span></span>
-</code></pre><p>错误行数在</p>
-<pre><code><span class="attribute">httpResponse</span>=<span class="string"> httpClient.execute(httpGet);</span>
-</code></pre><p>和</p>
-<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">HttpData</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AsyncTask&lt;String</span>, <span class="title">Void</span>, <span class="title">String&gt;</span> {</span>
-</code></pre><p>下回涨点记性</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cidr7k9lr000u60b2p3e19u3v" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-13-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/13/2015-7-13-2/">获取上下文路径，get和post</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/13/2015-7-13-2/">
-    <time datetime="2015-07-13T09:09:29.000Z" itemprop="datePublished">2015-07-13</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="问题集">问题集</h1><h2 id="request-getContextPath()获取上下文路径">request.getContextPath()获取上下文路径</h2><p>超级实用的小技巧</p>
-<p>《form action=”&lt;%=request.getContextPath() %&gt;/loginServlet” method=”post”&gt;</p>
-<h2 id="Servlet添加到web。xml中的信息">Servlet添加到web。xml中的信息</h2><p>其中url中的值要与上面相对应。<br>    <servlet><br>          <servlet-name>LoginServlet</servlet-name><br>          <servlet-class>com.zsz.develop.servlet.LoginServlet</servlet-class><br>      </servlet></p>
-<pre><code><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>LoginServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/loginServlet<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span>
-</code></pre><h2 id="get和post">get和post</h2><p><img src="http://cl.ly/image/2A2O3e2H3v27/E%7BKO]~HE348]90%252~9%7D9HGS.png" alt=""></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cidr7k9ly000w60b2z786kryd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cidsk54wp000uskb2u99dyf1i" class="article-share-link">Share</a>
       
       
     </footer>
