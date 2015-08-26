@@ -462,6 +462,7 @@
 <pre><code><span class="label">android:</span>layout_marginBottom=<span class="string">"100dp"</span>
 </code></pre><h2 id="将控件底部与父类底部对齐">将控件底部与父类底部对齐</h2><pre><code><span class="label">android:</span>layout_alignParentBottom=<span class="string">"true"</span>
 </code></pre><h2 id="将控件底部与父类右边对齐">将控件底部与父类右边对齐</h2><pre><code><span class="label">android:</span>layout_alignParentRight=<span class="string">"true"</span>
+</code></pre><h2 id="相对布局中居中对齐">相对布局中居中对齐</h2><pre><code><span class="label">android:</span>layout_centerHorizontal=<span class="string">"true"</span>
 </code></pre>
       
     </div>
@@ -552,19 +553,18 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 </code></pre><h2 id="listview绑定adapter之感悟">listview绑定adapter之感悟</h2><p>首先在这里面的设置：</p>
 <ul>
 <li>1.首先需要准备的数据listview承载数据，Adapter适配数据，data是数据。还需要一个装data的list集合</li>
-<li>找到listview并实例化。</li>
+<li>找到listview并实例化。（并不需要实例化）</li>
 <li>实例化list和data，并把data装进list中</li>
 <li>把list装进adapter中</li>
 <li>绑定adapter</li>
-<li>setContentView(lvMyHome)；</li>
+<li>setContentView(lvMyHome)；（错误：这也重新覆盖掉了布局）</li>
 </ul>
-<p>-</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.my;
+<p>-<br>更改后的代码</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.myOneLine;
+
 <span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
 <span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
-<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
-<span class="keyword">import</span> android.widget.<span class="type">ArrayAdapter</span>;
+<span class="keyword">import</span> android.view.<span class="type">Window</span>;
 <span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
 
 <span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
@@ -572,33 +572,102 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 <span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
 <span class="keyword">import</span> java.util.<span class="type">List</span>;
 
-public <span class="class"><span class="keyword">class</span> <span class="title">MyHomeActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">MyBillctivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
 
-<span class="keyword">private</span> <span class="type">ListView</span> lvMyHome;
-<span class="keyword">private</span> <span class="type">MyHomeAdapter</span> adapter;
-<span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">MyHomeData</span>&gt; myHomeLists;
-<span class="keyword">private</span> <span class="type">MyHomeData</span> myHomeData;
+<span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">MyBillData</span>&gt; myBillDataList;
+<span class="keyword">private</span> <span class="type">MyBillAdapter</span> adapter;
+<span class="keyword">private</span> <span class="type">ListView</span> lvMyBill;
+<span class="keyword">private</span> <span class="type">MyBillData</span> myBillData;
+
 <span class="annotation">@Override</span>
 <span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
     <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.activity_my_home);
-    lvMyHome= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lvMyHome);
-    lvMyHome=<span class="keyword">new</span> <span class="type">ListView</span>(<span class="keyword">this</span>);
-    myHomeLists=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
-    <span class="keyword">for</span> (int i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++){
-        myHomeData=<span class="keyword">new</span> <span class="type">MyHomeData</span>(<span class="string">" 父子"</span>,i+<span class="string">"天大地大"</span>,<span class="string">"审核中"</span>);
-
-        myHomeLists.add(myHomeData);
-
+    setContentView(<span class="type">R</span>.layout.activity_my_bill);
+    lvMyBill= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lvMyBill);
+<span class="comment">//不要        lvMyBill=new ListView(this);</span>
+    myBillDataList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+    <span class="keyword">for</span> (int i=<span class="number">1</span>;i&lt;<span class="number">5</span>;i++){
+        myBillData=<span class="keyword">new</span> <span class="type">MyBillData</span>(<span class="string">"2015-1-1至2015-1-31"</span>,<span class="string">"未交"</span>,<span class="string">"35"</span>+i);
+        myBillDataList.add(myBillData);
     }
+    adapter=<span class="keyword">new</span> <span class="type">MyBillAdapter</span>(<span class="keyword">this</span>,myBillDataList);
+    lvMyBill.setAdapter(adapter);
+<span class="comment">//不要        setContentView(lvMyBill);</span>
 
-    adapter=<span class="keyword">new</span> <span class="type">MyHomeAdapter</span>(<span class="type">MyHomeActivity</span>.<span class="keyword">this</span>,myHomeLists);
-    lvMyHome.setAdapter(adapter);
-
-    setContentView(lvMyHome);
 }
 
 
+}
+</code></pre><h2 id="Adapter的操作">Adapter的操作</h2><p>错误之：setTag（）这里是传入整个类。而不是字符串</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.myOneLine;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.view.LayoutInflater;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.ViewGroup;
+<span class="keyword">import</span> android.widget.BaseAdapter;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.R;
+
+<span class="keyword">import</span> java.util.List;
+
+<span class="javadoc">/**
+ * Created by shengzhong on 2015/8/25.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBillAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
+<span class="keyword">private</span> Context context;
+<span class="keyword">private</span> List&lt;MyBillData&gt; myBillDataList;
+
+<span class="function"><span class="keyword">public</span> <span class="title">MyBillAdapter</span><span class="params">(Context context,List&lt;MyBillData&gt; myBillDataList)</span></span>{
+    <span class="keyword">this</span>.context=context;
+    <span class="keyword">this</span>.myBillDataList=myBillDataList;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+    <span class="function"><span class="keyword">return</span> myBillDataList.<span class="title">size</span><span class="params">()</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="function"><span class="keyword">return</span> myBillDataList.<span class="title">get</span><span class="params">(i)</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="keyword">return</span> i;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
+
+    ViewHolder holder;
+    <span class="keyword">if</span> (view==<span class="keyword">null</span>) {
+        view= LayoutInflater.from(context).inflate(R.layout.my_bill_layout,<span class="keyword">null</span>);
+        holder=<span class="keyword">new</span> ViewHolder();
+        holder.tv_my_bill_layout_Time= (TextView) view.findViewById(R.id.tv_my_bill_layout_Time);
+        holder.tv_my_bill_layout_CostState= (TextView) view.findViewById(R.id.tv_my_bill_layout_CostState);
+        holder.tv_my_bill_layout_Cost= (TextView) view.findViewById(R.id.tv_my_bill_layout_Cost);
+        holder.tv_my_bill_layout_Time.setText(myBillDataList.get(i).getTime());
+        holder.tv_my_bill_layout_CostState.setText(myBillDataList.get(i).getCoatState());
+        holder.tv_my_bill_layout_Cost.setText(myBillDataList.get(i).getCoat());
+        view.setTag(holder);
+    }<span class="keyword">else</span> {
+        holder= (ViewHolder) view.getTag();
+        holder.tv_my_bill_layout_Time.setText(myBillDataList.get(i).getTime());
+        holder.tv_my_bill_layout_CostState.setText(myBillDataList.get(i).getCoatState());
+        holder.tv_my_bill_layout_Cost.setText(myBillDataList.get(i).getCoat());
+
+    }
+
+    <span class="keyword">return</span> view;
+}
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span></span>{
+    TextView tv_my_bill_layout_Time;
+    TextView tv_my_bill_layout_CostState;
+    TextView tv_my_bill_layout_Cost;
+}
 }
 </code></pre>
       
