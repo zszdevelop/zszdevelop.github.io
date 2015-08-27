@@ -95,7 +95,7 @@ ll= (LinearLayout) myView.findViewById(R.id.">
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        46
+        47
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -312,11 +312,17 @@ public <span class="class"><span class="keyword">class</span> <span class="title
     TextView tv_my_bill_layout_Cost;
 }
 }
+</code></pre><h2 id="如果要对listview的每个item添加一个点击事件操作">如果要对listview的每个item添加一个点击事件操作</h2><pre><code>lvMyInterflowMain.setOnItemClickListener(<span class="keyword">new</span> AdapterView.OnItemClickListener() {
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(AdapterView&lt;?&gt; adapterView, View view, <span class="keyword">int</span> i, <span class="keyword">long</span> l)</span> </span>{
+          Intent intent=<span class="keyword">new</span> Intent(MyInterflowMainActivity.<span class="keyword">this</span>,MyInterflowActivity.class);
+          startActivity(intent);
+      }
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cidsk54up0005skb2ijnbic3j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cidu14pee00061cb2u1nmysuz" class="article-share-link">Share</a>
       
       
     </footer>
