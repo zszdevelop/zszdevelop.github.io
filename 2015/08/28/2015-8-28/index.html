@@ -5,16 +5,37 @@
   
   <title>2015/8/28 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2015/8/28Android Studio 国内镜像文件地址">
+  <meta name="description" content="2015/8/28Android Studio 国内镜像文件地址
+Fragment的使用其实Fragment是个小Activiyt，那么他和Activity的区别。
+
+继承的时候继承Fragment。（layout还是那个layout）
+重写的是onCreateView（Activiyt重写的是onCreate）
+
+举例创建onCreateView，添加要返回的东西。inflater
+packag">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2015/8/28">
 <meta property="og:url" content="http://yoursite.com/2015/08/28/2015-8-28/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="2015/8/28Android Studio 国内镜像文件地址">
+<meta property="og:description" content="2015/8/28Android Studio 国内镜像文件地址
+Fragment的使用其实Fragment是个小Activiyt，那么他和Activity的区别。
+
+继承的时候继承Fragment。（layout还是那个layout）
+重写的是onCreateView（Activiyt重写的是onCreate）
+
+举例创建onCreateView，添加要返回的东西。inflater
+packag">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/81eeb0fcgw1evi9o8rcckj20cs0bjdge.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2015/8/28">
-<meta name="twitter:description" content="2015/8/28Android Studio 国内镜像文件地址">
+<meta name="twitter:description" content="2015/8/28Android Studio 国内镜像文件地址
+Fragment的使用其实Fragment是个小Activiyt，那么他和Activity的区别。
+
+继承的时候继承Fragment。（layout还是那个layout）
+重写的是onCreateView（Activiyt重写的是onCreate）
+
+举例创建onCreateView，添加要返回的东西。inflater
+packag">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -87,7 +108,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        48
+        49
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -139,11 +160,48 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="2015/8/28">2015/8/28</h1><h2 id="Android_Studio_国内镜像文件地址">Android Studio 国内镜像文件地址</h2><p><img src="http://ww1.sinaimg.cn/large/81eeb0fcgw1evi9o8rcckj20cs0bjdge.jpg" alt=""></p>
+<h2 id="Fragment的使用">Fragment的使用</h2><p>其实Fragment是个小Activiyt，那么他和Activity的区别。</p>
+<ul>
+<li>继承的时候继承Fragment。（layout还是那个layout）</li>
+<li>重写的是onCreateView（Activiyt重写的是onCreate）</li>
+</ul>
+<h2 id="举例">举例</h2><p>创建onCreateView，添加要返回的东西。inflater</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
 
+
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
+<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
+
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/28.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">FragmentCloud</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
+
+<span class="annotation">@Nullable</span>
+<span class="annotation">@Override</span>
+public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
+
+    <span class="type">View</span> view=inflater.inflate(<span class="type">R</span>.layout.cloud_view_pager, <span class="literal">null</span>);
+    <span class="keyword">return</span> view;
+
+}
+}
+</code></pre><h2 id="Fragment_问题之一">Fragment 问题之一</h2><p>Fragment是通过inflater来加载布局，布局控件都是view。<br>在此找控件的时候就要采用</p>
+<pre><code><span class="keyword">ll</span>= (LinearLayout)<span class="keyword">view</span>.findViewById(R.id.<span class="keyword">ll</span>);
+</code></pre><h2 id="Fragment_问题之二">Fragment 问题之二</h2><p>在Fragment中要得到context，只需要采用getActivity（）</p>
+<p>例如：</p>
+<pre><code><span class="type">Intent</span> <span class="type">Intent</span>=new <span class="type">Intent</span>(getActivity(),StairsMouthActivity.<span class="keyword">class</span>);
+</code></pre><h2 id="#">#</h2>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cidv84v3900039sb2v5vl5pfm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cidvg7qsb0003icb2n6g1gttf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,6 +209,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/08/28/2015-8-28-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/8/28-2
+        
+      </div>
+    </a>
   
   
     <a href="/2015/08/27/2015-8-27/" id="article-nav-older" class="article-nav-link-wrap">

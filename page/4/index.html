@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        48
+        49
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,85 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/20/2015-7-20/">字节流如何转换为字符流，去除文件中的空格和回车，LayoutInflater加载布局，新建http连接</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/20/2015-7-20/">
+    <time datetime="2015-07-20T01:51:03.000Z" itemprop="datePublished">2015-07-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/20_问题集">2015/7/20 问题集</h1><h2 id="字节流如何转换为字符流">字节流如何转换为字符流</h2><pre><code>FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"c:/abc.txt"</span>);<span class="comment">// 字节流</span>
+ InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis);<span class="comment">// 字符流</span>
+ <span class="keyword">BufferedReader</span> br = <span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);<span class="comment">// 缓冲流</span>
+ <span class="keyword">String</span> <span class="built_in">str</span> = <span class="keyword">null</span>;
+ <span class="keyword">if</span> ((<span class="built_in">str</span> = br.readLine()) != <span class="keyword">null</span>) {
+  System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);
+ }
+ br.close();
+ isr.close();
+ fis.close();
+}
+</code></pre><h2 id="去除文件中的空格和回车">去除文件中的空格和回车</h2><pre><code>  content_str=etSend.getText().<span class="keyword">toString</span>();
+<span class="comment">//去除空格</span>
+    String <span class="keyword">drop</span>=content_str.<span class="keyword">replace</span>(<span class="string">" "</span>,<span class="string">""</span>);
+<span class="comment">//    去除回车</span>
+    String droph=<span class="keyword">drop</span>.<span class="keyword">replace</span>(<span class="string">"\n"</span>,<span class="string">""</span>);
+</code></pre><h2 id="LayoutInflater加载布局">LayoutInflater加载布局</h2><p>findViewById加载控件，LayoutInflater加载布局</p>
+<pre><code>LayoutInflater <span class="variable">layoutInflater=</span>LayoutInflater.from(context);
+
+     <span class="variable">layout=</span> (RelativeLayout) layoutInflater.inflate(R.layout.left_item,<span class="constant">null</span>);
+</code></pre><h2 id="新建http连接">新建http连接</h2><pre><code><span class="keyword">protected</span> <span class="keyword">String</span> doInBackground(<span class="keyword">String</span>... strings) {
+
+ <span class="keyword">try</span> {
+     client=<span class="keyword">new</span> DefaultHttpClient();
+     httpGet=<span class="keyword">new</span> HttpGet(url);
+    httpResponse= client.execute(httpGet);
+    entity= httpResponse.getEntity();
+     InputStream is=entity.getContent();
+     InputStreamReader isr=<span class="keyword">new</span> InputStreamReader(is);
+     <span class="keyword">BufferedReader</span> br=<span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);
+     <span class="keyword">String</span> <span class="built_in">line</span>;
+     StringBuffer sb=<span class="keyword">new</span> StringBuffer();
+     <span class="keyword">while</span> ((<span class="built_in">line</span>=br.readLine())!=<span class="keyword">null</span>){
+         sb.<span class="built_in">append</span>(<span class="built_in">line</span>);
+     }
+     <span class="keyword">return</span> sb.toString();
+ } <span class="keyword">catch</span> (IOException e) {
+     e.printStackTrace();
+ }
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cidvg7qur000wicb2macgmvk2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-18-adapter" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -194,7 +273,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cidv84v5n000x9sb267he6ij6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cidvg7quv000yicb25jybax7m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -273,7 +352,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cidv84v5i000w9sb2cbqyov82" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cidvg7qut000xicb2sidaewh8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -335,7 +414,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cidv84v5q000y9sb2mbpo0c9t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cidvg7quy000zicb2wbe2ai7l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -383,7 +462,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cidv84v5w00109sb2237nis1f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cidvg7qv80011icb2pla0kxmv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -492,7 +571,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cidv84v5t000z9sb21kmyjy72" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cidvg7qv20010icb2r8eg1wa0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -938,7 +1017,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cidv84v6000119sb2ly0hvnve" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cidvg7qvd0012icb2w9qay4u2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1092,7 +1171,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cidv84v6200129sb2krjsceh1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cidvg7qvg0013icb232jvw12b" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1186,7 +1265,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cidv84v6300139sb260daphcp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cidvg7qvh0014icb2onpwnfgg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1390,144 +1469,7 @@ public <span class="keyword">static</span> <span class="type">void</span> main(<
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cidv84v6700159sb2ajmjeobo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-6-5" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/04/2015-6-5/">SharedPrefenences的使用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/06/04/2015-6-5/">
-    <time datetime="2015-06-04T13:40:35.000Z" itemprop="datePublished">2015-06-04</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SharedPrefenences是什么">SharedPrefenences是什么</h1><p>SharedPrefenences是一种轻型的数据存储方式，他的本质是基于XML文件存储<strong>Ket-Value键值对数据</strong>，通常用来存储一些简单的<strong>配置信息</strong>。</p>
-<p>存储位置在/data/data/&lt;包名&gt;/shared_prefs目录下。</p>
-<p>SharedPrefenences对象本身只能获取数据而<strong>不支持存储和修改，存储修改要通过Editor对象实现。</strong></p>
-<h1 id="SharedPrefenences的优势">SharedPrefenences的优势</h1><p>SharedPrefenences与SQLite数据库相比，免去了创建数据库，创建表，写SQL语句等操作，更加易用。</p>
-<p>支持的类型数据</p>
-<ul>
-<li>boolean</li>
-<li>int</li>
-<li>float</li>
-<li>long</li>
-<li>String</li>
-</ul>
-<p>但是无法进行条件查询。</p>
-<h1 id="SharedPrefenences的代码实现">SharedPrefenences的代码实现</h1><p>Activity：</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.sharedpreferencestest;
-
-<span class="keyword">import</span> android.content.SharedPreferences;
-<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.view.Menu;
-<span class="keyword">import</span> android.view.MenuItem;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.widget.EditText;
-<span class="keyword">import</span> android.widget.Toast;
-
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
-
-<span class="keyword">private</span> EditText etData;
-<span class="keyword">private</span>  SharedPreferences sharedPreferences;
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    etData= (EditText) findViewById(R.id.etData);
-    sharedPreferences=getSharedPreferences(<span class="string">"sharedPrefXML"</span>,MODE_PRIVATE);
-    <span class="comment">//要编辑修改sharedPreferences就要使用Editor来修改</span>
-   <span class="keyword">final</span> SharedPreferences.Editor editor= sharedPreferences.edit();
-
-    <span class="comment">//读取SharedPreferences数据</span>
-    findViewById(R.id.btnRead).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
-        <span class="annotation">@Override</span>
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-
-            <span class="comment">//得到sharedPreferences的值,传进去第一个参数是键，第二个是如果为空返回的值。</span>
-          String value=  sharedPreferences.getString(<span class="string">"key-name"</span>,<span class="string">"当前数值不存在"</span>);
-            Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
-        }
-    });
-
-    <span class="comment">//写入SharedPreferences数据</span>
-    findViewById(R.id.btnWrite).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
-        <span class="annotation">@Override</span>
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-
-            <span class="comment">//要修改存储什么类型数据就put什么类型,这里传进去的是Key-Value</span>
-            editor.putString(<span class="string">"key-name"</span>,etData.getText().toString().trim());
-            <span class="comment">//commit提交数据,commit返回值为boolean。进行判断</span>
-          <span class="keyword">if</span> (editor.commit()) {
-              Toast.makeText(getApplicationContext(), <span class="string">"写入成功"</span>, Toast.LENGTH_SHORT).show();
-          }
-        }
-    });
-
-
-
-}
-
-
-
-}
-</code></pre><p>layout档：</p>
-<pre><code>&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
-xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
-android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
-&lt;EditText
-   android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-   android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-   android:<span class="variable">id=</span><span class="string">"@+id/etData"</span>
-   /&gt;
-&lt;Button
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/btnRead"</span>
-    android:<span class="variable">text=</span><span class="string">"读取数据"</span>
-    /&gt;
-
-&lt;Button
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/btnWrite"</span>
-    android:<span class="variable">text=</span><span class="string">"写入数据"</span>
-    /&gt;
-&lt;/LinearLayout&gt;
-</code></pre><p>SharedPrefenences非常方便的使用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cidv84v6500149sb24l4ydjzh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cidvg7qvl0016icb2fppzbzv6" class="article-share-link">Share</a>
       
       
     </footer>
