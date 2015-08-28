@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        47
+        48
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,98 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-18-adapter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/19/2015-7-18-adapter/">adapter</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/19/2015-7-18-adapter/">
+    <time datetime="2015-07-19T05:10:37.000Z" itemprop="datePublished">2015-07-19</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Adapter">Adapter</h1><h2 id="Adapter的概念">Adapter的概念</h2><p> Adapter是连接后端数据和前端显示的适配器接口，是数据和UI（View）之间一个重要的纽带。在常见的View(List View,Grid View)等地方都需要用到Adapter。如下图直观的表达了Data、Adapter、View三者的关系：</p>
+<h2 id="常用Adapter">常用Adapter</h2><ul>
+<li>BaseAdapter是一个抽象类，继承它需要实现较多的方法，所以也就具有较高的灵活性；</li>
+<li>ArrayAdapter支持泛型操作，最为简单，只能展示一行字。</li>
+<li>SimpleAdapter有最好的扩充性，可以自定义出各种效果。</li>
+<li>SimpleCursorAdapter可以适用于简单的纯文字型ListView，它需要Cursor的字段和UI的id对应起来。如需要实现更复杂的UI也可以重写其他方法。可以认为是SimpleAdapter对数据库的简单结合，可以方便地把数据库的内容以列表的形式展示出来。</li>
+</ul>
+<h2 id="ArrayAdapter的操作">ArrayAdapter的操作</h2><p>ArrayAdapter的操作很简单，构建一个ArrayAdapter（）实例。其中要传入三个参数。</p>
+<p>依次为this,布局文件（注意这里的布局文件描述的是列表的每一行的布局，android.R.layout.simple_list_item_1是系统定义好的布局文件只显示一行文字，数据源(一个List集合)。</p>
+<p>最后绑定显示。</p>
+<pre><code>package com.zsz.develop.adaptertest;
+
+<span class="keyword">import</span> android.app.ListActivity;
+<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.Adapter;
+<span class="keyword">import</span> android.widget.ArrayAdapter;
+<span class="keyword">import</span> android.widget.ListView;
+
+<span class="keyword">import</span> java.util.ArrayList;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
+
+private ListView lv;
+private ArrayList&lt;<span class="built_in">String</span>&gt; mArrayList = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">String</span>&gt;();
+@Override
+protected <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    ArrayAdapter&lt;<span class="built_in">String</span>&gt; adapter=<span class="keyword">new</span> ArrayAdapter&lt;<span class="built_in">String</span>&gt;(<span class="keyword">this</span>,android.R.layout.simple_list_item_1,getData());
+    lv= (ListView) findViewById(R.id.lv);
+    lv.setAdapter(adapter);
+
+}
+private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
+
+    mArrayList.add(<span class="string">"测试一"</span>);
+    mArrayList.add(<span class="string">"测试二"</span>);
+    mArrayList.add(<span class="string">"测试三"</span>);
+    mArrayList.add(<span class="string">"测试死"</span>);
+    <span class="keyword">return</span> mArrayList;
+
+}
+
+
+
+}
+</code></pre><h2 id="java与Mysql类型对应">java与Mysql类型对应</h2><p><img src="http://cl.ly/image/1k1z2h033V2O/QL" alt="">TTDB2<a href="RH(0A]8QQRR.png">N</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cidv84v5n000x9sb267he6ij6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-18" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -181,7 +273,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cidu14pgs000v1cb2diahb4l2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cidv84v5i000w9sb2cbqyov82" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +335,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cidu14pgy000x1cb2hllcemfu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cidv84v5q000y9sb2mbpo0c9t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -291,7 +383,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cidu14ph3000z1cb2pfnl8afa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cidv84v5w00109sb2237nis1f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,7 +492,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cidu14ph0000y1cb2fdqkgk3t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cidv84v5t000z9sb21kmyjy72" class="article-share-link">Share</a>
       
       
     </footer>
@@ -846,7 +938,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cidu14ph500101cb2nd0zvuyl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cidv84v6000119sb2ly0hvnve" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1000,7 +1092,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cidu14ph800111cb2oohe8t9q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cidv84v6200129sb2krjsceh1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1094,7 +1186,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cidu14phd00121cb2d1ffsedu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cidv84v6300139sb260daphcp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1298,7 +1390,7 @@ public <span class="keyword">static</span> <span class="type">void</span> main(<
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cidu14phk00141cb28yi76j7x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cidv84v6700159sb2ajmjeobo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1435,122 +1527,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cidu14phi00131cb20jw5frkn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-6-4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/04/2015-6-4/">清除用户数据</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/06/04/2015-6-4/">
-    <time datetime="2015-06-04T08:03:24.000Z" itemprop="datePublished">2015-06-04</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="清除用户数据">清除用户数据</h1><p>非常实用的清空数据函数。</p>
-<p>主要通过deleteFilesByDirectory（）函数删除文件，来达到清楚数据的功能。</p>
-<p>功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录</p>
-<pre><code>package com.fsd.zsz.manplan.main;
-
-/<span class="keyword">*</span><span class="keyword">*</span>
- <span class="keyword">*</span> Created by shengzhong on 2015/6/3.
- <span class="keyword">*</span>/
-
-
-import java.io.File;
-import android.content.Context;
-import android.os.Environment;
-/<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 本应用数据清除管理器 <span class="keyword">*</span>/
-public class DataCleanManager {
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
-    public static void cleanInternalCache(Context context) {
-        deleteFilesByDirectory(context.getCacheDir());
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
-    public static void cleanDatabases(Context context) {
-        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
-                + context.getPackageName() + <span class="string">"/databases"</span>));
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span>
-     <span class="keyword">*</span> <span class="keyword">*</span> 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
-     <span class="keyword">*</span> context
-     <span class="keyword">*</span>/
-    public static void cleanSharedPreference(Context context) {
-        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
-                + context.getPackageName() + <span class="string">"/shared_prefs"</span>));
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 按名字清除本应用数据库 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param dbName */</span>
-    public static void cleanDatabaseByName(Context context, String dbName) {
-        context.deleteDatabase(dbName);
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除/data/data/com.xxx.xxx/files下的内容 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
-    public static void cleanFiles(Context context) {
-        deleteFilesByDirectory(context.getFilesDir());
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span>
-     <span class="keyword">*</span> <span class="keyword">*</span> 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
-     <span class="keyword">*</span> context
-     <span class="keyword">*</span>/
-    public static void cleanExternalCache(Context context) {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            deleteFilesByDirectory(context.getExternalCacheDir());
-        }
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param filePath */</span>
-    public static void cleanCustomCache(String filePath) {
-        deleteFilesByDirectory(new File(filePath));
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有的数据 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param filepath */</span>
-    public static void cleanApplicationData(Context context, String... filepath) {
-        cleanInternalCache(context);
-        cleanExternalCache(context);
-        cleanDatabases(context);
-        cleanSharedPreference(context);
-        cleanFiles(context);
-        for (String filePath : filepath) {
-            cleanCustomCache(filePath);
-        }
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param directory */</span>
-    private static void deleteFilesByDirectory(File directory) {
-        if (directory != null &amp;&amp; directory.exists() &amp;&amp; directory.isDirectory()) {
-            for (File item : directory.listFiles()) {
-                item.delete();
-            }
-        }
-    }
-}
-</code></pre><p>出处：<a href="http://blog.csdn.net/berber78/article/details/38587567" target="_blank" rel="external">http://blog.csdn.net/berber78/article/details/38587567</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cidu14phl00151cb2eerufq04" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cidv84v6500149sb24l4ydjzh" class="article-share-link">Share</a>
       
       
     </footer>

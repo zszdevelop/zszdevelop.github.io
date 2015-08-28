@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        47
+        48
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,120 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-28" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/28/2015-7-28/">json转化异常，JDBC查询之感悟</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/28/2015-7-28/">
+    <time datetime="2015-07-28T12:50:57.000Z" itemprop="datePublished">2015-07-28</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/28问题集">2015/7/28问题集</h1><h2 id="json转化异常">json转化异常</h2><p>异常信息为：Expected BEGIN_ARRAY but was BEGIN_OBJECT<br>说不是数组，查找到当时的json数据.</p>
+<p>{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}<br>这并不是一条数组信息</p>
+<p>不管你有几条数据：他都要是一个数组类型。也就是返回的是一个list集合。</p>
+<p>[{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}]</p>
+<h3 id="修改方法_###添加的时候、不要在for循环里添加。"><strong>修改方法    </strong> ###添加的时候、不要在for循环里添加。</h3><pre><code>listDataBeans=dataDao.getEditData(jsonNameStr);
+            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; listDataBeans.<span class="built_in">size</span>(); i++) {
+               DataBean dataBean=listDataBeans.<span class="built_in">get</span>(i);
+               System.out.<span class="built_in">println</span>(dataBean.getGoalTime()+<span class="string">"傻逼"</span>);
+           }
+            dataString = gson.toJson(listDataBeans);
+</code></pre><h2 id="JDBC查询之感悟">JDBC查询之感悟</h2><p>查询必定是通过一个条件来查找，返回的数据可能会有多条（List）。<br>查询出来是一个ResultSet，所以也需要一条一条读取出来。有值得时候就设置进属性。</p>
+<pre><code>    <span class="keyword">public</span> ArrayList&lt;ManBean&gt; getAllMan(<span class="keyword">String</span> name) {
+
+    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
+    ArrayList&lt;ManBean&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;ManBean&gt;();
+    Connection conn=<span class="keyword">null</span>;
+    PreparedStatement ps=<span class="keyword">null</span>;
+    ResultSet rs=<span class="keyword">null</span>;
+    <span class="keyword">String</span> getAllManSQL=<span class="string">"SELECT * FROM man "</span>+<span class="string">"WHERE name=?"</span>;
+    <span class="keyword">try</span> {
+        conn=BaseConnection.getConnection();
+        ps=(PreparedStatement) conn.prepareStatement(getAllManSQL);
+        ps.setString(<span class="number">1</span>, name);
+        System.out.<span class="built_in">println</span>(ps+<span class="string">")))))"</span>+name);
+        rs=ps.executeQuery();
+        <span class="keyword">String</span> <span class="built_in">line</span>;
+        StringBuffer sb=<span class="keyword">new</span> StringBuffer();
+        <span class="keyword">while</span> (rs.next()) {
+            ManBean manBean=<span class="keyword">new</span> ManBean();
+            manBean.setArm(rs.getString(<span class="string">"arm"</span>));
+            manBean.setChest(rs.getString(<span class="string">"chest"</span>));
+            manBean.setImage(rs.getBytes(<span class="string">"image"</span>));
+            manBean.setTime(rs.getString(<span class="string">"time"</span>));
+            manBean.setName(rs.getString(<span class="string">"name"</span>));
+            manBean.setWeight(rs.getString(<span class="string">"weight"</span>));
+            manBean.setWaust(rs.getString(<span class="string">"waust"</span>));
+            manBean.setId(rs.getInt(<span class="string">"id"</span>));
+            arrayList.<span class="built_in">add</span>(manBean);
+        }
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span> {
+        BaseConnection.closeResource(rs, ps, conn);
+    }
+
+    <span class="keyword">return</span> arrayList;
+}
+</code></pre><h2 id="JDBC等一干操作">JDBC等一干操作</h2><pre><code><span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">deleteMan</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
+
+    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=<span class="keyword">null</span>;
+    PreparedStatement ps=<span class="keyword">null</span>;
+    String deleteManSQL=<span class="string">"DELETE FROM man WHERE id=?"</span>;
+    <span class="keyword">try</span> {
+        conn=BaseConnection.getConnection();
+        ps=(PreparedStatement) conn.prepareStatement(deleteManSQL);
+        ps.setInt(<span class="number">1</span>, id);
+        System.out.println(deleteManSQL);
+        <span class="keyword">int</span> i=ps.executeUpdate();
+        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }
+
+
+    } <span class="keyword">catch</span> (Exception e) {
+        e.printStackTrace();
+    }<span class="keyword">finally</span> {
+        BaseConnection.closeResource(ps, conn);
+    }
+
+    <span class="keyword">return</span> b;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cidv84v4u000m9sb2mubtcxdw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-27" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -178,7 +292,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cidu14pg7000m1cb2hldvcae8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cidv84v4w000n9sb2ql9y4jr9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -306,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cidu14pga000o1cb2p4kh3729" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cidv84v50000p9sb296bpfyyg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -507,7 +621,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cidu14pg8000n1cb2pd9fgjj8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cidv84v4y000o9sb2v883w4kc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -552,7 +666,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cidu14pgc000p1cb2e3rn3tdl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cidv84v52000q9sb2lg3h8ree" class="article-share-link">Share</a>
       
       
     </footer>
@@ -716,7 +830,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cidu14pgj000r1cb2db9nhxxy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cidv84v59000s9sb2ttkztfx1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -772,7 +886,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cidu14pgg000q1cb2tictq4jz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cidv84v56000r9sb24ljv3om8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -975,7 +1089,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cidu14pgl000s1cb2lsn116qf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cidv84v5a000t9sb2cpgt9d8s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1105,7 +1219,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cidu14pgn000t1cb2ff45vg4z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cidv84v5c000u9sb2vqj14ccc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1184,99 +1298,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cidu14pgp000u1cb2i7zh3y0l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-18-adapter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/19/2015-7-18-adapter/">adapter</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/19/2015-7-18-adapter/">
-    <time datetime="2015-07-19T05:10:37.000Z" itemprop="datePublished">2015-07-19</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Adapter">Adapter</h1><h2 id="Adapter的概念">Adapter的概念</h2><p> Adapter是连接后端数据和前端显示的适配器接口，是数据和UI（View）之间一个重要的纽带。在常见的View(List View,Grid View)等地方都需要用到Adapter。如下图直观的表达了Data、Adapter、View三者的关系：</p>
-<h2 id="常用Adapter">常用Adapter</h2><ul>
-<li>BaseAdapter是一个抽象类，继承它需要实现较多的方法，所以也就具有较高的灵活性；</li>
-<li>ArrayAdapter支持泛型操作，最为简单，只能展示一行字。</li>
-<li>SimpleAdapter有最好的扩充性，可以自定义出各种效果。</li>
-<li>SimpleCursorAdapter可以适用于简单的纯文字型ListView，它需要Cursor的字段和UI的id对应起来。如需要实现更复杂的UI也可以重写其他方法。可以认为是SimpleAdapter对数据库的简单结合，可以方便地把数据库的内容以列表的形式展示出来。</li>
-</ul>
-<h2 id="ArrayAdapter的操作">ArrayAdapter的操作</h2><p>ArrayAdapter的操作很简单，构建一个ArrayAdapter（）实例。其中要传入三个参数。</p>
-<p>依次为this,布局文件（注意这里的布局文件描述的是列表的每一行的布局，android.R.layout.simple_list_item_1是系统定义好的布局文件只显示一行文字，数据源(一个List集合)。</p>
-<p>最后绑定显示。</p>
-<pre><code>package com.zsz.develop.adaptertest;
-
-<span class="keyword">import</span> android.app.ListActivity;
-<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.view.Menu;
-<span class="keyword">import</span> android.view.MenuItem;
-<span class="keyword">import</span> android.widget.Adapter;
-<span class="keyword">import</span> android.widget.ArrayAdapter;
-<span class="keyword">import</span> android.widget.ListView;
-
-<span class="keyword">import</span> java.util.ArrayList;
-
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
-
-private ListView lv;
-private ArrayList&lt;<span class="built_in">String</span>&gt; mArrayList = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">String</span>&gt;();
-@Override
-protected <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    ArrayAdapter&lt;<span class="built_in">String</span>&gt; adapter=<span class="keyword">new</span> ArrayAdapter&lt;<span class="built_in">String</span>&gt;(<span class="keyword">this</span>,android.R.layout.simple_list_item_1,getData());
-    lv= (ListView) findViewById(R.id.lv);
-    lv.setAdapter(adapter);
-
-}
-private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
-
-    mArrayList.add(<span class="string">"测试一"</span>);
-    mArrayList.add(<span class="string">"测试二"</span>);
-    mArrayList.add(<span class="string">"测试三"</span>);
-    mArrayList.add(<span class="string">"测试死"</span>);
-    <span class="keyword">return</span> mArrayList;
-
-}
-
-
-
-}
-</code></pre><h2 id="java与Mysql类型对应">java与Mysql类型对应</h2><p><img src="http://cl.ly/image/1k1z2h033V2O/QL" alt="">TTDB2<a href="RH(0A]8QQRR.png">N</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cidu14pgu000w1cb2ykwflsiz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cidv84v5f000v9sb2cjhlkyit" class="article-share-link">Share</a>
       
       
     </footer>

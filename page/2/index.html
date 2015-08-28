@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        47
+        48
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,150 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/20/2015-8-20/">Fragment的产生与介绍，Fragment的生命周期，Fragment相当于一个控件，静态Fragment的简单实例</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/20/2015-8-20/">
+    <time datetime="2015-08-20T06:01:14.000Z" itemprop="datePublished">2015-08-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/20问题集">2015/8/20问题集</h1><h2 id="Fragment的产生与介绍">Fragment的产生与介绍</h2><p>Fragment支持在不同的Activity中使用并且可以处理自己的输入事件以及生命周期方法等。可以看做是一个子Activity。</p>
+<p>Android运行在各种各样的设备中，有小屏幕的手机，超大屏的平板甚至电视。针对屏幕尺寸的差距，很多情况下，都是先针对手机开发一套App，然后拷贝一份，修改布局以适应平板神马超级大屏的。难道无法做到一个App可以同时适应手机和平板么，当然了，必须有啊。Fragment的出现就是为了解决这样的问题。你可以把Fragment当成Activity的一个界面的一个组成部分，甚至Activity的界面可以完全有不同的Fragment组成，更帅气的是Fragment拥有自己的生命周期和接收、处理用户的事件，这样就不必在Activity写一堆控件的事件处理的代码了。更为重要的是，你可以动态的添加、替换和移除某个Fragment。</p>
+<h2 id="Fragment的生命周期">Fragment的生命周期</h2><p>Fragment必须是依存与Activity而存在的，因此Activity的生命周期会直接影响到Fragment的生命周期。官网这张图很好的说明了两者生命周期的关系：</p>
+<p>可以看到Fragment比Activity多了几个额外的生命周期回调方法：<br>onAttach(Activity)<br>当Fragment与Activity发生关联时调用。<br>onCreateView(LayoutInflater, ViewGroup,Bundle)<br>创建该Fragment的视图<br>onActivityCreated(Bundle)<br>当Activity的onCreate方法返回时调用<br>onDestoryView()<br>与onCreateView想对应，当该Fragment的视图被移除时调用<br>onDetach()<br>与onAttach相对应，当Fragment与Activity关联被取消时调用<br>注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现，</p>
+<h2 id="Fragment相当于一个控件">Fragment相当于一个控件</h2><p>Fragment可以被多个Activity重用，但是您也必须把Fragment关联到一个FragmentActivity上</p>
+<h2 id="静态Fragment的简单实例">静态Fragment的简单实例</h2><p>先自己定义一个Fragment的view的layout。</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span> android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>&gt;
+
+&lt;ImageButton
+    android:<span class="variable">id=</span><span class="string">"@+id/id_title_left_btn"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_centerVertical=</span><span class="string">"true"</span>
+    android:<span class="variable">background=</span><span class="string">"@drawable/my_icon"</span> /&gt;
+
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    android:<span class="variable">text=</span><span class="string">"我是Fragment"</span>
+     /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>再定义Fragment，这个Fragment就相当于一个小Activity，Activity可以包含多个Fragment</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
+
+<span class="keyword">import</span> android.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
+<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ImageButton</span>;
+<span class="keyword">import</span> android.widget.<span class="type">Toast</span>;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/20.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">FragmentTest</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
+
+<span class="keyword">private</span> <span class="type">ImageButton</span> mButton;
+
+<span class="annotation">@Nullable</span>
+<span class="annotation">@Override</span>
+public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
+
+    <span class="type">View</span> view = inflater.inflate(<span class="type">R</span>.layout.title_fragment, container, <span class="literal">false</span>);
+    mButton = (<span class="type">ImageButton</span>)view.findViewById(<span class="type">R</span>.id.id_title_left_btn);
+    mButton.setOnClickListener(<span class="keyword">new</span> <span class="type">View</span>.<span class="type">OnClickListener</span>() {
+
+        <span class="annotation">@Override</span>
+        public void onClick(<span class="type">View</span> v) {
+            <span class="type">Toast</span>.makeText(getActivity(),
+                    <span class="string">"i am an ImageButton in TitleFragment ! "</span>,
+                    <span class="type">Toast</span>.<span class="type">LENGTH_SHORT</span>).show();
+        }
+    });
+    <span class="keyword">return</span> view;
+}
+}
+</code></pre><p>在Mainlayout里面添加Fragment，这就相当于一个view的使用</p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span> android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span> tools:<span class="variable">context=</span><span class="string">".MainActivity"</span>&gt;
+
+&lt;TextView android:<span class="variable">text=</span><span class="string">"@string/hello_world"</span> android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span> /&gt;
+&lt;fragment
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"45dp"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/fragmentTitle"</span>
+    android:<span class="variable">name=</span><span class="string">"com.zsz.develop.firstfragment.FragmentTest"</span>
+    &gt;&lt;/fragment&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>在Main里调用</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
+
+<span class="keyword">import</span> android.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">View</span> fragmentTitle;
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_main);
+    fragmentTitle=findViewById(<span class="type">R</span>.id.fragmentTitle);
+}
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cidv84v3w000b9sb27uqbje68" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-19" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -249,7 +393,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cidu14pf7000d1cb276zbj461" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cidv84v44000e9sb2tmw7orzn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,7 +451,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cidu14pf9000e1cb2uhnujm27" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cidv84v46000f9sb2uw96czex" class="article-share-link">Share</a>
       
       
     </footer>
@@ -523,7 +667,7 @@ android:<span class="variable">versionName=</span><span class="string">"1.0"</sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cidu14pfc000f1cb2d2f8takv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cidv84v4a000g9sb2ipr8mngi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -888,7 +1032,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cidu14pff000g1cb2xv9240im" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cidv84v4c000h9sb2q41d2f6n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -934,7 +1078,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cidu14pfl000h1cb2mm5s7izj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cidv84v4f000i9sb29a3qgvpw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1019,7 +1163,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cidu14pe100021cb2p5subndg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cidv84v3700029sb2mw9lq5fs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1135,7 +1279,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cidu14pfp000i1cb2wcc4nd7l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cidv84v4j000j9sb2lvkoagpx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1301,7 +1445,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cidu14pfz000k1cb2fkj62p2q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cidv84v4r000l9sb2bxt63gq6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2109,121 +2253,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cidu14pfw000j1cb2uxygbtun" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-28" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/2015-7-28/">json转化异常，JDBC查询之感悟</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/28/2015-7-28/">
-    <time datetime="2015-07-28T12:50:57.000Z" itemprop="datePublished">2015-07-28</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/28问题集">2015/7/28问题集</h1><h2 id="json转化异常">json转化异常</h2><p>异常信息为：Expected BEGIN_ARRAY but was BEGIN_OBJECT<br>说不是数组，查找到当时的json数据.</p>
-<p>{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}<br>这并不是一条数组信息</p>
-<p>不管你有几条数据：他都要是一个数组类型。也就是返回的是一个list集合。</p>
-<p>[{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}]</p>
-<h3 id="修改方法_###添加的时候、不要在for循环里添加。"><strong>修改方法    </strong> ###添加的时候、不要在for循环里添加。</h3><pre><code>listDataBeans=dataDao.getEditData(jsonNameStr);
-            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; listDataBeans.<span class="built_in">size</span>(); i++) {
-               DataBean dataBean=listDataBeans.<span class="built_in">get</span>(i);
-               System.out.<span class="built_in">println</span>(dataBean.getGoalTime()+<span class="string">"傻逼"</span>);
-           }
-            dataString = gson.toJson(listDataBeans);
-</code></pre><h2 id="JDBC查询之感悟">JDBC查询之感悟</h2><p>查询必定是通过一个条件来查找，返回的数据可能会有多条（List）。<br>查询出来是一个ResultSet，所以也需要一条一条读取出来。有值得时候就设置进属性。</p>
-<pre><code>    <span class="keyword">public</span> ArrayList&lt;ManBean&gt; getAllMan(<span class="keyword">String</span> name) {
-
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    ArrayList&lt;ManBean&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;ManBean&gt;();
-    Connection conn=<span class="keyword">null</span>;
-    PreparedStatement ps=<span class="keyword">null</span>;
-    ResultSet rs=<span class="keyword">null</span>;
-    <span class="keyword">String</span> getAllManSQL=<span class="string">"SELECT * FROM man "</span>+<span class="string">"WHERE name=?"</span>;
-    <span class="keyword">try</span> {
-        conn=BaseConnection.getConnection();
-        ps=(PreparedStatement) conn.prepareStatement(getAllManSQL);
-        ps.setString(<span class="number">1</span>, name);
-        System.out.<span class="built_in">println</span>(ps+<span class="string">")))))"</span>+name);
-        rs=ps.executeQuery();
-        <span class="keyword">String</span> <span class="built_in">line</span>;
-        StringBuffer sb=<span class="keyword">new</span> StringBuffer();
-        <span class="keyword">while</span> (rs.next()) {
-            ManBean manBean=<span class="keyword">new</span> ManBean();
-            manBean.setArm(rs.getString(<span class="string">"arm"</span>));
-            manBean.setChest(rs.getString(<span class="string">"chest"</span>));
-            manBean.setImage(rs.getBytes(<span class="string">"image"</span>));
-            manBean.setTime(rs.getString(<span class="string">"time"</span>));
-            manBean.setName(rs.getString(<span class="string">"name"</span>));
-            manBean.setWeight(rs.getString(<span class="string">"weight"</span>));
-            manBean.setWaust(rs.getString(<span class="string">"waust"</span>));
-            manBean.setId(rs.getInt(<span class="string">"id"</span>));
-            arrayList.<span class="built_in">add</span>(manBean);
-        }
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span> {
-        BaseConnection.closeResource(rs, ps, conn);
-    }
-
-    <span class="keyword">return</span> arrayList;
-}
-</code></pre><h2 id="JDBC等一干操作">JDBC等一干操作</h2><pre><code><span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">deleteMan</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
-
-    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=<span class="keyword">null</span>;
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String deleteManSQL=<span class="string">"DELETE FROM man WHERE id=?"</span>;
-    <span class="keyword">try</span> {
-        conn=BaseConnection.getConnection();
-        ps=(PreparedStatement) conn.prepareStatement(deleteManSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        System.out.println(deleteManSQL);
-        <span class="keyword">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }
-
-
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span> {
-        BaseConnection.closeResource(ps, conn);
-    }
-
-    <span class="keyword">return</span> b;
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cidu14pg4000l1cb2l64jm2w2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cidv84v4o000k9sb2hgkwhwd7" class="article-share-link">Share</a>
       
       
     </footer>
