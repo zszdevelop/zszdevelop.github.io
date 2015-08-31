@@ -5,27 +5,45 @@
   
   <title>2015/8/31 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2015/8/31问题集使用theme将ActionBar隐藏再目录：\main\res\values\strings.xml 中的theme中更改
-&amp;lt;resources&amp;gt;
+  <meta name="description" content="2015/8/31问题集for each循环
+1.首先要传入多个参数
+2.for（View i：view）这里这个View要与传入的类型是相同的。
+3.i是要传入的每个值
 
-&amp;lt;!-- Base application theme. --&amp;gt;
-&amp;lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar">
+o
+private void ViewGone(View... view){
+    for (View i:view){
+        i.setVisibility(View.GONE);
+    }
+使用theme将A">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2015/8/31">
 <meta property="og:url" content="http://yoursite.com/2015/08/31/2015-8-31/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="2015/8/31问题集使用theme将ActionBar隐藏再目录：\main\res\values\strings.xml 中的theme中更改
-&amp;lt;resources&amp;gt;
+<meta property="og:description" content="2015/8/31问题集for each循环
+1.首先要传入多个参数
+2.for（View i：view）这里这个View要与传入的类型是相同的。
+3.i是要传入的每个值
 
-&amp;lt;!-- Base application theme. --&amp;gt;
-&amp;lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar">
+o
+private void ViewGone(View... view){
+    for (View i:view){
+        i.setVisibility(View.GONE);
+    }
+使用theme将A">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2015/8/31">
-<meta name="twitter:description" content="2015/8/31问题集使用theme将ActionBar隐藏再目录：\main\res\values\strings.xml 中的theme中更改
-&amp;lt;resources&amp;gt;
+<meta name="twitter:description" content="2015/8/31问题集for each循环
+1.首先要传入多个参数
+2.for（View i：view）这里这个View要与传入的类型是相同的。
+3.i是要传入的每个值
 
-&amp;lt;!-- Base application theme. --&amp;gt;
-&amp;lt;style name=&quot;AppTheme&quot; parent=&quot;Theme.AppCompat.Light.NoActionBar">
+o
+private void ViewGone(View... view){
+    for (View i:view){
+        i.setVisibility(View.GONE);
+    }
+使用theme将A">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -98,7 +116,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        50
+        51
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -149,7 +167,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="2015/8/31问题集">2015/8/31问题集</h1><h2 id="使用theme将ActionBar隐藏">使用theme将ActionBar隐藏</h2><p>再目录：\main\res\values\strings.xml 中的theme中更改</p>
+        <h1 id="2015/8/31问题集">2015/8/31问题集</h1><h2 id="for_each循环">for each循环</h2><ul>
+<li>1.首先要传入多个参数</li>
+<li>2.for（View i：view）这里这个View要与传入的类型是相同的。</li>
+<li>3.i是要传入的每个值</li>
+</ul>
+<p>o</p>
+<pre><code>private void ViewGone(<span class="keyword">View</span>... <span class="keyword">view</span>){
+    <span class="keyword">for</span> (<span class="keyword">View</span> i:<span class="keyword">view</span>){
+        i.setVisibility(<span class="keyword">View</span>.GONE);
+    }
+</code></pre><h2 id="使用theme将ActionBar隐藏">使用theme将ActionBar隐藏</h2><p>再目录：\main\res\values\strings.xml 中的theme中更改</p>
 <pre><code><span class="tag">&lt;<span class="title">resources</span>&gt;</span>
 
 <span class="comment">&lt;!-- Base application theme. --&gt;</span>
@@ -168,11 +196,15 @@
               /&gt;</span>
 </code></pre><h2 id="text文字加粗">text文字加粗</h2><pre><code><span class="label">android:</span>textStyle=”bold”
 </code></pre><h2 id="调用string中的东西">调用string中的东西</h2><pre><code>tvTopBarTitle.setText(R.<span class="type">string</span>.myinfo_title);
+</code></pre><h2 id="主布局LinearLayout之—-fitsSystemWindows">主布局LinearLayout之—-fitsSystemWindows</h2><p>设置应用布局时是否考虑系统窗口布局；如果为true</p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:fitsSystemWindows"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
+</code></pre><h2 id="主布局LinearLayout_之——clipToPadding">主布局LinearLayout 之——clipToPadding</h2><p>clipToPadding:控件的绘制区域是否在padding里面, 值为true时padding那么绘制的区域就不包括padding区域;<br>定义一个孩子是否仅限于画里面的界限。 </p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:clipToPadding"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cidzrlde70003ywb2s30p4hzl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cidzvora90003r4b273t1m68n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -180,6 +212,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/08/31/2015-8-31-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/8/31-2
+        
+      </div>
+    </a>
   
   
     <a href="/2015/08/28/2015-8-28-2/" id="article-nav-older" class="article-nav-link-wrap">

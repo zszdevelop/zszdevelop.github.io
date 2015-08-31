@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        50
+        51
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,132 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-31-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/31/2015-8-31-2/">2015/8/31-2</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/31/2015-8-31-2/">
+    <time datetime="2015-08-31T11:38:25.000Z" itemprop="datePublished">2015-08-31</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PopupWindow">PopupWindow</h1><p>PopupWindow这个类用来实现一个弹出框，可以使用任意布局的View作为其内容，这个弹出框是悬浮在当前activity之上的。</p>
+<h2 id="PopupWindow的使用">PopupWindow的使用</h2><p><strong>PopupWindow</strong>的构造函数为</p>
+<pre><code><span class="keyword">public</span> PopupWindow(View contentView, <span class="built_in">int</span> <span class="variable">width</span>, <span class="built_in">int</span> <span class="variable">height</span>, <span class="built_in">boolean</span> focusable)
+</code></pre><p>contentView为要显示的view，width和height为宽和高，值为像素值，也可以是MATCHT_PARENT和WRAP_CONTENT。</p>
+<p><strong>focusable</strong>为是否可以获得焦点，这是一个很重要的参数，也可以通过</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">void</span> setFocusable(<span class="keyword">boolean</span> focusable)
+</code></pre><p>来设置，如果focusable为false，在一个Activity弹出一个PopupWindow，按返回键，由于PopupWindow没有焦点，会直接退出Activity。如果focusable为true，PopupWindow弹出后，所有的触屏和物理按键都有PopupWindows处理。</p>
+<h2 id="简单使用">简单使用</h2><p>mianLayout</p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span>
+android:<span class="variable">id=</span><span class="string">"@+id/layout_main"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+tools:<span class="variable">context=</span><span class="string">".MainActivity"</span> &gt;
+
+&lt;Button
+    android:<span class="variable">id=</span><span class="string">"@+id/btn_test_popupwindow"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_centerInParent=</span><span class="string">"true"</span>
+    android:<span class="variable">text=</span><span class="string">"@string/app_name"</span> /&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>popudWindow 的布局文件</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+android:<span class="variable">background=</span><span class="string">"#000000"</span> &gt;
+
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"80dp"</span>
+    android:<span class="variable">text=</span><span class="string">"wusisan"</span>
+    android:<span class="variable">textColor=</span><span class="string">"#ffffffff"</span>
+    android:<span class="variable">layout_centerInParent=</span><span class="string">"true"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>/&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>mainActivity</p>
+<pre><code>package com.zsz.develop.popupwindowdemo;
+
+<span class="preprocessor"><span class="keyword">import</span> android.content.DialogInterface;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Bitmap;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.drawable.BitmapDrawable;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.Menu;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.MenuItem;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.View;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.ViewGroup;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.Button;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.PopupWindow;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.RelativeLayout;</span>
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> {</span>
+
+<span class="keyword">private</span> Button mButton;
+<span class="keyword">private</span> PopupWindow mPopupWindow;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    <span class="variable">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    View popupView = getLayoutInflater().inflate(R.layout.popup_window, <span class="literal">null</span>);
+
+    mPopupWindow = <span class="keyword">new</span> PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT, <span class="literal">true</span>);
+    mPopupWindow.setTouchable(<span class="literal">true</span>);
+    mPopupWindow.setOutsideTouchable(<span class="literal">true</span>);
+    mPopupWindow.setBackgroundDrawable(<span class="keyword">new</span> BitmapDrawable(getResources(), (Bitmap) <span class="literal">null</span>));
+
+    mButton = (Button) findViewById(R.id.btn_test_popupwindow);
+    mButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+
+        @Override
+        <span class="keyword">public</span> void onClick(View v) {
+            mPopupWindow.showAsDropDown(v);
+        }
+    });
+}
+</code></pre><p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cidzvorac0004r4b2s2od0sz1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-31" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -138,7 +264,17 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="2015/8/31问题集">2015/8/31问题集</h1><h2 id="使用theme将ActionBar隐藏">使用theme将ActionBar隐藏</h2><p>再目录：\main\res\values\strings.xml 中的theme中更改</p>
+        <h1 id="2015/8/31问题集">2015/8/31问题集</h1><h2 id="for_each循环">for each循环</h2><ul>
+<li>1.首先要传入多个参数</li>
+<li>2.for（View i：view）这里这个View要与传入的类型是相同的。</li>
+<li>3.i是要传入的每个值</li>
+</ul>
+<p>o</p>
+<pre><code>private void ViewGone(<span class="keyword">View</span>... <span class="keyword">view</span>){
+    <span class="keyword">for</span> (<span class="keyword">View</span> i:<span class="keyword">view</span>){
+        i.setVisibility(<span class="keyword">View</span>.GONE);
+    }
+</code></pre><h2 id="使用theme将ActionBar隐藏">使用theme将ActionBar隐藏</h2><p>再目录：\main\res\values\strings.xml 中的theme中更改</p>
 <pre><code><span class="tag">&lt;<span class="title">resources</span>&gt;</span>
 
 <span class="comment">&lt;!-- Base application theme. --&gt;</span>
@@ -157,11 +293,15 @@
               /&gt;</span>
 </code></pre><h2 id="text文字加粗">text文字加粗</h2><pre><code><span class="label">android:</span>textStyle=”bold”
 </code></pre><h2 id="调用string中的东西">调用string中的东西</h2><pre><code>tvTopBarTitle.setText(R.<span class="type">string</span>.myinfo_title);
+</code></pre><h2 id="主布局LinearLayout之—-fitsSystemWindows">主布局LinearLayout之—-fitsSystemWindows</h2><p>设置应用布局时是否考虑系统窗口布局；如果为true</p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:fitsSystemWindows"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
+</code></pre><h2 id="主布局LinearLayout_之——clipToPadding">主布局LinearLayout 之——clipToPadding</h2><p>clipToPadding:控件的绘制区域是否在padding里面, 值为true时padding那么绘制的区域就不包括padding区域;<br>定义一个孩子是否仅限于画里面的界限。 </p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:clipToPadding"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
 </code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cidzrlde70003ywb2s30p4hzl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cidzvora90003r4b273t1m68n" class="article-share-link">Share</a>
       
       
     </footer>
@@ -363,7 +503,7 @@ ArrayList&lt;View&gt; viewContainter = <span class="keyword">new</span> ArrayLis
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cidzrldee0005ywb2vlwm1emy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cidzvorak0006r4b2azq8o1cu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -441,7 +581,7 @@ public <span class="type">View</span> onCreateView(<span class="type">LayoutInfl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cidzrldea0004ywb22ajmufxe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cidzvorah0005r4b2ozx7fyig" class="article-share-link">Share</a>
       
       
     </footer>
@@ -554,7 +694,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cidzrldeg0006ywb217x0zzt4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cidzvoran0007r4b24yzbjihw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -864,7 +1004,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cidzrldem0008ywb242z68z6k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cidzvorat0009r4b213bzgm7v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -919,7 +1059,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cidzrldek0007ywb27yoh3xq2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cidzvoraq0008r4b2p4wdkmkh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1131,7 +1271,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cidzrldep0009ywb2kk1i7rlg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cidzvorav000ar4b2fh9qdusj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1205,7 +1345,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cidzrldes000aywb265eqrsit" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cidzvoray000br4b2m56brx7i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1228,79 +1368,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cidzrldf0000cywb2kz7x5sb0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-21" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/21/2015-8-21/">android获取SHA1和MD5，LinearLayout中的控件对齐问题，Android之事件监听的使用(OnClickListener)</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/21/2015-8-21/">
-    <time datetime="2015-08-21T03:22:27.000Z" itemprop="datePublished">2015-08-21</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/21问题集">2015/8/21问题集</h1><h2 id="android获取SHA1和MD5">android获取SHA1和MD5</h2><p>android studio安全码，在许多申请key的时候都要用到安全码。例如百度地图等</p>
-<p>具体的操作方法：</p>
-<ul>
-<li>1.找到debug.keystore的位置，默认位置在C:\Users\shengzhong.android</li>
-<li>2.cmd打开命令提示符，cd到keystore的位置</li>
-<li>3.输入 keytool -list -v -keystore debug.keystore</li>
-<li>回车就显示了要的SHA1和MD5</li>
-</ul>
-<h2 id="java-lang-IllegalArgumentException:_No_config_chosen">java.lang.IllegalArgumentException: No config chosen</h2><p>这种情况：</p>
-<p>解决1.模拟器选项勾选gpu</p>
-<p>解决2.用真机测试</p>
-<h2 id="LinearLayout中的控件对齐问题">LinearLayout中的控件对齐问题</h2><p>LinearLayout中的控件对齐，如果他是水平布局，那么当他向左向右对齐的时候。他就不行，水平没有边界</p>
-<p>解决办法：用相对布局啊！！RelativeLayout</p>
-<p>android:layout_alignParentLeft 如果该值为true，则将该控件的左边与父控件的左边对齐<br>android:layout_alignParentRight 如果该值为true，则将该控件的右边与父控件的右边对齐</p>
-<h2 id="Android之事件监听的使用(OnClickListener)">Android之事件监听的使用(OnClickListener)</h2><ul>
-<li>实现implements View.OnClickListener接口</li>
-<li>并实现OnClick方法。</li>
-<li>取得每个的id，并根据id去判断</li>
-</ul>
-<pre><code><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-    <span class="keyword">int</span> id=view.getId();
-    <span class="keyword">switch</span> (id){
-        <span class="keyword">case</span> R.id.tvCloud:
-            pager.setCurrentItem(0);
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> R.id.tvDoor:
-            pager.setCurrentItem(1);
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> R.id.tvMy:
-            pager.setCurrentItem(2);
-            <span class="keyword">break</span>;
-    }
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cidzrldev000bywb2v0nxk80d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cidzvorb1000dr4b2gter4twy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1311,7 +1379,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
     
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
       </nav>
     </section>
       

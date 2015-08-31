@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        50
+        51
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,78 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-21" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/21/2015-8-21/">android获取SHA1和MD5，LinearLayout中的控件对齐问题，Android之事件监听的使用(OnClickListener)</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/21/2015-8-21/">
+    <time datetime="2015-08-21T03:22:27.000Z" itemprop="datePublished">2015-08-21</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/21问题集">2015/8/21问题集</h1><h2 id="android获取SHA1和MD5">android获取SHA1和MD5</h2><p>android studio安全码，在许多申请key的时候都要用到安全码。例如百度地图等</p>
+<p>具体的操作方法：</p>
+<ul>
+<li>1.找到debug.keystore的位置，默认位置在C:\Users\shengzhong.android</li>
+<li>2.cmd打开命令提示符，cd到keystore的位置</li>
+<li>3.输入 keytool -list -v -keystore debug.keystore</li>
+<li>回车就显示了要的SHA1和MD5</li>
+</ul>
+<h2 id="java-lang-IllegalArgumentException:_No_config_chosen">java.lang.IllegalArgumentException: No config chosen</h2><p>这种情况：</p>
+<p>解决1.模拟器选项勾选gpu</p>
+<p>解决2.用真机测试</p>
+<h2 id="LinearLayout中的控件对齐问题">LinearLayout中的控件对齐问题</h2><p>LinearLayout中的控件对齐，如果他是水平布局，那么当他向左向右对齐的时候。他就不行，水平没有边界</p>
+<p>解决办法：用相对布局啊！！RelativeLayout</p>
+<p>android:layout_alignParentLeft 如果该值为true，则将该控件的左边与父控件的左边对齐<br>android:layout_alignParentRight 如果该值为true，则将该控件的右边与父控件的右边对齐</p>
+<h2 id="Android之事件监听的使用(OnClickListener)">Android之事件监听的使用(OnClickListener)</h2><ul>
+<li>实现implements View.OnClickListener接口</li>
+<li>并实现OnClick方法。</li>
+<li>取得每个的id，并根据id去判断</li>
+</ul>
+<pre><code><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+    <span class="keyword">int</span> id=view.getId();
+    <span class="keyword">switch</span> (id){
+        <span class="keyword">case</span> R.id.tvCloud:
+            pager.setCurrentItem(0);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> R.id.tvDoor:
+            pager.setCurrentItem(1);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> R.id.tvMy:
+            pager.setCurrentItem(2);
+            <span class="keyword">break</span>;
+    }
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cidzvorb0000cr4b22eigsi69" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-20-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -325,7 +397,7 @@ tools:context=<span class="string">".MainActivity"</span> &gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cidzrldf5000eywb21pui5d3n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cidzvorb6000fr4b25v03sbjg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -520,7 +592,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cidzrldf8000fywb2g6fkymaq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cidzvorb8000gr4b235y5svw3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -664,7 +736,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cidzrldf3000dywb20iapyg45" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cidzvorb4000er4b23uyl1xqi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -811,7 +883,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cidzrldfb000gywb25u48rrxz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cidzvorbb000hr4b2z5x84rw2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -869,7 +941,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cidzrldfd000hywb2ru76q8z2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cidzvorbf000ir4b2t4tz0mvj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1085,7 +1157,7 @@ android:<span class="variable">versionName=</span><span class="string">"1.0"</sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cidzrldfh000iywb2ta62gsgz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cidzvorbh000jr4b2jnnafr7o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1450,7 +1522,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cidzrldfk000jywb2r8n5q4zk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cidzvorbk000kr4b2dlv3v8is" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1496,7 +1568,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cidzrldfn000kywb2hib45l0f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cidzvorbn000lr4b257txie44" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1581,123 +1653,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cidzrlde50002ywb27znswzrn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-30" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/30/2015-7-30/">android端乱码问题，RadioGroup多选一，对比空字符，4种方式实现java 保留2位小数点</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/30/2015-7-30/">
-    <time datetime="2015-07-30T00:38:24.000Z" itemprop="datePublished">2015-07-30</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/5问题集">2015/8/5问题集</h1><h2 id="android端乱码问题">android端乱码问题</h2><p>服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题</p>
-<p>把这句代码</p>
-<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity());
-</code></pre><p>改成接收的时候也要转成UTF-8</p>
-<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity(),<span class="string">"UTF-8"</span>);
-</code></pre><h2 id="RadioGroup多选一">RadioGroup多选一</h2><p>程序中常常要用到多选一的时候，例如男女</p>
-<p>就以男女为例</p>
-<p>XML</p>
-<pre><code> <span class="tag">&lt;<span class="title">LinearLayout</span>
-    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
-    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-    <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">TextView</span>
-        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:text</span>=<span class="value">"性别："</span>
-        /&gt;</span>
-    <span class="tag">&lt;<span class="title">TextView</span>
-        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:text</span>=<span class="value">"男"</span>
-        <span class="attribute">android:id</span>=<span class="value">"@+id/etSex"</span>
-        /&gt;</span>
-    <span class="comment">&lt;!--&lt;EditText--&gt;</span>
-        <span class="comment">&lt;!--android:id="@+id/etSex"--&gt;</span>
-        <span class="comment">&lt;!--android:layout_width="fill_parent"--&gt;</span>
-        <span class="comment">&lt;!--android:layout_height="wrap_content"--&gt;</span>
-        <span class="comment">&lt;!--/&gt;--&gt;</span>
-
-    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-<span class="tag">&lt;<span class="title">LinearLayout</span>
-    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
-
-    <span class="tag">&lt;<span class="title">RadioGroup</span> <span class="attribute">android:id</span>=<span class="value">"@+id/radioGroup"</span>
-        <span class="attribute">android:contentDescription</span>=<span class="value">"性别"</span>
-        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
-
-        <span class="tag">&lt;<span class="title">RadioButton</span>
-            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:id</span>=<span class="value">"@+id/radioMale"</span>
-            <span class="attribute">android:text</span>=<span class="value">"男"</span>
-            <span class="attribute">android:checked</span>=<span class="value">"true"</span>&gt;</span>
-
-        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">RadioButton</span>
-            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:id</span>=<span class="value">"@+id/radioFemale"</span>
-            <span class="attribute">android:text</span>=<span class="value">"女"</span>&gt;</span>
-
-        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">RadioGroup</span>&gt;</span>
-
-    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-</code></pre><p>Activty中的代码如下</p>
-<pre><code>etSex= (TextView) findViewById(R.id.etSex);
-
-   radioGroup= (RadioGroup) findViewById(R.id.radioGroup);
-   radioGroup.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() {
-       <span class="annotation">@Override</span>
-       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup radioGroup, <span class="keyword">int</span> i)</span> </span>{
-        <span class="keyword">int</span> radioButtonId = radioGroup.getCheckedRadioButtonId();
-           rb = (RadioButton)EditDataActicity.<span class="keyword">this</span>.findViewById(radioButtonId);
-           etSex.setText( rb.getText());
-       }
-   });
-</code></pre><h2 id="对比空字符">对比空字符</h2><p>对比空字符要用equals(“”)</p>
-<pre><code>etHeight.<span class="function"><span class="title">getText</span><span class="params">()</span></span>.<span class="function"><span class="title">toString</span><span class="params">()</span></span>.<span class="function"><span class="title">trim</span><span class="params">()</span></span>.<span class="function"><span class="title">equals</span><span class="params">(<span class="string">""</span>)</span></span>
-</code></pre><h2 id="4种方式实现java_保留2位小数点">4种方式实现java 保留2位小数点</h2><h3 id="方式一：">方式一：</h3><p>四舍五入<br>double   f   =   111231.5585;<br>BigDecimal   b   =   new   BigDecimal(f);<br>double   f1   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();<br>保留两位小数</p>
-<h3 id="方式二：">方式二：</h3><p>java.text.DecimalFormat   df   =new   java.text.DecimalFormat(”#.00″);<br>df.format(你要格式化的数字);<br>例：new java.text.DecimalFormat(”#.00″).format(3.1415926)</p>
-<p>（#.00 表示两位小数 #.0000四位小数 以此类推…</p>
-<h3 id="方式三：">方式三：</h3><p>double d = 3.1415926;<br>String result = String .format(”%.2f”);<br>%.2f %. 表示 小数点前任意位数   2 表示两位小数 格式后的结果为f 表示浮点型。</p>
-<h3 id="方式四：">方式四：</h3><p>此外如果使用struts标签做输出的话，有个format属性,设置为format=”0.00”就是保留两位小数<br>例如：<bean:write name="entity" property="dkhAFSumPl" format="0.00"></bean:write></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cidzrldfq000lywb23n801f7c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cidzvor9y0002r4b2am2j3sme" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1708,7 +1664,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
       </nav>
     </section>
       
