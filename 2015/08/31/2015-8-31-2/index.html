@@ -6,23 +6,23 @@
   <title>2015/8/31-2 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="PopupWindowPopupWindow这个类用来实现一个弹出框，可以使用任意布局的View作为其内容，这个弹出框是悬浮在当前activity之上的。
-PopupWindow的使用PopupWindow的构造函数为
-public PopupWindow(View contentView, int width, int height, boolean focusable)
-contentView">
+Android的对话框有两种：PopupWindow和AlertDialog。它们的不同点在于：
+AlertDialog的位置固定，而PopupWindow的位置可以随意
+AlertDialog是非阻塞线程的，而PopupWindow是阻塞线程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2015/8/31-2">
 <meta property="og:url" content="http://yoursite.com/2015/08/31/2015-8-31-2/index.html">
 <meta property="og:site_name" content="zszBlog">
 <meta property="og:description" content="PopupWindowPopupWindow这个类用来实现一个弹出框，可以使用任意布局的View作为其内容，这个弹出框是悬浮在当前activity之上的。
-PopupWindow的使用PopupWindow的构造函数为
-public PopupWindow(View contentView, int width, int height, boolean focusable)
-contentView">
+Android的对话框有两种：PopupWindow和AlertDialog。它们的不同点在于：
+AlertDialog的位置固定，而PopupWindow的位置可以随意
+AlertDialog是非阻塞线程的，而PopupWindow是阻塞线程">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2015/8/31-2">
 <meta name="twitter:description" content="PopupWindowPopupWindow这个类用来实现一个弹出框，可以使用任意布局的View作为其内容，这个弹出框是悬浮在当前activity之上的。
-PopupWindow的使用PopupWindow的构造函数为
-public PopupWindow(View contentView, int width, int height, boolean focusable)
-contentView">
+Android的对话框有两种：PopupWindow和AlertDialog。它们的不同点在于：
+AlertDialog的位置固定，而PopupWindow的位置可以随意
+AlertDialog是非阻塞线程的，而PopupWindow是阻塞线程">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -95,7 +95,7 @@ contentView">
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        51
+        52
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -147,12 +147,21 @@ contentView">
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="PopupWindow">PopupWindow</h1><p>PopupWindow这个类用来实现一个弹出框，可以使用任意布局的View作为其内容，这个弹出框是悬浮在当前activity之上的。</p>
+<p>Android的对话框有两种：PopupWindow和AlertDialog。它们的不同点在于：</p>
+<p>AlertDialog的位置固定，而PopupWindow的位置可以随意</p>
+<p>AlertDialog是非阻塞线程的，而PopupWindow是阻塞线程的</p>
+<p>PopupWindow的位置按照有无偏移分，可以分为偏移和无偏移两种；按照参照物的不同，可以分为相对于某个控件（Anchor锚）和相对于父控件。具体如下</p>
+<p>showAsDropDown(View anchor)：相对某个控件的位置（正左下方），无偏移</p>
+<p>showAsDropDown(View anchor, int xoff, int yoff)：相对某个控件的位置，有偏移</p>
+<p>showAtLocation(View parent, int gravity, int x, int y)：相对于父控件的位置（例如正中央Gravity.CENTER，下方Gravity.BOTTOM等），可以设置偏移或无偏移</p>
 <h2 id="PopupWindow的使用">PopupWindow的使用</h2><p><strong>PopupWindow</strong>的构造函数为</p>
 <pre><code><span class="keyword">public</span> PopupWindow(View contentView, <span class="built_in">int</span> <span class="variable">width</span>, <span class="built_in">int</span> <span class="variable">height</span>, <span class="built_in">boolean</span> focusable)
 </code></pre><p>contentView为要显示的view，width和height为宽和高，值为像素值，也可以是MATCHT_PARENT和WRAP_CONTENT。</p>
 <p><strong>focusable</strong>为是否可以获得焦点，这是一个很重要的参数，也可以通过</p>
 <pre><code><span class="keyword">public</span> <span class="keyword">void</span> setFocusable(<span class="keyword">boolean</span> focusable)
 </code></pre><p>来设置，如果focusable为false，在一个Activity弹出一个PopupWindow，按返回键，由于PopupWindow没有焦点，会直接退出Activity。如果focusable为true，PopupWindow弹出后，所有的触屏和物理按键都有PopupWindows处理。</p>
+<pre><code>mPopupWindow.setBackgroundDrawable(<span class="keyword">new</span> BitmapDrawable(getResources(), (Bitmap) <span class="literal">null</span>));
+</code></pre><p>设置了上面的就可以点击外面返回了。</p>
 <h2 id="简单使用">简单使用</h2><p>mianLayout</p>
 <pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
 xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span>
@@ -231,12 +240,28 @@ protected void onCreate(Bundle savedInstanceState) {
         }
     });
 }
-</code></pre><p>}</p>
 
+
+}
+</code></pre><h2 id="PopupWIndow的使用">PopupWIndow的使用</h2><pre><code>View popupView= LayoutInflater.<span class="keyword">from</span>(<span class="keyword">this</span>).inflate(R.layout.popup_window_layout,<span class="keyword">null</span>);
+  mPopupWindow=<span class="keyword">new</span> PopupWindow(popupView,<span class="number">200</span>, RelativeLayout.LayoutParams.WRAP_CONTENT);
+  mPopupWindow.setOutsideTouchable(<span class="keyword">true</span>);
+  mPopupWindow.setFocusable(<span class="keyword">true</span>);
+  mPopupWindow.setTouchable(<span class="keyword">true</span>);
+  mPopupWindow.setBackgroundDrawable(<span class="keyword">new</span> BitmapDrawable(getResources(), (Bitmap) <span class="keyword">null</span>));
+
+  lvPopupWindow= (ListView) popupView.findViewById(R.id.lvPopupWindow);
+  <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++){
+      titleItemData=<span class="keyword">new</span> TitleItemData(<span class="string">"快递箱"</span>+i);
+      titleItemDataList.add(titleItemData);
+  }
+  titleItemAdapter=<span class="keyword">new</span> TitleItemAdapter(MyExpressActivity.<span class="keyword">this</span>,titleItemDataList);
+  lvPopupWindow.setAdapter(titleItemAdapter);
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cidzvorac0004r4b2s2od0sz1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cie2kr60f0005lob2o04ry37r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -244,6 +269,15 @@ protected void onCreate(Bundle savedInstanceState) {
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/09/01/2015-9-1/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/9/1
+        
+      </div>
+    </a>
   
   
     <a href="/2015/08/31/2015-8-31/" id="article-nav-older" class="article-nav-link-wrap">
