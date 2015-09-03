@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        52
+        53
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,53 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/03/2015-9-3/">2015/9/3</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/03/2015-9-3/">
+    <time datetime="2015-09-03T00:54:52.000Z" itemprop="datePublished">2015-09-03</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/3日问题集">2015/9/3日问题集</h1><p>奇葩的selector。</p>
+<ul>
+<li>1.item结尾直接/&gt; 不要加《/item》</li>
+<li><p>2.有状态的selector要在前面。没有的在后面</p>
+<p>  &lt;?xml version=”1.0” encoding=”utf-8” ?&gt;</p>
+  <selector xmlns:android="http://schemas.android.com/apk/res/android"><br>  <item android:state_pressed="true" android:drawable="@drawable/new_ic_tab_cloud02"><br>  <item android:drawable="@drawable/new_ic_tab_cloud01"><br>  </item></item></selector></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cie41dsqp0002pwb2ubyqa4r2" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-1" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -364,11 +411,85 @@ tools:<span class="variable">context=</span><span class="string">"com.example.nl
     &lt;/LinearLayout&gt;
 &lt;/LinearLayout&gt;
 &lt;/RelativeLayout&gt;
-</code></pre><h2 id="drawerlayoutandroid_抽屉效果的导航菜单实现">drawerlayoutandroid 抽屉效果的导航菜单实现</h2>
+</code></pre><h2 id="drawerlayoutandroid_抽屉效果的导航菜单实现">drawerlayoutandroid 抽屉效果的导航菜单实现</h2><h2 id="Spinner的使用">Spinner的使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.spinnerdemo;
+
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.AdapterView;
+<span class="keyword">import</span> android.widget.ArrayAdapter;
+<span class="keyword">import</span> android.widget.Spinner;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] m={<span class="string">"A型"</span>,<span class="string">"B型"</span>,<span class="string">"O型"</span>,<span class="string">"AB型"</span>,<span class="string">"其他"</span>};
+<span class="keyword">private</span> TextView view ;
+<span class="keyword">private</span> Spinner spinner;
+<span class="keyword">private</span> ArrayAdapter&lt;String&gt; adapter;
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+    view = (TextView) findViewById(R.id.spinnerText);
+    spinner = (Spinner) findViewById(R.id.Spinner01);
+    <span class="comment">//将可选内容与ArrayAdapter连接起来</span>
+    adapter = <span class="keyword">new</span> ArrayAdapter&lt;String&gt;(<span class="keyword">this</span>,android.R.layout.simple_spinner_item,m);
+
+    <span class="comment">//设置下拉列表的风格</span>
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    <span class="comment">//将adapter 添加到spinner中</span>
+    spinner.setAdapter(adapter);
+
+    <span class="comment">//添加事件Spinner事件监听</span>
+    spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) <span class="keyword">new</span> SpinnerSelectedListener());
+
+    <span class="comment">//设置默认值</span>
+    spinner.setVisibility(View.VISIBLE);
+
+}
+
+<span class="comment">//使用数组形式操作</span>
+<span class="class"><span class="keyword">class</span> <span class="title">SpinnerSelectedListener</span> <span class="keyword">implements</span> <span class="title">AdapterView</span>.<span class="title">OnItemSelectedListener</span> </span>{
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemSelected</span><span class="params">(AdapterView&lt;?&gt; arg0, View arg1, <span class="keyword">int</span> arg2,
+                               <span class="keyword">long</span> arg3)</span> </span>{
+        view.setText(<span class="string">"你的血型是："</span>+m[arg2]);
+
+<span class="comment">//这是得到spinner里面的内容</span>
+<span class="comment">//        String selectedValue = (String)spType.getSelectedItem();</span>
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNothingSelected</span><span class="params">(AdapterView&lt;?&gt; arg0)</span> </span>{
+    }
+}
+}
+</code></pre><p>layout</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span>
+<span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+<span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+<span class="attribute">android:layout_height</span>=<span class="value">"fill_parent"</span>
+<span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>
+&gt;</span>
+<span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:id</span>=<span class="value">"@+id/spinnerText"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span><span class="tag">&lt;/<span class="title">TextView</span>&gt;</span>
+<span class="tag">&lt;<span class="title">Spinner</span> <span class="attribute">android:id</span>=<span class="value">"@+id/Spinner01"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span><span class="tag">&lt;/<span class="title">Spinner</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cie2kr5zu0002lob228fi1346" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cie41dsqr0003pwb2v18zie1r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -519,7 +640,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cie2kr60f0005lob2o04ry37r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cie41dsr80006pwb2jvfa98y0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -592,7 +713,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cie2kr60d0004lob2jwq9ndhp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cie41dsr40005pwb23e1lvt9k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -794,7 +915,7 @@ ArrayList&lt;View&gt; viewContainter = <span class="keyword">new</span> ArrayLis
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cie2kr60n0007lob2pzsr9xea" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cie41dsre0008pwb201ttrs6h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -872,7 +993,7 @@ public <span class="type">View</span> onCreateView(<span class="type">LayoutInfl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cie2kr60k0006lob25oeh6qu0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cie41dsrb0007pwb2fk9lfhj0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -985,7 +1106,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cie2kr60p0008lob23tdfscfq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cie41dsrj0009pwb22oe27amh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1295,7 +1416,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cie2kr60v000alob21xqi5c4k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cie41dsrq000bpwb2jqjcdh7m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1350,7 +1471,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cie2kr60s0009lob2mafc1z9x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cie41dsrn000apwb2surau4qp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1562,81 +1683,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cie2kr60z000blob2se7fg2d6" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-24" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/24/2015-8-24/">FrameLayout(框架布局)，shape包裹框的设置，ScrollView让页面也可以滚动拖，使用include重用UI組件，在textView上面在添加一张图片</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/24/2015-8-24/">
-    <time datetime="2015-08-24T02:20:42.000Z" itemprop="datePublished">2015-08-24</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/24问题集">2015/8/24问题集</h1><h2 id="FrameLayout(框架布局)">FrameLayout(框架布局)</h2><p>框架布局是最简单的布局形式。所有添加到这个布局中的视图都以层叠的方式显示。第一个添加的控件被放在最底层，最后一个添加到框架布局中的视图显示在最顶层，上一层的控件会覆盖下一层的控件。这种显示方式有些类似于堆栈。</p>
-<h2 id="shape包裹框的设置">shape包裹框的设置</h2><p>xml要添加在drawable</p>
-<p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"><br>    <!-- 圆角 --><br>    <corners android:radius="5dp"><br>    <!-- 背景色 --><br>    <solid android:color="#FFFFFF"><br>    <!-- 线框 --><br>    <stroke android:color="#EEEEEE" android:width="0.5dp"><br><br></stroke></solid></corners></shape>
-
-<h2 id="ScrollView让页面也可以滚动拖">ScrollView让页面也可以滚动拖</h2><pre><code> &lt;ScrollView
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>&gt;
-    &lt;LinearLayout
-        android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
-
-    //这里面填写要滚动的内容
- &lt;/ScrollView&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><h2 id="使用include重用UI組件">使用include重用UI組件</h2><p>把需要重用的Ui组件单独列在layout中</p>
-<p>当再次需要使用的时候，在其他布局中使用include来调用。</p>
-<pre><code><span class="keyword">include</span> android:id=<span class="string">"@+id/title"</span> layout=<span class="string">"@layout/title_include"</span>&gt;&lt;/<span class="keyword">include</span>&gt;
-</code></pre><h2 id="在textView上面在添加一张图片">在textView上面在添加一张图片</h2><p>android:drawableTop=”@drawable/3to1”</p>
-<h2 id="android布局—Android_fill_parent、wrap_content和match_parent的区别">android布局—Android fill_parent、wrap_content和match_parent的区别</h2><p>三个属性都用来适应视图的水平或垂直大小，一个以视图的内容或尺寸为基础的布局比精确地指定视图范围更加方便。</p>
-<ul>
-<li>1）fill_parent</li>
-</ul>
-<p>设置一个构件的布局为fill_parent将强制性地使构件扩展，以填充布局单元内尽可能多的空间。这跟Windows控件的dockstyle属性大体一致。设置一个顶部布局或控件为fill_parent将强制性让它布满整个屏幕。</p>
-<ul>
-<li>2） wrap_content</li>
-</ul>
-<p>设置一个视图的尺寸为wrap_content将强制性地使视图扩展以显示全部内容。以TextView和ImageView控件为例，设置为wrap_content将完整显示其内部的文本和图像。布局元素将根据内容更改大小。设置一个视图的尺寸为wrap_content大体等同于设置Windows控件的Autosize属性为True。</p>
-<ul>
-<li>3）match_parent<br> Android2.2中match_parent和fill_parent是一个意思 .两个参数意思一样，match_parent更贴切，于是从2.2开始两个词都可以用。那么如果考虑低版本的使用情况你就需要用fill_parent了a</li>
-</ul>
-<h2 id="Android颜色对比">Android颜色对比</h2><p><a href="http://www.cnblogs.com/bluestorm/p/3644669.html" target="_blank" rel="external">http://www.cnblogs.com/bluestorm/p/3644669.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cie2kr615000clob2pa6y9raq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cie41dsrv000cpwb2dhvyt15m" class="article-share-link">Share</a>
       
       
     </footer>

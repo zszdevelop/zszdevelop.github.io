@@ -98,7 +98,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        52
+        53
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -375,11 +375,85 @@ tools:<span class="variable">context=</span><span class="string">"com.example.nl
     &lt;/LinearLayout&gt;
 &lt;/LinearLayout&gt;
 &lt;/RelativeLayout&gt;
-</code></pre><h2 id="drawerlayoutandroid_抽屉效果的导航菜单实现">drawerlayoutandroid 抽屉效果的导航菜单实现</h2>
+</code></pre><h2 id="drawerlayoutandroid_抽屉效果的导航菜单实现">drawerlayoutandroid 抽屉效果的导航菜单实现</h2><h2 id="Spinner的使用">Spinner的使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.spinnerdemo;
+
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.AdapterView;
+<span class="keyword">import</span> android.widget.ArrayAdapter;
+<span class="keyword">import</span> android.widget.Spinner;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] m={<span class="string">"A型"</span>,<span class="string">"B型"</span>,<span class="string">"O型"</span>,<span class="string">"AB型"</span>,<span class="string">"其他"</span>};
+<span class="keyword">private</span> TextView view ;
+<span class="keyword">private</span> Spinner spinner;
+<span class="keyword">private</span> ArrayAdapter&lt;String&gt; adapter;
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+    view = (TextView) findViewById(R.id.spinnerText);
+    spinner = (Spinner) findViewById(R.id.Spinner01);
+    <span class="comment">//将可选内容与ArrayAdapter连接起来</span>
+    adapter = <span class="keyword">new</span> ArrayAdapter&lt;String&gt;(<span class="keyword">this</span>,android.R.layout.simple_spinner_item,m);
+
+    <span class="comment">//设置下拉列表的风格</span>
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    <span class="comment">//将adapter 添加到spinner中</span>
+    spinner.setAdapter(adapter);
+
+    <span class="comment">//添加事件Spinner事件监听</span>
+    spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) <span class="keyword">new</span> SpinnerSelectedListener());
+
+    <span class="comment">//设置默认值</span>
+    spinner.setVisibility(View.VISIBLE);
+
+}
+
+<span class="comment">//使用数组形式操作</span>
+<span class="class"><span class="keyword">class</span> <span class="title">SpinnerSelectedListener</span> <span class="keyword">implements</span> <span class="title">AdapterView</span>.<span class="title">OnItemSelectedListener</span> </span>{
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemSelected</span><span class="params">(AdapterView&lt;?&gt; arg0, View arg1, <span class="keyword">int</span> arg2,
+                               <span class="keyword">long</span> arg3)</span> </span>{
+        view.setText(<span class="string">"你的血型是："</span>+m[arg2]);
+
+<span class="comment">//这是得到spinner里面的内容</span>
+<span class="comment">//        String selectedValue = (String)spType.getSelectedItem();</span>
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNothingSelected</span><span class="params">(AdapterView&lt;?&gt; arg0)</span> </span>{
+    }
+}
+}
+</code></pre><p>layout</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span>
+<span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+<span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+<span class="attribute">android:layout_height</span>=<span class="value">"fill_parent"</span>
+<span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>
+&gt;</span>
+<span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:id</span>=<span class="value">"@+id/spinnerText"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span><span class="tag">&lt;/<span class="title">TextView</span>&gt;</span>
+<span class="tag">&lt;<span class="title">Spinner</span> <span class="attribute">android:id</span>=<span class="value">"@+id/Spinner01"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span><span class="tag">&lt;/<span class="title">Spinner</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cie2kr5zu0002lob228fi1346" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cie41dsqr0003pwb2v18zie1r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -387,6 +461,15 @@ tools:<span class="variable">context=</span><span class="string">"com.example.nl
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/09/03/2015-9-3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/9/3
+        
+      </div>
+    </a>
   
   
     <a href="/2015/08/31/2015-8-31-2/" id="article-nav-older" class="article-nav-link-wrap">

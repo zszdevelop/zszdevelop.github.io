@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        52
+        53
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,170 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-23-URI-Intent" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/23/2015-7-23-URI-Intent/"> 2015/7/23-URI-Intent</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/23/2015-7-23-URI-Intent/">
+    <time datetime="2015-07-23T01:05:42.000Z" itemprop="datePublished">2015-07-23</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="通过URI和Intent启动各种功能">通过URI和Intent启动各种功能</h1><h2 id="Uri">Uri</h2><p>就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：<br>scheme://host:port/path<br>举个实际的例子：</p>
+<p><img src="http://cl.ly/image/2l2F3K3b2W2n/36D61U2UNF%25SOXIFK2%60UN%25N.png" alt=""></p>
+<p>现在大家应该知道data flag中那些属性的含义了吧，看下data flag<br><data android:host="string" android:mimetype="string" android:path="string" android:pathpattern="string" android:pathprefix="string" android:port="string" android:scheme="string"></data></p>
+<p>但是我们在程序中一般是不直接用URI来标识CP的，是的，正如我们通常见到的用定义的常量来标识。例如standard CP中的Contacts，我们就用Contacts.People.CONTENT_URI来标识Contacts CP中People这个表。那么要标识某个具体的人怎么办呢？ 这就用到了ContentUris.withAppendedId() 和 Uri.withAppendedPath()。例如我们要表示content://contacts/people/20，那么我们就可以用如下语句：<br>Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, 20); 或者<br>Uri uri = Uri.withAppendedPath(People.CONTENT_URI, “20”);</p>
+<p>举些例子，如：</p>
+<p>所有联系人的Uri： content://contacts/people</p>
+<p>某个联系人的Uri: content://contacts/people/5</p>
+<p>所有图片Uri: content://media/external</p>
+<p>某个图片的Uri：content://media/external/images/media/4</p>
+<p>下面是一些常用的Uri</p>
+<p><strong>显示网页:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“<a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>“);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW,uri);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>显示地图:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“geo:38.899533,-77.036476”);<ol>
+<li>Intent it = new Intent(Intent.Action_VIEW,uri);</li>
+<li>startActivity(it);</li>
+</ol>
+</li>
+</ol>
+<p><strong>路径规划:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“<a href="http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en" target="_blank" rel="external">http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en</a>“);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW,URI);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>拨打电话:<br>调用拨号程序</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“tel:xxxxxx”);</li>
+<li>Intent it = new Intent(Intent.ACTION_DIAL, uri);   </li>
+<li>startActivity(it);   </li>
+<li>Uri uri = Uri.parse(“tel.xxxxxx”);</li>
+<li>Intent it =new Intent(Intent.ACTION_CALL,uri);</li>
+<li>要使用这个必须在配置文件中加入<uses-permission id="Android.permission.CALL_PHONE"></uses-permission></li>
+</ol>
+<p><strong>发送SMS/MMS<br>调用发送短信的程序</strong></p>
+<ol>
+<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
+<li>it.putExtra(“sms_body”, “The SMS text”);</li>
+<li>it.setType(“vnd.android-dir/mms-sms”);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>发送短信</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“smsto:0800000123”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
+<li>it.putExtra(“sms_body”, “The SMS text”);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>发送彩信</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“content://media/external/images/media/23”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(“sms_body”, “some text”);</li>
+<li>it.putExtra(Intent.EXTRA_STREAM, uri);</li>
+<li>it.setType(“image/png”);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong><br>发送Email</strong></p>
+<p>  1.</p>
+<ol>
+<li>Uri uri = Uri.parse(“mailto:xxx@abc.com”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
+<li>startActivity(it);</li>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(Intent.EXTRA_EMAIL, “me@abc.com”);</li>
+<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);</li>
+<li>it.setType(“text/plain”);</li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));   </li>
+<li>Intent it=new Intent(Intent.ACTION_SEND);   </li>
+<li>String[] tos={“me@abc.com”};   </li>
+<li>String[] ccs={“you@abc.com”};   </li>
+<li>it.putExtra(Intent.EXTRA_EMAIL, tos);   </li>
+<li>it.putExtra(Intent.EXTRA_CC, ccs);   </li>
+<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);   </li>
+<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);   </li>
+<li>it.setType(“message/rfc822”);   </li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
+</ol>
+<p><strong>添加附件</strong></p>
+<ol>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);</li>
+<li>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/mysong.mp3[/url]”);</li>
+<li>sendIntent.setType(“audio/mp3”);</li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
+</ol>
+<p><strong>播放多媒体</strong></p>
+<ol>
+<li></li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
+<li>Uri uri = Uri.parse(“[url=]file:///sdcard/song.mp3[/url]”);</li>
+<li>it.setDataAndType(uri, “audio/mp3”);</li>
+<li>startActivity(it);</li>
+<li>Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, “1”);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW, uri);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>Uninstall 程序</strong></p>
+<ol>
+<li>Uri uri = Uri.fromParts(“package”, strPackageName, null);</li>
+<li>Intent it = new Intent(Intent.ACTION_DELETE, uri);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>//调用相册</strong></p>
+<p>public static final String MIME_TYPE_IMAGE_JPEG = “image/*”;<br>public static final int ACTIVITY_GET_IMAGE = 0;<br>Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);<br>getImage.addCategory(Intent.CATEGORY_OPENABLE);<br>getImage.setType(MIME_TYPE_IMAGE_JPEG);<br>startActivityForResult(getImage, ACTIVITY_GET_IMAGE);</p>
+<p><strong>//调用系统相机应用程序，并存储拍下来的照片</strong></p>
+<p>Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);<br>time = Calendar.getInstance().getTimeInMillis();<br>intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment<br>.getExternalStorageDirectory().getAbsolutePath()+”/tucue”, time + “.jpg”)));<br>startActivityForResult(intent, ACTIVITY_GET_CAMERA_IMAGE);</p>
+<p>uninstall apk</p>
+<p><strong>未测试</strong></p>
+<p>Uri uninstallUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_DELETE, uninstallUri);<br>*/<br>Uri packageURI = Uri.parse(“package:”+wistatmap);<br>Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);<br>startActivity(uninstallIntent);</p>
+<p>install apk<br>Uri installUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_PACKAGE_ADDED, installUri);<br>play audio<br>Uri playUri = Uri.parse(“[url=]file:///sdcard/download/everything.mp3[/url]”);<br>returnIt = new Intent(Intent.ACTION_VIEW, playUri);</p>
+<p><strong>//发送附件</strong></p>
+<p>Intent it = new Intent(Intent.ACTION_SEND);<br>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);<br>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/eoe.mp3[/url]”);<br>sendIntent.setType(“audio/mp3”);<br>startActivity(Intent.createChooser(it, “Choose Email Client”));</p>
+<p><strong>//搜索应用</strong></p>
+<p>Uri uri = Uri.parse(“market://search?q=pname:pkg_name”);<br>Intent it = new Intent(Intent.ACTION_VIEW, uri);<br>startActivity(it);<br>//where pkg_name is the full package path for an application</p>
+<p><strong>进入联系人页面</strong></p>
+<p>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(People.CONTENT_URI);<br>startActivity(intent);</p>
+<p><strong>查看指定联系人</strong></p>
+<p>Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, info.id);//info.id联系人ID<br>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(personUri);<br>startActivity(intent);</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cie41dsu6000xpwb2bgr1dyee" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-23" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -158,7 +322,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cie2kr632000vlob2dtr99eif" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cie41dsu1000wpwb21e0m73sg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -361,7 +525,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cie2kr63b000xlob2gvj7sqdg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cie41dsuc000ypwb2lwyu2bli" class="article-share-link">Share</a>
       
       
     </footer>
@@ -491,7 +655,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cie2kr63c000ylob2ahb0wi2h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cie41dsug000zpwb2ral7xsma" class="article-share-link">Share</a>
       
       
     </footer>
@@ -570,7 +734,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cie2kr63f000zlob292nlv3ws" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cie41dsuk0010pwb2qerojz6l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -662,7 +826,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cie2kr63j0011lob2u8k2ex3u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cie41dsus0012pwb2nbj9xeac" class="article-share-link">Share</a>
       
       
     </footer>
@@ -741,7 +905,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cie2kr63h0010lob256fyzpx6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cie41dsum0011pwb26wba2ev7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -803,7 +967,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cie2kr63l0012lob238ok6ch7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cie41dsuw0013pwb2u1ctmiyo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -851,7 +1015,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cie2kr63o0014lob2mlct084r" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cie41dsv20015pwb2ao3mo3is" class="article-share-link">Share</a>
       
       
     </footer>
@@ -960,453 +1124,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cie2kr63n0013lob29z2yxkqn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-12" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/12/2015-7-12/">For-Each循环，两种方式实现插入，增删改查，完整的JDBC代码</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/12/2015-7-12/">
-    <time datetime="2015-07-12T01:35:24.000Z" itemprop="datePublished">2015-07-12</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="7-12问题集">7.12问题集</h1><h2 id="For-Each循环">For-Each循环</h2><p>Java[編輯]<br>Java語言從JDK 1.5.0開始引入foreach循環。</p>
-<p>以下代碼用於循環列印myArray數組中的每個元素，java中的foreach循環使用for關鍵字，而非foreach。</p>
-<pre><code><span class="tag">for</span> (<span class="tag">int</span> <span class="rule"><span class="attribute">x </span>:<span class="value"> myArray){
-  System.out.<span class="function">println</span>(x)</span></span>;
-}
-</code></pre><p>他的语法如下</p>
-<pre><code><span class="tag">for</span>(<span class="tag">type</span> <span class="rule"><span class="attribute">element</span>:<span class="value"> array)
-
-　　{
-
-  　System.out.<span class="function">println</span>(element)</span></span>;
-
-　　}
-</code></pre><h2 id="两种方式实现插入">两种方式实现插入</h2><p>第一种直接书写sql语句。</p>
-<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(UserInfo userInfo)</span></span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        String sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values('"</span>+userInfo.getName()+<span class="string">"','"</span>+userInfo.getPassword()+<span class="string">"')"</span>;
-        System.<span class="keyword">out</span>.println(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="keyword">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加成功"</span>);
-        }<span class="keyword">else</span> {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加失败"</span>);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-        <span class="keyword">try</span> {
-
-            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                ps.close();
-            }
-            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                conn.close();
-            }
-        } <span class="keyword">catch</span> (SQLException e) {
-            <span class="comment">// TODO Auto-generated catch block</span>
-            e.printStackTrace();
-
-        }
-    }
-}
-</code></pre><p>第二种使用占位符书写</p>
-<pre><code><span class="comment">/*
- *占位符的优势。
- *1.效率更高
- *2.书写时不容易出错
- *3.防止sql注入（安全问题） 
- */</span>
-
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert2</span><span class="params">(UserInfo userInfo)</span></span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        String sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values(?,?)"</span>;
-        System.<span class="keyword">out</span>.println(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="keyword">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加成功"</span>);
-        }<span class="keyword">else</span> {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加失败"</span>);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-        <span class="keyword">try</span> {
-
-            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                ps.close();
-            }
-            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                conn.close();
-            }
-            } <span class="keyword">catch</span> (SQLException e) {
-            <span class="comment">// TODO Auto-generated catch block</span>
-            e.printStackTrace();
-
-    }
-}
-}
-</code></pre><p>他的调用我也补充一下</p>
-<pre><code>public static void main(<span class="type">String</span><span class="literal">[]</span> args) {
-        <span class="type">ArrayList</span>&lt;<span class="type">UserInfo</span>&gt; arrayList= <span class="keyword">new</span> <span class="type">UserInfoDao</span><span class="literal">()</span>.getList<span class="literal">()</span>;
-        <span class="type">UserInfo</span> userInfo=<span class="keyword">new</span> <span class="type">UserInfo</span><span class="literal">()</span>;
-        userInfo.setName(<span class="string">"shan"</span>);
-        userInfo.setPassword(<span class="string">"123---"</span>);
-        <span class="keyword">new</span> <span class="type">UserInfoDao</span><span class="literal">()</span>.insert(userInfo);
-
-    }
-
-}
-</code></pre><h2 id="更新操作">更新操作</h2><pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(UserInfo userInfo)</span></span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String updateSQL=<span class="string">"update userinfo set name=?,password=?"</span>+<span class="string">"where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(updateSQL);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        ps.setInt(<span class="number">3</span>, userInfo.getId());
-        System.<span class="keyword">out</span>.println(updateSQL);
-
-        <span class="keyword">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"更改完成"</span>);
-        }
-        <span class="keyword">if</span> (a&lt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"更改失败"</span>);
-
-        }
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-            <span class="keyword">try</span> {
-                <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                    ps.close();
-                }
-                <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                    conn.close();
-                }
-            } <span class="keyword">catch</span> (SQLException e) {
-                <span class="comment">// TODO Auto-generated catch block</span>
-                e.printStackTrace();
-            }
-
-    }
-
-}
-</code></pre><p>注意点：ps.setString(1, userInfo.getName());这是从1开始添加。</p>
-<h2 id="删除数据">删除数据</h2><pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        <span class="keyword">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"删除成功"</span>);
-        }<span class="keyword">else</span> {
-            System.<span class="keyword">out</span>.println(<span class="string">"删除失败"</span>);
-        }
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="keyword">try</span> {
-            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                ps.close();
-            }
-            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                conn.close();
-            }
-        } <span class="keyword">catch</span> (Exception e2) {
-            e2.printStackTrace();
-        }
-    }
-}
-</code></pre><h2 id="进行代码优化——1，关闭资源">进行代码优化——1，关闭资源</h2><p>注意：参数有两个或者三个的。这时候就要使用参数多态性</p>
-<p>当使用的时候就直接调用者两个函数就可以了<br>    public static void closeResource(PreparedStatement ps,Connection conn){</p>
-<pre><code>    <span class="keyword">try</span> {
-        <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-            ps.close();
-        }
-        <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-            conn.close();
-        }
-        } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-        }
-}
-
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">closeResource</span><span class="params">(ResultSet rs,PreparedStatement ps,Connection conn)</span></span>{
-
-    <span class="keyword">try</span> {
-        <span class="keyword">if</span> (rs!=<span class="keyword">null</span>) {
-        rs.close();
-
-        }
-        <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-            ps.close();
-        }
-        <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-            conn.close();
-        }
-        } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-        }
-}
-</code></pre><h2 id="代码优化之二———使用boolean值作为返回值来判断是否修改成功">代码优化之二———使用boolean值作为返回值来判断是否修改成功</h2><p>前面的修改例子中，修改成功是显示在控制台上。而这种方法修改成功是显示在返回值</p>
-<pre><code><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="keyword">delete</span>(<span class="keyword">int</span> id) {
-    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        <span class="keyword">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }<span class="keyword">else</span> {
-            System.out.<span class="keyword">println</span>(<span class="string">"删除失败"</span>);
-        }
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        BaseConnection.closeResource(ps, conn);
-    }
-    <span class="keyword">return</span> b;
-}
-</code></pre><h2 id="完整的JDBC代码">完整的JDBC代码</h2><pre><code><span class="keyword">package</span> com.zsz.develop.dao;
-
-<span class="keyword">import</span> java.sql.Connection;
-<span class="keyword">import</span> java.sql.ResultSet;
-<span class="keyword">import</span> java.sql.SQLException;
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.Iterator;
-
-<span class="keyword">import</span> org.omg.CORBA.portable.ValueBase;
-<span class="keyword">import</span> org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
-
-<span class="keyword">import</span> com.mysql.jdbc.PreparedStatement;
-<span class="keyword">import</span> com.zsz.develop.bean.UserInfo;
-<span class="keyword">import</span> com.zsz.develop.util.BaseConnection;
-
-<span class="keyword">public</span> class UserInfoDao {
-
-<span class="keyword">public</span> ArrayList&lt;UserInfo&gt; getList(){
-    ArrayList&lt;UserInfo&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;UserInfo&gt;();
-    Connection conn=BaseConnection.getConnection();
-    <span class="comment">//定义在外面是要让他成为全局变量</span>
-    PreparedStatement ps=<span class="keyword">null</span>;
-    ResultSet rs=<span class="keyword">null</span>;
-    <span class="keyword">String</span> sql=<span class="string">"select * from userinfo"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(sql);
-         rs =ps.executeQuery();
-        <span class="keyword">while</span> (rs.next()) {
-<span class="comment">//                System.out.println(rs.getString("name")+"-----");</span>
-            <span class="comment">//把数据封装到实体类</span>
-            UserInfo userInfo=<span class="keyword">new</span> UserInfo();
-            userInfo.setId(rs.getInt(<span class="string">"id"</span>));
-            userInfo.setName(rs.getString(<span class="string">"name"</span>));
-            userInfo.setPassword(rs.getString(<span class="string">"password"</span>));
-            <span class="comment">//再把封装好的对象放到我们的集合中去</span>
-            arrayList.<span class="built_in">add</span>(userInfo);
-        }
-
-
-
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-            BaseConnection.closeResource(rs, ps, conn);
-    }
-
-    <span class="keyword">return</span> arrayList;
-}
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> insert(UserInfo userInfo){
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        <span class="keyword">String</span> sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values('"</span>+userInfo.getName()+<span class="string">"','"</span>+userInfo.getPassword()+<span class="string">"')"</span>;
-        System.out.<span class="built_in">println</span>(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="built_in">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        BaseConnection.closeResource( ps, conn);
-    }
-    <span class="keyword">return</span> b;
-}
-<span class="comment">/*
- *占位符的优势。
- *1.效率更高
- *2.书写时不容易出错
- *3.防止sql注入（安全问题） 
- */</span>
-
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> insert2(UserInfo userInfo){
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        <span class="keyword">String</span> sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values(?,?)"</span>;
-        System.out.<span class="built_in">println</span>(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="built_in">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }<span class="keyword">else</span> {
-            System.out.<span class="built_in">println</span>(<span class="string">"添加失败"</span>);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-        BaseConnection.closeResource(ps, conn);
-
-    }
-    <span class="keyword">return</span> b;
-}
-
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> update(UserInfo userInfo){
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">String</span> updateSQL=<span class="string">"update userinfo set name=?,password=?"</span>+<span class="string">"where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(updateSQL);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        ps.setInt(<span class="number">3</span>, userInfo.getId());
-        System.out.<span class="built_in">println</span>(updateSQL);
-
-        <span class="built_in">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }
-
-
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-            BaseConnection.closeResource(ps, conn);
-
-    }
-    <span class="keyword">return</span> b;
-}
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> delete(<span class="built_in">int</span> id) {
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">String</span> deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        <span class="built_in">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }<span class="keyword">else</span> {
-            System.out.<span class="built_in">println</span>(<span class="string">"删除失败"</span>);
-        }
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        BaseConnection.closeResource(ps, conn);
-    }
-    <span class="keyword">return</span> b;
-}
-
-
-
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cie2kr63r0015lob2rrznaclt" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cie41dsuz0014pwb28okx9iif" class="article-share-link">Share</a>
       
       
     </footer>

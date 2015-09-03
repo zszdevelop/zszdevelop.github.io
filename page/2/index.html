@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        52
+        53
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,80 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-24" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/24/2015-8-24/">FrameLayout(框架布局)，shape包裹框的设置，ScrollView让页面也可以滚动拖，使用include重用UI組件，在textView上面在添加一张图片</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/24/2015-8-24/">
+    <time datetime="2015-08-24T02:20:42.000Z" itemprop="datePublished">2015-08-24</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/24问题集">2015/8/24问题集</h1><h2 id="FrameLayout(框架布局)">FrameLayout(框架布局)</h2><p>框架布局是最简单的布局形式。所有添加到这个布局中的视图都以层叠的方式显示。第一个添加的控件被放在最底层，最后一个添加到框架布局中的视图显示在最顶层，上一层的控件会覆盖下一层的控件。这种显示方式有些类似于堆栈。</p>
+<h2 id="shape包裹框的设置">shape包裹框的设置</h2><p>xml要添加在drawable</p>
+<p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"><br>    <!-- 圆角 --><br>    <corners android:radius="5dp"><br>    <!-- 背景色 --><br>    <solid android:color="#FFFFFF"><br>    <!-- 线框 --><br>    <stroke android:color="#EEEEEE" android:width="0.5dp"><br><br></stroke></solid></corners></shape>
+
+<h2 id="ScrollView让页面也可以滚动拖">ScrollView让页面也可以滚动拖</h2><pre><code> &lt;ScrollView
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>&gt;
+    &lt;LinearLayout
+        android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
+
+    //这里面填写要滚动的内容
+ &lt;/ScrollView&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h2 id="使用include重用UI組件">使用include重用UI組件</h2><p>把需要重用的Ui组件单独列在layout中</p>
+<p>当再次需要使用的时候，在其他布局中使用include来调用。</p>
+<pre><code><span class="keyword">include</span> android:id=<span class="string">"@+id/title"</span> layout=<span class="string">"@layout/title_include"</span>&gt;&lt;/<span class="keyword">include</span>&gt;
+</code></pre><h2 id="在textView上面在添加一张图片">在textView上面在添加一张图片</h2><p>android:drawableTop=”@drawable/3to1”</p>
+<h2 id="android布局—Android_fill_parent、wrap_content和match_parent的区别">android布局—Android fill_parent、wrap_content和match_parent的区别</h2><p>三个属性都用来适应视图的水平或垂直大小，一个以视图的内容或尺寸为基础的布局比精确地指定视图范围更加方便。</p>
+<ul>
+<li>1）fill_parent</li>
+</ul>
+<p>设置一个构件的布局为fill_parent将强制性地使构件扩展，以填充布局单元内尽可能多的空间。这跟Windows控件的dockstyle属性大体一致。设置一个顶部布局或控件为fill_parent将强制性让它布满整个屏幕。</p>
+<ul>
+<li>2） wrap_content</li>
+</ul>
+<p>设置一个视图的尺寸为wrap_content将强制性地使视图扩展以显示全部内容。以TextView和ImageView控件为例，设置为wrap_content将完整显示其内部的文本和图像。布局元素将根据内容更改大小。设置一个视图的尺寸为wrap_content大体等同于设置Windows控件的Autosize属性为True。</p>
+<ul>
+<li>3）match_parent<br> Android2.2中match_parent和fill_parent是一个意思 .两个参数意思一样，match_parent更贴切，于是从2.2开始两个词都可以用。那么如果考虑低版本的使用情况你就需要用fill_parent了a</li>
+</ul>
+<h2 id="Android颜色对比">Android颜色对比</h2><p><a href="http://www.cnblogs.com/bluestorm/p/3644669.html" target="_blank" rel="external">http://www.cnblogs.com/bluestorm/p/3644669.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cie41dss2000dpwb2829fit7m" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-21-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -125,7 +199,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cie2kr61f000elob2sgmafuj5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cie41dss9000fpwb2vbb4efjc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -197,7 +271,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cie2kr61b000dlob280o42fak" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cie41dss4000epwb2dvbi637v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -420,7 +494,7 @@ tools:context=<span class="string">".MainActivity"</span> &gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cie2kr61i000glob2du4kczks" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cie41dsse000hpwb20s4klnse" class="article-share-link">Share</a>
       
       
     </footer>
@@ -615,7 +689,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cie2kr61l000hlob2m9cwvnx2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cie41dssj000ipwb2l6bf9pfn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -759,7 +833,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cie2kr61g000flob2ae078mbz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cie41dssb000gpwb2828weqnl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -906,7 +980,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cie2kr61m000ilob2eysesu8m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cie41dssn000jpwb2zc07kzl7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -964,7 +1038,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cie2kr61r000jlob2naidmt23" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cie41dssr000kpwb2kpqulylq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1180,7 +1254,7 @@ android:<span class="variable">versionName=</span><span class="string">"1.0"</sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cie2kr61v000klob2o1mt4sju" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cie41dssw000lpwb29bz83wna" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1545,53 +1619,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cie2kr61y000llob2x9ypmmh9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-10" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/10/2015-8-10/">部署代码到CentOS云服务器</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/10/2015-8-10/">
-    <time datetime="2015-08-10T01:31:22.000Z" itemprop="datePublished">2015-08-10</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="部署代码到CentOS云服务器">部署代码到CentOS云服务器</h1><h2 id="FTP通道">FTP通道</h2><p>用户需要使用FTP通道，将应用程序从用户自己的服务器上传到云服务器上。</p>
-<blockquote>
-<p>FTP（File Transfer Protocol，文件传输协议） 是 TCP/IP 协议组中的协议之一。FTP协议包括两个组成部分，其一为FTP服务器，其二为FTP客户端。其中FTP服务器用来存储文件，用户可以使用FTP客户端通过FTP协议访问位于FTP服务器上的资源。在开发网站的时候，通常利用FTP协议把网页或程序传到Web服务器上。此外，由于FTP传输效率非常高，在网络上传输大的文件时，一般也采用该协议。</p>
-<p>默认情况下FTP协议使用TCP端口中的 20和21这两个端口，其中20用于传输数据，21用于传输控制信息。但是，是否使用20作为传输数据的端口与FTP使用的传输模式有关，如果采用主动模式，那么数据传输端口就是20；如果采用被动模式，则具体最终使用哪个端口要服务器端和客户端协商决定。</p>
-</blockquote>
-<p><a href="http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="external">http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cie2kr623000mlob2waexfvw2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cie41dst0000mpwb22fiktq9b" class="article-share-link">Share</a>
       
       
     </footer>
