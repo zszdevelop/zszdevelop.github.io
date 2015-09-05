@@ -154,7 +154,8 @@
 <p>可以对一个AlertDialog设置title、message。</p>
 <p>不能直接通过AlertDialog的构造函数来生成一个AlertDialog</p>
 <p>一般生成的时候都是通过它的的一个内部静态类AlertDialog.Builder来构造的。</p>
-<h2 id="AlertDialog的使用_利用系统自带的进行设置">AlertDialog的使用 利用系统自带的进行设置</h2><pre><code><span class="keyword">package</span> com.zsz.develop.alertdialogdemo;
+<h2 id="AlertDialog的使用_利用系统自带的进行设置">AlertDialog的使用 利用系统自带的进行设置</h2><p>跟其他提示框一样要先创建成dialog，然后才可以show或者dismiss</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.alertdialogdemo;
 
     <span class="keyword">import</span> android.app.AlertDialog;
     <span class="keyword">import</span> android.content.DialogInterface;
@@ -250,7 +251,12 @@
 <span class="comment">// .......</span>
 }
 }
-</code></pre><h2 id=""> </h2><h2 id="AlertDialog的使用_自定义设置">AlertDialog的使用 自定义设置</h2><pre><code><span class="keyword">package</span> com.zsz.develop.alertdialogdemo;
+</code></pre><h3 id="CharSequence与String之间的区别">CharSequence与String之间的区别</h3><p>CharSequence与String都能用于定义字符串，但CharSequence的值是可读可写序列，而String的值是只读序列。</p>
+<h3 id="有message就没有item">有message就没有item</h3><h3 id="还可以设置单选框多选框">还可以设置单选框多选框</h3><p>单选框</p>
+<pre><code>.setSingleChoiceItems(<span class="keyword">new</span> <span class="built_in">String</span>[] {<span class="string">"选项1"</span>,<span class="string">"选项2"</span>,<span class="string">"选项3"</span>,<span class="string">"选项4"</span>}, <span class="number">0</span>, 
+</code></pre><p>多选框</p>
+<pre><code>.setMultiChoiceItems(<span class="keyword">new</span> <span class="built_in">String</span>[] {<span class="string">"选项1"</span>,<span class="string">"选项2"</span>,<span class="string">"选项3"</span>,<span class="string">"选项4"</span>}, <span class="keyword">null</span>, <span class="keyword">null</span>)
+</code></pre><h2 id="#">#</h2><h2 id=""> </h2><h2 id="AlertDialog的使用_自定义设置">AlertDialog的使用 自定义设置</h2><pre><code><span class="keyword">package</span> com.zsz.develop.alertdialogdemo;
 
 <span class="keyword">import</span> android.app.AlertDialog;
 <span class="keyword">import</span> android.content.DialogInterface;
