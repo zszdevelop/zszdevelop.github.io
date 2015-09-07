@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        56
+        57
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,53 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-7-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/2015-9-7-3/">2015/9/7/3</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/07/2015-9-7-3/">
+    <time datetime="2015-09-07T07:16:13.000Z" itemprop="datePublished">2015-09-07</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="adapter">adapter</h1><h2 id="通过ViewHolder">通过ViewHolder</h2><p>首先分析下ViewHolder的作用，通过convertView.setTag与convertView进行绑定，然后当convertView复用时，直接从与之对于的ViewHolder(getTag)中拿到convertView布局中的控件，省去了findViewById的时间~</p>
+<p>也就是说，实际上们每个convertView会绑定一个ViewHolder对象，这个viewHolder主要用于帮convertView存储布局中的控件。</p>
+<p>那么我们只要写出一个通用的ViewHolder，然后对于任意的convertView，提供一个对象让其setTag即可；</p>
+<p>既然是通用，那么我们这个ViewHolder就不可能含有各种控件的成员变量了，因为每个Item的布局是不同的，最好的方式是什么呢？</p>
+<p>提供一个容器，专门存每个Item布局中的所有控件，而且还要能够查找出来；既然需要查找，那么ListView肯定是不行了，需要一个键值对进行保存，键为控件的Id，值为控件的引用，相信大家立刻就能想到Map；但是我们不用Map，因为有更好的替代类，就是我们android提供的SparseArray这个类，和Map类似，但是比Map效率，不过键只能为Integer.</p>
+<p><strong>还需要重温好多边</strong></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/38902805/" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/38902805/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-3/" data-id="cie9tn4hu0003j0b247bqls55" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-7-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -246,7 +293,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-2/" data-id="cie9kmnz700036ob2m1dbdq6p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-2/" data-id="cie9tn4hy0004j0b2yewt7cob" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,7 +447,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cie9kmnz500026ob27yj4vwvm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cie9tn4hq0002j0b220zy5st6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -448,7 +495,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="cie9kmnzb00046ob2p74819ot" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="cie9tn4i70005j0b21mb212gl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +542,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cie9kmnzd00056ob2a0mjn3il" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cie9tn4ic0006j0b21nrnm3oz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -841,7 +888,7 @@ tools:<span class="variable">context=</span><span class="string">"com.example.nl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cie9kmnzg00066ob229k81qt6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cie9tn4ih0007j0b2rp4k0zlr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -992,7 +1039,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cie9kmnzq00096ob20fkjk3qy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cie9tn4io000aj0b2z9w3q3vf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1065,7 +1112,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cie9kmnzn00086ob2tngcg0og" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cie9tn4im0009j0b2im3e6nil" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1320,7 +1367,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cie9kmnzy000b6ob28y5a6x6w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cie9tn4iu000cj0b2ajyh2i1v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1398,120 +1445,7 @@ public <span class="type">View</span> onCreateView(<span class="type">LayoutInfl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cie9kmnzu000a6ob2ecq9jl86" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-27" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/27/2015-8-27/">listview没有显示，让按钮距离底部100dp，界面设置</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/27/2015-8-27/">
-    <time datetime="2015-08-27T00:47:41.000Z" itemprop="datePublished">2015-08-27</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/27">2015/8/27</h1><h2 id="listview没有显示">listview没有显示</h2><p>原因之一：</p>
-<p>父布局没改垂直导致错误，</p>
-<p>因为listview要不断向父类添加，没有看到</p>
-<h2 id="让按钮距离底部100dp">让按钮距离底部100dp</h2><pre><code>&lt;RelativeLayout
-android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>
-android:<span class="variable">layout_marginBottom=</span><span class="string">"100dp"</span>
-&gt;
-&lt;TextView
-    android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
-    android:<span class="variable">text=</span><span class="string">"外呼"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/tv_my_view_pager_Call"</span>
-    android:<span class="variable">textSize=</span><span class="string">"25sp"</span>
-    android:<span class="variable">gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">textColor=</span><span class="string">"#FFFFFF"</span>
-    android:<span class="variable">background=</span><span class="string">"@drawable/call_shape"</span>
-    android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
-
-    /&gt;
-
-
-
-
-
-&lt;TextView
-    android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
-    android:<span class="variable">text=</span><span class="string">"梯口机"</span>
-    android:<span class="variable">textSize=</span><span class="string">"30sp"</span>
-    android:<span class="variable">layout_toRightOf=</span><span class="string">"@id/tv_my_view_pager_Call"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/tv_my_view_pager_Stairs"</span>
-    android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
-    android:<span class="variable">gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">textColor=</span><span class="string">"#FFFFFF"</span>
-    android:<span class="variable">background=</span><span class="string">"@drawable/stairs_shape"</span>
-    /&gt;
-
-&lt;/RelativeLayout&gt;
-</code></pre><h2 id="界面设置方法之一">界面设置方法之一</h2><p>几个文本宽设置，要先设置父级的高（例如50dp），再让布局立面的文字按钮等垂直居中。</p>
-<h2 id="界面设置方法之二">界面设置方法之二</h2><p>每个文本之间的间隔线</p>
-<pre><code>&lt;View
-       android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-       android:<span class="variable">layout_height=</span><span class="string">"0.5dp"</span>
-       android:<span class="variable">background=</span><span class="string">"#cdcdcd"</span>&gt;&lt;/View&gt;
-</code></pre><h2 id="界面设置之三_—-按钮变色">界面设置之三 —-按钮变色</h2><p>给他在drawable文件中设置一个按钮按下的xml文件，并设置里面按钮按下的变化。</p>
-<p>例如：</p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> &gt;</span>
-    <span class="comment">&lt;!--&lt;item android:state_selected="true" android:drawable="@drawable/btn_blue_press" /&gt;--&gt;</span>
-<span class="comment">&lt;!--&lt;item android:drawable="@drawable/appbar_sd_selected" android:state_checked="true"/&gt;--&gt;</span>
-<span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/btn_blue_press"</span>/&gt;</span>
-<span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/newbtn_blue"</span> /&gt;</span>
-<span class="tag">&lt;/<span class="title">selector</span>&gt;</span>
-</code></pre><p>再在按钮图标上设置背景直接改为这个文件</p>
-<h2 id="界面设置之四——-使用styles是管理">界面设置之四——-使用styles是管理</h2><pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="tag">&lt;<span class="title">resources</span>&gt;</span>
-<span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"mine_cicyle_style"</span>&gt;</span><span class="css">
-    &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="rule"><span class="attribute">android</span>:<span class="value">layout_width<span class="string">"&gt;90dp&lt;/item&gt;
-    &lt;item name="</span>android:layout_height<span class="string">"&gt;90dp&lt;/item&gt;
-    &lt;item name="</span>android:orientation<span class="string">"&gt;vertical&lt;/item&gt;
-</span></span></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">resources</span>&gt;</span>
-</code></pre><p>当调用的时候：    </p>
-<pre><code><span class="setting">style=<span class="value"><span class="string">"@style/mine_cicyle_style"</span></span></span>
-</code></pre><h2 id="拉界面设置之五——editText自动适配">拉界面设置之五——editText自动适配</h2><p>配置editText的时候，他两边都有控件。这时候设置的时候就要让宽度为0dp，权重为1.只有他设置</p>
-<pre><code>&lt;EditText
-        android:<span class="variable">layout_width=</span><span class="string">"0dp"</span>
-        android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-
-        /&gt;
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cie9kmo01000c6ob2j15xgovg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cie9tn4ir000bj0b2xn113gjo" class="article-share-link">Share</a>
       
       
     </footer>
