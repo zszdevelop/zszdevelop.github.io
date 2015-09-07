@@ -5,15 +5,16 @@
   
   <title>2015/9/7 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="this zszdeveloper blog��welcome��">
+  <meta name="description" content="2015/9/7问题集理解 Android Build 系统Android Build 系统是用来编译 Android 系统，Android SDK 以及相关文档的一套框架。众所周知，Android 是一个开源的操作系统。Android 的源码中包含了许许多多的模块。 不同产商的不同设备对于 Android 系统的定制都是不一样的。如何将这些模块统一管理起来，如何能够在不同的操作系统上进行编译，如">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2015/9/7">
 <meta property="og:url" content="http://yoursite.com/2015/09/07/2015-9-7/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="this zszdeveloper blog��welcome��">
+<meta property="og:description" content="2015/9/7问题集理解 Android Build 系统Android Build 系统是用来编译 Android 系统，Android SDK 以及相关文档的一套框架。众所周知，Android 是一个开源的操作系统。Android 的源码中包含了许许多多的模块。 不同产商的不同设备对于 Android 系统的定制都是不一样的。如何将这些模块统一管理起来，如何能够在不同的操作系统上进行编译，如">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/81eeb0fcgw1evtooxq3scj20ku0rstai.jpg">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2015/9/7">
-<meta name="twitter:description" content="this zszdeveloper blog��welcome��">
+<meta name="twitter:description" content="2015/9/7问题集理解 Android Build 系统Android Build 系统是用来编译 Android 系统，Android SDK 以及相关文档的一套框架。众所周知，Android 是一个开源的操作系统。Android 的源码中包含了许许多多的模块。 不同产商的不同设备对于 Android 系统的定制都是不一样的。如何将这些模块统一管理起来，如何能够在不同的操作系统上进行编译，如">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -86,7 +87,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        55
+        56
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -137,11 +138,125 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="2015/9/7问题集">2015/9/7问题集</h1><h2 id="理解_Android_Build_系统">理解 Android Build 系统</h2><p>Android Build 系统是用来编译 Android 系统，Android SDK 以及相关文档的一套框架。众所周知，Android 是一个开源的操作系统。Android 的源码中包含了许许多多的模块。 不同产商的不同设备对于 Android 系统的定制都是不一样的。如何将这些模块统一管理起来，如何能够在不同的操作系统上进行编译，如何在编译时能够支持面向不同的硬件设备，不同的编译类型，且还要提供面向各个产商的定制扩展，是非常有难度的。 但 Android Build 系统很好的解决了这些问题，这里面有很多值得我们开发人员学习的地方。</p>
+<h2 id="Build的参数：">Build的参数：</h2><p><strong>、内部类：</strong></p>
+<p>1、Build.VERSION    各种版本字符串</p>
+<p>2、Build.VERSION_CODES    目前已知的版本代码的枚举类</p>
+<p><strong>静态属性</strong></p>
+<p>1、BOARD   主板：The name of the underlying board, like “goldfish”.</p>
+<p>2、BOOTLOADER 系统启动程序版本号：The system bootloader version number.</p>
+<p>3、BRAND  系统定制商：The consumer-visible brand with which the product/hardware will be associated, if any.</p>
+<p>4、CPU_ABI  cpu指令集：The name of the instruction set (CPU type + ABI convention) of native code.</p>
+<p>5、CPU_ABI2 cpu指令集2：The name of the second instruction set (CPU type + ABI convention) of native code.</p>
+<p>6、DEVICE 设备参数：The name of the industrial design.</p>
+<p>7、DISPLAY  显示屏参数：A build ID string meant for displaying to the user</p>
+<p>8、FINGERPRINT   唯一识别码：A string that uniquely identifies this build. Do not attempt to parse this value.</p>
+<p>9、HARDWARE   硬件名称：The name of the hardware (from the kernel command line or /proc).</p>
+<p>10、HOST</p>
+<p>11、ID  修订版本列表：Either a changelist number, or a label like “M4-rc20”.</p>
+<p>12、MANUFACTURER  硬件制造商：The manufacturer of the product/hardware.</p>
+<p>13、MODEL  版本即最终用户可见的名称：The end-user-visible name for the end product.</p>
+<p>14、PRODUCT 整个产品的名称：The name of the overall product.</p>
+<p>15、RADIO  无线电固件版本：The radio firmware version number.   在API14后已过时。使用 getRadioVersion()代替。</p>
+<p>16、SERIAL 硬件序列号：A hardware serial number, if available. Alphanumeric only, case-insensitive.</p>
+<p>17、TAGS  描述build的标签,如未签名，debug等等。：Comma-separated tags describing the build, like “unsigned,debug”.</p>
+<p>18、TIME</p>
+<p>19、TYPE build的类型：The type of build, like “user” or “eng”.</p>
+<p>20、USER</p>
+<h2 id="Build小Demo">Build小Demo</h2><pre><code>package com.zsz.develop.builddemo;
+
+<span class="keyword">import</span> android.os.Build;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="component">public class MainActivity <span class="keyword">extends</span> AppCompatActivity {
+private TextView tvBuild01,tvBuild02,tvBuild03,tvBuild04,tvBuild05,tvBuild06,tvBuild07;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super<span class="string">.onCreate(savedInstanceState)</span>;
+    setContentView(R<span class="string">.layout.activity_main)</span>;
+    tvBuild01= (TextView) findViewById(R<span class="string">.id.tvBuild01)</span>;
+    tvBuild02= (TextView) findViewById(R<span class="string">.id.tvBuild02)</span>;
+    tvBuild03= (TextView) findViewById(R<span class="string">.id.tvBuild03)</span>;
+    tvBuild04= (TextView) findViewById(R<span class="string">.id.tvBuild04)</span>;
+    tvBuild05= (TextView) findViewById(R<span class="string">.id.tvBuild05)</span>;
+    tvBuild06= (TextView) findViewById(R<span class="string">.id.tvBuild06)</span>;
+    tvBuild07= (TextView) findViewById(R<span class="string">.id.tvBuild07)</span>;
+
+    tvBuild01<span class="string">.setText("版本号：</span> "+ Build<span class="string">.VERSION.SDK_INT)</span>;
+    tvBuild02<span class="string">.setText("版本字符串号：</span> "+ Build<span class="string">.VERSION.RELEASE)</span>;
+    tvBuild03<span class="string">.setText("屏幕参数：</span> "+ Build<span class="string">.DISPLAY)</span>;
+    tvBuild04<span class="string">.setText("主板：</span> "+  Build<span class="string">.BOARD)</span>;
+    tvBuild05<span class="string">.setText("android系统定制商：</span> "+ Build<span class="string">.BRAND)</span>;
+    tvBuild06<span class="string">.setText("硬件名称：</span> "+Build<span class="string">.FINGERPRINT)</span>;
+    tvBuild07<span class="string">.setText("手机制造商：</span> "+ Build<span class="string">.PRODUCT)</span>;
+
+
+
+
+}</span>
+
+}
+</code></pre><p><img src="http://ww4.sinaimg.cn/large/81eeb0fcgw1evtooxq3scj20ku0rstai.jpg" alt=""></p>
+<h2 id="getWindow()-setFlags()设置窗体">getWindow().setFlags()设置窗体</h2><p>//设置窗体全屏</p>
+<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);</p>
+<p>//设置窗体始终点亮</p>
+<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,</p>
+<pre><code>WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+</code></pre><p>//设置窗体背景模糊</p>
+<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,<br>                WindowManager.LayoutParams.FLAG_BLUR_BEHIND);</p>
+<h2 id="Android的kitkat是什么？">Android的kitkat是什么？</h2><p>Android 4.4，是由Google公司制作和研发的代号为KitKat的手机操作系统</p>
+<h2 id="android4-4以后的透明状态栏一体化">android4.4以后的透明状态栏一体化</h2><pre><code><span class="comment">//信号栏一体化</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">initSystembarTint</span><span class="params">()</span> </span>{
+    <span class="comment">//kitkat代表android4.4.大于4.4才可以设置这些东西</span>
+    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);<span class="comment">//设置透明状态栏</span>
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);<span class="comment">//设置透明导航栏</span>
+        <span class="comment">// 创建状态栏的管理实例</span>
+        SystemBarTintManager tintManager = <span class="keyword">new</span> SystemBarTintManager(<span class="keyword">this</span>);
+        <span class="comment">// 激活状态栏设置</span>
+        tintManager.setStatusBarTintEnabled(<span class="keyword">true</span>);
+        <span class="comment">// 激活导航栏设置  </span>
+        tintManager.setStatusBarTintColor(Color.parseColor(<span class="string">"#3B87C5"</span>));
+    }
+}
+</code></pre><h2 id="Android_动画（anim）">Android 动画（anim）</h2><p> Android的animation由四种类型组成：alpha(透明度)、scale(缩放)、translate(位移)、rotate(旋转)</p>
+<set xmlns:android="http://schemas.android.com/apk/res/android"><br>  <alpha><br>  <scale><br>  <translate><br>  <rotate><br></rotate></translate></scale></alpha></set>
+
+
+<h2 id="Animation的简单使用">Animation的简单使用</h2><p>实现左边进入效果</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> &gt;</span>
+
+    <span class="tag">&lt;<span class="title">translate</span>
+        <span class="attribute">android:duration</span>=<span class="value">"300"</span>
+        <span class="attribute">android:fromXDelta</span>=<span class="value">"-100%p"</span>
+        <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/decelerate_interpolator"</span>
+        <span class="attribute">android:toXDelta</span>=<span class="value">"0%p"</span> /&gt;</span>
+
+<span class="tag">&lt;/<span class="title">set</span>&gt;</span>
+</code></pre><p>实现右边退出效果</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">translate</span>
+
+        <span class="attribute">android:toXDelta</span>=<span class="value">"-100%p"</span>
+        <span class="attribute">android:toYDelta</span>=<span class="value">"0%p"</span>
+        <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/decelerate_interpolator"</span>
+        <span class="attribute">android:duration</span>=<span class="value">"100"</span>
+
+        /&gt;</span>
+<span class="tag">&lt;/<span class="title">set</span>&gt;</span>
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cie99giuo0002kwb2jslga9yu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cie9kmnz500026ob27yj4vwvm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -149,6 +264,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/09/07/2015-9-7-2/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/9/9-2
+        
+      </div>
+    </a>
   
   
     <a href="/2015/09/06/2015-9-6/" id="article-nav-older" class="article-nav-link-wrap">
