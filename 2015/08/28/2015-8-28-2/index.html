@@ -5,30 +5,27 @@
   
   <title>pager和fragment绑定使用的完整代码。 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="pager和fragment绑定使用的完整代码。Fragment的代码，没什么特别就只是一个界面而已。
+  <meta name="description" content="pager和fragment绑定使用的完整代码。Fragment的代码，没什么特别就只是一个界面而已。但是这里要实现的方法和activity有点不同是实现OnCreateView(activity是实现OnCreate)
 package com.zsz.develop.wisdomcommunity.main;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.F">
+import android.s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="pager和fragment绑定使用的完整代码。">
 <meta property="og:url" content="http://yoursite.com/2015/08/28/2015-8-28-2/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="pager和fragment绑定使用的完整代码。Fragment的代码，没什么特别就只是一个界面而已。
+<meta property="og:description" content="pager和fragment绑定使用的完整代码。Fragment的代码，没什么特别就只是一个界面而已。但是这里要实现的方法和activity有点不同是实现OnCreateView(activity是实现OnCreate)
 package com.zsz.develop.wisdomcommunity.main;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.F">
+import android.s">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pager和fragment绑定使用的完整代码。">
-<meta name="twitter:description" content="pager和fragment绑定使用的完整代码。Fragment的代码，没什么特别就只是一个界面而已。
+<meta name="twitter:description" content="pager和fragment绑定使用的完整代码。Fragment的代码，没什么特别就只是一个界面而已。但是这里要实现的方法和activity有点不同是实现OnCreateView(activity是实现OnCreate)
 package com.zsz.develop.wisdomcommunity.main;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.F">
+import android.s">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -101,7 +98,7 @@ import android.support.v4.app.F">
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        53
+        55
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -152,7 +149,7 @@ import android.support.v4.app.F">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="pager和fragment绑定使用的完整代码。">pager和fragment绑定使用的完整代码。</h2><p>Fragment的代码，没什么特别就只是一个界面而已。</p>
+        <h2 id="pager和fragment绑定使用的完整代码。">pager和fragment绑定使用的完整代码。</h2><p>Fragment的代码，没什么特别就只是一个界面而已。<br>但是这里要实现的方法和activity有点不同是实现OnCreateView(activity是实现OnCreate)</p>
 <pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
 
 <span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
@@ -178,7 +175,12 @@ public <span class="type">View</span> onCreateView(<span class="type">LayoutInfl
 
 }
 }
-</code></pre><h2 id="pager页面">pager页面</h2><pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
+</code></pre><h2 id="pager页面">pager页面</h2><ul>
+<li>1.定义好两个list一个装view、一个装fragment</li>
+<li>2.对于pager这种需要后期添加的都需要对他设置adapter</li>
+<li>3.pager是针对fragment设置的adapter所以他就要使用fragment的适配器。中间要加个管理器。</li>
+</ul>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
 
 <span class="keyword">import</span> android.app.FragmentManager;
 <span class="keyword">import</span> android.app.FragmentTransaction;
@@ -313,12 +315,60 @@ ArrayList&lt;View&gt; viewContainter = <span class="keyword">new</span> ArrayLis
    }
 
 }
+
+}
+</code></pre><p>对于viewpager的layout</p>
+<pre><code>&lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>
+    android:id=<span class="string">"@+id/viewPager"</span>
+    android:layout_width=<span class="string">"wrap_content"</span>
+    android:layout_height=<span class="string">"0dp"</span>
+    android:layout_weight=<span class="string">"1"</span>
+    &gt;
+
+&lt;/android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>&gt;
+</code></pre><h2 id="最简单的pager和fragment的结合使用">最简单的pager和fragment的结合使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.exercisedemo;
+
+<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.support.v4.app.<span class="type">FragmentPagerAdapter</span>;
+<span class="keyword">import</span> android.support.v4.view.<span class="type">ViewPager</span>;
+<span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+
+<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">ViewPagerActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">ViewPager</span> viewPager;
+<span class="keyword">private</span> <span class="type">ArrayList</span>&lt;<span class="type">Fragment</span>&gt; fragmentArrayList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+<span class="keyword">private</span> <span class="type">ArrayList</span>&lt;<span class="type">View</span>&gt; viewArrayList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_view_pager);
+    viewPager= (<span class="type">ViewPager</span>) findViewById(<span class="type">R</span>.id.vp);
+    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment</span>());
+    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment02</span>());
+    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment</span>());
+</code></pre><p>//        viewArrayList.add()<br>        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {<br>            @Override<br>            public Fragment getItem(int i) {<br>                return fragmentArrayList.get(i);<br>            }</p>
+<pre><code>        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+            <span class="function"><span class="keyword">return</span> fragmentArrayList.<span class="title">size</span><span class="params">()</span></span>;
+        }
+    });
+
+}
 </code></pre><p>}</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cie41dsre0008pwb201ttrs6h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cie99give000akwb2llfe5gy6" class="article-share-link">Share</a>
       
       
     </footer>
