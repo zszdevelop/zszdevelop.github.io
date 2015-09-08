@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        57
+        63
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,737 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-24" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/24/2015-8-24/">FrameLayout(框架布局)，shape包裹框的设置，ScrollView让页面也可以滚动拖，使用include重用UI組件，在textView上面在添加一张图片</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/24/2015-8-24/">
+    <time datetime="2015-08-24T02:20:42.000Z" itemprop="datePublished">2015-08-24</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/24问题集">2015/8/24问题集</h1><h2 id="FrameLayout(框架布局)">FrameLayout(框架布局)</h2><p>框架布局是最简单的布局形式。所有添加到这个布局中的视图都以层叠的方式显示。第一个添加的控件被放在最底层，最后一个添加到框架布局中的视图显示在最顶层，上一层的控件会覆盖下一层的控件。这种显示方式有些类似于堆栈。</p>
+<h2 id="shape包裹框的设置">shape包裹框的设置</h2><p>xml要添加在drawable</p>
+<p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"><br>    <!-- 圆角 --><br>    <corners android:radius="5dp"><br>    <!-- 背景色 --><br>    <solid android:color="#FFFFFF"><br>    <!-- 线框 --><br>    <stroke android:color="#EEEEEE" android:width="0.5dp"><br><br></stroke></solid></corners></shape>
+
+<h2 id="ScrollView让页面也可以滚动拖">ScrollView让页面也可以滚动拖</h2><pre><code> &lt;ScrollView
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>&gt;
+    &lt;LinearLayout
+        android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
+
+    //这里面填写要滚动的内容
+ &lt;/ScrollView&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h2 id="使用include重用UI組件">使用include重用UI組件</h2><p>把需要重用的Ui组件单独列在layout中</p>
+<p>当再次需要使用的时候，在其他布局中使用include来调用。</p>
+<pre><code><span class="keyword">include</span> android:id=<span class="string">"@+id/title"</span> layout=<span class="string">"@layout/title_include"</span>&gt;&lt;/<span class="keyword">include</span>&gt;
+</code></pre><h2 id="在textView上面在添加一张图片">在textView上面在添加一张图片</h2><p>android:drawableTop=”@drawable/3to1”</p>
+<h2 id="android布局—Android_fill_parent、wrap_content和match_parent的区别">android布局—Android fill_parent、wrap_content和match_parent的区别</h2><p>三个属性都用来适应视图的水平或垂直大小，一个以视图的内容或尺寸为基础的布局比精确地指定视图范围更加方便。</p>
+<ul>
+<li>1）fill_parent</li>
+</ul>
+<p>设置一个构件的布局为fill_parent将强制性地使构件扩展，以填充布局单元内尽可能多的空间。这跟Windows控件的dockstyle属性大体一致。设置一个顶部布局或控件为fill_parent将强制性让它布满整个屏幕。</p>
+<ul>
+<li>2） wrap_content</li>
+</ul>
+<p>设置一个视图的尺寸为wrap_content将强制性地使视图扩展以显示全部内容。以TextView和ImageView控件为例，设置为wrap_content将完整显示其内部的文本和图像。布局元素将根据内容更改大小。设置一个视图的尺寸为wrap_content大体等同于设置Windows控件的Autosize属性为True。</p>
+<ul>
+<li>3）match_parent<br> Android2.2中match_parent和fill_parent是一个意思 .两个参数意思一样，match_parent更贴切，于是从2.2开始两个词都可以用。那么如果考虑低版本的使用情况你就需要用fill_parent了a</li>
+</ul>
+<h2 id="Android颜色对比">Android颜色对比</h2><p><a href="http://www.cnblogs.com/bluestorm/p/3644669.html" target="_blank" rel="external">http://www.cnblogs.com/bluestorm/p/3644669.html</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cieb6up3r000ntob2co8nv0k5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-21-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="百度地图开发">百度地图开发</h1><p>自己回去看发开文档吧</p>
+<p><a href="http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap" target="_blank" rel="external">http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cieb6up41000ptob29q41c6q5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-21" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/21/2015-8-21/">android获取SHA1和MD5，LinearLayout中的控件对齐问题，Android之事件监听的使用(OnClickListener)</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/21/2015-8-21/">
+    <time datetime="2015-08-21T03:22:27.000Z" itemprop="datePublished">2015-08-21</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/21问题集">2015/8/21问题集</h1><h2 id="android获取SHA1和MD5">android获取SHA1和MD5</h2><p>android studio安全码，在许多申请key的时候都要用到安全码。例如百度地图等</p>
+<p>具体的操作方法：</p>
+<ul>
+<li>1.找到debug.keystore的位置，默认位置在C:\Users\shengzhong.android</li>
+<li>2.cmd打开命令提示符，cd到keystore的位置</li>
+<li>3.输入 keytool -list -v -keystore debug.keystore</li>
+<li>回车就显示了要的SHA1和MD5</li>
+</ul>
+<h2 id="java-lang-IllegalArgumentException:_No_config_chosen">java.lang.IllegalArgumentException: No config chosen</h2><p>这种情况：</p>
+<p>解决1.模拟器选项勾选gpu</p>
+<p>解决2.用真机测试</p>
+<h2 id="LinearLayout中的控件对齐问题">LinearLayout中的控件对齐问题</h2><p>LinearLayout中的控件对齐，如果他是水平布局，那么当他向左向右对齐的时候。他就不行，水平没有边界</p>
+<p>解决办法：用相对布局啊！！RelativeLayout</p>
+<p>android:layout_alignParentLeft 如果该值为true，则将该控件的左边与父控件的左边对齐<br>android:layout_alignParentRight 如果该值为true，则将该控件的右边与父控件的右边对齐</p>
+<h2 id="Android之事件监听的使用(OnClickListener)">Android之事件监听的使用(OnClickListener)</h2><ul>
+<li>实现implements View.OnClickListener接口</li>
+<li>并实现OnClick方法。</li>
+<li>取得每个的id，并根据id去判断</li>
+</ul>
+<pre><code><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+    <span class="keyword">int</span> id=view.getId();
+    <span class="keyword">switch</span> (id){
+        <span class="keyword">case</span> R.id.tvCloud:
+            pager.setCurrentItem(0);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> R.id.tvDoor:
+            pager.setCurrentItem(1);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> R.id.tvMy:
+            pager.setCurrentItem(2);
+            <span class="keyword">break</span>;
+    }
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cieb6up3v000otob21tgl5aqm" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-20-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/20/2015-8-20-3/">ViewPager,ViewPager实现的功能,setOnPageChangeListener的三个方法,pager error</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/20/2015-8-20-3/">
+    <time datetime="2015-08-20T09:28:16.000Z" itemprop="datePublished">2015-08-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ViewPager">ViewPager</h1><h2 id="ViewPager的简介">ViewPager的简介</h2><p> ViewPager是android扩展包v4包中的类，这个类可以让用户左右切换当前的view。</p>
+<p>所以这时候定义View要这么定义android.support.v4.view.ViewPager</p>
+<p>我们首先来看看API对于这个类的表述：</p>
+<blockquote>
+<p>Layout manager that allows the user to flip left and right through pages of data. You supply an implementation of a PagerAdapter to generate the pages that the view shows.<br>    Note this class is currently under early design and development. The API will likely change in later updates of the compatibility library, requiring changes to the source code of apps when they are compiled against the newer version.<br>    ViewPager is most often used in conjunction with Fragment, which is a convenient way to supply and manage the lifecycle of each page. There are standard adapters implemented for using fragments with the ViewPager, which cover the most common use cases. These are FragmentPagerAdapter andFragmentStatePagerAdapter; each of these classes have simple code showing how to build a full user interface with them.</p>
+</blockquote>
+<p>在编写ViewPager的应用的使用，还需要使用两个组件类分别是PagerTitleStrip类和PagerTabStrip类，PagerTitleStrip类直接继承自ViewGroup类，而PagerTabStrip类继承PagerTitleStrip类，所以这两个类也是容器类。但是有一点需要注意，在定义XML的layout的时候，这两个类必须是ViewPager标签的子标签，不然会出错。</p>
+<h2 id="ViewPager实现的功能">ViewPager实现的功能</h2><p>ViewPager类提供了多界面切换的新效果，<br>新效果有如下特征：</p>
+<ul>
+<li><1>当前显示一组界面中的其中一个界面；</1></li>
+<li><2>当用户通过左右滑动界面时，当前的屏幕显示当前界面和下一个界面的一部分；</2></li>
+<li><3>滑动结束后，界面自动跳转到当前选择的界面中。</3></li>
+</ul>
+<h2 id="setOnPageChangeListener的三个方法">setOnPageChangeListener的三个方法</h2><ul>
+<li><p>1.onPageSelected(int position)：这个方法有一个参数position，代表哪个页面被选中。当用手指滑动翻页的时候，如果翻动成功了（滑动的距离够长），手指抬起来就会立即执行这个方法，position就是当前滑动到的页面。如果直接setCurrentItem翻页，那position就和setCurrentItem的参数一致，这种情况在onPageScrolled执行方法前就会立即执行。</p>
+</li>
+<li><p>2.onPageScrolled(int position,float positionOffset, int positionOffsetPixels)：这个方法会在屏幕滚动过程中不断被调用。<br>有三个参数，第一个position，这个参数要特别注意一下。当用手指滑动时，如果手指按在页面上不动，position和当前页面index是一致的；如果手指向左拖动（相应页面向右翻动），这时候position大部分时间和当前页面是一致的，只有翻页成功的情况下最后一次调用才会变为目标页面；如果手指向右拖动（相应页面向左翻动），这时候position大部分时间和目标页面是一致的，只有翻页不成功的情况下最后一次调用才会变为原页面。<br>当直接设置setCurrentItem翻页时，如果是相邻的情况（比如现在是第二个页面，跳到第一或者第三个页面），如果页面向右翻动，大部分时间是和当前页面是一致的，只有最后才变成目标页面；如果向左翻动，position和目标页面是一致的。这和用手指拖动页面翻动是基本一致的。<br>如果不是相邻的情况，比如我从第一个页面跳到第三个页面，position先是0，然后逐步变成1，然后逐步变成2；我从第三个页面跳到第一个页面，position先是1，然后逐步变成0，并没有出现为2的情况。<br>positionOffset是当前页面滑动比例，如果页面向右翻动，这个值不断变大，最后在趋近1的情况后突变为0。如果页面向左翻动，这个值不断变小，最后变为0。<br>positionOffsetPixels是当前页面滑动像素，变化情况和positionOffset一致。</p>
+</li>
+<li><p>3.onPageScrollStateChanged(int state)：这个方法在手指操作屏幕的时候发生变化。有三个值：0（END）,1(PRESS) , 2(UP) 。<br>当用手指滑动翻页时，手指按下去的时候会触发这个方法，state值为1，手指抬起时，如果发生了滑动（即使很小），这个值会变为2，然后最后变为0 。总共执行这个方法三次。一种特殊情况是手指按下去以后一点滑动也没有发生，这个时候只会调用这个方法两次，state值分别是1,0 。<br>当setCurrentItem翻页时，会执行这个方法两次，state值分别为2 , 0 。</p>
+</li>
+</ul>
+<p><strong>三个方法的执行顺序为</strong>：用手指拖动翻页时，最先执行一遍onPageScrollStateChanged（1），然后不断执行onPageScrolled，放手指的时候，直接立即执行一次onPageScrollStateChanged（2），然后立即执行一次onPageSelected，然后再不断执行onPageScrollStateChanged，最后执行一次onPageScrollStateChanged（0）。<br>其它的情况由这个可以推出来，不再赘述。</p>
+<h2 id="pager-setCurrentItem(0)的使用">pager.setCurrentItem(0)的使用</h2><p> pager.setCurrentItem(0)直接设置显示的页面。0代表第一个页面，1代表第二个。</p>
+<h2 id="简单小实例">简单小实例</h2><p>layout.xml:</p>
+<pre><code>&lt;RelativeLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span>
+android:layout_width=<span class="string">"match_parent"</span>
+android:layout_height=<span class="string">"match_parent"</span>
+tools:context=<span class="string">".MainActivity"</span> &gt;
+
+&lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>
+    android:id=<span class="string">"@+id/viewpager"</span>
+    android:layout_width=<span class="string">"wrap_content"</span>
+    android:layout_height=<span class="string">"wrap_content"</span> &gt;
+
+    &lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.PagerTabStrip</span>
+        android:id=<span class="string">"@+id/tabstrip"</span>
+        android:layout_width=<span class="string">"wrap_content"</span>
+        android:layout_height=<span class="string">"50dip"</span>
+        android:gravity=<span class="string">"center"</span> /&gt;
+&lt;/android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>MainActivity.java</p>
+<ul>
+<li><p>1.先找到viewPager和pagerTabStrip。</p>
+</li>
+<li><p>2.定义两个Array来当容器一个装载view一个装载title</p>
+</li>
+<li><p>3.pagerTabStrip对设置</p>
+</li>
+<li>4.把view和title装载进去</li>
+<li><p>5.设置Adapter</p>
+<p>  package com.example.android_viewpager1;</p>
+<p>  import java.util.ArrayList;</p>
+<p>  import android.annotation.SuppressLint;<br>  import android.app.Activity;<br>  import android.os.Bundle;<br>  import android.support.v4.view.PagerAdapter;<br>  import android.support.v4.view.PagerTabStrip;<br>  import android.support.v4.view.ViewPager;<br>  import android.support.v4.view.ViewPager.OnPageChangeListener;<br>  import android.util.Log;<br>  import android.view.LayoutInflater;<br>  import android.view.View;<br>  import android.view.ViewGroup;</p>
+<p>  public class MainActivity extends Activity {</p>
+<p>  ViewPager pager = null;<br>  PagerTabStrip tabStrip = null;<br>  ArrayList<view> viewContainter = new ArrayList<view>();<br>  ArrayList<string> titleContainer = new ArrayList<string>();<br>  public String TAG = “tag”;</string></string></view></view></p>
+<p>  @SuppressLint(“ResourceAsColor”)<br>  @Override<br>  protected void onCreate(Bundle savedInstanceState) {</p>
+<pre><code>  <span class="keyword">super</span>.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+
+  pager = (ViewPager) <span class="keyword">this</span>.findViewById(R.id.viewpager);
+  tabStrip = (PagerTabStrip) <span class="keyword">this</span>.findViewById(R.id.tabstrip);
+  <span class="comment">//取消tab下面的长横线</span>
+  tabStrip.setDrawFullUnderline(<span class="keyword">false</span>);
+  <span class="comment">//设置tab的背景色</span>
+  tabStrip.setBackgroundColor(<span class="keyword">this</span>.getResources().getColor(R.color.bg));
+  <span class="comment">//设置当前tab页签的下划线颜色</span>
+  tabStrip.setTabIndicatorColor(<span class="keyword">this</span>.getResources().getColor(R.color.red));
+  tabStrip.setTextSpacing(<span class="number">200</span>);
+
+  View view1 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab1, <span class="keyword">null</span>);
+  View view2 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab2, <span class="keyword">null</span>);
+  View view3 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab3, <span class="keyword">null</span>);
+  View view4 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab4, <span class="keyword">null</span>);
+<span class="comment">//viewpager开始添加view</span>
+  viewContainter.add(view1);
+  viewContainter.add(view2);
+  viewContainter.add(view3);
+  viewContainter.add(view4);
+<span class="comment">//页签项</span>
+  titleContainer.add(<span class="string">"网易新闻"</span>);
+  titleContainer.add(<span class="string">"网易体育"</span>);
+  titleContainer.add(<span class="string">"网易财经"</span>);
+  titleContainer.add(<span class="string">"网易女人"</span>);
+
+  pager.setAdapter(<span class="keyword">new</span> PagerAdapter() {
+
+      <span class="comment">//viewpager中的组件数量</span>
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+          <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">size</span><span class="params">()</span></span>;
+      }
+    <span class="comment">//滑动切换的时候销毁当前的组件</span>
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position,
+              Object object)</span> </span>{
+          ((ViewPager) container).removeView(viewContainter.get(position));
+      }
+    <span class="comment">//每次滑动的时候生成的组件</span>
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function">Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>{
+          ((ViewPager) container).addView(viewContainter.get(position));
+          <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">get</span><span class="params">(position)</span></span>;
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isViewFromObject</span><span class="params">(View arg0, Object arg1)</span> </span>{
+          <span class="keyword">return</span> arg0 == arg1;
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getItemPosition</span><span class="params">(Object object)</span> </span>{
+          <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">getItemPosition</span><span class="params">(object)</span></span>;
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function">CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>{
+          <span class="function"><span class="keyword">return</span> titleContainer.<span class="title">get</span><span class="params">(position)</span></span>;
+      }
+  });
+
+  pager.setOnPageChangeListener(<span class="keyword">new</span> OnPageChangeListener() {
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrollStateChanged</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
+          Log.d(TAG, <span class="string">"--------changed:"</span> + arg0);
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrolled</span><span class="params">(<span class="keyword">int</span> arg0, <span class="keyword">float</span> arg1, <span class="keyword">int</span> arg2)</span> </span>{
+          Log.d(TAG, <span class="string">"-------scrolled arg0:"</span> + arg0);
+          Log.d(TAG, <span class="string">"-------scrolled arg1:"</span> + arg1);
+          Log.d(TAG, <span class="string">"-------scrolled arg2:"</span> + arg2);
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageSelected</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
+          Log.d(TAG, <span class="string">"------selected:"</span> + arg0);
+      }
+  });
+</code></pre><p>  }</p>
+<p>  }</p>
+</li>
+</ul>
+<p>程式中要使用ViewPager來顯示資訊必須自己繼承PagerAdapter，來完成手指滑動切換視窗的動作。 </p>
+<h2 id="ViewPage_:Required_method_instantiateItem_was_not_overridde">ViewPage :Required method instantiateItem was not overridde</h2><p>错误代码提示</p>
+<pre><code>java.lang.<span class="type">UnsupportedOperationException</span>: <span class="type">Required</span> <span class="keyword">method</span> instantiateItem was <span class="keyword">not</span> overridden
+</code></pre><p>解决办法<br>把return super.instantiateItem(container, position);</p>
+<p>换成：</p>
+<p>return container;</p>
+<h2 id="pager错误之二">pager错误之二</h2><p>java.lang.UnsupportedOperationException: Required method destroyItem was not overridden</p>
+<p>这里说必须的方法没有实现，因为先super了。所以就没有实现了。把super删除就可以实现</p>
+<pre><code><span class="comment">//每次滑动删除的页面</span>
+    @<span class="function">Override
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object <span class="keyword">object</span>)</span> </span>{
+
+<span class="comment">//就是删除这行        super.destroyItem(container, position, object);</span>
+        ((ViewPager) container).removeView(viewContainter.<span class="keyword">get</span>(position));
+    }
+</code></pre><h2 id="pager错误之三">pager错误之三</h2><p>页面没有显示出来，</p>
+<p>解决过程</p>
+<ul>
+<li>1.查看页面本身是否有问题</li>
+<li>2.ArrayList有没有添加页面</li>
+<li>3.在instantiateItem中有没有添加页面并返回页面。</li>
+</ul>
+<p>我的原因是没有返回页面所以导致错误</p>
+<pre><code><span class="comment">//每次滑动增加的页面</span>
+
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function">Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>{
+            container.addView(viewContainter.get(position));
+
+            <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">get</span><span class="params">(position)</span></span>;
+        }
+</code></pre><h2 id="pager错误之四">pager错误之四</h2><p>pager.setCurrentItem(1);</p>
+<p>设置初始值没有反应。<br>设置的时候要放在Adapter里面</p>
+<hr>
+<h2 id="设置只可以通过点选，而不是滑动来切换页面">设置只可以通过点选，而不是滑动来切换页面</h2><ul>
+<li>1.首先去掉layout中PagerTabStrip，采用TextView来当tab</li>
+<li>2.点击TextView的时候再通过pager.setCurrentItem(0)来设置切换的页面</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cieb6up4a000rtob2c0m1ofxc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-20-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/20/2015-8-20-2/">动态加载Fragment，Fragment常用的API</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/20/2015-8-20-2/">
+    <time datetime="2015-08-20T07:32:15.000Z" itemprop="datePublished">2015-08-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="动态加载Fragment">动态加载Fragment</h1><p>在动态加载Fragment里面，就不需要把Fragment写死,写成View.而是采用动态加载的方式来实现操作。</p>
+<p>我们先看布局文件：他是由一个FragmentLayout容器来存放Fragmeng（动态加载就是加载到这个地方）。还有两个选择按钮组成</p>
+<pre><code>&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span> android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
+&gt;
+
+&lt;TextView android:<span class="variable">text=</span><span class="string">"@string/hello_world"</span> android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span> /&gt;
+&lt;FrameLayout
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/fl"</span>
+    &gt;&lt;/FrameLayout&gt;
+
+&lt;LinearLayout
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>&gt;
+    &lt;TextView
+        android:<span class="variable">layout_width=</span><span class="string">"0dp"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
+        android:<span class="variable">text=</span><span class="string">"tv01"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/tv01"</span>
+        /&gt;
+    &lt;TextView
+        android:<span class="variable">layout_width=</span><span class="string">"0dp"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
+        android:<span class="variable">text=</span><span class="string">"tv02"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/tv02"</span>
+        /&gt;
+
+    &lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>在mainActivity里面就实现他的动态添加与管理</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
+
+<span class="keyword">import</span> android.app.FragmentManager;
+<span class="keyword">import</span> android.app.FragmentTransaction;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.TextView;
+
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>{
+
+
+<span class="keyword">private</span> FragmentTest fragmentTest;
+<span class="keyword">private</span> FragmentTest02 fragmentTest02;
+<span class="keyword">private</span> TextView tv01,tv02;
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    initView();
+}
+
+<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>{
+    tv01= (TextView) findViewById(R.id.tv01);
+    tv02= (TextView) findViewById(R.id.tv02);
+    tv01.setOnClickListener(<span class="keyword">this</span>);
+    tv02.setOnClickListener(<span class="keyword">this</span>);
+
+    <span class="comment">// 设置默认的Fragment</span>
+    setDefaultFragment();
+
+}
+
+<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">setDefaultFragment</span><span class="params">()</span> </span>{
+    <span class="comment">//使用FragmentManager来管理</span>
+    FragmentManager manager=getFragmentManager();
+    FragmentTransaction transaction = manager.beginTransaction();
+
+    fragmentTest=<span class="keyword">new</span> FragmentTest();
+    <span class="comment">//使用transaction.replace去FragmentLayout里添加Fragment。</span>
+    transaction.replace(R.id.fl,fragmentTest);
+    transaction.commit();
+}
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+
+    FragmentManager fm = getFragmentManager();
+    <span class="comment">// 开启Fragment事务</span>
+    FragmentTransaction transaction = fm.beginTransaction();
+    <span class="keyword">switch</span> (view.getId()) {
+        <span class="keyword">case</span> R.id.tv01:
+            <span class="keyword">if</span> ( fragmentTest== <span class="keyword">null</span>) {
+                fragmentTest = <span class="keyword">new</span> FragmentTest();
+            }
+            <span class="comment">// 使用当前Fragment的布局替代id_content的控件</span>
+            transaction.replace(R.id.fl, fragmentTest);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> R.id.tv02:
+            <span class="keyword">if</span> (fragmentTest02 == <span class="keyword">null</span>) {
+                fragmentTest02 = <span class="keyword">new</span> FragmentTest02();
+            }
+            transaction.replace(R.id.fl, fragmentTest02);
+            <span class="keyword">break</span>;
+    }
+    <span class="comment">// transaction.addToBackStack();</span>
+    <span class="comment">// 事务提交</span>
+    transaction.commit();
+}
+}
+</code></pre><h2 id="Fragment常用的API：">Fragment常用的API：</h2><p><strong>Fragment常用的三个类：</strong></p>
+<ul>
+<li><p>android.app.Fragment 主要用于定义Fragment</p>
+</li>
+<li><p>android.app.FragmentManager 主要用于在Activity中操作Fragment</p>
+</li>
+<li><p>android.app.FragmentTransaction 保证一些列Fragment操作的原子性，熟悉事务这个词，一定能明白~</p>
+</li>
+</ul>
+<p><strong>a、获取FragmentManage的方式：</strong></p>
+<p>getFragmentManager() // v4中，getSupportFragmentManager</p>
+<p><strong>b、主要的操作都是FragmentTransaction的方法</strong></p>
+<p>FragmentTransaction transaction = fm.benginTransatcion();//开启一个事务</p>
+<p>transaction.add() </p>
+<p>往Activity中添加一个Fragment</p>
+<p>transaction.remove()</p>
+<p>从Activity中移除一个Fragment，如果被移除的Fragment没有添加到回退栈（回退栈后面会详细说），这个Fragment实例将会被销毁。</p>
+<p>transaction.replace()</p>
+<p>使用另一个Fragment替换当前的，实际上就是remove()然后add()的合体~</p>
+<p>transaction.hide()</p>
+<p>隐藏当前的Fragment，仅仅是设为不可见，并不会销毁</p>
+<p>transaction.show()</p>
+<p>显示之前隐藏的Fragment</p>
+<p>detach()</p>
+<p>将此Fragment从Activity中分离，会销毁其布局，但不会销毁该实例</p>
+<p>attach()</p>
+<p>将从Activity中分离的Fragment，重新关联到该Activity，重新创建其视图层次</p>
+<p>transatcion.commit()//提交一个事务</p>
+<p><strong>注意：常用Fragment的哥们，可能会经常遇到这样Activity状态不一致：State loss这样的错误。主要是因为：commit方法一定要在Activity.onSaveInstance()之前调用。</strong></p>
+<p>上述，基本是操作Fragment的所有的方式了，在一个事务开启到提交可以进行多个的添加、移除、替换等操作。</p>
+<p>值得注意的是：如果你喜欢使用Fragment，一定要清楚这些方法，哪个会销毁视图，哪个会销毁实例，哪个仅仅只是隐藏，这样才能更好的使用它们。</p>
+<ul>
+<li><p>a、比如：我在FragmentA中的EditText填了一些数据，当切换到FragmentB时，如果希望会到A还能看到数据，则适合你的就是hide和show；也就是说，希望保留用户操作的面板，你可以使用hide和show，当然了不要使劲在那new实例，进行下非null判断。</p>
+</li>
+<li><p>b、再比如：我不希望保留用户操作，你可以使用remove()，然后add()；或者使用replace()这个和remove,add是相同的效果。</p>
+</li>
+<li><p>c、remove和detach有一点细微的区别，在不考虑回退栈的情况下，remove会销毁整个Fragment实例，而detach则只是销毁其视图结构，实例并不会被销毁。那么二者怎么取舍使用呢？如果你的当前Activity一直存在，那么在不希望保留用户操作的时候，你可以优先使用detach。</p>
+</li>
+</ul>
+<p>上述已经介绍完成了Fragment常用的一些方法，相信看完，大家一定清楚了Fragment的产生理由，以及如何使用Fragment，再根据API的讲解，也能明白，曾经为何觉得Fragment会出现一些列乱七八槽的问题，终究是因为没有弄清楚其生命周期。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cieb6up4f000stob2n0ezedi6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/20/2015-8-20/">Fragment的产生与介绍，Fragment的生命周期，Fragment相当于一个控件，静态Fragment的简单实例</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/20/2015-8-20/">
+    <time datetime="2015-08-20T06:01:14.000Z" itemprop="datePublished">2015-08-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/20问题集">2015/8/20问题集</h1><h2 id="Fragment的产生与介绍">Fragment的产生与介绍</h2><p>Fragment支持在不同的Activity中使用并且可以处理自己的输入事件以及生命周期方法等。可以看做是一个子Activity。</p>
+<p>Android运行在各种各样的设备中，有小屏幕的手机，超大屏的平板甚至电视。针对屏幕尺寸的差距，很多情况下，都是先针对手机开发一套App，然后拷贝一份，修改布局以适应平板神马超级大屏的。难道无法做到一个App可以同时适应手机和平板么，当然了，必须有啊。Fragment的出现就是为了解决这样的问题。你可以把Fragment当成Activity的一个界面的一个组成部分，甚至Activity的界面可以完全有不同的Fragment组成，更帅气的是Fragment拥有自己的生命周期和接收、处理用户的事件，这样就不必在Activity写一堆控件的事件处理的代码了。更为重要的是，你可以动态的添加、替换和移除某个Fragment。</p>
+<h2 id="Fragment的生命周期">Fragment的生命周期</h2><p>Fragment必须是依存与Activity而存在的，因此Activity的生命周期会直接影响到Fragment的生命周期。官网这张图很好的说明了两者生命周期的关系：</p>
+<p>可以看到Fragment比Activity多了几个额外的生命周期回调方法：<br>onAttach(Activity)<br>当Fragment与Activity发生关联时调用。<br>onCreateView(LayoutInflater, ViewGroup,Bundle)<br>创建该Fragment的视图<br>onActivityCreated(Bundle)<br>当Activity的onCreate方法返回时调用<br>onDestoryView()<br>与onCreateView想对应，当该Fragment的视图被移除时调用<br>onDetach()<br>与onAttach相对应，当Fragment与Activity关联被取消时调用<br>注意：除了onCreateView，其他的所有方法如果你重写了，必须调用父类对于该方法的实现，</p>
+<h2 id="Fragment相当于一个控件">Fragment相当于一个控件</h2><p>Fragment可以被多个Activity重用，但是您也必须把Fragment关联到一个FragmentActivity上</p>
+<h2 id="静态Fragment的简单实例">静态Fragment的简单实例</h2><p>先自己定义一个Fragment的view的layout。</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span> android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>&gt;
+
+&lt;ImageButton
+    android:<span class="variable">id=</span><span class="string">"@+id/id_title_left_btn"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_centerVertical=</span><span class="string">"true"</span>
+    android:<span class="variable">background=</span><span class="string">"@drawable/my_icon"</span> /&gt;
+
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    android:<span class="variable">text=</span><span class="string">"我是Fragment"</span>
+     /&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>再定义Fragment，这个Fragment就相当于一个小Activity，Activity可以包含多个Fragment</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
+
+<span class="keyword">import</span> android.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
+<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ImageButton</span>;
+<span class="keyword">import</span> android.widget.<span class="type">Toast</span>;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/20.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">FragmentTest</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
+
+<span class="keyword">private</span> <span class="type">ImageButton</span> mButton;
+
+<span class="annotation">@Nullable</span>
+<span class="annotation">@Override</span>
+public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
+
+    <span class="type">View</span> view = inflater.inflate(<span class="type">R</span>.layout.title_fragment, container, <span class="literal">false</span>);
+    mButton = (<span class="type">ImageButton</span>)view.findViewById(<span class="type">R</span>.id.id_title_left_btn);
+    mButton.setOnClickListener(<span class="keyword">new</span> <span class="type">View</span>.<span class="type">OnClickListener</span>() {
+
+        <span class="annotation">@Override</span>
+        public void onClick(<span class="type">View</span> v) {
+            <span class="type">Toast</span>.makeText(getActivity(),
+                    <span class="string">"i am an ImageButton in TitleFragment ! "</span>,
+                    <span class="type">Toast</span>.<span class="type">LENGTH_SHORT</span>).show();
+        }
+    });
+    <span class="keyword">return</span> view;
+}
+}
+</code></pre><p>在Mainlayout里面添加Fragment，这就相当于一个view的使用</p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span> android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span> tools:<span class="variable">context=</span><span class="string">".MainActivity"</span>&gt;
+
+&lt;TextView android:<span class="variable">text=</span><span class="string">"@string/hello_world"</span> android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span> /&gt;
+&lt;fragment
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"45dp"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/fragmentTitle"</span>
+    android:<span class="variable">name=</span><span class="string">"com.zsz.develop.firstfragment.FragmentTest"</span>
+    &gt;&lt;/fragment&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>在Main里调用</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
+
+<span class="keyword">import</span> android.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">View</span> fragmentTitle;
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_main);
+    fragmentTitle=findViewById(<span class="type">R</span>.id.fragmentTitle);
+}
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cieb6up45000qtob2s63ygkmw" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-19" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -249,7 +980,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cie9tn4jz000nj0b2ck0j8qqr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cieb6up4i000ttob2pwn4q125" class="article-share-link">Share</a>
       
       
     </footer>
@@ -307,7 +1038,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cie9tn4k6000oj0b2ku7bj22i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cieb6up4m000utob29ohfmvnx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -523,7 +1254,7 @@ android:<span class="variable">versionName=</span><span class="string">"1.0"</sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cie9tn4ka000pj0b2eaxh5vcn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cieb6up4r000vtob236lxym0l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -888,1342 +1619,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cie9tn4kd000qj0b2wg37c0ti" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-10" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/10/2015-8-10/">部署代码到CentOS云服务器</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/10/2015-8-10/">
-    <time datetime="2015-08-10T01:31:22.000Z" itemprop="datePublished">2015-08-10</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="部署代码到CentOS云服务器">部署代码到CentOS云服务器</h1><h2 id="FTP通道">FTP通道</h2><p>用户需要使用FTP通道，将应用程序从用户自己的服务器上传到云服务器上。</p>
-<blockquote>
-<p>FTP（File Transfer Protocol，文件传输协议） 是 TCP/IP 协议组中的协议之一。FTP协议包括两个组成部分，其一为FTP服务器，其二为FTP客户端。其中FTP服务器用来存储文件，用户可以使用FTP客户端通过FTP协议访问位于FTP服务器上的资源。在开发网站的时候，通常利用FTP协议把网页或程序传到Web服务器上。此外，由于FTP传输效率非常高，在网络上传输大的文件时，一般也采用该协议。</p>
-<p>默认情况下FTP协议使用TCP端口中的 20和21这两个端口，其中20用于传输数据，21用于传输控制信息。但是，是否使用20作为传输数据的端口与FTP使用的传输模式有关，如果采用主动模式，那么数据传输端口就是20；如果采用被动模式，则具体最终使用哪个端口要服务器端和客户端协商决定。</p>
-</blockquote>
-<p><a href="http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="external">http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cie9tn4kj000rj0b2l8ttlsvu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-6" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/06/2015-8-6/">px和dp的转换公式， Android 判断当前线程是否是主线程的方法</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/06/2015-8-6/">
-    <time datetime="2015-08-06T01:07:34.000Z" itemprop="datePublished">2015-08-06</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/6问题集">2015/8/6问题集</h1><h2 id="px和dp的转换公式">px和dp的转换公式</h2><p> px = dp * (dpi / 160)</p>
-<ul>
-<li><p>px：即像素，1px代表屏幕上一个物理的像素点；px单位不被建议使用，因为同样100px的图片，在不同手机上显示的实际大小可能不同</p>
-</li>
-<li><p>dp：它与“像素密度”密切相关，所以首先我们解释一下什么是像素密度。假设有一部手机，屏幕的物理尺寸为1.5英寸x2英寸，屏幕分辨率为240x320，则我们可以计算出在这部手机的屏幕上，每英寸包含的像素点的数量为240/1.5=160dpi（横向）或320/2=160dpi（纵向），160dpi就是这部手机的像素密度，像素密度的单位dpi是Dots Per Inch的缩写，即每英寸像素数量。横向和纵向的这个值都是相同的，原因是大部分手机屏幕使用正方形的像素点。</p>
-</li>
-</ul>
-<ul>
-<li><p>四种像素密度：而ldpi指120，mdpi指160，hdpi指240，xhdpi指320。低（120dpi）、中（160dpi）、高（240dpi）和超高（320dpi），它们对应的dp到px的系数分别为0.75、1、1.5和2，这个系数乘以dp长度就是像素数。例如界面上有一个长度为“80dp”的图片，那么它在240dpi的手机上实际显示为80x1.5=120px，在320dpi的手机上实际显示为80x2=160px</p>
-</li>
-<li><p>dip：<br>与dp完全相同，只是名字不同而已。在早期的Android版本里多使用dip，后来为了与sp统一就建议使用dp这个名字了。</p>
-</li>
-<li><p>sp：<br>与缩放无关的抽象像素（Scale-independent Pixel）。sp和dp很类似但唯一的区别是，Android系统允许用户自定义文字尺寸大小（小、正常、大、超大等等），当文字尺寸是“正常”时1sp=1dp=0.00625英寸，而当文字尺寸是“大”或“超大”时，1sp&gt;1dp=0.00625英寸。类似我们在windows里调整字体尺寸以后的效果——窗口大小不变，只有文字大小改变。</p>
-</li>
-<li><p>mm：<br>即毫米；</p>
-</li>
-<li><p>in：<br>即英寸，1英寸=2.54厘米（约）；</p>
-</li>
-<li><p>pt：<br>1pt=1/72英寸=0.035厘米；</p>
-</li>
-</ul>
-<p>最佳实践，<strong>文字的尺寸一律用sp单位，非文字的尺寸一律使用dp单位</strong>。例如textSize=”16sp”、layout_width=”60dp”；偶尔需要使用px单位，例如需要在屏幕上画一条细的分隔线时：</p>
-<h2 id="如何加载一张大图bitmap如（4096*4096）">如何加载一张大图bitmap如（4096*4096）</h2><h2 id="加载一张大图，有什么注意事项">加载一张大图，有什么注意事项</h2><ul>
-<li><p>在展示高分辨率图片的时候，最好先将图片进行压缩。压缩后的图片大小应该和用来展示它的控件大小相近，在一个很小的ImageView上显示一张超大的图片不会带来任何视觉上的好处，但却会占用我们相当多宝贵的内存，而且在性能上还可能会带来负面影响。</p>
-</li>
-<li><p>为了避免OOM异常，最好在解析每张图片的时候都先检查一下图片的大小，除非你非常信任图片的来源，保证这些图片都不会超出你程序的可用内存。 </p>
-</li>
-</ul>
-<h2 id="Android_判断当前线程是否是主线程的方法">Android 判断当前线程是否是主线程的方法</h2><ul>
-<li><p>方法一：使用Looper类判断</p>
-<pre><code>Looper.<span class="function"><span class="title">myLooper</span><span class="params">()</span></span> != Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>  
-</code></pre></li>
-</ul>
-<p>方法二：通过查看Thread类的当前线程</p>
-<pre><code>Thread.<span class="function"><span class="title">currentThread</span><span class="params">()</span></span> == Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>.<span class="function"><span class="title">getThread</span><span class="params">()</span></span> 
-</code></pre><p>方法三：使用线程句柄判断，将主线程的Thread.currentThread()获取到主线程当前句柄，保存起来，在需要判断的时候调用Thread.currentThread()来与之比较，即可判断当前线程是否是主线程了，该方法可以参见Activity中</p>
-<pre><code><span class="keyword">private</span> <span class="keyword">Thread</span> mUiThread;  
-</code></pre><p>另</p>
-<pre><code><span class="keyword">public</span> <span class="keyword">final</span> void runOnUiThread(Runnable <span class="keyword">action</span>) {  
-    <span class="keyword">if</span> (Thread.currentThread() <span class="comment">!= mUiThread) {  </span>
-        mHandler.post(<span class="keyword">action</span>);  
-    } <span class="keyword">else</span> {  
-        <span class="keyword">action</span>.run();  
-    }  
-}  
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cie9tn4ij0008j0b23ib7usve" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-30" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/30/2015-7-30/">android端乱码问题，RadioGroup多选一，对比空字符，4种方式实现java 保留2位小数点</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/30/2015-7-30/">
-    <time datetime="2015-07-30T00:38:24.000Z" itemprop="datePublished">2015-07-30</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/5问题集">2015/8/5问题集</h1><h2 id="android端乱码问题">android端乱码问题</h2><p>服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题</p>
-<p>把这句代码</p>
-<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity());
-</code></pre><p>改成接收的时候也要转成UTF-8</p>
-<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity(),<span class="string">"UTF-8"</span>);
-</code></pre><h2 id="RadioGroup多选一">RadioGroup多选一</h2><p>程序中常常要用到多选一的时候，例如男女</p>
-<p>就以男女为例</p>
-<p>XML</p>
-<pre><code> <span class="tag">&lt;<span class="title">LinearLayout</span>
-    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
-    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-    <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">TextView</span>
-        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:text</span>=<span class="value">"性别："</span>
-        /&gt;</span>
-    <span class="tag">&lt;<span class="title">TextView</span>
-        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:text</span>=<span class="value">"男"</span>
-        <span class="attribute">android:id</span>=<span class="value">"@+id/etSex"</span>
-        /&gt;</span>
-    <span class="comment">&lt;!--&lt;EditText--&gt;</span>
-        <span class="comment">&lt;!--android:id="@+id/etSex"--&gt;</span>
-        <span class="comment">&lt;!--android:layout_width="fill_parent"--&gt;</span>
-        <span class="comment">&lt;!--android:layout_height="wrap_content"--&gt;</span>
-        <span class="comment">&lt;!--/&gt;--&gt;</span>
-
-    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-<span class="tag">&lt;<span class="title">LinearLayout</span>
-    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
-
-    <span class="tag">&lt;<span class="title">RadioGroup</span> <span class="attribute">android:id</span>=<span class="value">"@+id/radioGroup"</span>
-        <span class="attribute">android:contentDescription</span>=<span class="value">"性别"</span>
-        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
-
-        <span class="tag">&lt;<span class="title">RadioButton</span>
-            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:id</span>=<span class="value">"@+id/radioMale"</span>
-            <span class="attribute">android:text</span>=<span class="value">"男"</span>
-            <span class="attribute">android:checked</span>=<span class="value">"true"</span>&gt;</span>
-
-        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
-        <span class="tag">&lt;<span class="title">RadioButton</span>
-            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
-            <span class="attribute">android:id</span>=<span class="value">"@+id/radioFemale"</span>
-            <span class="attribute">android:text</span>=<span class="value">"女"</span>&gt;</span>
-
-        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
-    <span class="tag">&lt;/<span class="title">RadioGroup</span>&gt;</span>
-
-    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
-</code></pre><p>Activty中的代码如下</p>
-<pre><code>etSex= (TextView) findViewById(R.id.etSex);
-
-   radioGroup= (RadioGroup) findViewById(R.id.radioGroup);
-   radioGroup.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() {
-       <span class="annotation">@Override</span>
-       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup radioGroup, <span class="keyword">int</span> i)</span> </span>{
-        <span class="keyword">int</span> radioButtonId = radioGroup.getCheckedRadioButtonId();
-           rb = (RadioButton)EditDataActicity.<span class="keyword">this</span>.findViewById(radioButtonId);
-           etSex.setText( rb.getText());
-       }
-   });
-</code></pre><h2 id="对比空字符">对比空字符</h2><p>对比空字符要用equals(“”)</p>
-<pre><code>etHeight.<span class="function"><span class="title">getText</span><span class="params">()</span></span>.<span class="function"><span class="title">toString</span><span class="params">()</span></span>.<span class="function"><span class="title">trim</span><span class="params">()</span></span>.<span class="function"><span class="title">equals</span><span class="params">(<span class="string">""</span>)</span></span>
-</code></pre><h2 id="4种方式实现java_保留2位小数点">4种方式实现java 保留2位小数点</h2><h3 id="方式一：">方式一：</h3><p>四舍五入<br>double   f   =   111231.5585;<br>BigDecimal   b   =   new   BigDecimal(f);<br>double   f1   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();<br>保留两位小数</p>
-<h3 id="方式二：">方式二：</h3><p>java.text.DecimalFormat   df   =new   java.text.DecimalFormat(”#.00″);<br>df.format(你要格式化的数字);<br>例：new java.text.DecimalFormat(”#.00″).format(3.1415926)</p>
-<p>（#.00 表示两位小数 #.0000四位小数 以此类推…</p>
-<h3 id="方式三：">方式三：</h3><p>double d = 3.1415926;<br>String result = String .format(”%.2f”);<br>%.2f %. 表示 小数点前任意位数   2 表示两位小数 格式后的结果为f 表示浮点型。</p>
-<h3 id="方式四：">方式四：</h3><p>此外如果使用struts标签做输出的话，有个format属性,设置为format=”0.00”就是保留两位小数<br>例如：<bean:write name="entity" property="dkhAFSumPl" format="0.00"></bean:write></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cie9tn4kn000sj0b2ek4p46ny" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-29-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/29/2015-7-29-1/">AChartEngine超简单实例</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/29/2015-7-29-1/">
-    <time datetime="2015-07-29T13:19:12.000Z" itemprop="datePublished">2015-07-29</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="AChartEngine超简单实例">AChartEngine超简单实例</h1><p>其实无非就在做三件事</p>
-<ul>
-<li>1.添加数据进图标</li>
-<li>2.线或条等设置</li>
-<li>3.制作成什么表。仅此而已</li>
-</ul>
-<p>package com.zsz.develop.mychart02;</p>
-<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.widget.Button;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.widget.LinearLayout;</span>
-
-
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.GraphicalView;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
-
-<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
-
-<span class="comment">/**
- * Created by shengzhong on 2015/7/29.
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
-<span class="keyword">private</span> LinearLayout llChart;
-<span class="keyword">private</span> Button btn;
-@Override
-<span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-
-    <span class="comment">// TODO Auto-generated method stub</span>
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.show_exam_activity);
-    <span class="comment">// 1, 构造显示用渲染图</span>
-    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
-    <span class="comment">// 2,进行显示</span>
-    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-    <span class="comment">// 2.1, 构建数据</span>
-    Random r = <span class="keyword">new</span> Random();
-    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
-        XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
-        <span class="comment">// 填充数据</span>
-        <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
-            <span class="comment">// 填x,y值</span>
-            series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
-        }
-        <span class="comment">// 需要绘制的点放进dataset中</span>
-        dataset.addSeries(series);
-    }
-    <span class="comment">// 3, 对点的绘制进行设置</span>
-    XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
-    <span class="comment">// 3.1设置颜色</span>
-    xyRenderer.setColor(Color.BLUE);
-    <span class="comment">// 3.2设置点的样式</span>
-    xyRenderer.setPointStyle(PointStyle.SQUARE);
-    <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
-    renderer.addSeriesRenderer(xyRenderer);
-    <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
-    xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
-    xyRenderer.setColor(Color.RED);
-    xyRenderer.setPointStyle(PointStyle.CIRCLE);
-    renderer.addSeriesRenderer(xyRenderer);
-<span class="comment">//        Intent intent = new LinChart().execute(this);</span>
-<span class="comment">//        Intent intent = ChartFactory</span>
-<span class="comment">//                .getLineChartIntent(this, dataset, renderer);</span>
-    GraphicalView graphicalView = ChartFactory.getLineChartView(<span class="keyword">this</span>, dataset, renderer);
-    llChart= (LinearLayout) findViewById(R.id.llChart);
-    llChart.addView(graphicalView);
-<span class="comment">//                startActivity(intent);</span>
-
-}
-
-}
-</code></pre><h2 id="详细配置。">详细配置。</h2><p>上面的配置只配置了几个基础的，还要进行更多配置才能使得图标更加简单通熟易懂。</p>
-<ul>
-<li>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</li>
-<li>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</li>
-<li>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</li>
-<li>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</li>
-<li>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</li>
-<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
-</li>
-<li><p>XYSeriesRenderer，impleSeriesRenderer、用于设置每张图中每一个序列的绘制方法。- XYMultipleSeries，RendererDefaultRenderer用于设置整张图的绘制格式。</p>
-</li>
-</ul>
-<p>XYMultipleSeriesRenderer.setAxisTitleTextSize</p>
-<h2 id="详细配置">详细配置</h2><ul>
-<li>1.修改背景色或设置背景图片：<br>背景色设置需要设置两项：setMarginsColor（设置四边颜色）以及setBackgroundColor（设置中间背景色）</li>
-<li>设置背景图片：<pre><code><span class="symbol">http:</span>/<span class="regexp">/blog.csdn.net/kmyhy</span><span class="regexp">/article/details</span><span class="regexp">/6590294</span>
-</code></pre></li>
-</ul>
-<ol>
-<li>setAxisTitleTextSize(16);// 设置坐标轴标题文本大小</li>
-<li>setChartTitleTextSize(20); // 设置图表标题文本大小</li>
-<li>setLabelsTextSize(15); // 设置轴标签文本大小</li>
-<li>setLegendTextSize(15); // 设置图例文本大小</li>
-<li>renderer.setChartTitle( “个人收支表”);//设置柱图名称</li>
-<li>renderer.setXTitle( “名单” );//设置X轴名称</li>
-<li>renderer.setYTitle( “金额” );//设置Y轴名称</li>
-<li>renderer.setXAxisMin(0.5);//设置X轴的最小值为0.5</li>
-<li>renderer.setXAxisMax(5.5);//设置X轴的最大值为5</li>
-<li>renderer.setYAxisMin(0);//设置Y轴的最小值为0</li>
-<li>renderer.setYAxisMax(500);//设置Y轴最大值为500</li>
-<li>renderer.setDisplayChartValues(true);//设置是否在柱体上方显示值</li>
-<li>renderer.setShowGrid(true);//设置是否在图表中显示网格</li>
-<li>renderer.setXLabels(0);//设置X轴显示的刻度标签的个数</li>
-<li>如果想要在X轴显示自定义的标签，那么首先要设置renderer.setXLabels(0);  如果不设置为0，那么所设置的Labels会与原X坐标轴labels重叠<br>其次我们要renderer.addTextLabel()循环添加<br>eg：for(int i=0;i&lt;13;i++)<br>  {<pre><code><span class="keyword">renderer</span>.addTextLabel(i+<span class="number">1</span>,years[i]); <span class="comment">//循环添加Xlabel其中显示的label放在years数组中</span>
-</code></pre>  }</li>
-<li>renderer.setXLabelsAlign(Align.RIGHT);//设置刻度线与X轴之间的相对位置关系</li>
-<li>renderer.setYLabelsAlign(Align.RIGHT);//设置刻度线与Y轴之间的相对位置关系</li>
-<li>renderer.setZoomButtonsVisible(true);//设置可以缩放</li>
-<li>renderer.setPanLimits(newdouble[] { 0, 20, 0, 140 });//设置拉动的范围</li>
-<li>renderer.setZoomLimits(newdouble[] { 0.5, 20, 1, 150 });//设置缩放的范围</li>
-<li>renderer.setRange(newdouble[]{0d, 5d, 0d, 100d}); //设置chart的视图范围</li>
-<li>renderer.setFitLegend(true);// 调整合适的位置</li>
-<li>renderer.setClickEnabled(true)//设置是否可以滑动及放大缩小;</li>
-<li><p>Dataset和Render参数介绍：<br>  <a href="http://blog.csdn.net/lk_blog/article/details/7645661" target="_blank" rel="external">http://blog.csdn.net/lk_blog/article/details/7645661</a></p>
-</li>
-<li><p>ChartView.repaint()；是重新绘图的命令</p>
-</li>
-<li>renderer.setMargins(new int[] { 70, 70, 100, 70 });//设置图表的外边框(上/左/下/右)</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cie9tn4ku000uj0b28zorw2j2" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-29" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/29/2015-7-29/">Android中图表AChartEngine</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/29/2015-7-29/">
-    <time datetime="2015-07-29T02:53:38.000Z" itemprop="datePublished">2015-07-29</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/29问题集">2015/7/29问题集</h1><h2 id="Android中图表AChartEngine">Android中图表AChartEngine</h2><p>很多时候项目中我们需要对一些统计数据进行绘制表格，更多直观查看报表分析结果。基本有以下几种方法:</p>
-<ul>
-<li><p>1:可以进行android  api进行draw这样的话，效率比较低</p>
-</li>
-<li><p>2:使用开源绘表引擎，这样效率比较高.下面就介绍一种。</p>
-</li>
-</ul>
-<p><strong>AChartEngine（简称ACE）</strong>是Google的一个开源图表库（for Android）。它功能强大，支持散点图、折线图、饼图、气泡图、柱状图、短棒图、仪表图等多种图表。</p>
-<p>参考文章：<a href="http://www.cnblogs.com/android100/p/Android-AChartEngine.html" target="_blank" rel="external">http://www.cnblogs.com/android100/p/Android-AChartEngine.html</a></p>
-<h2 id="achartengine的数据模型">achartengine的数据模型</h2><ul>
-<li><p>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</p>
-</li>
-<li><p>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</p>
-</li>
-<li><p>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</p>
-</li>
-<li><p>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</p>
-</li>
-<li><p>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</p>
-</li>
-<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
-</li>
-</ul>
-<p><strong>不同的数据模型用于不同的图表显示</strong>。XYSeries可以用于折线图、直方图。CategorySeries可以用于圆饼图。每种数据模型都提供了丰富的操作接口，用于插入删除数据等多种操作。我们可以根据需要将数据存为合适的数据模型。</p>
-<h2 id="绘制器（渲染器Renderer）">绘制器（渲染器Renderer）</h2><p>绘制器声明了绘制图表的类型。主要包括以下几种。</p>
-<p>SimpleSeriesRenderer、 XYSeriesRenderer用于设置每张图中每一个序列的绘制方法。而DefaultRenderer和 XYMultipleSeriesRenderer用于设置整张图的绘制格式。它们之间的关系类似于XYSeries 与XYMultipleSeriesDataset之间的关系。</p>
-<h2 id="画图概念"><strong>画图概念</strong></h2><p>要 画一张图，我们需要设置好需要绘制的数据及绘制的方法。确定好data model及renderer后，再调用合适的绘制方法绘制图形。库提供了两种绘制图形的方法，一种是get<strong><em>Intent( )（如getLineChartIntent()）直接新建一个Activity全屏显示生成的图表，另一种是get</em></strong>View( )（如getLineChartView()）生成一个View，用户可以自行设置它的显示。</p>
-<p>主要通过设置几个对象</p>
-<p>  1、XYSeries对象：用于存储一条线的数据信息；<br>  2、XYMultipleSeriesDataset对象：即数据集，可添加多个XYSeries对象，因为一个折线图中可能有多条线。<br>  3、XYSeriesRenderer对象：主要是用来设置一条线条的风格，颜色啊，粗细之类的。<br>  4、XYMultipleSeriesRenderer对象：主要用来定义一个图的整体风格，设置xTitle,yTitle,chartName等等整体性的风格，<br>    可添加多个XYSeriesRenderer对象，因为一个图中可以有多条折线。<br>设置完那些对象之后，可通过 org.achartengine.ChartFactory调用数据集XYMultipleSeriesDataset对象<br>  与XYMultipleSeriesRenderer对象来画图并将图加载到GraphicalView中，<br>  ChartFactory有多种api，通过这些api调用来决定是画折线图还是柱状图。</p>
-<h2 id="绘制基础">绘制基础</h2><p>1,ChartFactory ,传入XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,然后,我们只需用 getXXXChartIntent(Context context,XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,)方法就可以进行图表的显示</p>
-<p>2,XYMutilpleSeriesRenderer 用于进行绘制的设置,添加的XYSeriesRender对象,用于定义绘制的点集合设置,注意数量要和XYMutilpleSeriesDataset,添加的XYseries一致!!!</p>
-<p>3,XYMutilpleSeriesDataset 用于数据的存放,添加的XYseries对象,用于提供绘制的点集合的数据</p>
-<h2 id="绘制实例">绘制实例</h2><p>这个实例告诉我们，不必跟着AChartEngine也可以照样实现。只需要懂得原理就行。<br>原理就是</p>
-<ul>
-<li>1.构造渲染图</li>
-<li>2.进行显示（构建数据）</li>
-<li>3.对点的绘制进行设置</li>
-<li><p>/ 3.1设置颜色</p>
-<p> 3.2设置点的样式</p>
-<p> 3.3, 将要绘制的点添加到坐标绘制中</p>
-<p> 3.4,重复 1~3的步骤绘制第二个系列点</p>
-</li>
-</ul>
-<p>package com.zsz.develop.mychart;</p>
-<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
-
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
-
-<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
-
-<span class="comment">/**
- * Created by shengzhong on 2015/7/29.
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
-
-    @Override
-    <span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-        <span class="comment">// TODO Auto-generated method stub</span>
-        <span class="keyword">super</span>.onCreate(savedInstanceState);
-        <span class="comment">// 1, 构造显示用渲染图</span>
-        XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
-        <span class="comment">// 2,进行显示</span>
-        XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-        <span class="comment">// 2.1, 构建数据</span>
-        Random r = <span class="keyword">new</span> Random();
-        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
-            XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
-            <span class="comment">// 填充数据</span>
-            <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
-                <span class="comment">// 填x,y值</span>
-                series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
-            }
-            <span class="comment">// 需要绘制的点放进dataset中</span>
-            dataset.addSeries(series);
-        }
-        <span class="comment">// 3, 对点的绘制进行设置</span>
-        XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
-        <span class="comment">// 3.1设置颜色</span>
-        xyRenderer.setColor(Color.BLUE);
-        <span class="comment">// 3.2设置点的样式</span>
-        xyRenderer.setPointStyle(PointStyle.SQUARE);
-        <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
-        renderer.addSeriesRenderer(xyRenderer);
-        <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
-        xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
-        xyRenderer.setColor(Color.RED);
-        xyRenderer.setPointStyle(PointStyle.CIRCLE);
-        renderer.addSeriesRenderer(xyRenderer);
-        <span class="comment">// Intent intent = new LinChart().execute(this);</span>
-        Intent intent = ChartFactory
-                .getLineChartIntent(<span class="keyword">this</span>, dataset, renderer);
-        startActivity(intent);
-
-
-
-<span class="comment">//          GraphicalView graphicalView = ChartFactory.getLineChartView(this, dataset, renderer);</span>
-<span class="comment">//    llChart= (LinearLayout) findViewById(R.id.llChart);</span>
-  <span class="comment">//  llChart.addView(graphicalView);</span>
-    }
-
-}    
-</code></pre><hr>
-<h2 id="把得到的图标设置成View"><strong>把得到的图标设置成View</strong></h2><p>绑定layout后找到LinearLayout，把他添加到LinearLayout里去</p>
-<pre><code>  GraphicalView <span class="variable">graphicalView =</span> ChartFactory.getLineChartView(this, dataset, renderer);
-<span class="variable">llChart=</span> (LinearLayout) findViewById(R.id.llChart);
-llChart.addView(graphicalView);
-</code></pre><hr>
-<h2 id="构建一个柱状图实例">构建一个柱状图实例</h2><p><strong>先定义一个接口AChartAbstract</strong></p>
-<pre><code>package com.zsz.develop.chartdemo;
-
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
-
-<span class="keyword">public</span> <span class="keyword">interface</span> AChartAbstract {
-/**
- * 获取一个当前类型图标的<span class="type">Intent</span>实例
- */
-<span class="keyword">public</span> <span class="type">Intent</span> getIntent(Context context);
-}
-</code></pre><p><strong>新建一个java类BarChart来实现AChartAbstract接口</strong></p>
-<pre><code>package com.zsz.develop.chartdemo;
-
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.content.Intent;
-<span class="keyword">import</span> android.graphics.Color;
-<span class="keyword">import</span> android.graphics.Paint;
-
-<span class="keyword">import</span> org.achartengine.ChartFactory;
-<span class="keyword">import</span> org.achartengine.model.CategorySeries;
-<span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;
-<span class="keyword">import</span> org.achartengine.chart.BarChart.Type;
-<span class="keyword">import</span> org.achartengine.renderer.SimpleSeriesRenderer;
-<span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/7/29.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">BarChart</span> <span class="title">implements</span> <span class="title">AChartAbstract</span> </span>{
-
-public Intent getIntent(Context context) {
-    Intent mIntent=ChartFactory.getBarChartIntent(context, getDataSet(), getRenderer(), Type.STACKED, <span class="string">"当月开票金额树状图"</span>);
-    <span class="keyword">return</span> mIntent;
-}
-
-<span class="comment">/**
- * 构造数据
- * @return
- */</span>
-public XYMultipleSeriesDataset getDataSet() {
-    <span class="comment">// 构造数据</span>
-    XYMultipleSeriesDataset barDataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-    CategorySeries barSeries = <span class="keyword">new</span> CategorySeries(<span class="string">"2014年3月"</span>);
-    barSeries.add(<span class="number">865.5969</span>);
-    barSeries.add(<span class="number">2492.6479</span>);
-    barSeries.add(<span class="number">891.0137</span>);
-    barSeries.add(<span class="number">0.0</span>);
-    barSeries.add(<span class="number">691.0568</span>);
-    barDataset.addSeries(barSeries.toXYSeries());
-    <span class="keyword">return</span> barDataset;
-}
-
-<span class="comment">/**
- * 构造渲染器
- * @return
- */</span>
-public XYMultipleSeriesRenderer getRenderer() {
-    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
-<span class="comment">//      renderer.setChartTitle("当月开票");</span>
-<span class="comment">//      // 设置标题的字体大小</span>
-<span class="comment">//      renderer.setChartTitleTextSize(16);</span>
-    renderer.setXTitle(<span class="string">"事业部"</span>);
-    renderer.setYTitle(<span class="string">"单位(万元)"</span>);
-    renderer.setAxesColor(Color.WHITE);
-    renderer.setLabelsColor(Color.WHITE);
-    <span class="comment">// 设置X轴的最小数字和最大数字</span>
-    renderer.setXAxisMin(<span class="number">0.5</span>);
-    renderer.setXAxisMax(<span class="number">5.5</span>);
-    <span class="comment">// 设置Y轴的最小数字和最大数字</span>
-    renderer.setYAxisMin(<span class="number">0</span>);
-    renderer.setYAxisMax(<span class="number">3000</span>);
-    renderer.addXTextLabel(<span class="number">1</span>, <span class="string">"电网"</span>);
-    renderer.addXTextLabel(<span class="number">2</span>, <span class="string">"通信"</span>);
-    renderer.addXTextLabel(<span class="number">3</span>, <span class="string">"宽带"</span>);
-    renderer.addXTextLabel(<span class="number">4</span>, <span class="string">"专网"</span>);
-    renderer.addXTextLabel(<span class="number">5</span>, <span class="string">"轨交"</span>);
-    renderer.setZoomButtonsVisible(<span class="literal">true</span>);
-    <span class="comment">// 设置渲染器允许放大缩小</span>
-    renderer.setZoomEnabled(<span class="literal">true</span>);
-    <span class="comment">// 消除锯齿</span>
-    renderer.setAntialiasing(<span class="literal">true</span>);
-    <span class="comment">// 设置背景颜色</span>
-    renderer.setApplyBackgroundColor(<span class="literal">true</span>);
-    renderer.setBackgroundColor(Color.GRAY);
-    <span class="comment">// 设置每条柱子的颜色</span>
-    SimpleSeriesRenderer sr = <span class="keyword">new</span> SimpleSeriesRenderer();
-    sr.setColor(Color.YELLOW);
-    renderer.addSeriesRenderer(sr);
-    <span class="comment">// 设置每个柱子上是否显示数值</span>
-    renderer.getSeriesRendererAt(<span class="number">0</span>).setDisplayChartValues(<span class="literal">true</span>);
-    <span class="comment">// X轴的近似坐标数  (这样不显示横坐标)</span>
-    renderer.setXLabels(<span class="number">0</span>);
-    <span class="comment">// Y轴的近似坐标数</span>
-    renderer.setYLabels(<span class="number">6</span>);
-    <span class="comment">// 刻度线与X轴坐标文字左侧对齐</span>
-    renderer.setXLabelsAlign(Paint.Align.LEFT);
-    <span class="comment">// Y轴与Y轴坐标文字左对齐</span>
-    renderer.setYLabelsAlign(Paint.Align.LEFT);
-    <span class="comment">// 允许左右拖动,但不允许上下拖动.</span>
-    renderer.setPanEnabled(<span class="literal">true</span>, <span class="literal">false</span>);
-    <span class="comment">// 柱子间宽度</span>
-    renderer.setBarSpacing(<span class="number">0.5</span>f);
-    <span class="comment">// 设置X,Y轴单位的字体大小</span>
-    renderer.setAxisTitleTextSize(<span class="number">20</span>);
-    <span class="keyword">return</span> renderer;
-}
-}
-</code></pre><p><strong>主函数中调用</strong></p>
-<pre><code>Intent lineIntent = <span class="keyword">new</span> BarChart().getIntent(<span class="keyword">this</span>);
-    startActivity(lineIntent);
-</code></pre><p><strong>最后不要忘了在Androidmanifest.xml文件中进行配置文件</strong></p>
-<pre><code>&lt;activity android:<span class="property">name</span>=<span class="string">"org.achartengine.GraphicalActivity"</span> /&gt;
-</code></pre><hr>
-<h2 id="Android_Studio的两个概念：Project_和_Module">Android Studio的两个概念：Project 和 Module</h2><p>Android Studio中的两个概念。 Project 和 Module 。<br>在Android Studio中，<strong> Project </strong>的真实含义是工作空间， <strong>Module</strong> 为一个具体的项目。</p>
-<p>在 Eclipse 中，我们可以同时对多个 Eclipse 的 Project 进行同时编辑，这些 Project 在同一个 workspace 之中。在Android Studio中，我们可以同时对多个Android Studio的 Module 进行同时编辑，这些 Module 在同一个 Project 之中。</p>
-<p>Eclipse 的 Project 等同于Android Studio的 Module 。<br>Eclipse 的 workspace 等同于Android Studio的 Project 。</p>
-<hr>
-<h2 id="AChartEngine日期折线图的例子">AChartEngine日期折线图的例子</h2><p>首先要导入他给的实例代码类<strong>AbstractDemoChart</strong>抽象类，和<strong>接口IDemoChart</strong>，与<strong>WeightDialChart</strong>。</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.mychart;
-
-<span class="keyword">import</span> java.util.Date;
-<span class="keyword">import</span> java.util.List;
-
-<span class="keyword">import</span> org.achartengine.chart.PointStyle;
-<span class="keyword">import</span> org.achartengine.model.CategorySeries;
-<span class="keyword">import</span> org.achartengine.model.MultipleCategorySeries;
-<span class="keyword">import</span> org.achartengine.model.TimeSeries;
-<span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;
-<span class="keyword">import</span> org.achartengine.model.XYSeries;
-<span class="keyword">import</span> org.achartengine.renderer.DefaultRenderer;
-<span class="keyword">import</span> org.achartengine.renderer.SimpleSeriesRenderer;
-<span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;
-<span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;
-
-<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractDemoChart</span> <span class="keyword">implements</span> <span class="title">IDemoChart</span> </span>{
-
-<span class="javadoc">/**
- * 构建 XYMultipleSeriesDataset.
- *
- *<span class="javadoctag"> @param</span> titles 每个序列的图例
- *<span class="javadoctag"> @param</span> xValues X轴的坐标
- *<span class="javadoctag"> @param</span> yValues Y轴的坐标
- *<span class="javadoctag"> @return</span> XYMultipleSeriesDataset
- */</span>
-<span class="function"><span class="keyword">protected</span> XYMultipleSeriesDataset <span class="title">buildDataset</span><span class="params">(String[] titles, List&lt;<span class="keyword">double</span>[]&gt; xValues,
-                                               List&lt;<span class="keyword">double</span>[]&gt; yValues)</span> </span>{
-    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-    addXYSeries(dataset, titles, xValues, yValues, <span class="number">0</span>);
-    <span class="keyword">return</span> dataset;
-}
-
-<span class="comment">//向DataSet中添加序列.</span>
-<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addXYSeries</span><span class="params">(XYMultipleSeriesDataset dataset, String[] titles, List&lt;<span class="keyword">double</span>[]&gt; xValues,
-                        List&lt;<span class="keyword">double</span>[]&gt; yValues, <span class="keyword">int</span> scale)</span> </span>{
-    <span class="keyword">int</span> length = titles.length;
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
-        XYSeries series = <span class="keyword">new</span> XYSeries(titles[i], scale); <span class="comment">//这里注意与TimeSeries区别.</span>
-        <span class="keyword">double</span>[] xV = xValues.get(i);
-        <span class="keyword">double</span>[] yV = yValues.get(i);
-        <span class="keyword">int</span> seriesLength = xV.length;
-        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; seriesLength; k++) {
-            series.add(xV[k], yV[k]);
-        }
-        dataset.addSeries(series);
-    }
-}
-
-<span class="javadoc">/**
- * 构建XYMultipleSeriesRenderer.
- *
- *<span class="javadoctag"> @param</span> colors 每个序列的颜色
- *<span class="javadoctag"> @param</span> styles 每个序列点的类型(可设置三角,圆点,菱形,方块等多种)
- *<span class="javadoctag"> @return</span> XYMultipleSeriesRenderer
- */</span>
-<span class="function"><span class="keyword">protected</span> XYMultipleSeriesRenderer <span class="title">buildRenderer</span><span class="params">(<span class="keyword">int</span>[] colors, PointStyle[] styles)</span> </span>{
-    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
-    setRenderer(renderer, colors, styles);
-    <span class="keyword">return</span> renderer;
-}
-
-<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setRenderer</span><span class="params">(XYMultipleSeriesRenderer renderer, <span class="keyword">int</span>[] colors, PointStyle[] styles)</span> </span>{
-    <span class="comment">//整个图表属性设置</span>
-    <span class="comment">//--&gt;start</span>
-    renderer.setAxisTitleTextSize(<span class="number">16</span>);<span class="comment">//设置轴标题文字的大小</span>
-    renderer.setChartTitleTextSize(<span class="number">40</span>);<span class="comment">//设置整个图表标题文字的大小</span>
-    renderer.setLabelsTextSize(<span class="number">15</span>);<span class="comment">//设置轴刻度文字的大小</span>
-    renderer.setLegendTextSize(<span class="number">15</span>);<span class="comment">//设置图例文字大小</span>
-    renderer.setPointSize(<span class="number">5f</span>);<span class="comment">//设置点的大小(图上显示的点的大小和图例中点的大小都会被设置)</span>
-    renderer.setMargins(<span class="keyword">new</span> <span class="keyword">int</span>[] { <span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">20</span> });<span class="comment">//设置图表的外边框(上/左/下/右)</span>
-    <span class="comment">//--&gt;end</span>
-
-    <span class="comment">//以下代码设置没个序列的颜色.</span>
-    <span class="comment">//--&gt;start</span>
-    <span class="keyword">int</span> length = colors.length;
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
-        XYSeriesRenderer r = <span class="keyword">new</span> XYSeriesRenderer();
-        r.setColor(colors[i]);<span class="comment">//设置颜色</span>
-        r.setPointStyle(styles[i]);
-        renderer.addSeriesRenderer(r);
-    }
-    <span class="comment">//--&gt;end</span>
-}
-
-<span class="javadoc">/**
- * 设置renderer的一些属性.
- *
- *<span class="javadoctag"> @param</span> renderer 要设置的renderer
- *<span class="javadoctag"> @param</span> title 图表标题
- *<span class="javadoctag"> @param</span> xTitle X轴标题
- *<span class="javadoctag"> @param</span> yTitle Y轴标题
- *<span class="javadoctag"> @param</span> xMin X轴最小值
- *<span class="javadoctag"> @param</span> xMax X轴最大值
- *<span class="javadoctag"> @param</span> yMin Y轴最小值
- *<span class="javadoctag"> @param</span> yMax Y轴最大值
- *<span class="javadoctag"> @param</span> axesColor X轴颜色
- *<span class="javadoctag"> @param</span> labelsColor Y轴颜色
- */</span>
-<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setChartSettings</span><span class="params">(XYMultipleSeriesRenderer renderer, String title, String xTitle,
-                                String yTitle, <span class="keyword">double</span> xMin, <span class="keyword">double</span> xMax, <span class="keyword">double</span> yMin, <span class="keyword">double</span> yMax, <span class="keyword">int</span> axesColor,
-                                <span class="keyword">int</span> labelsColor)</span> </span>{
-    renderer.setChartTitle(title);
-    renderer.setXTitle(xTitle);
-    renderer.setYTitle(yTitle);
-    renderer.setXAxisMin(xMin);
-    renderer.setXAxisMax(xMax);
-    renderer.setYAxisMin(yMin);
-    renderer.setYAxisMax(yMax);
-    renderer.setAxesColor(axesColor);
-    renderer.setLabelsColor(labelsColor);
-}
-
-<span class="javadoc">/**
- * 构建和时间有关的XYMultipleSeriesDataset,这个方法与buildDataset在参数上区别是需要List&lt;Date[]&gt;作参数.
- *
- *<span class="javadoctag"> @param</span> titles 序列图例
- *<span class="javadoctag"> @param</span> xValues X轴值
- *<span class="javadoctag"> @param</span> yValues Y轴值
- *<span class="javadoctag"> @return</span> XYMultipleSeriesDataset
- */</span>
-<span class="function"><span class="keyword">protected</span> XYMultipleSeriesDataset <span class="title">buildDateDataset</span><span class="params">(String[] titles, List&lt;Date[]&gt; xValues,
-                                                   List&lt;<span class="keyword">double</span>[]&gt; yValues)</span> </span>{
-    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-    <span class="keyword">int</span> length = titles.length;
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
-        TimeSeries series = <span class="keyword">new</span> TimeSeries(titles[i]);<span class="comment">//构建时间序列TimeSeries,</span>
-        Date[] xV = xValues.get(i);
-        <span class="keyword">double</span>[] yV = yValues.get(i);
-        <span class="keyword">int</span> seriesLength = xV.length;
-        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; seriesLength; k++) {
-            series.add(xV[k], yV[k]);
-        }
-        dataset.addSeries(series);
-    }
-    <span class="keyword">return</span> dataset;
-}
-
-<span class="javadoc">/**
- * 构建单个CategorySeries,可用于生成饼图,注意与buildMultipleCategoryDataset(构建圆环图)相区别.
- *
- *<span class="javadoctag"> @param</span> titles the series titles
- *<span class="javadoctag"> @param</span> values the values
- *<span class="javadoctag"> @return</span> the category series
- */</span>
-<span class="function"><span class="keyword">protected</span> CategorySeries <span class="title">buildCategoryDataset</span><span class="params">(String title, <span class="keyword">double</span>[] values)</span> </span>{
-    CategorySeries series = <span class="keyword">new</span> CategorySeries(title);
-    <span class="keyword">int</span> k = <span class="number">0</span>;
-    <span class="keyword">for</span> (<span class="keyword">double</span> value : values) {
-        series.add(<span class="string">"Project "</span> + ++k, value);
-    }
-
-    <span class="keyword">return</span> series;
-}
-
-<span class="javadoc">/**
- * 构建MultipleCategorySeries,可用于构建圆环图(每个环是一个序列)
- *
- *<span class="javadoctag"> @param</span> titles the series titles
- *<span class="javadoctag"> @param</span> values the values
- *<span class="javadoctag"> @return</span> the category series
- */</span>
-<span class="function"><span class="keyword">protected</span> MultipleCategorySeries <span class="title">buildMultipleCategoryDataset</span><span class="params">(String title,
-                                                              List&lt;String[]&gt; titles, List&lt;<span class="keyword">double</span>[]&gt; values)</span> </span>{
-    MultipleCategorySeries series = <span class="keyword">new</span> MultipleCategorySeries(title);
-    <span class="keyword">int</span> k = <span class="number">0</span>;
-    <span class="keyword">for</span> (<span class="keyword">double</span>[] value : values) {
-        series.add(<span class="number">2007</span> + k + <span class="string">""</span>, titles.get(k), value);
-        k++;
-    }
-    <span class="keyword">return</span> series;
-}
-
-<span class="javadoc">/**
- * 构建DefaultRenderer.
- *
- *<span class="javadoctag"> @param</span> colors 每个序列的颜色
- *<span class="javadoctag"> @return</span> DefaultRenderer
- */</span>
-<span class="function"><span class="keyword">protected</span> DefaultRenderer <span class="title">buildCategoryRenderer</span><span class="params">(<span class="keyword">int</span>[] colors)</span> </span>{
-    DefaultRenderer renderer = <span class="keyword">new</span> DefaultRenderer();
-    renderer.setLabelsTextSize(<span class="number">15</span>);
-    renderer.setLegendTextSize(<span class="number">15</span>);
-    renderer.setMargins(<span class="keyword">new</span> <span class="keyword">int</span>[] { <span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">0</span> });
-    <span class="keyword">for</span> (<span class="keyword">int</span> color : colors) {
-        SimpleSeriesRenderer r = <span class="keyword">new</span> SimpleSeriesRenderer();
-        r.setColor(color);
-        renderer.addSeriesRenderer(r);
-    }
-    <span class="keyword">return</span> renderer;
-}
-
-<span class="javadoc">/**
- * 构建XYMultipleSeriesDataset,适用于柱状图.
- *
- *<span class="javadoctag"> @param</span> titles 每中柱子序列的图列
- *<span class="javadoctag"> @param</span> values 柱子的高度值
- *<span class="javadoctag"> @return</span> XYMultipleSeriesDataset
- */</span>
-<span class="function"><span class="keyword">protected</span> XYMultipleSeriesDataset <span class="title">buildBarDataset</span><span class="params">(String[] titles, List&lt;<span class="keyword">double</span>[]&gt; values)</span> </span>{
-    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-    <span class="keyword">int</span> length = titles.length;
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
-        CategorySeries series = <span class="keyword">new</span> CategorySeries(titles[i]);
-        <span class="keyword">double</span>[] v = values.get(i);
-        <span class="keyword">int</span> seriesLength = v.length;
-        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; seriesLength; k++) {
-            series.add(v[k]);
-        }
-        dataset.addSeries(series.toXYSeries());
-    }
-    <span class="keyword">return</span> dataset;
-}
-
-<span class="javadoc">/**
- * 构建XYMultipleSeriesRenderer,适用于柱状图.
- *
- *<span class="javadoctag"> @param</span> colors 每个序列的颜色
- *<span class="javadoctag"> @return</span> XYMultipleSeriesRenderer
- */</span>
-<span class="function"><span class="keyword">protected</span> XYMultipleSeriesRenderer <span class="title">buildBarRenderer</span><span class="params">(<span class="keyword">int</span>[] colors)</span> </span>{
-    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
-    renderer.setAxisTitleTextSize(<span class="number">16</span>);
-    renderer.setChartTitleTextSize(<span class="number">20</span>);
-    renderer.setLabelsTextSize(<span class="number">15</span>);
-    renderer.setLegendTextSize(<span class="number">15</span>);
-    <span class="keyword">int</span> length = colors.length;
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
-        SimpleSeriesRenderer r = <span class="keyword">new</span> SimpleSeriesRenderer();
-        r.setColor(colors[i]);
-        renderer.addSeriesRenderer(r);
-    }
-    <span class="keyword">return</span> renderer;
-}
-
-}
-</code></pre><p>=======<br><strong>接口IDemoChart</strong></p>
-<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>
- <span class="keyword">*</span> Copyright (C) 2009 - 2013 SC 4ViewSoft SRL
- <span class="keyword">*</span>  
- <span class="keyword">*</span> Licensed under the Apache License, Version 2.0 (the <span class="string">"License"</span>);
- <span class="keyword">*</span> you may not use this file except in compliance with the License.
- <span class="keyword">*</span> You may obtain a copy of the License at
- <span class="keyword">*</span>  
- <span class="keyword">*</span>      http://www.apache.org/licenses/LICENSE-2.0
- <span class="keyword">*</span>  
- <span class="keyword">*</span> Unless required by applicable law or agreed to in writing, software
- <span class="keyword">*</span> distributed under the License is distributed on an <span class="string">"AS IS"</span> BASIS,
- <span class="keyword">*</span> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- <span class="keyword">*</span> See the License for the specific language governing permissions and
- <span class="keyword">*</span> limitations under the License.
- <span class="keyword">*</span>/
-package com.zsz.develop.mychart;
-
-import android.content.Context;
-import android.content.Intent;
-
-/<span class="keyword">*</span><span class="keyword">*</span>
- <span class="keyword">*</span> Defines the demo charts.
- <span class="keyword">*</span>/
-public interface IDemoChart {
-  /<span class="keyword">*</span><span class="keyword">*</span> A constant for the name field in a list activity. <span class="keyword">*</span>/
-  String NAME = <span class="string">"name"</span>;
-  /<span class="keyword">*</span><span class="keyword">*</span> A constant for the description field in a list activity. <span class="keyword">*</span>/
-  String DESC = <span class="string">"desc"</span>;
-
-  /<span class="keyword">*</span><span class="keyword">*</span>
-   <span class="keyword">*</span> Returns the chart name.
-   <span class="keyword">*</span> 
-   <span class="keyword">*</span> <span class="comment">@return the chart name</span>
-   <span class="keyword">*</span>/
-  String getName();
-
-  /<span class="keyword">*</span><span class="keyword">*</span>
-   <span class="keyword">*</span> Returns the chart description.
-   <span class="keyword">*</span> 
-   <span class="keyword">*</span> <span class="comment">@return the chart description</span>
-   <span class="keyword">*</span>/
-  String getDesc();
-
-  /<span class="keyword">*</span><span class="keyword">*</span>
-   <span class="keyword">*</span> Executes the chart demo.
-   <span class="keyword">*</span> 
-   <span class="keyword">*</span> <span class="comment">@param context the context</span>
-   <span class="keyword">*</span> <span class="comment">@return the built intent</span>
-   <span class="keyword">*</span>/
-  Intent execute(Context context);
-
-}
-</code></pre><p>======<br>    /**</p>
-<pre><code> * <span class="type">Copyright</span> (<span class="type">C</span>) <span class="number">2009</span> - <span class="number">2013</span> <span class="type">SC</span> <span class="number">4</span>ViewSoft <span class="type">SRL</span>
- *  
- * <span class="type">Licensed</span> under the <span class="type">Apache</span> <span class="type">License</span>, <span class="type">Version</span> <span class="number">2.0</span> (the <span class="string">"License"</span>);
- * you may not use <span class="keyword">this</span> file except in compliance <span class="keyword">with</span> the <span class="type">License</span>.
- * <span class="type">You</span> may obtain a copy of the <span class="type">License</span> at
- *  
- *      http:<span class="comment">//www.apache.org/licenses/LICENSE-2.0</span>
- *  
- * <span class="type">Unless</span> required by applicable law or agreed to in writing, software
- * distributed under the <span class="type">License</span> is distributed on an <span class="string">"AS IS"</span> <span class="type">BASIS</span>,
- * <span class="type">WITHOUT</span> <span class="type">WARRANTIES</span> <span class="type">OR</span> <span class="type">CONDITIONS</span> <span class="type">OF</span> <span class="type">ANY</span> <span class="type">KIND</span>, either express or implied.
- * <span class="type">See</span> the <span class="type">License</span> <span class="keyword">for</span> the specific language governing permissions and
- * limitations under the <span class="type">License</span>.
- */
-<span class="keyword">package</span> com.zsz.develop.mychart;
-
-<span class="keyword">import</span> org.achartengine.<span class="type">ChartFactory</span>;
-<span class="keyword">import</span> org.achartengine.model.<span class="type">CategorySeries</span>;
-<span class="keyword">import</span> org.achartengine.renderer.<span class="type">DialRenderer</span>;
-<span class="keyword">import</span> org.achartengine.renderer.<span class="type">SimpleSeriesRenderer</span>;
-<span class="keyword">import</span> org.achartengine.renderer.<span class="type">DialRenderer</span>.<span class="type">Type</span>;
-
-<span class="keyword">import</span> android.content.<span class="type">Context</span>;
-<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
-<span class="keyword">import</span> android.graphics.<span class="type">Color</span>;
-
-<span class="comment">/**
- * Budget demo pie chart.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">WeightDialChart</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AbstractDemoChart</span> {</span>
-  <span class="comment">/**
-   * Returns the chart name.
-   * @return the chart name
-   */</span>
-  public <span class="type">String</span> getName() {
-    <span class="keyword">return</span> <span class="string">"Weight chart"</span>;
-  }
-
-  <span class="comment">/**
-   * Returns the chart description.
-   * @return the chart description
-   */</span>
-  public <span class="type">String</span> getDesc() {
-    <span class="keyword">return</span> <span class="string">"The weight indicator (dial chart)"</span>;
-  }
-
-  <span class="comment">/**
-   * Executes the chart demo.
-   * @param context the context
-   * @return the built intent
-   */</span>
-  public <span class="type">Intent</span> execute(<span class="type">Context</span> context) {
-   <span class="type">CategorySeries</span> category = <span class="keyword">new</span> <span class="type">CategorySeries</span>(<span class="string">"Weight indic"</span>);
-category.add(<span class="string">"Current"</span>, <span class="number">75</span>);
-category.add(<span class="string">"Minimum"</span>, <span class="number">65</span>);
-category.add(<span class="string">"Maximum"</span>, <span class="number">90</span>);
-<span class="type">DialRenderer</span> renderer = <span class="keyword">new</span> <span class="type">DialRenderer</span>();
-renderer.setChartTitleTextSize(<span class="number">20</span>);
-renderer.setLabelsTextSize(<span class="number">15</span>);
-renderer.setLegendTextSize(<span class="number">15</span>);
-renderer.setMargins(<span class="keyword">new</span> int[] {<span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">0</span>});
-<span class="type">SimpleSeriesRenderer</span> r = <span class="keyword">new</span> <span class="type">SimpleSeriesRenderer</span>();
-r.setColor(<span class="type">Color</span>.<span class="type">BLUE</span>);
-renderer.addSeriesRenderer(r);
-r = <span class="keyword">new</span> <span class="type">SimpleSeriesRenderer</span>();
-r.setColor(<span class="type">Color</span>.rgb(<span class="number">0</span>, <span class="number">150</span>, <span class="number">0</span>));
-renderer.addSeriesRenderer(r);
-r = <span class="keyword">new</span> <span class="type">SimpleSeriesRenderer</span>();
-r.setColor(<span class="type">Color</span>.<span class="type">GREEN</span>);
-renderer.addSeriesRenderer(r);
-renderer.setLabelsTextSize(<span class="number">10</span>);
-renderer.setLabelsColor(<span class="type">Color</span>.<span class="type">WHITE</span>);
-renderer.setShowLabels(<span class="literal">true</span>);
-renderer.setVisualTypes(<span class="keyword">new</span> <span class="type">Type</span>[] {<span class="type">Type</span>.<span class="type">ARROW</span>, <span class="type">Type</span>.<span class="type">NEEDLE</span>, <span class="type">Type</span>.<span class="type">NEEDLE</span>});
-renderer.setMinValue(<span class="number">0</span>);
-renderer.setMaxValue(<span class="number">150</span>);
-<span class="keyword">return</span> <span class="type">ChartFactory</span>.getDialChartIntent(context, category, renderer, <span class="string">"Weight indicator"</span>);
-  }
-
-}
-</code></pre><p>通过这个<strong>WeightTimeChart</strong>类进行实现</p>
-<pre><code><span class="javadoc">/**
- * WeightTimeChart.java
- * 版权所有(C) 2013 
- * 创建:cuiran 2013-10-24 下午4:11:28
- */</span>
-<span class="keyword">package</span> com.zsz.develop.mychart;
-
-<span class="keyword">import</span> java.text.ParsePosition;
-<span class="keyword">import</span> java.text.SimpleDateFormat;
-<span class="keyword">import</span> java.util.Date;
-<span class="keyword">import</span> java.util.Random;
-
-<span class="keyword">import</span> org.achartengine.ChartFactory;
-<span class="keyword">import</span> org.achartengine.chart.PointStyle;
-<span class="keyword">import</span> org.achartengine.chart.TimeChart;
-<span class="keyword">import</span> org.achartengine.model.TimeSeries;
-<span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;
-<span class="keyword">import</span> org.achartengine.renderer.SimpleSeriesRenderer;
-<span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;
-<span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;
-
-
-
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.content.Intent;
-<span class="keyword">import</span> android.graphics.Color;
-
-<span class="javadoc">/**
- * TODO 折线图
- *<span class="javadoctag"> @author</span> cuiran
- *<span class="javadoctag"> @version</span> 1.0.0
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeightTimeChart</span> <span class="keyword">extends</span> <span class="title">AbstractDemoChart</span> </span>{
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SERIES_NR = <span class="number">1</span>;
-<span class="comment">/* (non-Javadoc)
- * @see com.cayden.weightnotes.achartengine.IDemoChart#getName()
- */</span>
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{
-    <span class="comment">// TODO Auto-generated method stub</span>
-    <span class="keyword">return</span> <span class="string">"WeightTimeChart"</span>;
-}
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Date <span class="title">strToDate</span><span class="params">(String strDate)</span> </span>{
-    SimpleDateFormat formatter = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);
-    ParsePosition pos = <span class="keyword">new</span> ParsePosition(<span class="number">0</span>);
-    Date strtodate = formatter.parse(strDate, pos);
-    <span class="keyword">return</span> strtodate;
-}
-
-<span class="comment">/* (non-Javadoc)
- * @see com.cayden.weightnotes.achartengine.IDemoChart#getDesc()
- */</span>
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">public</span> String <span class="title">getDesc</span><span class="params">()</span> </span>{
-    <span class="comment">// TODO Auto-generated method stub</span>
-    <span class="keyword">return</span> <span class="string">"WeightTimeChart"</span>;
-}
-
-<span class="function"><span class="keyword">private</span> XYMultipleSeriesDataset <span class="title">getDateDemoDataset</span><span class="params">()</span> </span>{
-    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-    <span class="keyword">final</span> <span class="keyword">int</span> nr = <span class="number">7</span>;
-
-
-
-    <span class="keyword">long</span> value = <span class="keyword">new</span> Date().getTime() - <span class="number">3</span> * TimeChart.DAY;
-    Random r = <span class="keyword">new</span> Random();
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SERIES_NR; i++) {
-        TimeSeries series = <span class="keyword">new</span> TimeSeries(<span class="string">"体重变化趋势 "</span>);
-
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-19"</span>), <span class="number">85.3</span>);
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-20"</span>), <span class="number">85.6</span>);
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-21"</span>), <span class="number">84.5</span>);
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-22"</span>), <span class="number">85.0</span>);
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-23"</span>), <span class="number">85.1</span>);
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-24"</span>), <span class="number">85.3</span>);
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-25"</span>), <span class="number">85.3</span>);
-        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-26"</span>), <span class="number">85.3</span>);
-
-<span class="comment">//              for (int k = 0; k &lt; nr; k++) {</span>
-<span class="comment">//                series.add(new Date(value + k * TimeChart.DAY / 4), 20 + r.nextInt() % 100);</span>
-<span class="comment">//              }</span>
-
-        dataset.addSeries(series);
-
-    }
-    <span class="keyword">return</span> dataset;
-}
-
-<span class="function"><span class="keyword">private</span> XYMultipleSeriesRenderer <span class="title">getDemoRenderer</span><span class="params">()</span> </span>{
-    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
-    renderer.setAxisTitleTextSize(<span class="number">40</span>);
-    renderer.setChartTitleTextSize(<span class="number">40</span>);
-    renderer.setLabelsTextSize(<span class="number">40</span>);
-    renderer.setLegendTextSize(<span class="number">18</span>);
-    renderer.setPointSize(<span class="number">6f</span>);
-    <span class="comment">//in this order: top, left, bottom, right</span>
-    renderer.setMargins(<span class="keyword">new</span> <span class="keyword">int</span>[] {<span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">0</span>});
-
-
-    XYSeriesRenderer r = <span class="keyword">new</span> XYSeriesRenderer();
-
-    r = <span class="keyword">new</span> XYSeriesRenderer();
-    r.setPointStyle(PointStyle.CIRCLE);
-    r.setColor(Color.GREEN);
-    r.setFillPoints(<span class="keyword">true</span>);
-
-    renderer.addSeriesRenderer(r);
-    renderer.setAxesColor(Color.DKGRAY);
-    renderer.setLabelsColor(Color.LTGRAY);
-    renderer.setChartTitle(<span class="string">"体重变化趋势"</span>);
-    renderer.setXTitle(<span class="string">"日期"</span>);
-    renderer.setYTitle(<span class="string">"体重(kg)"</span>);
-    renderer.setZoomButtonsVisible(<span class="keyword">true</span>);
-
-    <span class="keyword">int</span> length = renderer.getSeriesRendererCount();
-    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
-        SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
-        seriesRenderer.setDisplayChartValues(<span class="keyword">true</span>);
-    }
-    <span class="keyword">return</span> renderer;
-}
-<span class="comment">/* (non-Javadoc)
- * @see com.cayden.weightnotes.achartengine.IDemoChart#execute(android.content.Context)
- */</span>
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">public</span> Intent <span class="title">execute</span><span class="params">(Context context)</span> </span>{
-    <span class="comment">// TODO Auto-generated method stub</span>
-
-    <span class="keyword">return</span> ChartFactory.getTimeChartIntent(context, getDateDemoDataset(), getDemoRenderer(), <span class="string">"yyyy-MM-dd"</span>);
-}
-
-}
-</code></pre><p>最后在<strong>MainActivity</strong>里调用</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.mychart;
-
-<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
-<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
-<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
-
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
-
-<span class="keyword">private</span> <span class="type">IDemoChart</span>[] mCharts = <span class="keyword">new</span> <span class="type">IDemoChart</span>[] {<span class="keyword">new</span> <span class="type">WeightDialChart</span>(),
-        <span class="keyword">new</span> <span class="type">WeightTimeChart</span>()};
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.activity_main);
-
-    <span class="type">Intent</span> intent=mCharts[<span class="number">1</span>].execute(<span class="keyword">this</span>);
-
-    startActivity(intent);
-
-}
-
-
-
-}
-</code></pre><p>最后别忘了在<strong>配置文件</strong>中添加</p>
-<activity android:name="org.achartengine.GraphicalActivity">  </activity>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cie9tn4kr000tj0b26xz6d685" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-28" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/28/2015-7-28/">json转化异常，JDBC查询之感悟</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/28/2015-7-28/">
-    <time datetime="2015-07-28T12:50:57.000Z" itemprop="datePublished">2015-07-28</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/28问题集">2015/7/28问题集</h1><h2 id="json转化异常">json转化异常</h2><p>异常信息为：Expected BEGIN_ARRAY but was BEGIN_OBJECT<br>说不是数组，查找到当时的json数据.</p>
-<p>{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}<br>这并不是一条数组信息</p>
-<p>不管你有几条数据：他都要是一个数组类型。也就是返回的是一个list集合。</p>
-<p>[{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}]</p>
-<h3 id="修改方法_###添加的时候、不要在for循环里添加。"><strong>修改方法    </strong> ###添加的时候、不要在for循环里添加。</h3><pre><code>listDataBeans=dataDao.getEditData(jsonNameStr);
-            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; listDataBeans.<span class="built_in">size</span>(); i++) {
-               DataBean dataBean=listDataBeans.<span class="built_in">get</span>(i);
-               System.out.<span class="built_in">println</span>(dataBean.getGoalTime()+<span class="string">"傻逼"</span>);
-           }
-            dataString = gson.toJson(listDataBeans);
-</code></pre><h2 id="JDBC查询之感悟">JDBC查询之感悟</h2><p>查询必定是通过一个条件来查找，返回的数据可能会有多条（List）。<br>查询出来是一个ResultSet，所以也需要一条一条读取出来。有值得时候就设置进属性。</p>
-<pre><code>    <span class="keyword">public</span> ArrayList&lt;ManBean&gt; getAllMan(<span class="keyword">String</span> name) {
-
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    ArrayList&lt;ManBean&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;ManBean&gt;();
-    Connection conn=<span class="keyword">null</span>;
-    PreparedStatement ps=<span class="keyword">null</span>;
-    ResultSet rs=<span class="keyword">null</span>;
-    <span class="keyword">String</span> getAllManSQL=<span class="string">"SELECT * FROM man "</span>+<span class="string">"WHERE name=?"</span>;
-    <span class="keyword">try</span> {
-        conn=BaseConnection.getConnection();
-        ps=(PreparedStatement) conn.prepareStatement(getAllManSQL);
-        ps.setString(<span class="number">1</span>, name);
-        System.out.<span class="built_in">println</span>(ps+<span class="string">")))))"</span>+name);
-        rs=ps.executeQuery();
-        <span class="keyword">String</span> <span class="built_in">line</span>;
-        StringBuffer sb=<span class="keyword">new</span> StringBuffer();
-        <span class="keyword">while</span> (rs.next()) {
-            ManBean manBean=<span class="keyword">new</span> ManBean();
-            manBean.setArm(rs.getString(<span class="string">"arm"</span>));
-            manBean.setChest(rs.getString(<span class="string">"chest"</span>));
-            manBean.setImage(rs.getBytes(<span class="string">"image"</span>));
-            manBean.setTime(rs.getString(<span class="string">"time"</span>));
-            manBean.setName(rs.getString(<span class="string">"name"</span>));
-            manBean.setWeight(rs.getString(<span class="string">"weight"</span>));
-            manBean.setWaust(rs.getString(<span class="string">"waust"</span>));
-            manBean.setId(rs.getInt(<span class="string">"id"</span>));
-            arrayList.<span class="built_in">add</span>(manBean);
-        }
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span> {
-        BaseConnection.closeResource(rs, ps, conn);
-    }
-
-    <span class="keyword">return</span> arrayList;
-}
-</code></pre><h2 id="JDBC等一干操作">JDBC等一干操作</h2><pre><code><span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">deleteMan</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
-
-    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=<span class="keyword">null</span>;
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String deleteManSQL=<span class="string">"DELETE FROM man WHERE id=?"</span>;
-    <span class="keyword">try</span> {
-        conn=BaseConnection.getConnection();
-        ps=(PreparedStatement) conn.prepareStatement(deleteManSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        System.out.println(deleteManSQL);
-        <span class="keyword">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }
-
-
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span> {
-        BaseConnection.closeResource(ps, conn);
-    }
-
-    <span class="keyword">return</span> b;
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cie9tn4ky000vj0b2d3gxorge" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cieb6up4v000wtob25opjdget" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2234,7 +1630,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
       </nav>
     </section>
       

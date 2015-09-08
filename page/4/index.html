@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        57
+        63
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,1341 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/10/2015-8-10/">部署代码到CentOS云服务器</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/10/2015-8-10/">
+    <time datetime="2015-08-10T01:31:22.000Z" itemprop="datePublished">2015-08-10</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="部署代码到CentOS云服务器">部署代码到CentOS云服务器</h1><h2 id="FTP通道">FTP通道</h2><p>用户需要使用FTP通道，将应用程序从用户自己的服务器上传到云服务器上。</p>
+<blockquote>
+<p>FTP（File Transfer Protocol，文件传输协议） 是 TCP/IP 协议组中的协议之一。FTP协议包括两个组成部分，其一为FTP服务器，其二为FTP客户端。其中FTP服务器用来存储文件，用户可以使用FTP客户端通过FTP协议访问位于FTP服务器上的资源。在开发网站的时候，通常利用FTP协议把网页或程序传到Web服务器上。此外，由于FTP传输效率非常高，在网络上传输大的文件时，一般也采用该协议。</p>
+<p>默认情况下FTP协议使用TCP端口中的 20和21这两个端口，其中20用于传输数据，21用于传输控制信息。但是，是否使用20作为传输数据的端口与FTP使用的传输模式有关，如果采用主动模式，那么数据传输端口就是20；如果采用被动模式，则具体最终使用哪个端口要服务器端和客户端协商决定。</p>
+</blockquote>
+<p><a href="http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="external">http://www.qcloud.com/wiki/%E9%83%A8%E7%BD%B2%E4%BB%A3%E7%A0%81%E5%88%B0CentOS%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cieb6up4z000xtob2u19cctdj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/06/2015-8-6/">px和dp的转换公式， Android 判断当前线程是否是主线程的方法</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/06/2015-8-6/">
+    <time datetime="2015-08-06T01:07:34.000Z" itemprop="datePublished">2015-08-06</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/6问题集">2015/8/6问题集</h1><h2 id="px和dp的转换公式">px和dp的转换公式</h2><p> px = dp * (dpi / 160)</p>
+<ul>
+<li><p>px：即像素，1px代表屏幕上一个物理的像素点；px单位不被建议使用，因为同样100px的图片，在不同手机上显示的实际大小可能不同</p>
+</li>
+<li><p>dp：它与“像素密度”密切相关，所以首先我们解释一下什么是像素密度。假设有一部手机，屏幕的物理尺寸为1.5英寸x2英寸，屏幕分辨率为240x320，则我们可以计算出在这部手机的屏幕上，每英寸包含的像素点的数量为240/1.5=160dpi（横向）或320/2=160dpi（纵向），160dpi就是这部手机的像素密度，像素密度的单位dpi是Dots Per Inch的缩写，即每英寸像素数量。横向和纵向的这个值都是相同的，原因是大部分手机屏幕使用正方形的像素点。</p>
+</li>
+</ul>
+<ul>
+<li><p>四种像素密度：而ldpi指120，mdpi指160，hdpi指240，xhdpi指320。低（120dpi）、中（160dpi）、高（240dpi）和超高（320dpi），它们对应的dp到px的系数分别为0.75、1、1.5和2，这个系数乘以dp长度就是像素数。例如界面上有一个长度为“80dp”的图片，那么它在240dpi的手机上实际显示为80x1.5=120px，在320dpi的手机上实际显示为80x2=160px</p>
+</li>
+<li><p>dip：<br>与dp完全相同，只是名字不同而已。在早期的Android版本里多使用dip，后来为了与sp统一就建议使用dp这个名字了。</p>
+</li>
+<li><p>sp：<br>与缩放无关的抽象像素（Scale-independent Pixel）。sp和dp很类似但唯一的区别是，Android系统允许用户自定义文字尺寸大小（小、正常、大、超大等等），当文字尺寸是“正常”时1sp=1dp=0.00625英寸，而当文字尺寸是“大”或“超大”时，1sp&gt;1dp=0.00625英寸。类似我们在windows里调整字体尺寸以后的效果——窗口大小不变，只有文字大小改变。</p>
+</li>
+<li><p>mm：<br>即毫米；</p>
+</li>
+<li><p>in：<br>即英寸，1英寸=2.54厘米（约）；</p>
+</li>
+<li><p>pt：<br>1pt=1/72英寸=0.035厘米；</p>
+</li>
+</ul>
+<p>最佳实践，<strong>文字的尺寸一律用sp单位，非文字的尺寸一律使用dp单位</strong>。例如textSize=”16sp”、layout_width=”60dp”；偶尔需要使用px单位，例如需要在屏幕上画一条细的分隔线时：</p>
+<h2 id="如何加载一张大图bitmap如（4096*4096）">如何加载一张大图bitmap如（4096*4096）</h2><h2 id="加载一张大图，有什么注意事项">加载一张大图，有什么注意事项</h2><ul>
+<li><p>在展示高分辨率图片的时候，最好先将图片进行压缩。压缩后的图片大小应该和用来展示它的控件大小相近，在一个很小的ImageView上显示一张超大的图片不会带来任何视觉上的好处，但却会占用我们相当多宝贵的内存，而且在性能上还可能会带来负面影响。</p>
+</li>
+<li><p>为了避免OOM异常，最好在解析每张图片的时候都先检查一下图片的大小，除非你非常信任图片的来源，保证这些图片都不会超出你程序的可用内存。 </p>
+</li>
+</ul>
+<h2 id="Android_判断当前线程是否是主线程的方法">Android 判断当前线程是否是主线程的方法</h2><ul>
+<li><p>方法一：使用Looper类判断</p>
+<pre><code>Looper.<span class="function"><span class="title">myLooper</span><span class="params">()</span></span> != Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>  
+</code></pre></li>
+</ul>
+<p>方法二：通过查看Thread类的当前线程</p>
+<pre><code>Thread.<span class="function"><span class="title">currentThread</span><span class="params">()</span></span> == Looper.<span class="function"><span class="title">getMainLooper</span><span class="params">()</span></span>.<span class="function"><span class="title">getThread</span><span class="params">()</span></span> 
+</code></pre><p>方法三：使用线程句柄判断，将主线程的Thread.currentThread()获取到主线程当前句柄，保存起来，在需要判断的时候调用Thread.currentThread()来与之比较，即可判断当前线程是否是主线程了，该方法可以参见Activity中</p>
+<pre><code><span class="keyword">private</span> <span class="keyword">Thread</span> mUiThread;  
+</code></pre><p>另</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">final</span> void runOnUiThread(Runnable <span class="keyword">action</span>) {  
+    <span class="keyword">if</span> (Thread.currentThread() <span class="comment">!= mUiThread) {  </span>
+        mHandler.post(<span class="keyword">action</span>);  
+    } <span class="keyword">else</span> {  
+        <span class="keyword">action</span>.run();  
+    }  
+}  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cieb6up2e000etob2kngkjcs5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-30" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/30/2015-7-30/">android端乱码问题，RadioGroup多选一，对比空字符，4种方式实现java 保留2位小数点</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/30/2015-7-30/">
+    <time datetime="2015-07-30T00:38:24.000Z" itemprop="datePublished">2015-07-30</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/5问题集">2015/8/5问题集</h1><h2 id="android端乱码问题">android端乱码问题</h2><p>服务器中没问题而单单android端乱码，那么一定是接收的时候出现问题</p>
+<p>把这句代码</p>
+<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity());
+</code></pre><p>改成接收的时候也要转成UTF-8</p>
+<pre><code><span class="variable">entity=</span> EntityUtils.<span class="built_in">toString</span>(response.getEntity(),<span class="string">"UTF-8"</span>);
+</code></pre><h2 id="RadioGroup多选一">RadioGroup多选一</h2><p>程序中常常要用到多选一的时候，例如男女</p>
+<p>就以男女为例</p>
+<p>XML</p>
+<pre><code> <span class="tag">&lt;<span class="title">LinearLayout</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:orientation</span>=<span class="value">"horizontal"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">TextView</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:text</span>=<span class="value">"性别："</span>
+        /&gt;</span>
+    <span class="tag">&lt;<span class="title">TextView</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:text</span>=<span class="value">"男"</span>
+        <span class="attribute">android:id</span>=<span class="value">"@+id/etSex"</span>
+        /&gt;</span>
+    <span class="comment">&lt;!--&lt;EditText--&gt;</span>
+        <span class="comment">&lt;!--android:id="@+id/etSex"--&gt;</span>
+        <span class="comment">&lt;!--android:layout_width="fill_parent"--&gt;</span>
+        <span class="comment">&lt;!--android:layout_height="wrap_content"--&gt;</span>
+        <span class="comment">&lt;!--/&gt;--&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">RadioGroup</span> <span class="attribute">android:id</span>=<span class="value">"@+id/radioGroup"</span>
+        <span class="attribute">android:contentDescription</span>=<span class="value">"性别"</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+        <span class="tag">&lt;<span class="title">RadioButton</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:id</span>=<span class="value">"@+id/radioMale"</span>
+            <span class="attribute">android:text</span>=<span class="value">"男"</span>
+            <span class="attribute">android:checked</span>=<span class="value">"true"</span>&gt;</span>
+
+        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">RadioButton</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+            <span class="attribute">android:id</span>=<span class="value">"@+id/radioFemale"</span>
+            <span class="attribute">android:text</span>=<span class="value">"女"</span>&gt;</span>
+
+        <span class="tag">&lt;/<span class="title">RadioButton</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">RadioGroup</span>&gt;</span>
+
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre><p>Activty中的代码如下</p>
+<pre><code>etSex= (TextView) findViewById(R.id.etSex);
+
+   radioGroup= (RadioGroup) findViewById(R.id.radioGroup);
+   radioGroup.setOnCheckedChangeListener(<span class="keyword">new</span> RadioGroup.OnCheckedChangeListener() {
+       <span class="annotation">@Override</span>
+       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onCheckedChanged</span><span class="params">(RadioGroup radioGroup, <span class="keyword">int</span> i)</span> </span>{
+        <span class="keyword">int</span> radioButtonId = radioGroup.getCheckedRadioButtonId();
+           rb = (RadioButton)EditDataActicity.<span class="keyword">this</span>.findViewById(radioButtonId);
+           etSex.setText( rb.getText());
+       }
+   });
+</code></pre><h2 id="对比空字符">对比空字符</h2><p>对比空字符要用equals(“”)</p>
+<pre><code>etHeight.<span class="function"><span class="title">getText</span><span class="params">()</span></span>.<span class="function"><span class="title">toString</span><span class="params">()</span></span>.<span class="function"><span class="title">trim</span><span class="params">()</span></span>.<span class="function"><span class="title">equals</span><span class="params">(<span class="string">""</span>)</span></span>
+</code></pre><h2 id="4种方式实现java_保留2位小数点">4种方式实现java 保留2位小数点</h2><h3 id="方式一：">方式一：</h3><p>四舍五入<br>double   f   =   111231.5585;<br>BigDecimal   b   =   new   BigDecimal(f);<br>double   f1   =   b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();<br>保留两位小数</p>
+<h3 id="方式二：">方式二：</h3><p>java.text.DecimalFormat   df   =new   java.text.DecimalFormat(”#.00″);<br>df.format(你要格式化的数字);<br>例：new java.text.DecimalFormat(”#.00″).format(3.1415926)</p>
+<p>（#.00 表示两位小数 #.0000四位小数 以此类推…</p>
+<h3 id="方式三：">方式三：</h3><p>double d = 3.1415926;<br>String result = String .format(”%.2f”);<br>%.2f %. 表示 小数点前任意位数   2 表示两位小数 格式后的结果为f 表示浮点型。</p>
+<h3 id="方式四：">方式四：</h3><p>此外如果使用struts标签做输出的话，有个format属性,设置为format=”0.00”就是保留两位小数<br>例如：<bean:write name="entity" property="dkhAFSumPl" format="0.00"></bean:write></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cieb6up52000ytob26y9dm576" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-29-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/29/2015-7-29-1/">AChartEngine超简单实例</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/29/2015-7-29-1/">
+    <time datetime="2015-07-29T13:19:12.000Z" itemprop="datePublished">2015-07-29</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="AChartEngine超简单实例">AChartEngine超简单实例</h1><p>其实无非就在做三件事</p>
+<ul>
+<li>1.添加数据进图标</li>
+<li>2.线或条等设置</li>
+<li>3.制作成什么表。仅此而已</li>
+</ul>
+<p>package com.zsz.develop.mychart02;</p>
+<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.Button;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.LinearLayout;</span>
+
+
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.GraphicalView;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/7/29.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
+<span class="keyword">private</span> LinearLayout llChart;
+<span class="keyword">private</span> Button btn;
+@Override
+<span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.show_exam_activity);
+    <span class="comment">// 1, 构造显示用渲染图</span>
+    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+    <span class="comment">// 2,进行显示</span>
+    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+    <span class="comment">// 2.1, 构建数据</span>
+    Random r = <span class="keyword">new</span> Random();
+    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
+        XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
+        <span class="comment">// 填充数据</span>
+        <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
+            <span class="comment">// 填x,y值</span>
+            series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
+        }
+        <span class="comment">// 需要绘制的点放进dataset中</span>
+        dataset.addSeries(series);
+    }
+    <span class="comment">// 3, 对点的绘制进行设置</span>
+    XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+    <span class="comment">// 3.1设置颜色</span>
+    xyRenderer.setColor(Color.BLUE);
+    <span class="comment">// 3.2设置点的样式</span>
+    xyRenderer.setPointStyle(PointStyle.SQUARE);
+    <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
+    renderer.addSeriesRenderer(xyRenderer);
+    <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
+    xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+    xyRenderer.setColor(Color.RED);
+    xyRenderer.setPointStyle(PointStyle.CIRCLE);
+    renderer.addSeriesRenderer(xyRenderer);
+<span class="comment">//        Intent intent = new LinChart().execute(this);</span>
+<span class="comment">//        Intent intent = ChartFactory</span>
+<span class="comment">//                .getLineChartIntent(this, dataset, renderer);</span>
+    GraphicalView graphicalView = ChartFactory.getLineChartView(<span class="keyword">this</span>, dataset, renderer);
+    llChart= (LinearLayout) findViewById(R.id.llChart);
+    llChart.addView(graphicalView);
+<span class="comment">//                startActivity(intent);</span>
+
+}
+
+}
+</code></pre><h2 id="详细配置。">详细配置。</h2><p>上面的配置只配置了几个基础的，还要进行更多配置才能使得图标更加简单通熟易懂。</p>
+<ul>
+<li>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</li>
+<li>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</li>
+<li>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</li>
+<li>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</li>
+<li>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</li>
+<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
+</li>
+<li><p>XYSeriesRenderer，impleSeriesRenderer、用于设置每张图中每一个序列的绘制方法。- XYMultipleSeries，RendererDefaultRenderer用于设置整张图的绘制格式。</p>
+</li>
+</ul>
+<p>XYMultipleSeriesRenderer.setAxisTitleTextSize</p>
+<h2 id="详细配置">详细配置</h2><ul>
+<li>1.修改背景色或设置背景图片：<br>背景色设置需要设置两项：setMarginsColor（设置四边颜色）以及setBackgroundColor（设置中间背景色）</li>
+<li>设置背景图片：<pre><code><span class="symbol">http:</span>/<span class="regexp">/blog.csdn.net/kmyhy</span><span class="regexp">/article/details</span><span class="regexp">/6590294</span>
+</code></pre></li>
+</ul>
+<ol>
+<li>setAxisTitleTextSize(16);// 设置坐标轴标题文本大小</li>
+<li>setChartTitleTextSize(20); // 设置图表标题文本大小</li>
+<li>setLabelsTextSize(15); // 设置轴标签文本大小</li>
+<li>setLegendTextSize(15); // 设置图例文本大小</li>
+<li>renderer.setChartTitle( “个人收支表”);//设置柱图名称</li>
+<li>renderer.setXTitle( “名单” );//设置X轴名称</li>
+<li>renderer.setYTitle( “金额” );//设置Y轴名称</li>
+<li>renderer.setXAxisMin(0.5);//设置X轴的最小值为0.5</li>
+<li>renderer.setXAxisMax(5.5);//设置X轴的最大值为5</li>
+<li>renderer.setYAxisMin(0);//设置Y轴的最小值为0</li>
+<li>renderer.setYAxisMax(500);//设置Y轴最大值为500</li>
+<li>renderer.setDisplayChartValues(true);//设置是否在柱体上方显示值</li>
+<li>renderer.setShowGrid(true);//设置是否在图表中显示网格</li>
+<li>renderer.setXLabels(0);//设置X轴显示的刻度标签的个数</li>
+<li>如果想要在X轴显示自定义的标签，那么首先要设置renderer.setXLabels(0);  如果不设置为0，那么所设置的Labels会与原X坐标轴labels重叠<br>其次我们要renderer.addTextLabel()循环添加<br>eg：for(int i=0;i&lt;13;i++)<br>  {<pre><code><span class="keyword">renderer</span>.addTextLabel(i+<span class="number">1</span>,years[i]); <span class="comment">//循环添加Xlabel其中显示的label放在years数组中</span>
+</code></pre>  }</li>
+<li>renderer.setXLabelsAlign(Align.RIGHT);//设置刻度线与X轴之间的相对位置关系</li>
+<li>renderer.setYLabelsAlign(Align.RIGHT);//设置刻度线与Y轴之间的相对位置关系</li>
+<li>renderer.setZoomButtonsVisible(true);//设置可以缩放</li>
+<li>renderer.setPanLimits(newdouble[] { 0, 20, 0, 140 });//设置拉动的范围</li>
+<li>renderer.setZoomLimits(newdouble[] { 0.5, 20, 1, 150 });//设置缩放的范围</li>
+<li>renderer.setRange(newdouble[]{0d, 5d, 0d, 100d}); //设置chart的视图范围</li>
+<li>renderer.setFitLegend(true);// 调整合适的位置</li>
+<li>renderer.setClickEnabled(true)//设置是否可以滑动及放大缩小;</li>
+<li><p>Dataset和Render参数介绍：<br>  <a href="http://blog.csdn.net/lk_blog/article/details/7645661" target="_blank" rel="external">http://blog.csdn.net/lk_blog/article/details/7645661</a></p>
+</li>
+<li><p>ChartView.repaint()；是重新绘图的命令</p>
+</li>
+<li>renderer.setMargins(new int[] { 70, 70, 100, 70 });//设置图表的外边框(上/左/下/右)</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cieb6up590010tob2o2uqyw69" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-29" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/29/2015-7-29/">Android中图表AChartEngine</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/29/2015-7-29/">
+    <time datetime="2015-07-29T02:53:38.000Z" itemprop="datePublished">2015-07-29</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/29问题集">2015/7/29问题集</h1><h2 id="Android中图表AChartEngine">Android中图表AChartEngine</h2><p>很多时候项目中我们需要对一些统计数据进行绘制表格，更多直观查看报表分析结果。基本有以下几种方法:</p>
+<ul>
+<li><p>1:可以进行android  api进行draw这样的话，效率比较低</p>
+</li>
+<li><p>2:使用开源绘表引擎，这样效率比较高.下面就介绍一种。</p>
+</li>
+</ul>
+<p><strong>AChartEngine（简称ACE）</strong>是Google的一个开源图表库（for Android）。它功能强大，支持散点图、折线图、饼图、气泡图、柱状图、短棒图、仪表图等多种图表。</p>
+<p>参考文章：<a href="http://www.cnblogs.com/android100/p/Android-AChartEngine.html" target="_blank" rel="external">http://www.cnblogs.com/android100/p/Android-AChartEngine.html</a></p>
+<h2 id="achartengine的数据模型">achartengine的数据模型</h2><ul>
+<li><p>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</p>
+</li>
+<li><p>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</p>
+</li>
+<li><p>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</p>
+</li>
+<li><p>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</p>
+</li>
+<li><p>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</p>
+</li>
+<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
+</li>
+</ul>
+<p><strong>不同的数据模型用于不同的图表显示</strong>。XYSeries可以用于折线图、直方图。CategorySeries可以用于圆饼图。每种数据模型都提供了丰富的操作接口，用于插入删除数据等多种操作。我们可以根据需要将数据存为合适的数据模型。</p>
+<h2 id="绘制器（渲染器Renderer）">绘制器（渲染器Renderer）</h2><p>绘制器声明了绘制图表的类型。主要包括以下几种。</p>
+<p>SimpleSeriesRenderer、 XYSeriesRenderer用于设置每张图中每一个序列的绘制方法。而DefaultRenderer和 XYMultipleSeriesRenderer用于设置整张图的绘制格式。它们之间的关系类似于XYSeries 与XYMultipleSeriesDataset之间的关系。</p>
+<h2 id="画图概念"><strong>画图概念</strong></h2><p>要 画一张图，我们需要设置好需要绘制的数据及绘制的方法。确定好data model及renderer后，再调用合适的绘制方法绘制图形。库提供了两种绘制图形的方法，一种是get<strong><em>Intent( )（如getLineChartIntent()）直接新建一个Activity全屏显示生成的图表，另一种是get</em></strong>View( )（如getLineChartView()）生成一个View，用户可以自行设置它的显示。</p>
+<p>主要通过设置几个对象</p>
+<p>  1、XYSeries对象：用于存储一条线的数据信息；<br>  2、XYMultipleSeriesDataset对象：即数据集，可添加多个XYSeries对象，因为一个折线图中可能有多条线。<br>  3、XYSeriesRenderer对象：主要是用来设置一条线条的风格，颜色啊，粗细之类的。<br>  4、XYMultipleSeriesRenderer对象：主要用来定义一个图的整体风格，设置xTitle,yTitle,chartName等等整体性的风格，<br>    可添加多个XYSeriesRenderer对象，因为一个图中可以有多条折线。<br>设置完那些对象之后，可通过 org.achartengine.ChartFactory调用数据集XYMultipleSeriesDataset对象<br>  与XYMultipleSeriesRenderer对象来画图并将图加载到GraphicalView中，<br>  ChartFactory有多种api，通过这些api调用来决定是画折线图还是柱状图。</p>
+<h2 id="绘制基础">绘制基础</h2><p>1,ChartFactory ,传入XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,然后,我们只需用 getXXXChartIntent(Context context,XYMutilpleSeriesRenderer,XYMutilpleSeriesDataset,)方法就可以进行图表的显示</p>
+<p>2,XYMutilpleSeriesRenderer 用于进行绘制的设置,添加的XYSeriesRender对象,用于定义绘制的点集合设置,注意数量要和XYMutilpleSeriesDataset,添加的XYseries一致!!!</p>
+<p>3,XYMutilpleSeriesDataset 用于数据的存放,添加的XYseries对象,用于提供绘制的点集合的数据</p>
+<h2 id="绘制实例">绘制实例</h2><p>这个实例告诉我们，不必跟着AChartEngine也可以照样实现。只需要懂得原理就行。<br>原理就是</p>
+<ul>
+<li>1.构造渲染图</li>
+<li>2.进行显示（构建数据）</li>
+<li>3.对点的绘制进行设置</li>
+<li><p>/ 3.1设置颜色</p>
+<p> 3.2设置点的样式</p>
+<p> 3.3, 将要绘制的点添加到坐标绘制中</p>
+<p> 3.4,重复 1~3的步骤绘制第二个系列点</p>
+</li>
+</ul>
+<p>package com.zsz.develop.mychart;</p>
+<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
+<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
+
+<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/7/29.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
+
+    @Override
+    <span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+        <span class="comment">// TODO Auto-generated method stub</span>
+        <span class="keyword">super</span>.onCreate(savedInstanceState);
+        <span class="comment">// 1, 构造显示用渲染图</span>
+        XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+        <span class="comment">// 2,进行显示</span>
+        XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+        <span class="comment">// 2.1, 构建数据</span>
+        Random r = <span class="keyword">new</span> Random();
+        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
+            XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
+            <span class="comment">// 填充数据</span>
+            <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
+                <span class="comment">// 填x,y值</span>
+                series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
+            }
+            <span class="comment">// 需要绘制的点放进dataset中</span>
+            dataset.addSeries(series);
+        }
+        <span class="comment">// 3, 对点的绘制进行设置</span>
+        XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+        <span class="comment">// 3.1设置颜色</span>
+        xyRenderer.setColor(Color.BLUE);
+        <span class="comment">// 3.2设置点的样式</span>
+        xyRenderer.setPointStyle(PointStyle.SQUARE);
+        <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
+        renderer.addSeriesRenderer(xyRenderer);
+        <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
+        xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
+        xyRenderer.setColor(Color.RED);
+        xyRenderer.setPointStyle(PointStyle.CIRCLE);
+        renderer.addSeriesRenderer(xyRenderer);
+        <span class="comment">// Intent intent = new LinChart().execute(this);</span>
+        Intent intent = ChartFactory
+                .getLineChartIntent(<span class="keyword">this</span>, dataset, renderer);
+        startActivity(intent);
+
+
+
+<span class="comment">//          GraphicalView graphicalView = ChartFactory.getLineChartView(this, dataset, renderer);</span>
+<span class="comment">//    llChart= (LinearLayout) findViewById(R.id.llChart);</span>
+  <span class="comment">//  llChart.addView(graphicalView);</span>
+    }
+
+}    
+</code></pre><hr>
+<h2 id="把得到的图标设置成View"><strong>把得到的图标设置成View</strong></h2><p>绑定layout后找到LinearLayout，把他添加到LinearLayout里去</p>
+<pre><code>  GraphicalView <span class="variable">graphicalView =</span> ChartFactory.getLineChartView(this, dataset, renderer);
+<span class="variable">llChart=</span> (LinearLayout) findViewById(R.id.llChart);
+llChart.addView(graphicalView);
+</code></pre><hr>
+<h2 id="构建一个柱状图实例">构建一个柱状图实例</h2><p><strong>先定义一个接口AChartAbstract</strong></p>
+<pre><code>package com.zsz.develop.chartdemo;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
+
+<span class="keyword">public</span> <span class="keyword">interface</span> AChartAbstract {
+/**
+ * 获取一个当前类型图标的<span class="type">Intent</span>实例
+ */
+<span class="keyword">public</span> <span class="type">Intent</span> getIntent(Context context);
+}
+</code></pre><p><strong>新建一个java类BarChart来实现AChartAbstract接口</strong></p>
+<pre><code>package com.zsz.develop.chartdemo;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.graphics.Color;
+<span class="keyword">import</span> android.graphics.Paint;
+
+<span class="keyword">import</span> org.achartengine.ChartFactory;
+<span class="keyword">import</span> org.achartengine.model.CategorySeries;
+<span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;
+<span class="keyword">import</span> org.achartengine.chart.BarChart.Type;
+<span class="keyword">import</span> org.achartengine.renderer.SimpleSeriesRenderer;
+<span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/7/29.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">BarChart</span> <span class="title">implements</span> <span class="title">AChartAbstract</span> </span>{
+
+public Intent getIntent(Context context) {
+    Intent mIntent=ChartFactory.getBarChartIntent(context, getDataSet(), getRenderer(), Type.STACKED, <span class="string">"当月开票金额树状图"</span>);
+    <span class="keyword">return</span> mIntent;
+}
+
+<span class="comment">/**
+ * 构造数据
+ * @return
+ */</span>
+public XYMultipleSeriesDataset getDataSet() {
+    <span class="comment">// 构造数据</span>
+    XYMultipleSeriesDataset barDataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+    CategorySeries barSeries = <span class="keyword">new</span> CategorySeries(<span class="string">"2014年3月"</span>);
+    barSeries.add(<span class="number">865.5969</span>);
+    barSeries.add(<span class="number">2492.6479</span>);
+    barSeries.add(<span class="number">891.0137</span>);
+    barSeries.add(<span class="number">0.0</span>);
+    barSeries.add(<span class="number">691.0568</span>);
+    barDataset.addSeries(barSeries.toXYSeries());
+    <span class="keyword">return</span> barDataset;
+}
+
+<span class="comment">/**
+ * 构造渲染器
+ * @return
+ */</span>
+public XYMultipleSeriesRenderer getRenderer() {
+    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+<span class="comment">//      renderer.setChartTitle("当月开票");</span>
+<span class="comment">//      // 设置标题的字体大小</span>
+<span class="comment">//      renderer.setChartTitleTextSize(16);</span>
+    renderer.setXTitle(<span class="string">"事业部"</span>);
+    renderer.setYTitle(<span class="string">"单位(万元)"</span>);
+    renderer.setAxesColor(Color.WHITE);
+    renderer.setLabelsColor(Color.WHITE);
+    <span class="comment">// 设置X轴的最小数字和最大数字</span>
+    renderer.setXAxisMin(<span class="number">0.5</span>);
+    renderer.setXAxisMax(<span class="number">5.5</span>);
+    <span class="comment">// 设置Y轴的最小数字和最大数字</span>
+    renderer.setYAxisMin(<span class="number">0</span>);
+    renderer.setYAxisMax(<span class="number">3000</span>);
+    renderer.addXTextLabel(<span class="number">1</span>, <span class="string">"电网"</span>);
+    renderer.addXTextLabel(<span class="number">2</span>, <span class="string">"通信"</span>);
+    renderer.addXTextLabel(<span class="number">3</span>, <span class="string">"宽带"</span>);
+    renderer.addXTextLabel(<span class="number">4</span>, <span class="string">"专网"</span>);
+    renderer.addXTextLabel(<span class="number">5</span>, <span class="string">"轨交"</span>);
+    renderer.setZoomButtonsVisible(<span class="literal">true</span>);
+    <span class="comment">// 设置渲染器允许放大缩小</span>
+    renderer.setZoomEnabled(<span class="literal">true</span>);
+    <span class="comment">// 消除锯齿</span>
+    renderer.setAntialiasing(<span class="literal">true</span>);
+    <span class="comment">// 设置背景颜色</span>
+    renderer.setApplyBackgroundColor(<span class="literal">true</span>);
+    renderer.setBackgroundColor(Color.GRAY);
+    <span class="comment">// 设置每条柱子的颜色</span>
+    SimpleSeriesRenderer sr = <span class="keyword">new</span> SimpleSeriesRenderer();
+    sr.setColor(Color.YELLOW);
+    renderer.addSeriesRenderer(sr);
+    <span class="comment">// 设置每个柱子上是否显示数值</span>
+    renderer.getSeriesRendererAt(<span class="number">0</span>).setDisplayChartValues(<span class="literal">true</span>);
+    <span class="comment">// X轴的近似坐标数  (这样不显示横坐标)</span>
+    renderer.setXLabels(<span class="number">0</span>);
+    <span class="comment">// Y轴的近似坐标数</span>
+    renderer.setYLabels(<span class="number">6</span>);
+    <span class="comment">// 刻度线与X轴坐标文字左侧对齐</span>
+    renderer.setXLabelsAlign(Paint.Align.LEFT);
+    <span class="comment">// Y轴与Y轴坐标文字左对齐</span>
+    renderer.setYLabelsAlign(Paint.Align.LEFT);
+    <span class="comment">// 允许左右拖动,但不允许上下拖动.</span>
+    renderer.setPanEnabled(<span class="literal">true</span>, <span class="literal">false</span>);
+    <span class="comment">// 柱子间宽度</span>
+    renderer.setBarSpacing(<span class="number">0.5</span>f);
+    <span class="comment">// 设置X,Y轴单位的字体大小</span>
+    renderer.setAxisTitleTextSize(<span class="number">20</span>);
+    <span class="keyword">return</span> renderer;
+}
+}
+</code></pre><p><strong>主函数中调用</strong></p>
+<pre><code>Intent lineIntent = <span class="keyword">new</span> BarChart().getIntent(<span class="keyword">this</span>);
+    startActivity(lineIntent);
+</code></pre><p><strong>最后不要忘了在Androidmanifest.xml文件中进行配置文件</strong></p>
+<pre><code>&lt;activity android:<span class="property">name</span>=<span class="string">"org.achartengine.GraphicalActivity"</span> /&gt;
+</code></pre><hr>
+<h2 id="Android_Studio的两个概念：Project_和_Module">Android Studio的两个概念：Project 和 Module</h2><p>Android Studio中的两个概念。 Project 和 Module 。<br>在Android Studio中，<strong> Project </strong>的真实含义是工作空间， <strong>Module</strong> 为一个具体的项目。</p>
+<p>在 Eclipse 中，我们可以同时对多个 Eclipse 的 Project 进行同时编辑，这些 Project 在同一个 workspace 之中。在Android Studio中，我们可以同时对多个Android Studio的 Module 进行同时编辑，这些 Module 在同一个 Project 之中。</p>
+<p>Eclipse 的 Project 等同于Android Studio的 Module 。<br>Eclipse 的 workspace 等同于Android Studio的 Project 。</p>
+<hr>
+<h2 id="AChartEngine日期折线图的例子">AChartEngine日期折线图的例子</h2><p>首先要导入他给的实例代码类<strong>AbstractDemoChart</strong>抽象类，和<strong>接口IDemoChart</strong>，与<strong>WeightDialChart</strong>。</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.mychart;
+
+<span class="keyword">import</span> java.util.Date;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">import</span> org.achartengine.chart.PointStyle;
+<span class="keyword">import</span> org.achartengine.model.CategorySeries;
+<span class="keyword">import</span> org.achartengine.model.MultipleCategorySeries;
+<span class="keyword">import</span> org.achartengine.model.TimeSeries;
+<span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;
+<span class="keyword">import</span> org.achartengine.model.XYSeries;
+<span class="keyword">import</span> org.achartengine.renderer.DefaultRenderer;
+<span class="keyword">import</span> org.achartengine.renderer.SimpleSeriesRenderer;
+<span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;
+<span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;
+
+<span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">AbstractDemoChart</span> <span class="keyword">implements</span> <span class="title">IDemoChart</span> </span>{
+
+<span class="javadoc">/**
+ * 构建 XYMultipleSeriesDataset.
+ *
+ *<span class="javadoctag"> @param</span> titles 每个序列的图例
+ *<span class="javadoctag"> @param</span> xValues X轴的坐标
+ *<span class="javadoctag"> @param</span> yValues Y轴的坐标
+ *<span class="javadoctag"> @return</span> XYMultipleSeriesDataset
+ */</span>
+<span class="function"><span class="keyword">protected</span> XYMultipleSeriesDataset <span class="title">buildDataset</span><span class="params">(String[] titles, List&lt;<span class="keyword">double</span>[]&gt; xValues,
+                                               List&lt;<span class="keyword">double</span>[]&gt; yValues)</span> </span>{
+    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+    addXYSeries(dataset, titles, xValues, yValues, <span class="number">0</span>);
+    <span class="keyword">return</span> dataset;
+}
+
+<span class="comment">//向DataSet中添加序列.</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addXYSeries</span><span class="params">(XYMultipleSeriesDataset dataset, String[] titles, List&lt;<span class="keyword">double</span>[]&gt; xValues,
+                        List&lt;<span class="keyword">double</span>[]&gt; yValues, <span class="keyword">int</span> scale)</span> </span>{
+    <span class="keyword">int</span> length = titles.length;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
+        XYSeries series = <span class="keyword">new</span> XYSeries(titles[i], scale); <span class="comment">//这里注意与TimeSeries区别.</span>
+        <span class="keyword">double</span>[] xV = xValues.get(i);
+        <span class="keyword">double</span>[] yV = yValues.get(i);
+        <span class="keyword">int</span> seriesLength = xV.length;
+        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; seriesLength; k++) {
+            series.add(xV[k], yV[k]);
+        }
+        dataset.addSeries(series);
+    }
+}
+
+<span class="javadoc">/**
+ * 构建XYMultipleSeriesRenderer.
+ *
+ *<span class="javadoctag"> @param</span> colors 每个序列的颜色
+ *<span class="javadoctag"> @param</span> styles 每个序列点的类型(可设置三角,圆点,菱形,方块等多种)
+ *<span class="javadoctag"> @return</span> XYMultipleSeriesRenderer
+ */</span>
+<span class="function"><span class="keyword">protected</span> XYMultipleSeriesRenderer <span class="title">buildRenderer</span><span class="params">(<span class="keyword">int</span>[] colors, PointStyle[] styles)</span> </span>{
+    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+    setRenderer(renderer, colors, styles);
+    <span class="keyword">return</span> renderer;
+}
+
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setRenderer</span><span class="params">(XYMultipleSeriesRenderer renderer, <span class="keyword">int</span>[] colors, PointStyle[] styles)</span> </span>{
+    <span class="comment">//整个图表属性设置</span>
+    <span class="comment">//--&gt;start</span>
+    renderer.setAxisTitleTextSize(<span class="number">16</span>);<span class="comment">//设置轴标题文字的大小</span>
+    renderer.setChartTitleTextSize(<span class="number">40</span>);<span class="comment">//设置整个图表标题文字的大小</span>
+    renderer.setLabelsTextSize(<span class="number">15</span>);<span class="comment">//设置轴刻度文字的大小</span>
+    renderer.setLegendTextSize(<span class="number">15</span>);<span class="comment">//设置图例文字大小</span>
+    renderer.setPointSize(<span class="number">5f</span>);<span class="comment">//设置点的大小(图上显示的点的大小和图例中点的大小都会被设置)</span>
+    renderer.setMargins(<span class="keyword">new</span> <span class="keyword">int</span>[] { <span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">20</span> });<span class="comment">//设置图表的外边框(上/左/下/右)</span>
+    <span class="comment">//--&gt;end</span>
+
+    <span class="comment">//以下代码设置没个序列的颜色.</span>
+    <span class="comment">//--&gt;start</span>
+    <span class="keyword">int</span> length = colors.length;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
+        XYSeriesRenderer r = <span class="keyword">new</span> XYSeriesRenderer();
+        r.setColor(colors[i]);<span class="comment">//设置颜色</span>
+        r.setPointStyle(styles[i]);
+        renderer.addSeriesRenderer(r);
+    }
+    <span class="comment">//--&gt;end</span>
+}
+
+<span class="javadoc">/**
+ * 设置renderer的一些属性.
+ *
+ *<span class="javadoctag"> @param</span> renderer 要设置的renderer
+ *<span class="javadoctag"> @param</span> title 图表标题
+ *<span class="javadoctag"> @param</span> xTitle X轴标题
+ *<span class="javadoctag"> @param</span> yTitle Y轴标题
+ *<span class="javadoctag"> @param</span> xMin X轴最小值
+ *<span class="javadoctag"> @param</span> xMax X轴最大值
+ *<span class="javadoctag"> @param</span> yMin Y轴最小值
+ *<span class="javadoctag"> @param</span> yMax Y轴最大值
+ *<span class="javadoctag"> @param</span> axesColor X轴颜色
+ *<span class="javadoctag"> @param</span> labelsColor Y轴颜色
+ */</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">setChartSettings</span><span class="params">(XYMultipleSeriesRenderer renderer, String title, String xTitle,
+                                String yTitle, <span class="keyword">double</span> xMin, <span class="keyword">double</span> xMax, <span class="keyword">double</span> yMin, <span class="keyword">double</span> yMax, <span class="keyword">int</span> axesColor,
+                                <span class="keyword">int</span> labelsColor)</span> </span>{
+    renderer.setChartTitle(title);
+    renderer.setXTitle(xTitle);
+    renderer.setYTitle(yTitle);
+    renderer.setXAxisMin(xMin);
+    renderer.setXAxisMax(xMax);
+    renderer.setYAxisMin(yMin);
+    renderer.setYAxisMax(yMax);
+    renderer.setAxesColor(axesColor);
+    renderer.setLabelsColor(labelsColor);
+}
+
+<span class="javadoc">/**
+ * 构建和时间有关的XYMultipleSeriesDataset,这个方法与buildDataset在参数上区别是需要List&lt;Date[]&gt;作参数.
+ *
+ *<span class="javadoctag"> @param</span> titles 序列图例
+ *<span class="javadoctag"> @param</span> xValues X轴值
+ *<span class="javadoctag"> @param</span> yValues Y轴值
+ *<span class="javadoctag"> @return</span> XYMultipleSeriesDataset
+ */</span>
+<span class="function"><span class="keyword">protected</span> XYMultipleSeriesDataset <span class="title">buildDateDataset</span><span class="params">(String[] titles, List&lt;Date[]&gt; xValues,
+                                                   List&lt;<span class="keyword">double</span>[]&gt; yValues)</span> </span>{
+    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+    <span class="keyword">int</span> length = titles.length;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
+        TimeSeries series = <span class="keyword">new</span> TimeSeries(titles[i]);<span class="comment">//构建时间序列TimeSeries,</span>
+        Date[] xV = xValues.get(i);
+        <span class="keyword">double</span>[] yV = yValues.get(i);
+        <span class="keyword">int</span> seriesLength = xV.length;
+        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; seriesLength; k++) {
+            series.add(xV[k], yV[k]);
+        }
+        dataset.addSeries(series);
+    }
+    <span class="keyword">return</span> dataset;
+}
+
+<span class="javadoc">/**
+ * 构建单个CategorySeries,可用于生成饼图,注意与buildMultipleCategoryDataset(构建圆环图)相区别.
+ *
+ *<span class="javadoctag"> @param</span> titles the series titles
+ *<span class="javadoctag"> @param</span> values the values
+ *<span class="javadoctag"> @return</span> the category series
+ */</span>
+<span class="function"><span class="keyword">protected</span> CategorySeries <span class="title">buildCategoryDataset</span><span class="params">(String title, <span class="keyword">double</span>[] values)</span> </span>{
+    CategorySeries series = <span class="keyword">new</span> CategorySeries(title);
+    <span class="keyword">int</span> k = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">double</span> value : values) {
+        series.add(<span class="string">"Project "</span> + ++k, value);
+    }
+
+    <span class="keyword">return</span> series;
+}
+
+<span class="javadoc">/**
+ * 构建MultipleCategorySeries,可用于构建圆环图(每个环是一个序列)
+ *
+ *<span class="javadoctag"> @param</span> titles the series titles
+ *<span class="javadoctag"> @param</span> values the values
+ *<span class="javadoctag"> @return</span> the category series
+ */</span>
+<span class="function"><span class="keyword">protected</span> MultipleCategorySeries <span class="title">buildMultipleCategoryDataset</span><span class="params">(String title,
+                                                              List&lt;String[]&gt; titles, List&lt;<span class="keyword">double</span>[]&gt; values)</span> </span>{
+    MultipleCategorySeries series = <span class="keyword">new</span> MultipleCategorySeries(title);
+    <span class="keyword">int</span> k = <span class="number">0</span>;
+    <span class="keyword">for</span> (<span class="keyword">double</span>[] value : values) {
+        series.add(<span class="number">2007</span> + k + <span class="string">""</span>, titles.get(k), value);
+        k++;
+    }
+    <span class="keyword">return</span> series;
+}
+
+<span class="javadoc">/**
+ * 构建DefaultRenderer.
+ *
+ *<span class="javadoctag"> @param</span> colors 每个序列的颜色
+ *<span class="javadoctag"> @return</span> DefaultRenderer
+ */</span>
+<span class="function"><span class="keyword">protected</span> DefaultRenderer <span class="title">buildCategoryRenderer</span><span class="params">(<span class="keyword">int</span>[] colors)</span> </span>{
+    DefaultRenderer renderer = <span class="keyword">new</span> DefaultRenderer();
+    renderer.setLabelsTextSize(<span class="number">15</span>);
+    renderer.setLegendTextSize(<span class="number">15</span>);
+    renderer.setMargins(<span class="keyword">new</span> <span class="keyword">int</span>[] { <span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">0</span> });
+    <span class="keyword">for</span> (<span class="keyword">int</span> color : colors) {
+        SimpleSeriesRenderer r = <span class="keyword">new</span> SimpleSeriesRenderer();
+        r.setColor(color);
+        renderer.addSeriesRenderer(r);
+    }
+    <span class="keyword">return</span> renderer;
+}
+
+<span class="javadoc">/**
+ * 构建XYMultipleSeriesDataset,适用于柱状图.
+ *
+ *<span class="javadoctag"> @param</span> titles 每中柱子序列的图列
+ *<span class="javadoctag"> @param</span> values 柱子的高度值
+ *<span class="javadoctag"> @return</span> XYMultipleSeriesDataset
+ */</span>
+<span class="function"><span class="keyword">protected</span> XYMultipleSeriesDataset <span class="title">buildBarDataset</span><span class="params">(String[] titles, List&lt;<span class="keyword">double</span>[]&gt; values)</span> </span>{
+    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+    <span class="keyword">int</span> length = titles.length;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
+        CategorySeries series = <span class="keyword">new</span> CategorySeries(titles[i]);
+        <span class="keyword">double</span>[] v = values.get(i);
+        <span class="keyword">int</span> seriesLength = v.length;
+        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; seriesLength; k++) {
+            series.add(v[k]);
+        }
+        dataset.addSeries(series.toXYSeries());
+    }
+    <span class="keyword">return</span> dataset;
+}
+
+<span class="javadoc">/**
+ * 构建XYMultipleSeriesRenderer,适用于柱状图.
+ *
+ *<span class="javadoctag"> @param</span> colors 每个序列的颜色
+ *<span class="javadoctag"> @return</span> XYMultipleSeriesRenderer
+ */</span>
+<span class="function"><span class="keyword">protected</span> XYMultipleSeriesRenderer <span class="title">buildBarRenderer</span><span class="params">(<span class="keyword">int</span>[] colors)</span> </span>{
+    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+    renderer.setAxisTitleTextSize(<span class="number">16</span>);
+    renderer.setChartTitleTextSize(<span class="number">20</span>);
+    renderer.setLabelsTextSize(<span class="number">15</span>);
+    renderer.setLegendTextSize(<span class="number">15</span>);
+    <span class="keyword">int</span> length = colors.length;
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
+        SimpleSeriesRenderer r = <span class="keyword">new</span> SimpleSeriesRenderer();
+        r.setColor(colors[i]);
+        renderer.addSeriesRenderer(r);
+    }
+    <span class="keyword">return</span> renderer;
+}
+
+}
+</code></pre><p>=======<br><strong>接口IDemoChart</strong></p>
+<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>
+ <span class="keyword">*</span> Copyright (C) 2009 - 2013 SC 4ViewSoft SRL
+ <span class="keyword">*</span>  
+ <span class="keyword">*</span> Licensed under the Apache License, Version 2.0 (the <span class="string">"License"</span>);
+ <span class="keyword">*</span> you may not use this file except in compliance with the License.
+ <span class="keyword">*</span> You may obtain a copy of the License at
+ <span class="keyword">*</span>  
+ <span class="keyword">*</span>      http://www.apache.org/licenses/LICENSE-2.0
+ <span class="keyword">*</span>  
+ <span class="keyword">*</span> Unless required by applicable law or agreed to in writing, software
+ <span class="keyword">*</span> distributed under the License is distributed on an <span class="string">"AS IS"</span> BASIS,
+ <span class="keyword">*</span> WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ <span class="keyword">*</span> See the License for the specific language governing permissions and
+ <span class="keyword">*</span> limitations under the License.
+ <span class="keyword">*</span>/
+package com.zsz.develop.mychart;
+
+import android.content.Context;
+import android.content.Intent;
+
+/<span class="keyword">*</span><span class="keyword">*</span>
+ <span class="keyword">*</span> Defines the demo charts.
+ <span class="keyword">*</span>/
+public interface IDemoChart {
+  /<span class="keyword">*</span><span class="keyword">*</span> A constant for the name field in a list activity. <span class="keyword">*</span>/
+  String NAME = <span class="string">"name"</span>;
+  /<span class="keyword">*</span><span class="keyword">*</span> A constant for the description field in a list activity. <span class="keyword">*</span>/
+  String DESC = <span class="string">"desc"</span>;
+
+  /<span class="keyword">*</span><span class="keyword">*</span>
+   <span class="keyword">*</span> Returns the chart name.
+   <span class="keyword">*</span> 
+   <span class="keyword">*</span> <span class="comment">@return the chart name</span>
+   <span class="keyword">*</span>/
+  String getName();
+
+  /<span class="keyword">*</span><span class="keyword">*</span>
+   <span class="keyword">*</span> Returns the chart description.
+   <span class="keyword">*</span> 
+   <span class="keyword">*</span> <span class="comment">@return the chart description</span>
+   <span class="keyword">*</span>/
+  String getDesc();
+
+  /<span class="keyword">*</span><span class="keyword">*</span>
+   <span class="keyword">*</span> Executes the chart demo.
+   <span class="keyword">*</span> 
+   <span class="keyword">*</span> <span class="comment">@param context the context</span>
+   <span class="keyword">*</span> <span class="comment">@return the built intent</span>
+   <span class="keyword">*</span>/
+  Intent execute(Context context);
+
+}
+</code></pre><p>======<br>    /**</p>
+<pre><code> * <span class="type">Copyright</span> (<span class="type">C</span>) <span class="number">2009</span> - <span class="number">2013</span> <span class="type">SC</span> <span class="number">4</span>ViewSoft <span class="type">SRL</span>
+ *  
+ * <span class="type">Licensed</span> under the <span class="type">Apache</span> <span class="type">License</span>, <span class="type">Version</span> <span class="number">2.0</span> (the <span class="string">"License"</span>);
+ * you may not use <span class="keyword">this</span> file except in compliance <span class="keyword">with</span> the <span class="type">License</span>.
+ * <span class="type">You</span> may obtain a copy of the <span class="type">License</span> at
+ *  
+ *      http:<span class="comment">//www.apache.org/licenses/LICENSE-2.0</span>
+ *  
+ * <span class="type">Unless</span> required by applicable law or agreed to in writing, software
+ * distributed under the <span class="type">License</span> is distributed on an <span class="string">"AS IS"</span> <span class="type">BASIS</span>,
+ * <span class="type">WITHOUT</span> <span class="type">WARRANTIES</span> <span class="type">OR</span> <span class="type">CONDITIONS</span> <span class="type">OF</span> <span class="type">ANY</span> <span class="type">KIND</span>, either express or implied.
+ * <span class="type">See</span> the <span class="type">License</span> <span class="keyword">for</span> the specific language governing permissions and
+ * limitations under the <span class="type">License</span>.
+ */
+<span class="keyword">package</span> com.zsz.develop.mychart;
+
+<span class="keyword">import</span> org.achartengine.<span class="type">ChartFactory</span>;
+<span class="keyword">import</span> org.achartengine.model.<span class="type">CategorySeries</span>;
+<span class="keyword">import</span> org.achartengine.renderer.<span class="type">DialRenderer</span>;
+<span class="keyword">import</span> org.achartengine.renderer.<span class="type">SimpleSeriesRenderer</span>;
+<span class="keyword">import</span> org.achartengine.renderer.<span class="type">DialRenderer</span>.<span class="type">Type</span>;
+
+<span class="keyword">import</span> android.content.<span class="type">Context</span>;
+<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
+<span class="keyword">import</span> android.graphics.<span class="type">Color</span>;
+
+<span class="comment">/**
+ * Budget demo pie chart.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">WeightDialChart</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AbstractDemoChart</span> {</span>
+  <span class="comment">/**
+   * Returns the chart name.
+   * @return the chart name
+   */</span>
+  public <span class="type">String</span> getName() {
+    <span class="keyword">return</span> <span class="string">"Weight chart"</span>;
+  }
+
+  <span class="comment">/**
+   * Returns the chart description.
+   * @return the chart description
+   */</span>
+  public <span class="type">String</span> getDesc() {
+    <span class="keyword">return</span> <span class="string">"The weight indicator (dial chart)"</span>;
+  }
+
+  <span class="comment">/**
+   * Executes the chart demo.
+   * @param context the context
+   * @return the built intent
+   */</span>
+  public <span class="type">Intent</span> execute(<span class="type">Context</span> context) {
+   <span class="type">CategorySeries</span> category = <span class="keyword">new</span> <span class="type">CategorySeries</span>(<span class="string">"Weight indic"</span>);
+category.add(<span class="string">"Current"</span>, <span class="number">75</span>);
+category.add(<span class="string">"Minimum"</span>, <span class="number">65</span>);
+category.add(<span class="string">"Maximum"</span>, <span class="number">90</span>);
+<span class="type">DialRenderer</span> renderer = <span class="keyword">new</span> <span class="type">DialRenderer</span>();
+renderer.setChartTitleTextSize(<span class="number">20</span>);
+renderer.setLabelsTextSize(<span class="number">15</span>);
+renderer.setLegendTextSize(<span class="number">15</span>);
+renderer.setMargins(<span class="keyword">new</span> int[] {<span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">0</span>});
+<span class="type">SimpleSeriesRenderer</span> r = <span class="keyword">new</span> <span class="type">SimpleSeriesRenderer</span>();
+r.setColor(<span class="type">Color</span>.<span class="type">BLUE</span>);
+renderer.addSeriesRenderer(r);
+r = <span class="keyword">new</span> <span class="type">SimpleSeriesRenderer</span>();
+r.setColor(<span class="type">Color</span>.rgb(<span class="number">0</span>, <span class="number">150</span>, <span class="number">0</span>));
+renderer.addSeriesRenderer(r);
+r = <span class="keyword">new</span> <span class="type">SimpleSeriesRenderer</span>();
+r.setColor(<span class="type">Color</span>.<span class="type">GREEN</span>);
+renderer.addSeriesRenderer(r);
+renderer.setLabelsTextSize(<span class="number">10</span>);
+renderer.setLabelsColor(<span class="type">Color</span>.<span class="type">WHITE</span>);
+renderer.setShowLabels(<span class="literal">true</span>);
+renderer.setVisualTypes(<span class="keyword">new</span> <span class="type">Type</span>[] {<span class="type">Type</span>.<span class="type">ARROW</span>, <span class="type">Type</span>.<span class="type">NEEDLE</span>, <span class="type">Type</span>.<span class="type">NEEDLE</span>});
+renderer.setMinValue(<span class="number">0</span>);
+renderer.setMaxValue(<span class="number">150</span>);
+<span class="keyword">return</span> <span class="type">ChartFactory</span>.getDialChartIntent(context, category, renderer, <span class="string">"Weight indicator"</span>);
+  }
+
+}
+</code></pre><p>通过这个<strong>WeightTimeChart</strong>类进行实现</p>
+<pre><code><span class="javadoc">/**
+ * WeightTimeChart.java
+ * 版权所有(C) 2013 
+ * 创建:cuiran 2013-10-24 下午4:11:28
+ */</span>
+<span class="keyword">package</span> com.zsz.develop.mychart;
+
+<span class="keyword">import</span> java.text.ParsePosition;
+<span class="keyword">import</span> java.text.SimpleDateFormat;
+<span class="keyword">import</span> java.util.Date;
+<span class="keyword">import</span> java.util.Random;
+
+<span class="keyword">import</span> org.achartengine.ChartFactory;
+<span class="keyword">import</span> org.achartengine.chart.PointStyle;
+<span class="keyword">import</span> org.achartengine.chart.TimeChart;
+<span class="keyword">import</span> org.achartengine.model.TimeSeries;
+<span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;
+<span class="keyword">import</span> org.achartengine.renderer.SimpleSeriesRenderer;
+<span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;
+<span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;
+
+
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.graphics.Color;
+
+<span class="javadoc">/**
+ * TODO 折线图
+ *<span class="javadoctag"> @author</span> cuiran
+ *<span class="javadoctag"> @version</span> 1.0.0
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WeightTimeChart</span> <span class="keyword">extends</span> <span class="title">AbstractDemoChart</span> </span>{
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> SERIES_NR = <span class="number">1</span>;
+<span class="comment">/* (non-Javadoc)
+ * @see com.cayden.weightnotes.achartengine.IDemoChart#getName()
+ */</span>
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">public</span> String <span class="title">getName</span><span class="params">()</span> </span>{
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">return</span> <span class="string">"WeightTimeChart"</span>;
+}
+
+<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Date <span class="title">strToDate</span><span class="params">(String strDate)</span> </span>{
+    SimpleDateFormat formatter = <span class="keyword">new</span> SimpleDateFormat(<span class="string">"yyyy-MM-dd"</span>);
+    ParsePosition pos = <span class="keyword">new</span> ParsePosition(<span class="number">0</span>);
+    Date strtodate = formatter.parse(strDate, pos);
+    <span class="keyword">return</span> strtodate;
+}
+
+<span class="comment">/* (non-Javadoc)
+ * @see com.cayden.weightnotes.achartengine.IDemoChart#getDesc()
+ */</span>
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">public</span> String <span class="title">getDesc</span><span class="params">()</span> </span>{
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">return</span> <span class="string">"WeightTimeChart"</span>;
+}
+
+<span class="function"><span class="keyword">private</span> XYMultipleSeriesDataset <span class="title">getDateDemoDataset</span><span class="params">()</span> </span>{
+    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
+    <span class="keyword">final</span> <span class="keyword">int</span> nr = <span class="number">7</span>;
+
+
+
+    <span class="keyword">long</span> value = <span class="keyword">new</span> Date().getTime() - <span class="number">3</span> * TimeChart.DAY;
+    Random r = <span class="keyword">new</span> Random();
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; SERIES_NR; i++) {
+        TimeSeries series = <span class="keyword">new</span> TimeSeries(<span class="string">"体重变化趋势 "</span>);
+
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-19"</span>), <span class="number">85.3</span>);
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-20"</span>), <span class="number">85.6</span>);
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-21"</span>), <span class="number">84.5</span>);
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-22"</span>), <span class="number">85.0</span>);
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-23"</span>), <span class="number">85.1</span>);
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-24"</span>), <span class="number">85.3</span>);
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-25"</span>), <span class="number">85.3</span>);
+        series.add(WeightTimeChart.strToDate(<span class="string">"2013-10-26"</span>), <span class="number">85.3</span>);
+
+<span class="comment">//              for (int k = 0; k &lt; nr; k++) {</span>
+<span class="comment">//                series.add(new Date(value + k * TimeChart.DAY / 4), 20 + r.nextInt() % 100);</span>
+<span class="comment">//              }</span>
+
+        dataset.addSeries(series);
+
+    }
+    <span class="keyword">return</span> dataset;
+}
+
+<span class="function"><span class="keyword">private</span> XYMultipleSeriesRenderer <span class="title">getDemoRenderer</span><span class="params">()</span> </span>{
+    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
+    renderer.setAxisTitleTextSize(<span class="number">40</span>);
+    renderer.setChartTitleTextSize(<span class="number">40</span>);
+    renderer.setLabelsTextSize(<span class="number">40</span>);
+    renderer.setLegendTextSize(<span class="number">18</span>);
+    renderer.setPointSize(<span class="number">6f</span>);
+    <span class="comment">//in this order: top, left, bottom, right</span>
+    renderer.setMargins(<span class="keyword">new</span> <span class="keyword">int</span>[] {<span class="number">20</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">0</span>});
+
+
+    XYSeriesRenderer r = <span class="keyword">new</span> XYSeriesRenderer();
+
+    r = <span class="keyword">new</span> XYSeriesRenderer();
+    r.setPointStyle(PointStyle.CIRCLE);
+    r.setColor(Color.GREEN);
+    r.setFillPoints(<span class="keyword">true</span>);
+
+    renderer.addSeriesRenderer(r);
+    renderer.setAxesColor(Color.DKGRAY);
+    renderer.setLabelsColor(Color.LTGRAY);
+    renderer.setChartTitle(<span class="string">"体重变化趋势"</span>);
+    renderer.setXTitle(<span class="string">"日期"</span>);
+    renderer.setYTitle(<span class="string">"体重(kg)"</span>);
+    renderer.setZoomButtonsVisible(<span class="keyword">true</span>);
+
+    <span class="keyword">int</span> length = renderer.getSeriesRendererCount();
+    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; length; i++) {
+        SimpleSeriesRenderer seriesRenderer = renderer.getSeriesRendererAt(i);
+        seriesRenderer.setDisplayChartValues(<span class="keyword">true</span>);
+    }
+    <span class="keyword">return</span> renderer;
+}
+<span class="comment">/* (non-Javadoc)
+ * @see com.cayden.weightnotes.achartengine.IDemoChart#execute(android.content.Context)
+ */</span>
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">public</span> Intent <span class="title">execute</span><span class="params">(Context context)</span> </span>{
+    <span class="comment">// TODO Auto-generated method stub</span>
+
+    <span class="keyword">return</span> ChartFactory.getTimeChartIntent(context, getDateDemoDataset(), getDemoRenderer(), <span class="string">"yyyy-MM-dd"</span>);
+}
+
+}
+</code></pre><p>最后在<strong>MainActivity</strong>里调用</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.mychart;
+
+<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
+<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">IDemoChart</span>[] mCharts = <span class="keyword">new</span> <span class="type">IDemoChart</span>[] {<span class="keyword">new</span> <span class="type">WeightDialChart</span>(),
+        <span class="keyword">new</span> <span class="type">WeightTimeChart</span>()};
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_main);
+
+    <span class="type">Intent</span> intent=mCharts[<span class="number">1</span>].execute(<span class="keyword">this</span>);
+
+    startActivity(intent);
+
+}
+
+
+
+}
+</code></pre><p>最后别忘了在<strong>配置文件</strong>中添加</p>
+<activity android:name="org.achartengine.GraphicalActivity">  </activity>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cieb6up56000ztob201a20l21" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-28" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/28/2015-7-28/">json转化异常，JDBC查询之感悟</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/28/2015-7-28/">
+    <time datetime="2015-07-28T12:50:57.000Z" itemprop="datePublished">2015-07-28</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/28问题集">2015/7/28问题集</h1><h2 id="json转化异常">json转化异常</h2><p>异常信息为：Expected BEGIN_ARRAY but was BEGIN_OBJECT<br>说不是数组，查找到当时的json数据.</p>
+<p>{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}<br>这并不是一条数组信息</p>
+<p>不管你有几条数据：他都要是一个数组类型。也就是返回的是一个list集合。</p>
+<p>[{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}]</p>
+<h3 id="修改方法_###添加的时候、不要在for循环里添加。"><strong>修改方法    </strong> ###添加的时候、不要在for循环里添加。</h3><pre><code>listDataBeans=dataDao.getEditData(jsonNameStr);
+            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; listDataBeans.<span class="built_in">size</span>(); i++) {
+               DataBean dataBean=listDataBeans.<span class="built_in">get</span>(i);
+               System.out.<span class="built_in">println</span>(dataBean.getGoalTime()+<span class="string">"傻逼"</span>);
+           }
+            dataString = gson.toJson(listDataBeans);
+</code></pre><h2 id="JDBC查询之感悟">JDBC查询之感悟</h2><p>查询必定是通过一个条件来查找，返回的数据可能会有多条（List）。<br>查询出来是一个ResultSet，所以也需要一条一条读取出来。有值得时候就设置进属性。</p>
+<pre><code>    <span class="keyword">public</span> ArrayList&lt;ManBean&gt; getAllMan(<span class="keyword">String</span> name) {
+
+    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
+    ArrayList&lt;ManBean&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;ManBean&gt;();
+    Connection conn=<span class="keyword">null</span>;
+    PreparedStatement ps=<span class="keyword">null</span>;
+    ResultSet rs=<span class="keyword">null</span>;
+    <span class="keyword">String</span> getAllManSQL=<span class="string">"SELECT * FROM man "</span>+<span class="string">"WHERE name=?"</span>;
+    <span class="keyword">try</span> {
+        conn=BaseConnection.getConnection();
+        ps=(PreparedStatement) conn.prepareStatement(getAllManSQL);
+        ps.setString(<span class="number">1</span>, name);
+        System.out.<span class="built_in">println</span>(ps+<span class="string">")))))"</span>+name);
+        rs=ps.executeQuery();
+        <span class="keyword">String</span> <span class="built_in">line</span>;
+        StringBuffer sb=<span class="keyword">new</span> StringBuffer();
+        <span class="keyword">while</span> (rs.next()) {
+            ManBean manBean=<span class="keyword">new</span> ManBean();
+            manBean.setArm(rs.getString(<span class="string">"arm"</span>));
+            manBean.setChest(rs.getString(<span class="string">"chest"</span>));
+            manBean.setImage(rs.getBytes(<span class="string">"image"</span>));
+            manBean.setTime(rs.getString(<span class="string">"time"</span>));
+            manBean.setName(rs.getString(<span class="string">"name"</span>));
+            manBean.setWeight(rs.getString(<span class="string">"weight"</span>));
+            manBean.setWaust(rs.getString(<span class="string">"waust"</span>));
+            manBean.setId(rs.getInt(<span class="string">"id"</span>));
+            arrayList.<span class="built_in">add</span>(manBean);
+        }
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span> {
+        BaseConnection.closeResource(rs, ps, conn);
+    }
+
+    <span class="keyword">return</span> arrayList;
+}
+</code></pre><h2 id="JDBC等一干操作">JDBC等一干操作</h2><pre><code><span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">deleteMan</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
+
+    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=<span class="keyword">null</span>;
+    PreparedStatement ps=<span class="keyword">null</span>;
+    String deleteManSQL=<span class="string">"DELETE FROM man WHERE id=?"</span>;
+    <span class="keyword">try</span> {
+        conn=BaseConnection.getConnection();
+        ps=(PreparedStatement) conn.prepareStatement(deleteManSQL);
+        ps.setInt(<span class="number">1</span>, id);
+        System.out.println(deleteManSQL);
+        <span class="keyword">int</span> i=ps.executeUpdate();
+        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }
+
+
+    } <span class="keyword">catch</span> (Exception e) {
+        e.printStackTrace();
+    }<span class="keyword">finally</span> {
+        BaseConnection.closeResource(ps, conn);
+    }
+
+    <span class="keyword">return</span> b;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cieb6up5c0011tob2mv9tzhxk" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-27" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -178,7 +1513,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cie9tn4l1000wj0b279mp14n1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cieb6up5f0012tob2byeyvjem" class="article-share-link">Share</a>
       
       
     </footer>
@@ -306,7 +1641,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cie9tn4la000yj0b2hkq51hmp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cieb6up5p0014tob2m7igo04g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -507,7 +1842,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cie9tn4l6000xj0b21eyg9bnz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cieb6up5k0013tob2ri9pcjw4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -552,731 +1887,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cie9tn4le000zj0b20zra4i31" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-23-URI-Intent" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/23/2015-7-23-URI-Intent/"> 2015/7/23-URI-Intent</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/23/2015-7-23-URI-Intent/">
-    <time datetime="2015-07-23T01:05:42.000Z" itemprop="datePublished">2015-07-23</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="通过URI和Intent启动各种功能">通过URI和Intent启动各种功能</h1><h2 id="Uri">Uri</h2><p>就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：<br>scheme://host:port/path<br>举个实际的例子：</p>
-<p><img src="http://cl.ly/image/2l2F3K3b2W2n/36D61U2UNF%25SOXIFK2%60UN%25N.png" alt=""></p>
-<p>现在大家应该知道data flag中那些属性的含义了吧，看下data flag<br><data android:host="string" android:mimetype="string" android:path="string" android:pathpattern="string" android:pathprefix="string" android:port="string" android:scheme="string"></data></p>
-<p>但是我们在程序中一般是不直接用URI来标识CP的，是的，正如我们通常见到的用定义的常量来标识。例如standard CP中的Contacts，我们就用Contacts.People.CONTENT_URI来标识Contacts CP中People这个表。那么要标识某个具体的人怎么办呢？ 这就用到了ContentUris.withAppendedId() 和 Uri.withAppendedPath()。例如我们要表示content://contacts/people/20，那么我们就可以用如下语句：<br>Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, 20); 或者<br>Uri uri = Uri.withAppendedPath(People.CONTENT_URI, “20”);</p>
-<p>举些例子，如：</p>
-<p>所有联系人的Uri： content://contacts/people</p>
-<p>某个联系人的Uri: content://contacts/people/5</p>
-<p>所有图片Uri: content://media/external</p>
-<p>某个图片的Uri：content://media/external/images/media/4</p>
-<p>下面是一些常用的Uri</p>
-<p><strong>显示网页:</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“<a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>“);</li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW,uri);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong>显示地图:</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“geo:38.899533,-77.036476”);<ol>
-<li>Intent it = new Intent(Intent.Action_VIEW,uri);</li>
-<li>startActivity(it);</li>
-</ol>
-</li>
-</ol>
-<p><strong>路径规划:</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“<a href="http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en" target="_blank" rel="external">http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en</a>“);</li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW,URI);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong>拨打电话:<br>调用拨号程序</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“tel:xxxxxx”);</li>
-<li>Intent it = new Intent(Intent.ACTION_DIAL, uri);   </li>
-<li>startActivity(it);   </li>
-<li>Uri uri = Uri.parse(“tel.xxxxxx”);</li>
-<li>Intent it =new Intent(Intent.ACTION_CALL,uri);</li>
-<li>要使用这个必须在配置文件中加入<uses-permission id="Android.permission.CALL_PHONE"></uses-permission></li>
-</ol>
-<p><strong>发送SMS/MMS<br>调用发送短信的程序</strong></p>
-<ol>
-<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
-<li>it.putExtra(“sms_body”, “The SMS text”);</li>
-<li>it.setType(“vnd.android-dir/mms-sms”);</li>
-<li>startActivity(it);   </li>
-</ol>
-<p><strong>发送短信</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“smsto:0800000123”);</li>
-<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
-<li>it.putExtra(“sms_body”, “The SMS text”);</li>
-<li>startActivity(it);   </li>
-</ol>
-<p><strong>发送彩信</strong></p>
-<ol>
-<li>Uri uri = Uri.parse(“content://media/external/images/media/23”);</li>
-<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
-<li>it.putExtra(“sms_body”, “some text”);</li>
-<li>it.putExtra(Intent.EXTRA_STREAM, uri);</li>
-<li>it.setType(“image/png”);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong><br>发送Email</strong></p>
-<p>  1.</p>
-<ol>
-<li>Uri uri = Uri.parse(“mailto:xxx@abc.com”);</li>
-<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
-<li>startActivity(it);</li>
-<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
-<li>it.putExtra(Intent.EXTRA_EMAIL, “me@abc.com”);</li>
-<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);</li>
-<li>it.setType(“text/plain”);</li>
-<li>startActivity(Intent.createChooser(it, “Choose Email Client”));   </li>
-<li>Intent it=new Intent(Intent.ACTION_SEND);   </li>
-<li>String[] tos={“me@abc.com”};   </li>
-<li>String[] ccs={“you@abc.com”};   </li>
-<li>it.putExtra(Intent.EXTRA_EMAIL, tos);   </li>
-<li>it.putExtra(Intent.EXTRA_CC, ccs);   </li>
-<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);   </li>
-<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);   </li>
-<li>it.setType(“message/rfc822”);   </li>
-<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
-</ol>
-<p><strong>添加附件</strong></p>
-<ol>
-<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
-<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);</li>
-<li>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/mysong.mp3[/url]”);</li>
-<li>sendIntent.setType(“audio/mp3”);</li>
-<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
-</ol>
-<p><strong>播放多媒体</strong></p>
-<ol>
-<li></li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
-<li>Uri uri = Uri.parse(“[url=]file:///sdcard/song.mp3[/url]”);</li>
-<li>it.setDataAndType(uri, “audio/mp3”);</li>
-<li>startActivity(it);</li>
-<li>Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, “1”);</li>
-<li>Intent it = new Intent(Intent.ACTION_VIEW, uri);</li>
-<li>startActivity(it);   </li>
-</ol>
-<p><strong>Uninstall 程序</strong></p>
-<ol>
-<li>Uri uri = Uri.fromParts(“package”, strPackageName, null);</li>
-<li>Intent it = new Intent(Intent.ACTION_DELETE, uri);</li>
-<li>startActivity(it);</li>
-</ol>
-<p><strong>//调用相册</strong></p>
-<p>public static final String MIME_TYPE_IMAGE_JPEG = “image/*”;<br>public static final int ACTIVITY_GET_IMAGE = 0;<br>Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);<br>getImage.addCategory(Intent.CATEGORY_OPENABLE);<br>getImage.setType(MIME_TYPE_IMAGE_JPEG);<br>startActivityForResult(getImage, ACTIVITY_GET_IMAGE);</p>
-<p><strong>//调用系统相机应用程序，并存储拍下来的照片</strong></p>
-<p>Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);<br>time = Calendar.getInstance().getTimeInMillis();<br>intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment<br>.getExternalStorageDirectory().getAbsolutePath()+”/tucue”, time + “.jpg”)));<br>startActivityForResult(intent, ACTIVITY_GET_CAMERA_IMAGE);</p>
-<p>uninstall apk</p>
-<p><strong>未测试</strong></p>
-<p>Uri uninstallUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_DELETE, uninstallUri);<br>*/<br>Uri packageURI = Uri.parse(“package:”+wistatmap);<br>Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);<br>startActivity(uninstallIntent);</p>
-<p>install apk<br>Uri installUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_PACKAGE_ADDED, installUri);<br>play audio<br>Uri playUri = Uri.parse(“[url=]file:///sdcard/download/everything.mp3[/url]”);<br>returnIt = new Intent(Intent.ACTION_VIEW, playUri);</p>
-<p><strong>//发送附件</strong></p>
-<p>Intent it = new Intent(Intent.ACTION_SEND);<br>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);<br>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/eoe.mp3[/url]”);<br>sendIntent.setType(“audio/mp3”);<br>startActivity(Intent.createChooser(it, “Choose Email Client”));</p>
-<p><strong>//搜索应用</strong></p>
-<p>Uri uri = Uri.parse(“market://search?q=pname:pkg_name”);<br>Intent it = new Intent(Intent.ACTION_VIEW, uri);<br>startActivity(it);<br>//where pkg_name is the full package path for an application</p>
-<p><strong>进入联系人页面</strong></p>
-<p>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(People.CONTENT_URI);<br>startActivity(intent);</p>
-<p><strong>查看指定联系人</strong></p>
-<p>Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, info.id);//info.id联系人ID<br>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(personUri);<br>startActivity(intent);</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cie9tn4lj0011j0b29f4cel9h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-23" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/23/2015-7-23/"> 注销，TaskStack，affinity</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/23/2015-7-23/">
-    <time datetime="2015-07-23T01:05:22.000Z" itemprop="datePublished">2015-07-23</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="7-23日问题集">7.23日问题集</h1><h2 id="Android注销流程">Android注销流程</h2><p>当我们点击注销按钮之后，一般都会重新返回登陆界面，这时候我们再按返回键是没有用的。这时候其实我们是将Android 的TaskStack清空。</p>
-<p>这里要设置Intent的FLAG,在执行完成Activity跳转的时候会清空TaskStack，并且将创建一个新的TaskStack</p>
-<p>注销</p>
-<pre><code><span class="type">Intent</span> logoutIntent = new <span class="type">Intent</span>(ctx, LoginActivity.<span class="keyword">class</span>);
-                logoutIntent.setFlags(<span class="type">Intent</span>.FLAG_ACTIVITY_CLEAR_TASK | <span class="type">Intent</span>.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(logoutIntent);
-</code></pre><h2 id="什么是Activity_Stack？">什么是Activity Stack？</h2><p>　　Activity承担了大量的显示和交互工作，从某种角度上将，我们看见的应用程序就是许多个Activity的组合。为了让这许多 Activity协同工作而不至于产生混乱，Android平台设计了一种堆栈机制用于管理Activity，其遵循先进后出的原则，系统总是显示位于栈 顶的Activity，从逻辑上将，位于栈顶的Activity也就是最后打开的Activity，这也是符合逻辑的。</p>
-<p>　　在操作应用程序时，每次启动新的Activity，都会将此压入Activity Stack，当用户执行返回操作时，移除Activity Stack顶上的Activity，这样就实现了返回上一个Activty的功能。直到用户一直返回到Home Screen，这时候可以理解为移除了Activity Stack所有的Activity，这个Activity Stack不再存在，应用程序也结束了运行。</p>
-<h2 id="什么是Task？">什么是Task？</h2><p>　　Task是指将相关的Activity组合到一起，以Activity Stack的方式进行管理。从用户体验上讲，一个“应用程序”就是一个Task，但是从根本上讲，一个Task是可以有一个或多个Android Application组成的。例如：你想在发送短信时，拍一张照并作为彩信发出去，这时你首先停留在短信应用程序的的Acitivity上，然后跳转到 Camera应用程序的Activity上，当完成拍照功能后，再返回到短信应用程序的Activity。这实际上是两个Android Application协同合作后完成的工作，但为了更好的用户体验，Android平台加入了Task这么一种机制，让用户没有感觉到应用的中断，让用 户感觉在一“应用程序”里就完成了想完成的工作。</p>
-<h2 id="Activity的affinity(亲和力)">Activity的affinity(亲和力)</h2><p>task对于Activity来说就好像它的身份证一样，可以告诉所在的task，自己属于这个task中的一员；拥有相同affinity的多个Activity理论同属于一个task，task自身的affinity决定于根Activity的affinity值。affinity在什么场合应用呢？1.根据affinity重新为Activity选择宿主task（与allowTaskReparenting属性配合工作）；2.启动一个Activity过程中Intent使用了FLAG_ACTIVITY_NEW_TASK标记，根据affinity查找或创建一个新的具有对应affinity的task。我们会在后面进行详细讲解。</p>
-<p>默认情况下，一个应用内的所有Activity都具有相同的affinity，都是从Application（参考<application>的taskAffinity属性）继承而来，而Application默认的affinity是<manifest>中的包名，我们可以为<application>设置taskAffinity属性值，这样可以应用到<application>下的所有<activity>，也可以单独为某个Activity设置taskAffinity。</activity></application></application></manifest></application></p>
-<h2 id="Intent几种常见的flags：">Intent几种常见的flags：</h2><h3 id="FLAG_ACTIVITY_CLEAR_TASK">FLAG_ACTIVITY_CLEAR_TASK</h3><p><strong>FLAG_ACTIVITY_CLEAR_TASK </strong>:如果在调用Context.startActivity时传递这个标记，将会导致任何用来放置该activity的已经存在的task里面的已经存在的activity先清空，然后该activity再在该task中启动，也就是说，这个新启动的activity变为了这个空tas的根activity.所有老的activity都结束掉。该标志必须和FLAG_ACTIVITY_NEW_TASK一起使用。</p>
-<h3 id="-FLAG_ACTIVITY_CLEAR_TOP">.FLAG_ACTIVITY_CLEAR_TOP</h3><p>当Intent对象包含这个标记时，如果在栈中发现存在Activity实例，则清空这个实例之上的Activity，使其处于栈顶。例如：我们的FirstActivity跳转到SecondActivity，SecondActivity跳转到ThirdActivity，而ThirdActivity又跳到SecondActivity，那么ThirdActivity实例将被弹出栈，使SecondActivity处于栈顶，显示到幕前，栈内只剩下FirstActivity和SecondActivity。这个SecondActivity既可以在onNewIntent()中接收到传来的Intent，也可以把自己销毁之后重新启动来接受这个Intent。在使用默认的“standard”启动模式下，如果没有在Intent使用到FLAG_ACTIVITY_SINGLE_TOP标记，那么它将关闭后重建，如果使用了这个FLAG_ACTIVITY_SINGLE_TOP标记，则会使用已存在的实例；对于其他启动模式，无需再使用FLAG_ACTIVITY_SINGLE_TOP，它都将使用已存在的实例，Intent会被传递到这个实例的onNewIntent()中。</p>
-<h3 id="FLAG_ACTIVITY_SINGLE_TOP">FLAG_ACTIVITY_SINGLE_TOP</h3><p>当task中存在目标Activity实例并且位于栈的顶端时，不再创建一个新的，直接利用这个实例。我们在上边的例子中也有讲到。</p>
-<h3 id="FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET">FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET</h3><p>如果一个Intent中包含此属性，则它转向的那个Activity以及在那个Activity其上的所有Activity都会在task重置时被清除出task。当我们将一个后台的task重新回到前台时，系统会在特定情况下为这个动作附带一个FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记，意味着必要时重置task，这时FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET就会生效。经过测试发现，对于一个处于后台的应用，如果在主选单点击应用，这个动作中含有FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记，长按Home键，然后点击最近记录，这个动作不含FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记,所以前者会清除，后者不会</p>
-<h3 id="FLAG_ACTIVITY_RESET_TASK_IF_NEEDED">FLAG_ACTIVITY_RESET_TASK_IF_NEEDED</h3><p>这个标记在以下情况下会生效：1.启动Activity时创建新的task来放置Activity实例；2.已存在的task被放置于前台。系统会根据affinity对指定的task进行重置操作，task会压入某些Activity实例或移除某些Activity实例。我们结合上面的CLEAR_WHEN_TASK_RESET可以加深理解。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cie9tn4lh0010j0b28xegha8j" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-22" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/22/2015-7-22/">putExtra()，Intent的构造函数，startActivityForResult的用法，onActivityResult</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/22/2015-7-22/">
-    <time datetime="2015-07-22T11:30:13.000Z" itemprop="datePublished">2015-07-22</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/22问题集">2015/7/22问题集</h1><h2 id="intent-putExtra()传值">intent.putExtra()传值</h2><p>putExtra(“A”,B)中，AB为键值对，第一个参数为键名，第二个参数为键对应的值。顺便提一下，如果想取出Intent对象中的这些值，需要在你的另一个Activity中用getXXXXXExtra方法，注意需要使用对应类型的方法，参数为键名</p>
-<p>第一个Activity，通过intent.putExtra(“key”,”value”);传给另一个Activity</p>
-<pre><code>btnIntent.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
-       <span class="annotation">@Override</span>
-       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-           Intent intent=<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,ToIntentActicity.class);
-           <span class="comment">//将要传递的值附加到Intent对象</span>
-           intent.putExtra(<span class="string">"Main"</span>,<span class="string">"66666"</span>);
-           startActivity(intent);
-       }
-   });
-</code></pre><p>另一个页面接收数据</p>
-<pre><code>tv= (TextView) findViewById(R.id.tv);
-  <span class="comment">//取得启动该Activity的Intent对象</span>
-  Intent intent=getIntent();
-   <span class="comment">/*取出Intent中附加的数据*/</span>
-  <span class="keyword">String</span> <span class="built_in">str</span>=intent.getStringExtra(<span class="string">"Main"</span>);
-  tv.setText(<span class="string">"从其他Intent传过来的值"</span>+<span class="built_in">str</span>);
-</code></pre><hr>
-<h2 id="Intent-putExtra()传递Object对象或者ArrayList">Intent.putExtra()传递Object对象或者ArrayList<object></object></h2><p>Intent传递基本类型相信大家都十分熟悉，如何传递Object对象或者ArrayList<object>对象呢？</object></p>
-<p>可以通过：</p>
-<p>（1）public Intent putExtra (String name, Serializable value)</p>
-<p>（2）public Intent putExtra (String name, Parcelable value)</p>
-<pre><code><span class="keyword">public</span> <span class="type">Intent</span> putParcelableArrayListExtra(String <span class="keyword">name</span>, ArrayList&lt;? <span class="keyword">extends</span> Parcelable&gt; <span class="keyword">value</span>)
-</code></pre><p><strong>一、通过实现Serializable接口传递</strong></p>
-<p>实体类继承Serializable。然后</p>
-<p>通过Intent来进行传输，具体方法是：public Intent putExtra (String name, Serializable value)</p>
-<pre><code><span class="type">Intent</span> <span class="type">ToManChartIntent</span>=<span class="keyword">new</span> <span class="type">Intent</span><span class="literal">()</span>;
-
-         <span class="type">ToManChartIntent</span>.putExtra(<span class="string">"toManChartIntent"</span>,mans);
-         getContext<span class="literal">()</span>.startActivity(<span class="type">ToManChartIntent</span>);
-</code></pre><p><strong>二、通过实现Parcelable接口传递</strong></p>
-<p>同上，Person类实现Parcelable接口即可：</p>
-<p>传递Object用：public Intent putExtra (String name, Parcelable value)<br>传递ArrayList<object>用：public Intent putParcelableArrayListExtra(String name, ArrayList&lt;? extends Parcelable&gt; value)</object></p>
-<h2 id="Intent的构造函数">Intent的构造函数</h2><p>公共构造函数：</p>
-<ul>
-<li><p>1、Intent() 空构造函数</p>
-</li>
-<li><p>2、Intent(Intent o) 拷贝构造函数</p>
-</li>
-<li><p>3、Intent(String action) 指定action类型的构造函数</p>
-</li>
-<li><p>4、Intent(String action, Uri uri) 指定Action类型和Uri的构造函数，URI主要是结合程序之间的数据共享ContentProvider</p>
-</li>
-<li><p>5、Intent(Context packageContext, Class&lt;?&gt; cls) 传入组件的构造函数，也就是上文提到的</p>
-</li>
-<li><p>6、Intent(String action, Uri uri, Context packageContext, Class&lt;?&gt; cls) 前两种结合体</p>
-</li>
-</ul>
-<p>Intent有六种构造函数，3、4、5是最常用的，并不是其他没用！</p>
-<h2 id="startActivityForResult的用法：">startActivityForResult的用法：</h2><ul>
-<li><p>1、startActivity( )<br>仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。</p>
-</li>
-<li><p>2、startActivityForResult( )<br>可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个Text2Activity，而当这个Text2Activity调用了finish()方法以后，程序会自动跳转回T1Activity，并调用前一个T1Activity中的onActivityResult( )方法。</p>
-</li>
-</ul>
-<p>如果想在Activity中得到新打开Activity 关闭后返回的数据，需要使用系统提供的startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新的Activity 关闭后会向前面的Activity传回数据，为了得到传回的数据，必须在前面的Activity中重写onActivityResult(int requestCode, int resultCode, Intent data)方法。</p>
-<pre><code><span class="comment">//这里采用startActivityForResult来做跳转，此处的0为一个依据，可以写其他的值，但一定要&gt;=0</span>
-
-startActivityForResult<span class="comment">(intent, 0)</span>;
-</code></pre><h2 id="onActivityResult传值的使用">onActivityResult传值的使用</h2><p>多个activity之间的传值 其实就是onActivityResult，然后别忘了还有一个action的问题 就是在主xml中添加自己的action以便于识别，最后次activity别忘了finansh。</p>
-<h2 id="针对startActivityForResult实例代码">针对startActivityForResult实例代码</h2><pre><code><span class="keyword">package</span> com.ljq.activitys;
-
-<span class="keyword">import</span> android.app.Activity;
-<span class="keyword">import</span> android.content.Intent;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.util.Log;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.widget.Button;
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
-<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TAG=<span class="string">"MainActivity"</span>;
-
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.main);
-
-    Button btnOpen=(Button)<span class="keyword">this</span>.findViewById(R.id.btnOpen);
-    btnOpen.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
-            <span class="comment">//得到新打开Activity关闭后返回的数据</span>
-            <span class="comment">//第二个参数为请求码，可以根据业务需求自己编号</span>
-            startActivityForResult(<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, OtherActivity.class), <span class="number">1</span>);
-        }
-    });
-}
-
-<span class="javadoc">/**
- * 为了得到传回的数据，必须在前面的Activity中（指MainActivity类）重写onActivityResult方法
- * 
- * requestCode 请求码，即调用startActivityForResult()传递过去的值
- * resultCode 结果码，结果码用于标识返回数据来自哪个新Activity
- */</span>
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
-    String result = data.getExtras().getString(<span class="string">"result"</span>);<span class="comment">//得到新Activity 关闭后返回的数据</span>
-    Log.i(TAG, result);
-}
-}
-</code></pre><p>当新Activity关闭后，新Activity返回的数据通过Intent进行传递，android平台会调用前面Activity 的onActivityResult()方法，把存放了返回数据的Intent作为第三个输入参数传入，在onActivityResult()方法中使用第三个输入参数可以取出新Activity返回的数据。</p>
-<h3 id="二、使用startActivityForResult(Intent_intent,_int_requestCode)方法打开新的Activity，新Activity关闭前需要向前面的Activity返回数据需要使用系统提供的setResult(int_resultCode,_Intent_data)方法实现：">二、使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新Activity关闭前需要向前面的Activity返回数据需要使用系统提供的setResult(int resultCode, Intent data)方法实现：</h3><pre><code><span class="keyword">package</span> com.ljq.activitys;
-
-<span class="keyword">import</span> android.app.<span class="type">Activity</span>;
-<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">View</span>;
-<span class="keyword">import</span> android.widget.<span class="type">Button</span>;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">OtherActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Activity</span> {</span>
-
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.other);
-
-    <span class="type">Button</span> btnClose=(<span class="type">Button</span>)findViewById(<span class="type">R</span>.id.btnClose);
-    btnClose.setOnClickListener(<span class="keyword">new</span> <span class="type">View</span>.<span class="type">OnClickListener</span>(){
-        public void onClick(<span class="type">View</span> v) {
-            <span class="comment">//数据是使用Intent返回</span>
-            <span class="type">Intent</span> intent = <span class="keyword">new</span> <span class="type">Intent</span>();
-            <span class="comment">//把返回数据存入Intent</span>
-            intent.putExtra(<span class="string">"result"</span>, <span class="string">"My name is linjiqin"</span>);
-            <span class="comment">//设置返回数据</span>
-            <span class="type">OtherActivity</span>.<span class="keyword">this</span>.setResult(<span class="type">RESULT_OK</span>, intent);
-            <span class="comment">//关闭Activity</span>
-            <span class="type">OtherActivity</span>.<span class="keyword">this</span>.finish();
-        }
-    });
-
-}
-
-}
-</code></pre><p>setResult()方法的第一个参数值可以根据业务需要自己定义，上面代码中使用到的RESULT_OK是系统Activity类定义的一个常量，值为-1，代码片断如下：<br>public class android.app.Activity extends ……{<br>  public static final int RESULT_CANCELED = 0;<br>  public static final int RESULT_OK = -1;<br>  public static final int RESULT_FIRST_USER = 1;<br>}</p>
-<h3 id="请求码的作用">请求码的作用</h3><p>使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，我们需要为startActivityForResult()方法传入一个请求码(第二个参数)。请求码的值是根据业务需要由自已设定，用于标识请求来源。例如：一个Activity有两个按钮，点击这两个按钮都会打开同一个Activity，不管是那个按钮打开新Activity，当这个新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。在onActivityResult()方法如果需要知道新Activity是由那个按钮打开的，并且要做出相应的业务处理，这时可以这样做：</p>
-<pre><code> @<span class="function">Override  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-        ....
-    button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
-            startActivityForResult (<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, NewActivity.<span class="keyword">class</span>), <span class="number">1</span>);
-
-       }
-
-    });
-    button2.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
-             startActivityForResult (<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, NewActivity.<span class="keyword">class</span>), <span class="number">2</span>);
-
-        }
-
-    });
-
-
-   @<span class="function">Override <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
-           <span class="keyword">switch</span>(requestCode){
-               <span class="keyword">case</span> <span class="number">1</span>:
-               <span class="comment">//来自按钮1的请求，作相应业务处理</span>
-               <span class="keyword">case</span> <span class="number">2</span>:
-               <span class="comment">//来自按钮2的请求，作相应业务处理</span>
-            }
-      }
-}
-</code></pre><h3 id="结果码的作用">结果码的作用</h3><p>在一个Activity中，可能会使用startActivityForResult()方法打开多个不同的Activity处理不同的业务，当这些新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。为了知道返回的数据来自于哪个新Activity，在onActivityResult()方法中可以这样做(ResultActivity和NewActivity为要打开的新Activity)：<br>public class ResultActivity extends Activity {<br>       …..<br>       ResultActivity.this.setResult(1, intent);<br>       ResultActivity.this.finish();<br>}<br>public class NewActivity extends Activity {<br>       ……<br>        NewActivity.this.setResult(2, intent);<br>        NewActivity.this.finish();<br>}<br>public class MainActivity extends Activity { // 在该Activity会打开ResultActivity和NewActivity<br>       @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {<br>               switch(resultCode){<br>                   case 1:<br>                   // ResultActivity的返回数据<br>                   case 2:<br>                    // NewActivity的返回数据<br>                }<br>          }<br>} </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cie9tn4lo0012j0b2wvn2u3aa" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-21" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/21/2015-7-21/">URIs, URLs, and URNs之间的关系区别，Android拍照功能</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/21/2015-7-21/">
-    <time datetime="2015-07-21T00:48:01.000Z" itemprop="datePublished">2015-07-21</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/21问题集">2015/7/21问题集</h1><h2 id="URIs,_URLs,_and_URNs之间的关系区别">URIs, URLs, and URNs之间的关系区别</h2><ul>
-<li>URI：是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</li>
-<li>URL：是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</li>
-<li>URN：uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。</li>
-</ul>
-<p>也就是说，URI是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。</p>
-<h2 id="Android拍照功能">Android拍照功能</h2><pre><code>package com.zsz.develop.picturedemo;
-
-    <span class="keyword">import</span> java.io.BufferedOutputStream;
-    <span class="keyword">import</span> java.io.File;
-    <span class="keyword">import</span> java.io.FileNotFoundException;
-    <span class="keyword">import</span> java.io.FileOutputStream;
-    <span class="keyword">import</span> java.io.IOException;
-    <span class="keyword">import</span> java.util.Calendar;
-    <span class="keyword">import</span> java.util.Locale;
-
-    <span class="keyword">import</span> android.app.Activity;
-    <span class="keyword">import</span> android.content.Intent;
-    <span class="keyword">import</span> android.graphics.Bitmap;
-    <span class="keyword">import</span> android.os.Bundle;
-    <span class="keyword">import</span> android.os.Environment;
-    <span class="keyword">import</span> android.provider.MediaStore;
-    <span class="keyword">import</span> android.text.format.DateFormat;
-    <span class="keyword">import</span> android.util.Log;
-    <span class="keyword">import</span> android.view.View;
-    <span class="keyword">import</span> android.view.View.OnClickListener;
-    <span class="keyword">import</span> android.widget.Button;
-    <span class="keyword">import</span> android.widget.ImageView;
-    <span class="keyword">import</span> android.widget.Toast;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
-<span class="comment">/** Called when the activity is first created. */</span>
-private Button button;
-
-@Override
-public <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-    button = (Button) findViewById(R.id.btnPicture);
-    button.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
-
-        @Override
-        public <span class="keyword">void</span> onClick(View v) {
-            <span class="comment">// TODO Auto-generated method stub</span>
-            Intent intent = <span class="keyword">new</span> Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-
-            startActivityForResult(intent, <span class="number">1</span>);
-        }
-    });
-}
-
-@Override
-protected <span class="keyword">void</span> onActivityResult(int requestCode, int resultCode, Intent data) {
-    <span class="comment">// TODO Auto-generated method stub</span>
-    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);
-    <span class="keyword">if</span> (resultCode == Activity.RESULT_OK) {
-        <span class="built_in">String</span> sdStatus = Environment.getExternalStorageState();
-        <span class="keyword">if</span> (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { <span class="comment">// 检测sd是否可用</span>
-            Log.i(<span class="string">"TestFile"</span>,
-                    <span class="string">"SD card is not avaiable/writeable right now."</span>);
-            <span class="keyword">return</span>;
-        }
-        <span class="built_in">String</span> name = <span class="keyword">new</span> DateFormat().format(<span class="string">"yyyyMMdd_hhmmss"</span>,Calendar.getInstance(Locale.CHINA)) + <span class="string">".jpg"</span>;
-        Toast.makeText(<span class="keyword">this</span>, name, Toast.LENGTH_LONG).show();
-        Bundle bundle = data.getExtras();
-        Bitmap bitmap = (Bitmap) bundle.get(<span class="string">"data"</span>);<span class="comment">// 获取相机返回的数据，并转换为Bitmap图片格式</span>
-
-        FileOutputStream b = <span class="literal">null</span>;
-        <span class="comment">//???????????????????????????????为什么不能直接保存在系统相册位置呢？？？？？？？？？？？？</span>
-        File file = <span class="keyword">new</span> File(<span class="string">"/sdcard/myImage/"</span>);
-        file.mkdirs();<span class="comment">// 创建文件夹</span>
-        <span class="built_in">String</span> fileName = <span class="string">"/sdcard/myImage/"</span>+name;
-
-        <span class="keyword">try</span> {
-            b = <span class="keyword">new</span> FileOutputStream(fileName);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, <span class="number">100</span>, b);<span class="comment">// 把数据写入文件</span>
-        } <span class="keyword">catch</span> (FileNotFoundException e) {
-            e.printStackTrace();
-        } <span class="keyword">finally</span> {
-            <span class="keyword">try</span> {
-                b.flush();
-                b.close();
-            } <span class="keyword">catch</span> (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        ((ImageView) findViewById(R.id.imageView)).setImageBitmap(bitmap);<span class="comment">// 将图片显示在ImageView里</span>
-    }
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cie9tn4lr0013j0b2y2m4u8ua" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-20" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/20/2015-7-20/">字节流如何转换为字符流，去除文件中的空格和回车，LayoutInflater加载布局，新建http连接</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/20/2015-7-20/">
-    <time datetime="2015-07-20T01:51:03.000Z" itemprop="datePublished">2015-07-20</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/20_问题集">2015/7/20 问题集</h1><h2 id="字节流如何转换为字符流">字节流如何转换为字符流</h2><pre><code>FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"c:/abc.txt"</span>);<span class="comment">// 字节流</span>
- InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis);<span class="comment">// 字符流</span>
- <span class="keyword">BufferedReader</span> br = <span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);<span class="comment">// 缓冲流</span>
- <span class="keyword">String</span> <span class="built_in">str</span> = <span class="keyword">null</span>;
- <span class="keyword">if</span> ((<span class="built_in">str</span> = br.readLine()) != <span class="keyword">null</span>) {
-  System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);
- }
- br.close();
- isr.close();
- fis.close();
-}
-</code></pre><h2 id="去除文件中的空格和回车">去除文件中的空格和回车</h2><pre><code>  content_str=etSend.getText().<span class="keyword">toString</span>();
-<span class="comment">//去除空格</span>
-    String <span class="keyword">drop</span>=content_str.<span class="keyword">replace</span>(<span class="string">" "</span>,<span class="string">""</span>);
-<span class="comment">//    去除回车</span>
-    String droph=<span class="keyword">drop</span>.<span class="keyword">replace</span>(<span class="string">"\n"</span>,<span class="string">""</span>);
-</code></pre><h2 id="LayoutInflater加载布局">LayoutInflater加载布局</h2><p>findViewById加载控件，LayoutInflater加载布局</p>
-<pre><code>LayoutInflater <span class="variable">layoutInflater=</span>LayoutInflater.from(context);
-
-     <span class="variable">layout=</span> (RelativeLayout) layoutInflater.inflate(R.layout.left_item,<span class="constant">null</span>);
-</code></pre><h2 id="新建http连接">新建http连接</h2><pre><code><span class="keyword">protected</span> <span class="keyword">String</span> doInBackground(<span class="keyword">String</span>... strings) {
-
- <span class="keyword">try</span> {
-     client=<span class="keyword">new</span> DefaultHttpClient();
-     httpGet=<span class="keyword">new</span> HttpGet(url);
-    httpResponse= client.execute(httpGet);
-    entity= httpResponse.getEntity();
-     InputStream is=entity.getContent();
-     InputStreamReader isr=<span class="keyword">new</span> InputStreamReader(is);
-     <span class="keyword">BufferedReader</span> br=<span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);
-     <span class="keyword">String</span> <span class="built_in">line</span>;
-     StringBuffer sb=<span class="keyword">new</span> StringBuffer();
-     <span class="keyword">while</span> ((<span class="built_in">line</span>=br.readLine())!=<span class="keyword">null</span>){
-         sb.<span class="built_in">append</span>(<span class="built_in">line</span>);
-     }
-     <span class="keyword">return</span> sb.toString();
- } <span class="keyword">catch</span> (IOException e) {
-     e.printStackTrace();
- }
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cie9tn4lt0014j0b2azk49okm" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-18-adapter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/19/2015-7-18-adapter/">adapter</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/19/2015-7-18-adapter/">
-    <time datetime="2015-07-19T05:10:37.000Z" itemprop="datePublished">2015-07-19</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Adapter">Adapter</h1><h2 id="Adapter的概念">Adapter的概念</h2><p> Adapter是连接后端数据和前端显示的适配器接口，是数据和UI（View）之间一个重要的纽带。在常见的View(List View,Grid View)等地方都需要用到Adapter。如下图直观的表达了Data、Adapter、View三者的关系：</p>
-<h2 id="常用Adapter">常用Adapter</h2><ul>
-<li>BaseAdapter是一个抽象类，继承它需要实现较多的方法，所以也就具有较高的灵活性；</li>
-<li>ArrayAdapter支持泛型操作，最为简单，只能展示一行字。</li>
-<li>SimpleAdapter有最好的扩充性，可以自定义出各种效果。</li>
-<li>SimpleCursorAdapter可以适用于简单的纯文字型ListView，它需要Cursor的字段和UI的id对应起来。如需要实现更复杂的UI也可以重写其他方法。可以认为是SimpleAdapter对数据库的简单结合，可以方便地把数据库的内容以列表的形式展示出来。</li>
-</ul>
-<h2 id="ArrayAdapter的操作">ArrayAdapter的操作</h2><p>ArrayAdapter的操作很简单，构建一个ArrayAdapter（）实例。其中要传入三个参数。</p>
-<p>依次为this,布局文件（注意这里的布局文件描述的是列表的每一行的布局，android.R.layout.simple_list_item_1是系统定义好的布局文件只显示一行文字，数据源(一个List集合)。</p>
-<p>最后绑定显示。</p>
-<pre><code>package com.zsz.develop.adaptertest;
-
-<span class="keyword">import</span> android.app.ListActivity;
-<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.view.Menu;
-<span class="keyword">import</span> android.view.MenuItem;
-<span class="keyword">import</span> android.widget.Adapter;
-<span class="keyword">import</span> android.widget.ArrayAdapter;
-<span class="keyword">import</span> android.widget.ListView;
-
-<span class="keyword">import</span> java.util.ArrayList;
-
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
-
-private ListView lv;
-private ArrayList&lt;<span class="built_in">String</span>&gt; mArrayList = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">String</span>&gt;();
-@Override
-protected <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    ArrayAdapter&lt;<span class="built_in">String</span>&gt; adapter=<span class="keyword">new</span> ArrayAdapter&lt;<span class="built_in">String</span>&gt;(<span class="keyword">this</span>,android.R.layout.simple_list_item_1,getData());
-    lv= (ListView) findViewById(R.id.lv);
-    lv.setAdapter(adapter);
-
-}
-private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
-
-    mArrayList.add(<span class="string">"测试一"</span>);
-    mArrayList.add(<span class="string">"测试二"</span>);
-    mArrayList.add(<span class="string">"测试三"</span>);
-    mArrayList.add(<span class="string">"测试死"</span>);
-    <span class="keyword">return</span> mArrayList;
-
-}
-
-
-
-}
-</code></pre><h2 id="java与Mysql类型对应">java与Mysql类型对应</h2><p><img src="http://cl.ly/image/1k1z2h033V2O/QL" alt="">TTDB2<a href="RH(0A]8QQRR.png">N</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cie9tn4lx0016j0b2bsjxt2m2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cieb6up5u0015tob2nq5j58w0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1287,7 +1898,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
       </nav>
     </section>
       

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015/9/8-5 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Android事件传递机制(dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent)Android中的事件类型分为按键事件和屏幕触摸事件，Touch事件是屏幕触摸事件的基础事件，有必要对它进行深入的了解。
+View即普通的控件，没有子布局的，如Button、TextView.
+ ViewGroup继承自View，表示可以有子控件，如Linearl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015/9/8-5">
+<meta property="og:url" content="http://yoursite.com/2015/09/08/2015-9-8-5/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="Android事件传递机制(dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent)Android中的事件类型分为按键事件和屏幕触摸事件，Touch事件是屏幕触摸事件的基础事件，有必要对它进行深入的了解。
+View即普通的控件，没有子布局的，如Button、TextView.
+ ViewGroup继承自View，表示可以有子控件，如Linearl">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015/9/8-5">
+<meta name="twitter:description" content="Android事件传递机制(dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent)Android中的事件类型分为按键事件和屏幕触摸事件，Touch事件是屏幕触摸事件的基础事件，有必要对它进行深入的了解。
+View即普通的控件，没有子布局的，如Button、TextView.
+ ViewGroup继承自View，表示可以有子控件，如Linearl">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="/.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="/archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="/categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="/tags">Tags</a></td>
+      
+        <td><a class="main-nav-link" href="/about">About</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        63
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-9-8-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015/9/8-5
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/08/2015-9-8-5/">
+    <time datetime="2015-09-08T08:13:14.000Z" itemprop="datePublished">2015-09-08</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android事件传递机制(dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent)">Android事件传递机制(dispatchTouchEvent、onInterceptTouchEvent、onTouchEvent)</h1><p>Android中的事件类型分为按键事件和屏幕触摸事件，Touch事件是屏幕触摸事件的基础事件，有必要对它进行深入的了解。</p>
+<p><strong>View即普通的控件</strong>，没有子布局的，如Button、TextView.</p>
+<p> <strong>ViewGroup继承自View</strong>，表示可以有子控件，如Linearlayout、Listview这些。</p>
+<h2 id="事件即MotionEvent，最重要的有3个:">事件即MotionEvent，最重要的有3个:</h2><ul>
+<li>(1)MotionEvent.ACTION_DOWN  按下View，是所有事件的开始</li>
+<li>(2)MotionEvent.ACTION_MOVE   滑动事件</li>
+<li>(3)MotionEvent.ACTION_UP       与down对应，表示抬起</li>
+</ul>
+<h2 id="明确事件传递机制的最终目的都是为了触发执行View的点击监听和触摸监听:">明确事件传递机制的最终目的都是为了触发执行View的点击监听和触摸监听:</h2><pre><code>******.setOnClickListener(new <span class="type">View</span>.<span class="type">OnClickListener</span>() {
+
+    @<span class="type">Override</span>
+    public <span class="type">void</span> onClick(<span class="type">View</span> v) {
+        // <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub
+        <span class="type">Log</span>.i(tag, <span class="string">"testLinelayout---onClick..."</span>);
+    }
+});
+
+*******.setOnTouchListener(new <span class="type">View</span>.<span class="type">OnTouchListener</span>() {
+
+    @<span class="type">Override</span>
+    public boolean onTouch(<span class="type">View</span> v, <span class="type">MotionEvent</span> event) {
+        // <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub
+
+        <span class="keyword">return</span> <span class="literal">false</span>;
+    }
+});
+</code></pre><p>我们简称为onClick监听和onTouch监听，一般程序会注册这两个监听。从上面可以看到，onTouch监听里默认return false。不要小看了这个return false，后面可以看到它有大用。</p>
+<p>对于View来说，事件传递机制有两个函数：dispatchTouchEvent负责分发事件，在dispatch<em>*</em>里又会调用onTouchEvent表示执行事件，或者说消费事件，</p>
+<h2 id="总结">总结</h2><p>1、事件入口是dispatchTouchEvent(),它会先执行注册的onTouch监听,如果一切顺利的话，接着执行onTouchEvent，在onTouchEvent里会执行onClick监听。</p>
+<p>2、无论是dispatchTouchEvent还是onTouchEvent，如果返回true表示这个事件已经被消费、处理了，不再往下传了。在dispathTouchEvent的源码里可以看到，如果onTouchEvent返回了true，那么它也返回true。如果dispatch<em>*</em>在执行onTouch监听的时候，onTouch返回了true，那么它也返回true，这个事件提前被onTouch消费掉了。就不再执行onTouchEvent了，更别说onClick监听了。</p>
+<p>3、我们通常在onTouch监听了设置图片一旦被触摸就改变它的背景、透明度之类的，这个onTouch表示事件的时机。而在onClick监听了去具体干某些事。</p>
+<h2 id="在自定义的View里面添加再设置一个外加View">在自定义的View里面添加再设置一个外加View</h2><p>再mianActivity中添加进来：</p>
+<pre><code>sideBar.setTextView<span class="comment">(dialog)</span>;
+</code></pre><p>在sideBar中再对他进行设置。</p>
+<pre><code>/<span class="keyword">*</span><span class="keyword">*</span>
+
+ <span class="keyword">*</span> 在mainActivity中吧TextView设置进来。
+ <span class="keyword">*</span> <span class="comment">@param mTextDialog</span>
+ <span class="keyword">*</span>/
+public void setTextView(TextView mTextDialog) {
+    this.mTextDialog = mTextDialog;
+}
+</code></pre><p>在dispatchTouchEvent中对他进行监听和控制。</p>
+<pre><code><span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">dispatchTouchEvent</span><span class="params">(MotionEvent event)</span> </span>{
+    <span class="keyword">final</span> <span class="keyword">int</span> action = event.getAction();
+    <span class="keyword">final</span> <span class="keyword">float</span> y = event.getY();<span class="comment">// 点击y坐标</span>
+    <span class="keyword">final</span> <span class="keyword">int</span> oldChoose = choose;
+    <span class="keyword">final</span> OnTouchingLetterChangedListener listener = onTouchingLetterChangedListener;
+    <span class="keyword">final</span> <span class="keyword">int</span> c = (<span class="keyword">int</span>) (y / getHeight() * b.length);<span class="comment">// 点击y坐标所占总高度的比例*b数组的长度就等于点击b中的个数.</span>
+
+    <span class="keyword">switch</span> (action) {
+    <span class="keyword">case</span> MotionEvent.ACTION_UP:
+        setBackgroundDrawable(<span class="keyword">new</span> ColorDrawable(0x00000000));
+        choose = -<span class="number">1</span>;<span class="comment">//</span>
+        invalidate();
+        <span class="keyword">if</span> (mTextDialog != <span class="keyword">null</span>) {
+            mTextDialog.setVisibility(View.INVISIBLE);
+        }
+        <span class="keyword">break</span>;
+
+    <span class="keyword">default</span>:
+        setBackgroundResource(R.drawable.sidebar_background);
+        <span class="keyword">if</span> (oldChoose != c) {
+            <span class="keyword">if</span> (c &gt;= <span class="number">0</span> &amp;&amp; c &lt; b.length) {
+                <span class="keyword">if</span> (listener != <span class="keyword">null</span>) {
+                    listener.onTouchingLetterChanged(b[c]);
+                }
+                <span class="keyword">if</span> (mTextDialog != <span class="keyword">null</span>) {
+                    mTextDialog.setText(b[c]);
+                    mTextDialog.setVisibility(View.VISIBLE);
+                }
+
+                choose = c;
+                invalidate();
+            }
+        }
+
+        <span class="keyword">break</span>;
+    }
+    <span class="keyword">return</span> <span class="keyword">true</span>;
+}
+</code></pre><h2 id="View-VISIBLE、INVISIBLE、GONE的区别">View.VISIBLE、INVISIBLE、GONE的区别</h2><p>android中UI应用的开发中经常会使用view.setVisibility（）来设置控件的可见性，其中该函数有3个可选值，他们有着不同的含义：</p>
+<p>View.VISIBLE—-&gt;可见</p>
+<p>View.INVISIBLE—-&gt;不可见，但这个View仍然会占用在xml文件中所分配的布局空间，不重新layout </p>
+<p>View.GONE——&gt;不可见，但这个View在ViewGroup中不保留位置，会重新layout，不再占用空间，那后面的view就会取代他的位置，</p>
+<h2 id="invalidate()函数">invalidate()函数</h2><p> invalidate()函数的主要作用是请求View树进行重绘，该函数可以由应用程序调用，或者由系统函数间接调用，例如setEnable(), setSelected(), setVisiblity()都会间接调用到invalidate()来请求View树重绘，更新View树的显示。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-5/" data-id="cieb6up040004tob2uqsmddz6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/09/08/2015-9-8-6/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/9/8-6
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/09/08/2015-9-8-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015/9/8-4</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        57
+        63
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,730 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-23-URI-Intent" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/23/2015-7-23-URI-Intent/"> 2015/7/23-URI-Intent</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/23/2015-7-23-URI-Intent/">
+    <time datetime="2015-07-23T01:05:42.000Z" itemprop="datePublished">2015-07-23</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="通过URI和Intent启动各种功能">通过URI和Intent启动各种功能</h1><h2 id="Uri">Uri</h2><p>就Android平台而言，URI主要分三个部分：scheme, authority and path。其中authority又分为host和port。格式如下：<br>scheme://host:port/path<br>举个实际的例子：</p>
+<p><img src="http://cl.ly/image/2l2F3K3b2W2n/36D61U2UNF%25SOXIFK2%60UN%25N.png" alt=""></p>
+<p>现在大家应该知道data flag中那些属性的含义了吧，看下data flag<br><data android:host="string" android:mimetype="string" android:path="string" android:pathpattern="string" android:pathprefix="string" android:port="string" android:scheme="string"></data></p>
+<p>但是我们在程序中一般是不直接用URI来标识CP的，是的，正如我们通常见到的用定义的常量来标识。例如standard CP中的Contacts，我们就用Contacts.People.CONTENT_URI来标识Contacts CP中People这个表。那么要标识某个具体的人怎么办呢？ 这就用到了ContentUris.withAppendedId() 和 Uri.withAppendedPath()。例如我们要表示content://contacts/people/20，那么我们就可以用如下语句：<br>Uri uri = ContentUris.withAppendedId(People.CONTENT_URI, 20); 或者<br>Uri uri = Uri.withAppendedPath(People.CONTENT_URI, “20”);</p>
+<p>举些例子，如：</p>
+<p>所有联系人的Uri： content://contacts/people</p>
+<p>某个联系人的Uri: content://contacts/people/5</p>
+<p>所有图片Uri: content://media/external</p>
+<p>某个图片的Uri：content://media/external/images/media/4</p>
+<p>下面是一些常用的Uri</p>
+<p><strong>显示网页:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“<a href="http://www.google.com" target="_blank" rel="external">http://www.google.com</a>“);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW,uri);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>显示地图:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“geo:38.899533,-77.036476”);<ol>
+<li>Intent it = new Intent(Intent.Action_VIEW,uri);</li>
+<li>startActivity(it);</li>
+</ol>
+</li>
+</ol>
+<p><strong>路径规划:</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“<a href="http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en" target="_blank" rel="external">http://maps.google.com/maps?f=d&amp;saddr=startLat%20startLng&amp;daddr=endLat%20endLng&amp;hl=en</a>“);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW,URI);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>拨打电话:<br>调用拨号程序</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“tel:xxxxxx”);</li>
+<li>Intent it = new Intent(Intent.ACTION_DIAL, uri);   </li>
+<li>startActivity(it);   </li>
+<li>Uri uri = Uri.parse(“tel.xxxxxx”);</li>
+<li>Intent it =new Intent(Intent.ACTION_CALL,uri);</li>
+<li>要使用这个必须在配置文件中加入<uses-permission id="Android.permission.CALL_PHONE"></uses-permission></li>
+</ol>
+<p><strong>发送SMS/MMS<br>调用发送短信的程序</strong></p>
+<ol>
+<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
+<li>it.putExtra(“sms_body”, “The SMS text”);</li>
+<li>it.setType(“vnd.android-dir/mms-sms”);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>发送短信</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“smsto:0800000123”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
+<li>it.putExtra(“sms_body”, “The SMS text”);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>发送彩信</strong></p>
+<ol>
+<li>Uri uri = Uri.parse(“content://media/external/images/media/23”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(“sms_body”, “some text”);</li>
+<li>it.putExtra(Intent.EXTRA_STREAM, uri);</li>
+<li>it.setType(“image/png”);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong><br>发送Email</strong></p>
+<p>  1.</p>
+<ol>
+<li>Uri uri = Uri.parse(“mailto:xxx@abc.com”);</li>
+<li>Intent it = new Intent(Intent.ACTION_SENDTO, uri);</li>
+<li>startActivity(it);</li>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(Intent.EXTRA_EMAIL, “me@abc.com”);</li>
+<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);</li>
+<li>it.setType(“text/plain”);</li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));   </li>
+<li>Intent it=new Intent(Intent.ACTION_SEND);   </li>
+<li>String[] tos={“me@abc.com”};   </li>
+<li>String[] ccs={“you@abc.com”};   </li>
+<li>it.putExtra(Intent.EXTRA_EMAIL, tos);   </li>
+<li>it.putExtra(Intent.EXTRA_CC, ccs);   </li>
+<li>it.putExtra(Intent.EXTRA_TEXT, “The email body text”);   </li>
+<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);   </li>
+<li>it.setType(“message/rfc822”);   </li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
+</ol>
+<p><strong>添加附件</strong></p>
+<ol>
+<li>Intent it = new Intent(Intent.ACTION_SEND);</li>
+<li>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);</li>
+<li>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/mysong.mp3[/url]”);</li>
+<li>sendIntent.setType(“audio/mp3”);</li>
+<li>startActivity(Intent.createChooser(it, “Choose Email Client”));</li>
+</ol>
+<p><strong>播放多媒体</strong></p>
+<ol>
+<li></li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW);</li>
+<li>Uri uri = Uri.parse(“[url=]file:///sdcard/song.mp3[/url]”);</li>
+<li>it.setDataAndType(uri, “audio/mp3”);</li>
+<li>startActivity(it);</li>
+<li>Uri uri = Uri.withAppendedPath(MediaStore.Audio.Media.INTERNAL_CONTENT_URI, “1”);</li>
+<li>Intent it = new Intent(Intent.ACTION_VIEW, uri);</li>
+<li>startActivity(it);   </li>
+</ol>
+<p><strong>Uninstall 程序</strong></p>
+<ol>
+<li>Uri uri = Uri.fromParts(“package”, strPackageName, null);</li>
+<li>Intent it = new Intent(Intent.ACTION_DELETE, uri);</li>
+<li>startActivity(it);</li>
+</ol>
+<p><strong>//调用相册</strong></p>
+<p>public static final String MIME_TYPE_IMAGE_JPEG = “image/*”;<br>public static final int ACTIVITY_GET_IMAGE = 0;<br>Intent getImage = new Intent(Intent.ACTION_GET_CONTENT);<br>getImage.addCategory(Intent.CATEGORY_OPENABLE);<br>getImage.setType(MIME_TYPE_IMAGE_JPEG);<br>startActivityForResult(getImage, ACTIVITY_GET_IMAGE);</p>
+<p><strong>//调用系统相机应用程序，并存储拍下来的照片</strong></p>
+<p>Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);<br>time = Calendar.getInstance().getTimeInMillis();<br>intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(new File(Environment<br>.getExternalStorageDirectory().getAbsolutePath()+”/tucue”, time + “.jpg”)));<br>startActivityForResult(intent, ACTIVITY_GET_CAMERA_IMAGE);</p>
+<p>uninstall apk</p>
+<p><strong>未测试</strong></p>
+<p>Uri uninstallUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_DELETE, uninstallUri);<br>*/<br>Uri packageURI = Uri.parse(“package:”+wistatmap);<br>Intent uninstallIntent = new Intent(Intent.ACTION_DELETE, packageURI);<br>startActivity(uninstallIntent);</p>
+<p>install apk<br>Uri installUri = Uri.fromParts(“package”, “xxx”, null);<br>returnIt = new Intent(Intent.ACTION_PACKAGE_ADDED, installUri);<br>play audio<br>Uri playUri = Uri.parse(“[url=]file:///sdcard/download/everything.mp3[/url]”);<br>returnIt = new Intent(Intent.ACTION_VIEW, playUri);</p>
+<p><strong>//发送附件</strong></p>
+<p>Intent it = new Intent(Intent.ACTION_SEND);<br>it.putExtra(Intent.EXTRA_SUBJECT, “The email subject text”);<br>it.putExtra(Intent.EXTRA_STREAM, “[url=]file:///sdcard/eoe.mp3[/url]”);<br>sendIntent.setType(“audio/mp3”);<br>startActivity(Intent.createChooser(it, “Choose Email Client”));</p>
+<p><strong>//搜索应用</strong></p>
+<p>Uri uri = Uri.parse(“market://search?q=pname:pkg_name”);<br>Intent it = new Intent(Intent.ACTION_VIEW, uri);<br>startActivity(it);<br>//where pkg_name is the full package path for an application</p>
+<p><strong>进入联系人页面</strong></p>
+<p>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(People.CONTENT_URI);<br>startActivity(intent);</p>
+<p><strong>查看指定联系人</strong></p>
+<p>Uri personUri = ContentUris.withAppendedId(People.CONTENT_URI, info.id);//info.id联系人ID<br>Intent intent = new Intent();<br>intent.setAction(Intent.ACTION_VIEW);<br>intent.setData(personUri);<br>startActivity(intent);</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cieb6up620017tob2d2jmjb5c" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-23" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/23/2015-7-23/"> 注销，TaskStack，affinity</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/23/2015-7-23/">
+    <time datetime="2015-07-23T01:05:22.000Z" itemprop="datePublished">2015-07-23</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="7-23日问题集">7.23日问题集</h1><h2 id="Android注销流程">Android注销流程</h2><p>当我们点击注销按钮之后，一般都会重新返回登陆界面，这时候我们再按返回键是没有用的。这时候其实我们是将Android 的TaskStack清空。</p>
+<p>这里要设置Intent的FLAG,在执行完成Activity跳转的时候会清空TaskStack，并且将创建一个新的TaskStack</p>
+<p>注销</p>
+<pre><code><span class="type">Intent</span> logoutIntent = new <span class="type">Intent</span>(ctx, LoginActivity.<span class="keyword">class</span>);
+                logoutIntent.setFlags(<span class="type">Intent</span>.FLAG_ACTIVITY_CLEAR_TASK | <span class="type">Intent</span>.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(logoutIntent);
+</code></pre><h2 id="什么是Activity_Stack？">什么是Activity Stack？</h2><p>　　Activity承担了大量的显示和交互工作，从某种角度上将，我们看见的应用程序就是许多个Activity的组合。为了让这许多 Activity协同工作而不至于产生混乱，Android平台设计了一种堆栈机制用于管理Activity，其遵循先进后出的原则，系统总是显示位于栈 顶的Activity，从逻辑上将，位于栈顶的Activity也就是最后打开的Activity，这也是符合逻辑的。</p>
+<p>　　在操作应用程序时，每次启动新的Activity，都会将此压入Activity Stack，当用户执行返回操作时，移除Activity Stack顶上的Activity，这样就实现了返回上一个Activty的功能。直到用户一直返回到Home Screen，这时候可以理解为移除了Activity Stack所有的Activity，这个Activity Stack不再存在，应用程序也结束了运行。</p>
+<h2 id="什么是Task？">什么是Task？</h2><p>　　Task是指将相关的Activity组合到一起，以Activity Stack的方式进行管理。从用户体验上讲，一个“应用程序”就是一个Task，但是从根本上讲，一个Task是可以有一个或多个Android Application组成的。例如：你想在发送短信时，拍一张照并作为彩信发出去，这时你首先停留在短信应用程序的的Acitivity上，然后跳转到 Camera应用程序的Activity上，当完成拍照功能后，再返回到短信应用程序的Activity。这实际上是两个Android Application协同合作后完成的工作，但为了更好的用户体验，Android平台加入了Task这么一种机制，让用户没有感觉到应用的中断，让用 户感觉在一“应用程序”里就完成了想完成的工作。</p>
+<h2 id="Activity的affinity(亲和力)">Activity的affinity(亲和力)</h2><p>task对于Activity来说就好像它的身份证一样，可以告诉所在的task，自己属于这个task中的一员；拥有相同affinity的多个Activity理论同属于一个task，task自身的affinity决定于根Activity的affinity值。affinity在什么场合应用呢？1.根据affinity重新为Activity选择宿主task（与allowTaskReparenting属性配合工作）；2.启动一个Activity过程中Intent使用了FLAG_ACTIVITY_NEW_TASK标记，根据affinity查找或创建一个新的具有对应affinity的task。我们会在后面进行详细讲解。</p>
+<p>默认情况下，一个应用内的所有Activity都具有相同的affinity，都是从Application（参考<application>的taskAffinity属性）继承而来，而Application默认的affinity是<manifest>中的包名，我们可以为<application>设置taskAffinity属性值，这样可以应用到<application>下的所有<activity>，也可以单独为某个Activity设置taskAffinity。</activity></application></application></manifest></application></p>
+<h2 id="Intent几种常见的flags：">Intent几种常见的flags：</h2><h3 id="FLAG_ACTIVITY_CLEAR_TASK">FLAG_ACTIVITY_CLEAR_TASK</h3><p><strong>FLAG_ACTIVITY_CLEAR_TASK </strong>:如果在调用Context.startActivity时传递这个标记，将会导致任何用来放置该activity的已经存在的task里面的已经存在的activity先清空，然后该activity再在该task中启动，也就是说，这个新启动的activity变为了这个空tas的根activity.所有老的activity都结束掉。该标志必须和FLAG_ACTIVITY_NEW_TASK一起使用。</p>
+<h3 id="-FLAG_ACTIVITY_CLEAR_TOP">.FLAG_ACTIVITY_CLEAR_TOP</h3><p>当Intent对象包含这个标记时，如果在栈中发现存在Activity实例，则清空这个实例之上的Activity，使其处于栈顶。例如：我们的FirstActivity跳转到SecondActivity，SecondActivity跳转到ThirdActivity，而ThirdActivity又跳到SecondActivity，那么ThirdActivity实例将被弹出栈，使SecondActivity处于栈顶，显示到幕前，栈内只剩下FirstActivity和SecondActivity。这个SecondActivity既可以在onNewIntent()中接收到传来的Intent，也可以把自己销毁之后重新启动来接受这个Intent。在使用默认的“standard”启动模式下，如果没有在Intent使用到FLAG_ACTIVITY_SINGLE_TOP标记，那么它将关闭后重建，如果使用了这个FLAG_ACTIVITY_SINGLE_TOP标记，则会使用已存在的实例；对于其他启动模式，无需再使用FLAG_ACTIVITY_SINGLE_TOP，它都将使用已存在的实例，Intent会被传递到这个实例的onNewIntent()中。</p>
+<h3 id="FLAG_ACTIVITY_SINGLE_TOP">FLAG_ACTIVITY_SINGLE_TOP</h3><p>当task中存在目标Activity实例并且位于栈的顶端时，不再创建一个新的，直接利用这个实例。我们在上边的例子中也有讲到。</p>
+<h3 id="FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET">FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET</h3><p>如果一个Intent中包含此属性，则它转向的那个Activity以及在那个Activity其上的所有Activity都会在task重置时被清除出task。当我们将一个后台的task重新回到前台时，系统会在特定情况下为这个动作附带一个FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记，意味着必要时重置task，这时FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET就会生效。经过测试发现，对于一个处于后台的应用，如果在主选单点击应用，这个动作中含有FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记，长按Home键，然后点击最近记录，这个动作不含FLAG_ACTIVITY_RESET_TASK_IF_NEEDED标记,所以前者会清除，后者不会</p>
+<h3 id="FLAG_ACTIVITY_RESET_TASK_IF_NEEDED">FLAG_ACTIVITY_RESET_TASK_IF_NEEDED</h3><p>这个标记在以下情况下会生效：1.启动Activity时创建新的task来放置Activity实例；2.已存在的task被放置于前台。系统会根据affinity对指定的task进行重置操作，task会压入某些Activity实例或移除某些Activity实例。我们结合上面的CLEAR_WHEN_TASK_RESET可以加深理解。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cieb6up5z0016tob28aktq186" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-22" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/22/2015-7-22/">putExtra()，Intent的构造函数，startActivityForResult的用法，onActivityResult</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/22/2015-7-22/">
+    <time datetime="2015-07-22T11:30:13.000Z" itemprop="datePublished">2015-07-22</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/22问题集">2015/7/22问题集</h1><h2 id="intent-putExtra()传值">intent.putExtra()传值</h2><p>putExtra(“A”,B)中，AB为键值对，第一个参数为键名，第二个参数为键对应的值。顺便提一下，如果想取出Intent对象中的这些值，需要在你的另一个Activity中用getXXXXXExtra方法，注意需要使用对应类型的方法，参数为键名</p>
+<p>第一个Activity，通过intent.putExtra(“key”,”value”);传给另一个Activity</p>
+<pre><code>btnIntent.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
+       <span class="annotation">@Override</span>
+       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+           Intent intent=<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>,ToIntentActicity.class);
+           <span class="comment">//将要传递的值附加到Intent对象</span>
+           intent.putExtra(<span class="string">"Main"</span>,<span class="string">"66666"</span>);
+           startActivity(intent);
+       }
+   });
+</code></pre><p>另一个页面接收数据</p>
+<pre><code>tv= (TextView) findViewById(R.id.tv);
+  <span class="comment">//取得启动该Activity的Intent对象</span>
+  Intent intent=getIntent();
+   <span class="comment">/*取出Intent中附加的数据*/</span>
+  <span class="keyword">String</span> <span class="built_in">str</span>=intent.getStringExtra(<span class="string">"Main"</span>);
+  tv.setText(<span class="string">"从其他Intent传过来的值"</span>+<span class="built_in">str</span>);
+</code></pre><hr>
+<h2 id="Intent-putExtra()传递Object对象或者ArrayList">Intent.putExtra()传递Object对象或者ArrayList<object></object></h2><p>Intent传递基本类型相信大家都十分熟悉，如何传递Object对象或者ArrayList<object>对象呢？</object></p>
+<p>可以通过：</p>
+<p>（1）public Intent putExtra (String name, Serializable value)</p>
+<p>（2）public Intent putExtra (String name, Parcelable value)</p>
+<pre><code><span class="keyword">public</span> <span class="type">Intent</span> putParcelableArrayListExtra(String <span class="keyword">name</span>, ArrayList&lt;? <span class="keyword">extends</span> Parcelable&gt; <span class="keyword">value</span>)
+</code></pre><p><strong>一、通过实现Serializable接口传递</strong></p>
+<p>实体类继承Serializable。然后</p>
+<p>通过Intent来进行传输，具体方法是：public Intent putExtra (String name, Serializable value)</p>
+<pre><code><span class="type">Intent</span> <span class="type">ToManChartIntent</span>=<span class="keyword">new</span> <span class="type">Intent</span><span class="literal">()</span>;
+
+         <span class="type">ToManChartIntent</span>.putExtra(<span class="string">"toManChartIntent"</span>,mans);
+         getContext<span class="literal">()</span>.startActivity(<span class="type">ToManChartIntent</span>);
+</code></pre><p><strong>二、通过实现Parcelable接口传递</strong></p>
+<p>同上，Person类实现Parcelable接口即可：</p>
+<p>传递Object用：public Intent putExtra (String name, Parcelable value)<br>传递ArrayList<object>用：public Intent putParcelableArrayListExtra(String name, ArrayList&lt;? extends Parcelable&gt; value)</object></p>
+<h2 id="Intent的构造函数">Intent的构造函数</h2><p>公共构造函数：</p>
+<ul>
+<li><p>1、Intent() 空构造函数</p>
+</li>
+<li><p>2、Intent(Intent o) 拷贝构造函数</p>
+</li>
+<li><p>3、Intent(String action) 指定action类型的构造函数</p>
+</li>
+<li><p>4、Intent(String action, Uri uri) 指定Action类型和Uri的构造函数，URI主要是结合程序之间的数据共享ContentProvider</p>
+</li>
+<li><p>5、Intent(Context packageContext, Class&lt;?&gt; cls) 传入组件的构造函数，也就是上文提到的</p>
+</li>
+<li><p>6、Intent(String action, Uri uri, Context packageContext, Class&lt;?&gt; cls) 前两种结合体</p>
+</li>
+</ul>
+<p>Intent有六种构造函数，3、4、5是最常用的，并不是其他没用！</p>
+<h2 id="startActivityForResult的用法：">startActivityForResult的用法：</h2><ul>
+<li><p>1、startActivity( )<br>仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。</p>
+</li>
+<li><p>2、startActivityForResult( )<br>可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个Text2Activity，而当这个Text2Activity调用了finish()方法以后，程序会自动跳转回T1Activity，并调用前一个T1Activity中的onActivityResult( )方法。</p>
+</li>
+</ul>
+<p>如果想在Activity中得到新打开Activity 关闭后返回的数据，需要使用系统提供的startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新的Activity 关闭后会向前面的Activity传回数据，为了得到传回的数据，必须在前面的Activity中重写onActivityResult(int requestCode, int resultCode, Intent data)方法。</p>
+<pre><code><span class="comment">//这里采用startActivityForResult来做跳转，此处的0为一个依据，可以写其他的值，但一定要&gt;=0</span>
+
+startActivityForResult<span class="comment">(intent, 0)</span>;
+</code></pre><h2 id="onActivityResult传值的使用">onActivityResult传值的使用</h2><p>多个activity之间的传值 其实就是onActivityResult，然后别忘了还有一个action的问题 就是在主xml中添加自己的action以便于识别，最后次activity别忘了finansh。</p>
+<h2 id="针对startActivityForResult实例代码">针对startActivityForResult实例代码</h2><pre><code><span class="keyword">package</span> com.ljq.activitys;
+
+<span class="keyword">import</span> android.app.Activity;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.util.Log;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.Button;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
+<span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">static</span> String TAG=<span class="string">"MainActivity"</span>;
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.main);
+
+    Button btnOpen=(Button)<span class="keyword">this</span>.findViewById(R.id.btnOpen);
+    btnOpen.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
+            <span class="comment">//得到新打开Activity关闭后返回的数据</span>
+            <span class="comment">//第二个参数为请求码，可以根据业务需求自己编号</span>
+            startActivityForResult(<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, OtherActivity.class), <span class="number">1</span>);
+        }
+    });
+}
+
+<span class="javadoc">/**
+ * 为了得到传回的数据，必须在前面的Activity中（指MainActivity类）重写onActivityResult方法
+ * 
+ * requestCode 请求码，即调用startActivityForResult()传递过去的值
+ * resultCode 结果码，结果码用于标识返回数据来自哪个新Activity
+ */</span>
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
+    String result = data.getExtras().getString(<span class="string">"result"</span>);<span class="comment">//得到新Activity 关闭后返回的数据</span>
+    Log.i(TAG, result);
+}
+}
+</code></pre><p>当新Activity关闭后，新Activity返回的数据通过Intent进行传递，android平台会调用前面Activity 的onActivityResult()方法，把存放了返回数据的Intent作为第三个输入参数传入，在onActivityResult()方法中使用第三个输入参数可以取出新Activity返回的数据。</p>
+<h3 id="二、使用startActivityForResult(Intent_intent,_int_requestCode)方法打开新的Activity，新Activity关闭前需要向前面的Activity返回数据需要使用系统提供的setResult(int_resultCode,_Intent_data)方法实现：">二、使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，新Activity关闭前需要向前面的Activity返回数据需要使用系统提供的setResult(int resultCode, Intent data)方法实现：</h3><pre><code><span class="keyword">package</span> com.ljq.activitys;
+
+<span class="keyword">import</span> android.app.<span class="type">Activity</span>;
+<span class="keyword">import</span> android.content.<span class="type">Intent</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+<span class="keyword">import</span> android.widget.<span class="type">Button</span>;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">OtherActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Activity</span> {</span>
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.other);
+
+    <span class="type">Button</span> btnClose=(<span class="type">Button</span>)findViewById(<span class="type">R</span>.id.btnClose);
+    btnClose.setOnClickListener(<span class="keyword">new</span> <span class="type">View</span>.<span class="type">OnClickListener</span>(){
+        public void onClick(<span class="type">View</span> v) {
+            <span class="comment">//数据是使用Intent返回</span>
+            <span class="type">Intent</span> intent = <span class="keyword">new</span> <span class="type">Intent</span>();
+            <span class="comment">//把返回数据存入Intent</span>
+            intent.putExtra(<span class="string">"result"</span>, <span class="string">"My name is linjiqin"</span>);
+            <span class="comment">//设置返回数据</span>
+            <span class="type">OtherActivity</span>.<span class="keyword">this</span>.setResult(<span class="type">RESULT_OK</span>, intent);
+            <span class="comment">//关闭Activity</span>
+            <span class="type">OtherActivity</span>.<span class="keyword">this</span>.finish();
+        }
+    });
+
+}
+
+}
+</code></pre><p>setResult()方法的第一个参数值可以根据业务需要自己定义，上面代码中使用到的RESULT_OK是系统Activity类定义的一个常量，值为-1，代码片断如下：<br>public class android.app.Activity extends ……{<br>  public static final int RESULT_CANCELED = 0;<br>  public static final int RESULT_OK = -1;<br>  public static final int RESULT_FIRST_USER = 1;<br>}</p>
+<h3 id="请求码的作用">请求码的作用</h3><p>使用startActivityForResult(Intent intent, int requestCode)方法打开新的Activity，我们需要为startActivityForResult()方法传入一个请求码(第二个参数)。请求码的值是根据业务需要由自已设定，用于标识请求来源。例如：一个Activity有两个按钮，点击这两个按钮都会打开同一个Activity，不管是那个按钮打开新Activity，当这个新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。在onActivityResult()方法如果需要知道新Activity是由那个按钮打开的，并且要做出相应的业务处理，这时可以这样做：</p>
+<pre><code> @<span class="function">Override  <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+        ....
+    button1.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
+            startActivityForResult (<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, NewActivity.<span class="keyword">class</span>), <span class="number">1</span>);
+
+       }
+
+    });
+    button2.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
+             startActivityForResult (<span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, NewActivity.<span class="keyword">class</span>), <span class="number">2</span>);
+
+        }
+
+    });
+
+
+   @<span class="function">Override <span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
+           <span class="keyword">switch</span>(requestCode){
+               <span class="keyword">case</span> <span class="number">1</span>:
+               <span class="comment">//来自按钮1的请求，作相应业务处理</span>
+               <span class="keyword">case</span> <span class="number">2</span>:
+               <span class="comment">//来自按钮2的请求，作相应业务处理</span>
+            }
+      }
+}
+</code></pre><h3 id="结果码的作用">结果码的作用</h3><p>在一个Activity中，可能会使用startActivityForResult()方法打开多个不同的Activity处理不同的业务，当这些新Activity关闭后，系统都会调用前面Activity的onActivityResult(int requestCode, int resultCode, Intent data)方法。为了知道返回的数据来自于哪个新Activity，在onActivityResult()方法中可以这样做(ResultActivity和NewActivity为要打开的新Activity)：<br>public class ResultActivity extends Activity {<br>       …..<br>       ResultActivity.this.setResult(1, intent);<br>       ResultActivity.this.finish();<br>}<br>public class NewActivity extends Activity {<br>       ……<br>        NewActivity.this.setResult(2, intent);<br>        NewActivity.this.finish();<br>}<br>public class MainActivity extends Activity { // 在该Activity会打开ResultActivity和NewActivity<br>       @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {<br>               switch(resultCode){<br>                   case 1:<br>                   // ResultActivity的返回数据<br>                   case 2:<br>                    // NewActivity的返回数据<br>                }<br>          }<br>} </p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cieb6up650018tob2bf7j0gix" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-21" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/21/2015-7-21/">URIs, URLs, and URNs之间的关系区别，Android拍照功能</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/21/2015-7-21/">
+    <time datetime="2015-07-21T00:48:01.000Z" itemprop="datePublished">2015-07-21</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/21问题集">2015/7/21问题集</h1><h2 id="URIs,_URLs,_and_URNs之间的关系区别">URIs, URLs, and URNs之间的关系区别</h2><ul>
+<li>URI：是uniform resource identifier，统一资源标识符，用来唯一的标识一个资源。</li>
+<li>URL：是uniform resource locator，统一资源定位器，它是一种具体的URI，即URL可以用来标识一个资源，而且还指明了如何locate这个资源。</li>
+<li>URN：uniform resource name，统一资源命名，是通过名字来标识资源，比如mailto:java-net@java.sun.com。</li>
+</ul>
+<p>也就是说，URI是以一种抽象的，高层次概念定义统一资源标识，而URL和URN则是具体的资源标识的方式。URL和URN都是一种URI。</p>
+<h2 id="Android拍照功能">Android拍照功能</h2><pre><code>package com.zsz.develop.picturedemo;
+
+    <span class="keyword">import</span> java.io.BufferedOutputStream;
+    <span class="keyword">import</span> java.io.File;
+    <span class="keyword">import</span> java.io.FileNotFoundException;
+    <span class="keyword">import</span> java.io.FileOutputStream;
+    <span class="keyword">import</span> java.io.IOException;
+    <span class="keyword">import</span> java.util.Calendar;
+    <span class="keyword">import</span> java.util.Locale;
+
+    <span class="keyword">import</span> android.app.Activity;
+    <span class="keyword">import</span> android.content.Intent;
+    <span class="keyword">import</span> android.graphics.Bitmap;
+    <span class="keyword">import</span> android.os.Bundle;
+    <span class="keyword">import</span> android.os.Environment;
+    <span class="keyword">import</span> android.provider.MediaStore;
+    <span class="keyword">import</span> android.text.format.DateFormat;
+    <span class="keyword">import</span> android.util.Log;
+    <span class="keyword">import</span> android.view.View;
+    <span class="keyword">import</span> android.view.View.OnClickListener;
+    <span class="keyword">import</span> android.widget.Button;
+    <span class="keyword">import</span> android.widget.ImageView;
+    <span class="keyword">import</span> android.widget.Toast;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
+<span class="comment">/** Called when the activity is first created. */</span>
+private Button button;
+
+@Override
+public <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    button = (Button) findViewById(R.id.btnPicture);
+    button.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
+
+        @Override
+        public <span class="keyword">void</span> onClick(View v) {
+            <span class="comment">// TODO Auto-generated method stub</span>
+            Intent intent = <span class="keyword">new</span> Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+
+            startActivityForResult(intent, <span class="number">1</span>);
+        }
+    });
+}
+
+@Override
+protected <span class="keyword">void</span> onActivityResult(int requestCode, int resultCode, Intent data) {
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);
+    <span class="keyword">if</span> (resultCode == Activity.RESULT_OK) {
+        <span class="built_in">String</span> sdStatus = Environment.getExternalStorageState();
+        <span class="keyword">if</span> (!sdStatus.equals(Environment.MEDIA_MOUNTED)) { <span class="comment">// 检测sd是否可用</span>
+            Log.i(<span class="string">"TestFile"</span>,
+                    <span class="string">"SD card is not avaiable/writeable right now."</span>);
+            <span class="keyword">return</span>;
+        }
+        <span class="built_in">String</span> name = <span class="keyword">new</span> DateFormat().format(<span class="string">"yyyyMMdd_hhmmss"</span>,Calendar.getInstance(Locale.CHINA)) + <span class="string">".jpg"</span>;
+        Toast.makeText(<span class="keyword">this</span>, name, Toast.LENGTH_LONG).show();
+        Bundle bundle = data.getExtras();
+        Bitmap bitmap = (Bitmap) bundle.get(<span class="string">"data"</span>);<span class="comment">// 获取相机返回的数据，并转换为Bitmap图片格式</span>
+
+        FileOutputStream b = <span class="literal">null</span>;
+        <span class="comment">//???????????????????????????????为什么不能直接保存在系统相册位置呢？？？？？？？？？？？？</span>
+        File file = <span class="keyword">new</span> File(<span class="string">"/sdcard/myImage/"</span>);
+        file.mkdirs();<span class="comment">// 创建文件夹</span>
+        <span class="built_in">String</span> fileName = <span class="string">"/sdcard/myImage/"</span>+name;
+
+        <span class="keyword">try</span> {
+            b = <span class="keyword">new</span> FileOutputStream(fileName);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, <span class="number">100</span>, b);<span class="comment">// 把数据写入文件</span>
+        } <span class="keyword">catch</span> (FileNotFoundException e) {
+            e.printStackTrace();
+        } <span class="keyword">finally</span> {
+            <span class="keyword">try</span> {
+                b.flush();
+                b.close();
+            } <span class="keyword">catch</span> (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        ((ImageView) findViewById(R.id.imageView)).setImageBitmap(bitmap);<span class="comment">// 将图片显示在ImageView里</span>
+    }
+}
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cieb6up680019tob2wmowf3au" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-20" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/20/2015-7-20/">字节流如何转换为字符流，去除文件中的空格和回车，LayoutInflater加载布局，新建http连接</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/20/2015-7-20/">
+    <time datetime="2015-07-20T01:51:03.000Z" itemprop="datePublished">2015-07-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/20_问题集">2015/7/20 问题集</h1><h2 id="字节流如何转换为字符流">字节流如何转换为字符流</h2><pre><code>FileInputStream fis = <span class="keyword">new</span> FileInputStream(<span class="string">"c:/abc.txt"</span>);<span class="comment">// 字节流</span>
+ InputStreamReader isr = <span class="keyword">new</span> InputStreamReader(fis);<span class="comment">// 字符流</span>
+ <span class="keyword">BufferedReader</span> br = <span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);<span class="comment">// 缓冲流</span>
+ <span class="keyword">String</span> <span class="built_in">str</span> = <span class="keyword">null</span>;
+ <span class="keyword">if</span> ((<span class="built_in">str</span> = br.readLine()) != <span class="keyword">null</span>) {
+  System.out.<span class="built_in">println</span>(<span class="built_in">str</span>);
+ }
+ br.close();
+ isr.close();
+ fis.close();
+}
+</code></pre><h2 id="去除文件中的空格和回车">去除文件中的空格和回车</h2><pre><code>  content_str=etSend.getText().<span class="keyword">toString</span>();
+<span class="comment">//去除空格</span>
+    String <span class="keyword">drop</span>=content_str.<span class="keyword">replace</span>(<span class="string">" "</span>,<span class="string">""</span>);
+<span class="comment">//    去除回车</span>
+    String droph=<span class="keyword">drop</span>.<span class="keyword">replace</span>(<span class="string">"\n"</span>,<span class="string">""</span>);
+</code></pre><h2 id="LayoutInflater加载布局">LayoutInflater加载布局</h2><p>findViewById加载控件，LayoutInflater加载布局</p>
+<pre><code>LayoutInflater <span class="variable">layoutInflater=</span>LayoutInflater.from(context);
+
+     <span class="variable">layout=</span> (RelativeLayout) layoutInflater.inflate(R.layout.left_item,<span class="constant">null</span>);
+</code></pre><h2 id="新建http连接">新建http连接</h2><pre><code><span class="keyword">protected</span> <span class="keyword">String</span> doInBackground(<span class="keyword">String</span>... strings) {
+
+ <span class="keyword">try</span> {
+     client=<span class="keyword">new</span> DefaultHttpClient();
+     httpGet=<span class="keyword">new</span> HttpGet(url);
+    httpResponse= client.execute(httpGet);
+    entity= httpResponse.getEntity();
+     InputStream is=entity.getContent();
+     InputStreamReader isr=<span class="keyword">new</span> InputStreamReader(is);
+     <span class="keyword">BufferedReader</span> br=<span class="keyword">new</span> <span class="keyword">BufferedReader</span>(isr);
+     <span class="keyword">String</span> <span class="built_in">line</span>;
+     StringBuffer sb=<span class="keyword">new</span> StringBuffer();
+     <span class="keyword">while</span> ((<span class="built_in">line</span>=br.readLine())!=<span class="keyword">null</span>){
+         sb.<span class="built_in">append</span>(<span class="built_in">line</span>);
+     }
+     <span class="keyword">return</span> sb.toString();
+ } <span class="keyword">catch</span> (IOException e) {
+     e.printStackTrace();
+ }
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cieb6up6b001atob2dp16h2rz" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-18-adapter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/19/2015-7-18-adapter/">adapter</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/19/2015-7-18-adapter/">
+    <time datetime="2015-07-19T05:10:37.000Z" itemprop="datePublished">2015-07-19</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Adapter">Adapter</h1><h2 id="Adapter的概念">Adapter的概念</h2><p> Adapter是连接后端数据和前端显示的适配器接口，是数据和UI（View）之间一个重要的纽带。在常见的View(List View,Grid View)等地方都需要用到Adapter。如下图直观的表达了Data、Adapter、View三者的关系：</p>
+<h2 id="常用Adapter">常用Adapter</h2><ul>
+<li>BaseAdapter是一个抽象类，继承它需要实现较多的方法，所以也就具有较高的灵活性；</li>
+<li>ArrayAdapter支持泛型操作，最为简单，只能展示一行字。</li>
+<li>SimpleAdapter有最好的扩充性，可以自定义出各种效果。</li>
+<li>SimpleCursorAdapter可以适用于简单的纯文字型ListView，它需要Cursor的字段和UI的id对应起来。如需要实现更复杂的UI也可以重写其他方法。可以认为是SimpleAdapter对数据库的简单结合，可以方便地把数据库的内容以列表的形式展示出来。</li>
+</ul>
+<h2 id="ArrayAdapter的操作">ArrayAdapter的操作</h2><p>ArrayAdapter的操作很简单，构建一个ArrayAdapter（）实例。其中要传入三个参数。</p>
+<p>依次为this,布局文件（注意这里的布局文件描述的是列表的每一行的布局，android.R.layout.simple_list_item_1是系统定义好的布局文件只显示一行文字，数据源(一个List集合)。</p>
+<p>最后绑定显示。</p>
+<pre><code>package com.zsz.develop.adaptertest;
+
+<span class="keyword">import</span> android.app.ListActivity;
+<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.Adapter;
+<span class="keyword">import</span> android.widget.ArrayAdapter;
+<span class="keyword">import</span> android.widget.ListView;
+
+<span class="keyword">import</span> java.util.ArrayList;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
+
+private ListView lv;
+private ArrayList&lt;<span class="built_in">String</span>&gt; mArrayList = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">String</span>&gt;();
+@Override
+protected <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    ArrayAdapter&lt;<span class="built_in">String</span>&gt; adapter=<span class="keyword">new</span> ArrayAdapter&lt;<span class="built_in">String</span>&gt;(<span class="keyword">this</span>,android.R.layout.simple_list_item_1,getData());
+    lv= (ListView) findViewById(R.id.lv);
+    lv.setAdapter(adapter);
+
+}
+private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
+
+    mArrayList.add(<span class="string">"测试一"</span>);
+    mArrayList.add(<span class="string">"测试二"</span>);
+    mArrayList.add(<span class="string">"测试三"</span>);
+    mArrayList.add(<span class="string">"测试死"</span>);
+    <span class="keyword">return</span> mArrayList;
+
+}
+
+
+
+}
+</code></pre><h2 id="java与Mysql类型对应">java与Mysql类型对应</h2><p><img src="http://cl.ly/image/1k1z2h033V2O/QL" alt="">TTDB2<a href="RH(0A]8QQRR.png">N</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cieb6up6g001ctob26cm8eitc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-18" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -181,7 +905,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cie9tn4lv0015j0b2mu3i27iq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cieb6up6e001btob2wiikps1u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +967,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cie9tn4m00017j0b2udgvielv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cieb6up6i001dtob2bcqgudn9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -291,7 +1015,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cie9tn4m70019j0b2u3o40gnh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cieb6up6n001ftob2oxpsaiy4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,1157 +1124,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cie9tn4m40018j0b2i9er30q0" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-12" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/12/2015-7-12/">For-Each循环，两种方式实现插入，增删改查，完整的JDBC代码</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/12/2015-7-12/">
-    <time datetime="2015-07-12T01:35:24.000Z" itemprop="datePublished">2015-07-12</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="7-12问题集">7.12问题集</h1><h2 id="For-Each循环">For-Each循环</h2><p>Java[編輯]<br>Java語言從JDK 1.5.0開始引入foreach循環。</p>
-<p>以下代碼用於循環列印myArray數組中的每個元素，java中的foreach循環使用for關鍵字，而非foreach。</p>
-<pre><code><span class="tag">for</span> (<span class="tag">int</span> <span class="rule"><span class="attribute">x </span>:<span class="value"> myArray){
-  System.out.<span class="function">println</span>(x)</span></span>;
-}
-</code></pre><p>他的语法如下</p>
-<pre><code><span class="tag">for</span>(<span class="tag">type</span> <span class="rule"><span class="attribute">element</span>:<span class="value"> array)
-
-　　{
-
-  　System.out.<span class="function">println</span>(element)</span></span>;
-
-　　}
-</code></pre><h2 id="两种方式实现插入">两种方式实现插入</h2><p>第一种直接书写sql语句。</p>
-<pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">(UserInfo userInfo)</span></span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        String sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values('"</span>+userInfo.getName()+<span class="string">"','"</span>+userInfo.getPassword()+<span class="string">"')"</span>;
-        System.<span class="keyword">out</span>.println(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="keyword">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加成功"</span>);
-        }<span class="keyword">else</span> {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加失败"</span>);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-        <span class="keyword">try</span> {
-
-            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                ps.close();
-            }
-            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                conn.close();
-            }
-        } <span class="keyword">catch</span> (SQLException e) {
-            <span class="comment">// TODO Auto-generated catch block</span>
-            e.printStackTrace();
-
-        }
-    }
-}
-</code></pre><p>第二种使用占位符书写</p>
-<pre><code><span class="comment">/*
- *占位符的优势。
- *1.效率更高
- *2.书写时不容易出错
- *3.防止sql注入（安全问题） 
- */</span>
-
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert2</span><span class="params">(UserInfo userInfo)</span></span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        String sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values(?,?)"</span>;
-        System.<span class="keyword">out</span>.println(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="keyword">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加成功"</span>);
-        }<span class="keyword">else</span> {
-            System.<span class="keyword">out</span>.println(<span class="string">"添加失败"</span>);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-        <span class="keyword">try</span> {
-
-            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                ps.close();
-            }
-            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                conn.close();
-            }
-            } <span class="keyword">catch</span> (SQLException e) {
-            <span class="comment">// TODO Auto-generated catch block</span>
-            e.printStackTrace();
-
-    }
-}
-}
-</code></pre><p>他的调用我也补充一下</p>
-<pre><code>public static void main(<span class="type">String</span><span class="literal">[]</span> args) {
-        <span class="type">ArrayList</span>&lt;<span class="type">UserInfo</span>&gt; arrayList= <span class="keyword">new</span> <span class="type">UserInfoDao</span><span class="literal">()</span>.getList<span class="literal">()</span>;
-        <span class="type">UserInfo</span> userInfo=<span class="keyword">new</span> <span class="type">UserInfo</span><span class="literal">()</span>;
-        userInfo.setName(<span class="string">"shan"</span>);
-        userInfo.setPassword(<span class="string">"123---"</span>);
-        <span class="keyword">new</span> <span class="type">UserInfoDao</span><span class="literal">()</span>.insert(userInfo);
-
-    }
-
-}
-</code></pre><h2 id="更新操作">更新操作</h2><pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">(UserInfo userInfo)</span></span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String updateSQL=<span class="string">"update userinfo set name=?,password=?"</span>+<span class="string">"where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(updateSQL);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        ps.setInt(<span class="number">3</span>, userInfo.getId());
-        System.<span class="keyword">out</span>.println(updateSQL);
-
-        <span class="keyword">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"更改完成"</span>);
-        }
-        <span class="keyword">if</span> (a&lt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"更改失败"</span>);
-
-        }
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-            <span class="keyword">try</span> {
-                <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                    ps.close();
-                }
-                <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                    conn.close();
-                }
-            } <span class="keyword">catch</span> (SQLException e) {
-                <span class="comment">// TODO Auto-generated catch block</span>
-                e.printStackTrace();
-            }
-
-    }
-
-}
-</code></pre><p>注意点：ps.setString(1, userInfo.getName());这是从1开始添加。</p>
-<h2 id="删除数据">删除数据</h2><pre><code><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        <span class="keyword">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            System.<span class="keyword">out</span>.println(<span class="string">"删除成功"</span>);
-        }<span class="keyword">else</span> {
-            System.<span class="keyword">out</span>.println(<span class="string">"删除失败"</span>);
-        }
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="keyword">try</span> {
-            <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-                ps.close();
-            }
-            <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-                conn.close();
-            }
-        } <span class="keyword">catch</span> (Exception e2) {
-            e2.printStackTrace();
-        }
-    }
-}
-</code></pre><h2 id="进行代码优化——1，关闭资源">进行代码优化——1，关闭资源</h2><p>注意：参数有两个或者三个的。这时候就要使用参数多态性</p>
-<p>当使用的时候就直接调用者两个函数就可以了<br>    public static void closeResource(PreparedStatement ps,Connection conn){</p>
-<pre><code>    <span class="keyword">try</span> {
-        <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-            ps.close();
-        }
-        <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-            conn.close();
-        }
-        } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-        }
-}
-
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">closeResource</span><span class="params">(ResultSet rs,PreparedStatement ps,Connection conn)</span></span>{
-
-    <span class="keyword">try</span> {
-        <span class="keyword">if</span> (rs!=<span class="keyword">null</span>) {
-        rs.close();
-
-        }
-        <span class="keyword">if</span> (ps!=<span class="keyword">null</span>) {
-            ps.close();
-        }
-        <span class="keyword">if</span> (conn!=<span class="keyword">null</span>) {
-            conn.close();
-        }
-        } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-        }
-}
-</code></pre><h2 id="代码优化之二———使用boolean值作为返回值来判断是否修改成功">代码优化之二———使用boolean值作为返回值来判断是否修改成功</h2><p>前面的修改例子中，修改成功是显示在控制台上。而这种方法修改成功是显示在返回值</p>
-<pre><code><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="keyword">delete</span>(<span class="keyword">int</span> id) {
-    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    String deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        <span class="keyword">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }<span class="keyword">else</span> {
-            System.out.<span class="keyword">println</span>(<span class="string">"删除失败"</span>);
-        }
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        BaseConnection.closeResource(ps, conn);
-    }
-    <span class="keyword">return</span> b;
-}
-</code></pre><h2 id="完整的JDBC代码">完整的JDBC代码</h2><pre><code><span class="keyword">package</span> com.zsz.develop.dao;
-
-<span class="keyword">import</span> java.sql.Connection;
-<span class="keyword">import</span> java.sql.ResultSet;
-<span class="keyword">import</span> java.sql.SQLException;
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.Iterator;
-
-<span class="keyword">import</span> org.omg.CORBA.portable.ValueBase;
-<span class="keyword">import</span> org.omg.PortableServer.ID_ASSIGNMENT_POLICY_ID;
-
-<span class="keyword">import</span> com.mysql.jdbc.PreparedStatement;
-<span class="keyword">import</span> com.zsz.develop.bean.UserInfo;
-<span class="keyword">import</span> com.zsz.develop.util.BaseConnection;
-
-<span class="keyword">public</span> class UserInfoDao {
-
-<span class="keyword">public</span> ArrayList&lt;UserInfo&gt; getList(){
-    ArrayList&lt;UserInfo&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;UserInfo&gt;();
-    Connection conn=BaseConnection.getConnection();
-    <span class="comment">//定义在外面是要让他成为全局变量</span>
-    PreparedStatement ps=<span class="keyword">null</span>;
-    ResultSet rs=<span class="keyword">null</span>;
-    <span class="keyword">String</span> sql=<span class="string">"select * from userinfo"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(sql);
-         rs =ps.executeQuery();
-        <span class="keyword">while</span> (rs.next()) {
-<span class="comment">//                System.out.println(rs.getString("name")+"-----");</span>
-            <span class="comment">//把数据封装到实体类</span>
-            UserInfo userInfo=<span class="keyword">new</span> UserInfo();
-            userInfo.setId(rs.getInt(<span class="string">"id"</span>));
-            userInfo.setName(rs.getString(<span class="string">"name"</span>));
-            userInfo.setPassword(rs.getString(<span class="string">"password"</span>));
-            <span class="comment">//再把封装好的对象放到我们的集合中去</span>
-            arrayList.<span class="built_in">add</span>(userInfo);
-        }
-
-
-
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-            BaseConnection.closeResource(rs, ps, conn);
-    }
-
-    <span class="keyword">return</span> arrayList;
-}
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> insert(UserInfo userInfo){
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        <span class="keyword">String</span> sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values('"</span>+userInfo.getName()+<span class="string">"','"</span>+userInfo.getPassword()+<span class="string">"')"</span>;
-        System.out.<span class="built_in">println</span>(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="built_in">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        BaseConnection.closeResource( ps, conn);
-    }
-    <span class="keyword">return</span> b;
-}
-<span class="comment">/*
- *占位符的优势。
- *1.效率更高
- *2.书写时不容易出错
- *3.防止sql注入（安全问题） 
- */</span>
-
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> insert2(UserInfo userInfo){
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">try</span> {
-
-        <span class="keyword">String</span> sqlinsert=<span class="string">"insert into userinfo(name,password)"</span>+ <span class="string">"values(?,?)"</span>;
-        System.out.<span class="built_in">println</span>(sqlinsert);
-        ps=(PreparedStatement) conn.prepareStatement(sqlinsert);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        <span class="comment">//注意：这里不要传入参数（），executeUpdate（）增删改都使用者种方法。</span>
-        <span class="built_in">int</span> i=ps.executeUpdate();
-        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }<span class="keyword">else</span> {
-            System.out.<span class="built_in">println</span>(<span class="string">"添加失败"</span>);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        <span class="comment">//rs.ps.conn都是跟数据库连接相关的。当我们使用完毕，必须关闭资源，防止堵死。顺序的后打开先关闭</span>
-        BaseConnection.closeResource(ps, conn);
-
-    }
-    <span class="keyword">return</span> b;
-}
-
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> update(UserInfo userInfo){
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">String</span> updateSQL=<span class="string">"update userinfo set name=?,password=?"</span>+<span class="string">"where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(updateSQL);
-        ps.setString(<span class="number">1</span>, userInfo.getName());
-        ps.setString(<span class="number">2</span>, userInfo.getPassword());
-        ps.setInt(<span class="number">3</span>, userInfo.getId());
-        System.out.<span class="built_in">println</span>(updateSQL);
-
-        <span class="built_in">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }
-
-
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-            BaseConnection.closeResource(ps, conn);
-
-    }
-    <span class="keyword">return</span> b;
-}
-
-<span class="keyword">public</span> <span class="built_in">boolean</span> delete(<span class="built_in">int</span> id) {
-    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="keyword">String</span> deleteSQL=<span class="string">"delete from userinfo where id=?"</span>;
-
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(deleteSQL);
-        ps.setInt(<span class="number">1</span>, id);
-        <span class="built_in">int</span> a=ps.executeUpdate();
-        <span class="keyword">if</span> (a&gt;<span class="number">0</span>) {
-            b=<span class="keyword">true</span>;
-        }<span class="keyword">else</span> {
-            System.out.<span class="built_in">println</span>(<span class="string">"删除失败"</span>);
-        }
-    } <span class="keyword">catch</span> (Exception e) {
-        e.printStackTrace();
-    }<span class="keyword">finally</span>{
-        BaseConnection.closeResource(ps, conn);
-    }
-    <span class="keyword">return</span> b;
-}
-
-
-
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cie9tn4m9001aj0b203o5l3gr" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-11" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/11/2015-7-11/">连接数据库代码，为什么静态类方法可以直接调用？，.PreparedStatement和Statement的使用，结果集(ResultSet)用法</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/11/2015-7-11/">
-    <time datetime="2015-07-11T10:25:33.000Z" itemprop="datePublished">2015-07-11</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="711问题集">711问题集</h1><ul>
-<li>1.The local variable conn may not have been initialized<h2 id="局部变量没有初始化问题？">局部变量没有初始化问题？</h2></li>
-</ul>
-<p>局部变量在进行读取操作之前必须进行初始化或进行赋值操作,否则会出现编译错误.</p>
-<h2 id="-_2-连接数据库代码">- 2.连接数据库代码</h2><pre><code>package com.zsz.develop.util;
-<span class="preprocessor"><span class="keyword">import</span> java.sql.Connection;</span>
-<span class="preprocessor"><span class="keyword">import</span> java.sql.DriverManager;</span>
-<span class="preprocessor"><span class="keyword">import</span> java.sql.SQLException;</span>
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BaseConnection</span> {</span>
-
-<span class="keyword">public</span> static Connection getConnection(){    
-
-    Connection conn=<span class="literal">null</span>;
-    <span class="keyword">try</span> {
-        <span class="class"><span class="keyword">Class</span>.<span class="title">forName</span>("<span class="title">com</span>.<span class="title">mysql</span>.<span class="title">jdbc</span>.<span class="title">Driver</span>");</span>
-        conn=DriverManager.getConnection(<span class="string">"jdbc:mysql://localhost:3306/test"</span>, <span class="string">"root"</span>, <span class="string">"SF948640."</span>);
-    } <span class="keyword">catch</span> (ClassNotFoundException e) {
-        // TODO Auto-generated <span class="keyword">catch</span> block
-        e.printStackTrace();
-    } <span class="keyword">catch</span> (SQLException e) {
-        // TODO Auto-generated <span class="keyword">catch</span> block
-        e.printStackTrace();
-    }
-
-    <span class="keyword">return</span> conn;
-}
-
-}
-</code></pre><h2 id="-_3-为什么静态类方法可以直接调用？">- 3.为什么静态类方法可以直接调用？</h2><p>这是因为静态类方法实际上属于类，不同任何类实例相关，也不允许访问任何实例属性；因此这些方法可以共享，可以直接调用；而普通方法需要同类实例相关，因此必须在对应的实例中访问。</p>
-<pre><code>    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
-<span class="comment">//当connection成为静态时、就可以直接调用。</span>
-<span class="comment">//        Connection conn=new BaseConnection().getConnection();</span>
-    Connection conn=BaseConnection.getConnection();
-    System.<span class="keyword">out</span>.println(conn);
-}
-</code></pre><h2 id="-_4-PreparedStatement和Statement的使用">- 4.PreparedStatement和Statement的使用</h2><p>PreparedStatement和Statement都是SQL执行器对象。PreparedStatement 对象已预编译过(所以第一次执行花费更多时间)，所以其执行速度要快于 Statement 对象。</p>
-<p>JDBC驱动的最佳化是基于使用的是什么功能. 选择PreparedStatement还是Statement取决于你要怎么使用它们. 对于只执行一次的SQL语句选择Statement是最好的. 相反, 如果SQL语句被多次执行选用PreparedStatement是最好的.</p>
-<h2 id="-_5-结果集(ResultSet)用法">- 5.结果集(ResultSet)用法</h2><p>ResultSet，数据库结果集的数据表，通常通过执行查询数据库的语句生成。</p>
-<p>ResultSet里面是一个指针数据，他首先指向0位置，也就是标题。当他使用next（）时。他读取的才是真正的数据。然后通过0位置的标题对比逐个取出数据</p>
-<p>简单实例</p>
-<pre><code>    <span class="function"><span class="keyword">public</span> ArrayList&lt;UserInfoDao&gt; <span class="title">getList</span><span class="params">()</span></span>{
-    ArrayList&lt;UserInfoDao&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;UserInfoDao&gt;();
-    Connection conn=BaseConnection.getConnection();
-    <span class="comment">//sql执行器Statement</span>
-    PreparedStatement ps=<span class="keyword">null</span>;
-    <span class="comment">//ResultSet结果集对象</span>
-    String sql=<span class="string">"select * from userinfo"</span>;
-    <span class="keyword">try</span> {
-        ps=ps=(PreparedStatement) conn.prepareStatement(sql);
-        rs =ps.executeQuery();
-        <span class="keyword">while</span> (rs.next()) {
-            System.<span class="keyword">out</span>.println(rs.getString(<span class="string">"name"</span>)+<span class="string">"-----"</span>);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }
-
-    <span class="keyword">return</span> arrayList;
-}
-</code></pre><p>把他存进实体类，再读取出来的案例</p>
-<pre><code>package com.zsz.develop.dao;
-
-<span class="keyword">import</span> java.sql.Connection;
-<span class="keyword">import</span> java.sql.ResultSet;
-<span class="keyword">import</span> java.sql.SQLException;
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.Iterator;
-
-<span class="keyword">import</span> com.mysql.jdbc.PreparedStatement;
-<span class="keyword">import</span> com.zsz.develop.bean.UserInfo;
-<span class="keyword">import</span> com.zsz.develop.util.BaseConnection;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">UserInfoDao</span> </span>{
-
-public ArrayList&lt;UserInfo&gt; getList(){
-    ArrayList&lt;UserInfo&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;UserInfo&gt;();
-    Connection conn=BaseConnection.getConnection();
-    PreparedStatement ps=<span class="literal">null</span>;
-
-    <span class="built_in">String</span> sql=<span class="string">"select * from userinfo"</span>;
-    <span class="keyword">try</span> {
-        ps=(PreparedStatement) conn.prepareStatement(sql);
-        ResultSet rs =ps.executeQuery();
-        <span class="keyword">while</span> (rs.next()) {
-<span class="comment">//                System.out.println(rs.getString("name")+"-----");</span>
-            <span class="comment">//把数据封装到实体类</span>
-            UserInfo userInfo=<span class="keyword">new</span> UserInfo();
-            userInfo.setId(rs.getInt(<span class="string">"id"</span>));
-            userInfo.setName(rs.getString(<span class="string">"name"</span>));
-            userInfo.setPassword(rs.getString(<span class="string">"password"</span>));
-            <span class="comment">//再把封装好的对象放到我们的集合中去</span>
-            arrayList.add(userInfo);
-        }
-
-    } <span class="keyword">catch</span> (SQLException e) {
-        <span class="comment">// TODO Auto-generated catch block</span>
-        e.printStackTrace();
-    }
-
-    <span class="keyword">return</span> arrayList;
-}
-<span class="comment">//添加再其他地方既可以使用。</span>
-<span class="comment">//    public static void main(String[] args) {</span>
-<span class="comment">//        ArrayList&lt;UserInfo&gt; arrayList= new UserInfoDao().getList();</span>
-<span class="comment">//        //用新型for循环把他打印出来</span>
-<span class="comment">//        for(UserInfo userInfo:arrayList){</span>
-<span class="comment">//            System.out.println(userInfo.getId()+"  "+userInfo.getName()+"  "+userInfo.getPassword());</span>
-<span class="comment">//        }</span>
-<span class="comment">//    }</span>
-
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cie9tn4mb001bj0b2y9tf9g10" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-6-8" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/08/2015-6-8/">Android传数据到服务器端</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/06/08/2015-6-8/">
-    <time datetime="2015-06-08T07:24:12.000Z" itemprop="datePublished">2015-06-08</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android传数据到服务器端">Android传数据到服务器端</h1><p>在之前的博客中提到主线程中不能操作耗时的操作，例如网络操作。</p>
-<p>今天使用实例来使用AsnycTask。</p>
-<pre><code> public <span class="type">Robot</span> query(<span class="type">Robot</span> rqRobot) {
-
-    <span class="type">Gson</span> gson=<span class="keyword">new</span> <span class="type">Gson</span><span class="literal">()</span>;
-    <span class="type">String</span> url= <span class="type">MyData</span>.<span class="type">URL</span>+<span class="string">"RobotServlet"</span>;
-    <span class="type">HttpClient</span> client=<span class="keyword">new</span> <span class="type">DefaultHttpClient</span><span class="literal">()</span>;
-    <span class="type">HttpPost</span> post=<span class="keyword">new</span> <span class="type">HttpPost</span>(url);
-    <span class="type">List</span>&lt;<span class="type">NameValuePair</span>&gt; rqParmeter=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;<span class="literal">()</span>;
-    rqParmeter.add(<span class="keyword">new</span> <span class="type">BasicNameValuePair</span>(<span class="string">"input"</span>,gson.toJson(rqRobot)));
-    <span class="keyword">try</span> {
-        post.setEntity(<span class="keyword">new</span> <span class="type">UrlEncodedFormEntity</span>(rqParmeter, <span class="type">HTTP</span>.<span class="type">UTF_8</span>));
-
-    } catch (<span class="type">UnsupportedEncodingException</span> e) {
-        e.printStackTrace<span class="literal">()</span>;
-    }
-
-    <span class="type">Robot</span> rpRobot=null;
-    <span class="type">Log</span>.e(<span class="string">"niinin"</span>,<span class="string">"----------------------------"</span>);
-
-    <span class="keyword">try</span> {
-        <span class="type">HttpResponse</span> httpResponse=client.execute(post);
-        <span class="built_in">int</span> statusCode=  httpResponse.getStatusLine<span class="literal">()</span>.getStatusCode<span class="literal">()</span>;
-
-        <span class="type">Log</span>.e(<span class="string">"dsdsd"</span>,statusCode+<span class="string">""</span>);
-        <span class="keyword">if</span> (statusCode==<span class="number">200</span>){
-            <span class="type">HttpEntity</span> httpEntity= httpResponse.getEntity<span class="literal">()</span>;
-            <span class="type">Log</span>.e(<span class="string">"niinin"</span>,httpResponse.getEntity<span class="literal">()</span>.toString<span class="literal">()</span>);
-          rpRobot=gson.fromJson(<span class="type">EntityUtils</span>.toString(httpEntity),<span class="type">Robot</span>.<span class="keyword">class</span>);
-        }
-    } catch (<span class="type">IOException</span> e) {
-        e.printStackTrace<span class="literal">()</span>;
-    }
-
-    return rpRobot;
-}
-</code></pre><p> 执行client上传数据，接收到的就是返回值：<br>HttpResponse response = client.execute(post);</p>
-<p>得到返回值：response.getEntity()</p>
-<p>但是得到的返回值不是字符串，要先把他转为字符串：</p>
-<p>使用EntityUtils的方法来转化为字符串</p>
-<p>EntityUtils.toString(response.getEntity());</p>
-<pre><code> <span class="comment">// setting request parameters</span>
-    List&lt;NameValuePair&gt; requestParameters = <span class="keyword">new</span> ArrayList&lt;&gt;();
-    <span class="comment">// send imageSize parameter to server for recognition</span>
-    requestParameters.<span class="built_in">add</span>(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"action"</span>, <span class="string">"findById"</span>));
-    requestParameters.<span class="built_in">add</span>(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"imageSize"</span>, <span class="string">"400"</span>));
-    requestParameters.<span class="built_in">add</span>(<span class="keyword">new</span> BasicNameValuePair(<span class="string">"id"</span>, Integer
-            .toString(spotId)));
-
-    <span class="keyword">try</span> {
-<span class="comment">//要将list转化为转化为Entity，可以调用UrlEncodedFormEntity方法转化</span>
-        post.setEntity(<span class="keyword">new</span> UrlEncodedFormEntity(requestParameters,
-                HTTP.UTF_8));
-</code></pre><p><a href="http://zszdevelop.github.io/2015/05/27/2015-5-27/" target="_blank" rel="external">http://zszdevelop.github.io/2015/05/27/2015-5-27/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cie9tn4mc001cj0b2d25ftxjd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-6-5-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/05/2015-6-5-2/">java集合的使用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/06/05/2015-6-5-2/">
-    <time datetime="2015-06-05T03:06:22.000Z" itemprop="datePublished">2015-06-05</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java集合">Java集合</h1><p>java集合接口（接口不能直接实例化、要实例化他的子类）：</p>
-<ul>
-<li>Collection 接口</li>
-<li>List接口</li>
-<li>Set接口</li>
-<li>Iterator接口</li>
-<li>Map接口</li>
-</ul>
-<h2 id="接口之间的关系图">接口之间的关系图</h2><p><img src="http://cl.ly/image/1F3P3E42350q/IC$HBD%601%7BZ2A%60S3K]L@C05V.png" alt="接口之间关系"></p>
-<h2 id="集合">集合</h2><ul>
-<li>1.集合可以理解为一个动态的对象数组，不同的是集合的对象内容可以任意扩充</li>
-<li>2.集合的特点：<br> 性能高，容易扩展和修改<h2 id="List接口">List接口</h2>List继承自Collection</li>
-<li>1.List接口可以存放任意的数据，而且在List接口中内容是可以重复的</li>
-<li>2.List接口常用子类</li>
-<li><ul>
-<li>Arraylist</li>
-<li>Vector</li>
-</ul>
-</li>
-</ul>
-<p>Arraylist和Vector的实现差不多，他们之间的区别就是</p>
-<ul>
-<li>Arraylist：采用异步处理方式，性能高，属于非线程安全。</li>
-<li>Vector：采用同步处理方式，性能低，属于线程安全。</li>
-</ul>
-<p>ArrayList的简单实例</p>
-<pre><code><span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.List;
-
-<span class="keyword">public</span> class ListTest {
-
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="keyword">String</span>[] args) {
-    <span class="comment">// TODO Auto-generated method stub</span>
-
-    <span class="comment">//List是一个接口，必须实例化其子类。</span>
-    List&lt;<span class="keyword">String</span>&gt; list=<span class="keyword">new</span> ArrayList&lt;<span class="keyword">String</span>&gt;();
-    <span class="comment">//集合使用add添加</span>
-    list.<span class="built_in">add</span>(<span class="string">"添加字符串"</span>);
-    list.<span class="built_in">add</span>(<span class="string">"A"</span>);
-    list.<span class="built_in">add</span>(<span class="string">"B"</span>);
-    list.<span class="built_in">add</span>(<span class="string">"C"</span>);
-
-    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt;list.<span class="built_in">size</span>(); i++) {
-        <span class="comment">//集合使用get方法来获取元素内容。</span>
-        System.out.<span class="built_in">println</span>(list.<span class="built_in">get</span>(i));
-    }
-    <span class="comment">//remove删除操作</span>
-    list.remove(<span class="number">0</span>);
-    System.out.<span class="built_in">println</span>(<span class="string">"删除后的操作"</span>);
-    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; list.<span class="built_in">size</span>(); i++) {
-        System.out.<span class="built_in">println</span>(list.<span class="built_in">get</span>(i));
-    }
-    System.out.<span class="built_in">println</span>(<span class="string">"判断集合是否为空"</span>+list.isEmpty());
-    <span class="comment">//indexOf返回值是元素的位置。</span>
-    System.out.<span class="built_in">println</span>(<span class="string">"判断元素是否存在，例如C: "</span>+list.indexOf(<span class="string">"C"</span>));
-}
-
-}
-</code></pre><h2 id="Set接口">Set接口</h2><ul>
-<li>1.Set接口中不能加入重复元素，但是可以排序</li>
-<li>2.常用子类：HashSet 和TreeSet </li>
-</ul>
-<p>HashSet：无順序性，查找速度快<br>（注意相同多个D，set只会读取一个）<br>TreeSet：有排序性(依字母)，由紅黑樹所建 </p>
-<pre><code>import java.util.TreeSet;
-
-public class SetTest {
-
-public static void main(String[] args) {
-    // TODO Auto-generated method stub
-
-//        <span class="operator"><span class="keyword">Set</span>&lt;<span class="keyword">String</span>&gt; <span class="keyword">set</span>=new HashSet&lt;<span class="keyword">String</span>&gt;();</span>
-    <span class="operator"><span class="keyword">Set</span>&lt;<span class="keyword">String</span>&gt; <span class="keyword">set</span>=new TreeSet&lt;<span class="keyword">String</span>&gt;();</span>
-    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"2"</span>);</span>
-    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"4"</span>);</span>
-    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"1"</span>);</span>
-    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"31"</span>);</span>
-    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"a"</span>);</span>
-    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"D"</span>);</span>
-    <span class="operator"><span class="keyword">set</span>.<span class="keyword">add</span>(<span class="string">"D"</span>);</span>
-
-    System.out.println(<span class="operator"><span class="keyword">set</span>);</span>
-}
-
-}
-</code></pre><h2 id="Iterator接口">Iterator接口</h2><p>1.集合输出的标准操作：标准做法，使用Iterator接口<br>2.操作原理：Iterator是专门的迭代输出接口，迭代输出就是将元素一个个进行判断，判断其是否有内容，如果有内容则把内容取出。</p>
-<p>Iterator的实例化比较特别：是通过集合来获得他的一个对象，来实例化。</p>
-<p>hasNext()：判断集合中元素是否遍历完毕，如果没有，就返回true<br>next() ：返回下一个元素 </p>
-<pre><code>package com.zsz.develop;
-
-<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
-<span class="keyword">import</span> java.util.<span class="type">Iterator</span>;
-<span class="keyword">import</span> java.util.<span class="type">List</span>;
-
-public class <span class="type">IteratorTest</span> {
-
-public <span class="keyword">static</span> <span class="type">void</span> main(<span class="type">String</span>[] args) {
-    // <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub
-
-    <span class="type">List</span>&lt;<span class="type">Integer</span>&gt; list=new <span class="type">ArrayList</span>&lt;<span class="type">Integer</span>&gt;();
-    <span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) {
-        list.add(i);
-
-    }
-    //使用<span class="type">Iterator</span>标准输出格式来输出
-    <span class="type">Iterator</span>&lt;<span class="type">Integer</span>&gt; <span class="keyword">iterator</span>=list.<span class="keyword">iterator</span>();
-    <span class="keyword">while</span> (<span class="keyword">iterator</span>.hasNext()) {
-        <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="keyword">iterator</span>.next());
-    }
-}
-
-}
-</code></pre><h2 id="Map接口">Map接口</h2><p>1.保存形式：是以Key—value对的方式来保存<br>2.常用子类</p>
-<ul>
-<li>HashMap：无序存放，KEY不允许重复、</li>
-<li>Hashtable：无序存放，KEY不允许重复、</li>
-</ul>
-<p>在list，set中添加数据都是使用add，而map是使用put添加数据。<br>通过map.get（）可以得到Key中的Value。</p>
-<p>要得到所以的键：Map.keySet() 返回类型是set&lt;&gt;;<br>要得到所以的值：Map.Value 返回类型是Collection&lt;&gt;;</p>
-<p>map实例</p>
-<pre><code>package com.zsz.develop;
-
-<span class="keyword">import</span> java.util.<span class="type">Collection</span>;
-<span class="keyword">import</span> java.util.<span class="type">HashMap</span>;
-<span class="keyword">import</span> java.util.<span class="type">Iterator</span>;
-<span class="keyword">import</span> java.util.<span class="type">Map</span>;
-<span class="keyword">import</span> java.util.<span class="type">Set</span>;
-
-public class <span class="type">MapTest</span> {
-
-public <span class="keyword">static</span> <span class="type">void</span> main(<span class="type">String</span>[] args) {
-    // <span class="type">TODO</span> <span class="type">Auto</span>-generated <span class="keyword">method</span> stub
-
-    //键值对的形式来存储数据
-    <span class="type">Map</span>&lt;<span class="type">String</span>, <span class="type">String</span>&gt; map=new <span class="type">HashMap</span>&lt;<span class="type">String</span>, <span class="type">String</span>&gt;();
-    map.put(<span class="string">"key1"</span>, <span class="string">"first"</span>);
-    map.put(<span class="string">"key2"</span>, <span class="string">"first2"</span>);
-    map.put(<span class="string">"key3"</span>, <span class="string">"first3"</span>);
-    map.put(<span class="string">"key4"</span>, <span class="string">"first4"</span>);
-
-    //得到所以的键
-    <span class="type">Set</span>&lt;<span class="type">String</span>&gt; <span class="type">set</span>=map.keySet();
-    <span class="type">Iterator</span>&lt;<span class="type">String</span>&gt; <span class="keyword">iterator</span>=<span class="type">set</span>.<span class="keyword">iterator</span>();
-    <span class="keyword">while</span> (<span class="keyword">iterator</span>.hasNext()) {
-        <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="keyword">iterator</span>.next());
-    }
-
-    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"上面为全部键，下面为全部值"</span>);
-    //得到所有的值
-    <span class="type">Collection</span>&lt;<span class="type">String</span>&gt; collection=map.values();
-    <span class="type">Iterator</span>&lt;<span class="type">String</span>&gt; i=collection.<span class="keyword">iterator</span>();
-    <span class="keyword">while</span> (i.hasNext()) {
-        <span class="type">System</span>.<span class="keyword">out</span>.println(i.next());
-
-    }
-
-    //判断是否存在键
-    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"是否存在键： "</span>+map.containsKey(<span class="string">"key1"</span>));
-    //判断是否存在值
-    <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"是否存在值： "</span>+map.containsKey(<span class="string">"first1"</span>));
-
-}
-
-
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cie9tn4mg001ej0b28z7nct51" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-6-5" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/04/2015-6-5/">SharedPrefenences的使用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/06/04/2015-6-5/">
-    <time datetime="2015-06-04T13:40:35.000Z" itemprop="datePublished">2015-06-04</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="SharedPrefenences是什么">SharedPrefenences是什么</h1><p>SharedPrefenences是一种轻型的数据存储方式，他的本质是基于XML文件存储<strong>Ket-Value键值对数据</strong>，通常用来存储一些简单的<strong>配置信息</strong>。</p>
-<p>存储位置在/data/data/&lt;包名&gt;/shared_prefs目录下。</p>
-<p>SharedPrefenences对象本身只能获取数据而<strong>不支持存储和修改，存储修改要通过Editor对象实现。</strong></p>
-<h1 id="SharedPrefenences的优势">SharedPrefenences的优势</h1><p>SharedPrefenences与SQLite数据库相比，免去了创建数据库，创建表，写SQL语句等操作，更加易用。</p>
-<p>支持的类型数据</p>
-<ul>
-<li>boolean</li>
-<li>int</li>
-<li>float</li>
-<li>long</li>
-<li>String</li>
-</ul>
-<p>但是无法进行条件查询。</p>
-<h1 id="SharedPrefenences的代码实现">SharedPrefenences的代码实现</h1><p>Activity：</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.sharedpreferencestest;
-
-<span class="keyword">import</span> android.content.SharedPreferences;
-<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.view.Menu;
-<span class="keyword">import</span> android.view.MenuItem;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.widget.EditText;
-<span class="keyword">import</span> android.widget.Toast;
-
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
-
-<span class="keyword">private</span> EditText etData;
-<span class="keyword">private</span>  SharedPreferences sharedPreferences;
-<span class="annotation">@Override</span>
-<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    etData= (EditText) findViewById(R.id.etData);
-    sharedPreferences=getSharedPreferences(<span class="string">"sharedPrefXML"</span>,MODE_PRIVATE);
-    <span class="comment">//要编辑修改sharedPreferences就要使用Editor来修改</span>
-   <span class="keyword">final</span> SharedPreferences.Editor editor= sharedPreferences.edit();
-
-    <span class="comment">//读取SharedPreferences数据</span>
-    findViewById(R.id.btnRead).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
-        <span class="annotation">@Override</span>
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-
-            <span class="comment">//得到sharedPreferences的值,传进去第一个参数是键，第二个是如果为空返回的值。</span>
-          String value=  sharedPreferences.getString(<span class="string">"key-name"</span>,<span class="string">"当前数值不存在"</span>);
-            Toast.makeText(getApplicationContext(),value,Toast.LENGTH_SHORT).show();
-        }
-    });
-
-    <span class="comment">//写入SharedPreferences数据</span>
-    findViewById(R.id.btnWrite).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
-        <span class="annotation">@Override</span>
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-
-            <span class="comment">//要修改存储什么类型数据就put什么类型,这里传进去的是Key-Value</span>
-            editor.putString(<span class="string">"key-name"</span>,etData.getText().toString().trim());
-            <span class="comment">//commit提交数据,commit返回值为boolean。进行判断</span>
-          <span class="keyword">if</span> (editor.commit()) {
-              Toast.makeText(getApplicationContext(), <span class="string">"写入成功"</span>, Toast.LENGTH_SHORT).show();
-          }
-        }
-    });
-
-
-
-}
-
-
-
-}
-</code></pre><p>layout档：</p>
-<pre><code>&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
-xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
-android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
-&lt;EditText
-   android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-   android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-   android:<span class="variable">id=</span><span class="string">"@+id/etData"</span>
-   /&gt;
-&lt;Button
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/btnRead"</span>
-    android:<span class="variable">text=</span><span class="string">"读取数据"</span>
-    /&gt;
-
-&lt;Button
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/btnWrite"</span>
-    android:<span class="variable">text=</span><span class="string">"写入数据"</span>
-    /&gt;
-&lt;/LinearLayout&gt;
-</code></pre><p>SharedPrefenences非常方便的使用。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cie9tn4me001dj0b2nl5sxequ" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-6-4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/04/2015-6-4/">清除用户数据</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/06/04/2015-6-4/">
-    <time datetime="2015-06-04T08:03:24.000Z" itemprop="datePublished">2015-06-04</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="清除用户数据">清除用户数据</h1><p>非常实用的清空数据函数。</p>
-<p>主要通过deleteFilesByDirectory（）函数删除文件，来达到清楚数据的功能。</p>
-<p>功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录</p>
-<pre><code>package com.fsd.zsz.manplan.main;
-
-/<span class="keyword">*</span><span class="keyword">*</span>
- <span class="keyword">*</span> Created by shengzhong on 2015/6/3.
- <span class="keyword">*</span>/
-
-
-import java.io.File;
-import android.content.Context;
-import android.os.Environment;
-/<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 本应用数据清除管理器 <span class="keyword">*</span>/
-public class DataCleanManager {
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
-    public static void cleanInternalCache(Context context) {
-        deleteFilesByDirectory(context.getCacheDir());
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有数据库(/data/data/com.xxx.xxx/databases) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
-    public static void cleanDatabases(Context context) {
-        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
-                + context.getPackageName() + <span class="string">"/databases"</span>));
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span>
-     <span class="keyword">*</span> <span class="keyword">*</span> 清除本应用SharedPreference(/data/data/com.xxx.xxx/shared_prefs) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
-     <span class="keyword">*</span> context
-     <span class="keyword">*</span>/
-    public static void cleanSharedPreference(Context context) {
-        deleteFilesByDirectory(new File(<span class="string">"/data/data/"</span>
-                + context.getPackageName() + <span class="string">"/shared_prefs"</span>));
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 按名字清除本应用数据库 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param dbName */</span>
-    public static void cleanDatabaseByName(Context context, String dbName) {
-        context.deleteDatabase(dbName);
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除/data/data/com.xxx.xxx/files下的内容 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context */</span>
-    public static void cleanFiles(Context context) {
-        deleteFilesByDirectory(context.getFilesDir());
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span>
-     <span class="keyword">*</span> <span class="keyword">*</span> 清除外部cache下的内容(/mnt/sdcard/android/data/com.xxx.xxx/cache) <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param</span>
-     <span class="keyword">*</span> context
-     <span class="keyword">*</span>/
-    public static void cleanExternalCache(Context context) {
-        if (Environment.getExternalStorageState().equals(
-                Environment.MEDIA_MOUNTED)) {
-            deleteFilesByDirectory(context.getExternalCacheDir());
-        }
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除自定义路径下的文件，使用需小心，请不要误删。而且只支持目录下的文件删除 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param filePath */</span>
-    public static void cleanCustomCache(String filePath) {
-        deleteFilesByDirectory(new File(filePath));
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 清除本应用所有的数据 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param context * @param filepath */</span>
-    public static void cleanApplicationData(Context context, String... filepath) {
-        cleanInternalCache(context);
-        cleanExternalCache(context);
-        cleanDatabases(context);
-        cleanSharedPreference(context);
-        cleanFiles(context);
-        for (String filePath : filepath) {
-            cleanCustomCache(filePath);
-        }
-    }
-    /<span class="keyword">*</span><span class="keyword">*</span> <span class="keyword">*</span> 删除方法 这里只会删除某个文件夹下的文件，如果传入的directory是个文件，将不做处理 <span class="keyword">*</span> <span class="keyword">*</span> <span class="comment">@param directory */</span>
-    private static void deleteFilesByDirectory(File directory) {
-        if (directory != null &amp;&amp; directory.exists() &amp;&amp; directory.isDirectory()) {
-            for (File item : directory.listFiles()) {
-                item.delete();
-            }
-        }
-    }
-}
-</code></pre><p>出处：<a href="http://blog.csdn.net/berber78/article/details/38587567" target="_blank" rel="external">http://blog.csdn.net/berber78/article/details/38587567</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cie9tn4mi001fj0b2ommy5zyj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cieb6up6l001etob2vsy0asmo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1561,7 +1135,7 @@ public class DataCleanManager {
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
       </nav>
     </section>
       
