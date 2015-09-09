@@ -3,20 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>zszBlog</title>
+  <title>2015/9/9/3 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="百度地图开发自己回去看发开文档吧
-http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap">
+  <meta name="description" content="startActivityForResult与startActivity的不同之处1、startActivity( )仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。2、startActivityForResult( )可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个T2Activity，而当这个T2Activi">
 <meta property="og:type" content="article">
-<meta property="og:title" content="zszBlog">
-<meta property="og:url" content="http://yoursite.com/2015/08/21/2015-8-21-2/index.html">
+<meta property="og:title" content="2015/9/9/3">
+<meta property="og:url" content="http://yoursite.com/2015/09/09/2015-9-9-3/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="百度地图开发自己回去看发开文档吧
-http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap">
+<meta property="og:description" content="startActivityForResult与startActivity的不同之处1、startActivity( )仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。2、startActivityForResult( )可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个T2Activity，而当这个T2Activi">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="zszBlog">
-<meta name="twitter:description" content="百度地图开发自己回去看发开文档吧
-http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap">
+<meta name="twitter:title" content="2015/9/9/3">
+<meta name="twitter:description" content="startActivityForResult与startActivity的不同之处1、startActivity( )仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。2、startActivityForResult( )可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个T2Activity，而当这个T2Activi">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -114,20 +111,55 @@ http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap">
     
   </div>
 </aside>
-      <section id="main"><article id="post-2015-8-21-2" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-2015-9-9-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015/9/9/3
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/09/2015-9-9-3/">
+    <time datetime="2015-09-09T07:30:20.000Z" itemprop="datePublished">2015-09-09</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="百度地图开发">百度地图开发</h1><p>自己回去看发开文档吧</p>
-<p><a href="http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap" target="_blank" rel="external">http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap</a></p>
+        <h2 id="startActivityForResult与startActivity的不同之处">startActivityForResult与startActivity的不同之处</h2><p>1、startActivity( )<br>仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。<br>2、startActivityForResult( )<br>可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个T2Activity，而当这个T2Activity调用了finish()方法以后，程序会自动跳转回T1Activity，并调用前一个T1Activity中的onActivityResult( )方法。</p>
+<pre><code>Intent toChooseCityActivity=new Intent<span class="list">(<span class="keyword">this</span>,ChooseCityActivity.class)</span><span class="comment">;</span>
+            startActivityForResult<span class="list">(<span class="keyword">toChooseCityActivity</span>, <span class="number">1</span>)</span><span class="comment">;</span>
+</code></pre><p>startActivityForResult( )第一个Intent，第二个是个标识，但一定要&gt;=0。</p>
+<p><strong>2.重写onActivityResult方法，用来接收B回传的数据。</strong></p>
+<pre><code> <span class="annotation">@Override</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
+    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);
+    <span class="keyword">if</span> (resultCode == <span class="number">2</span>){
+        <span class="keyword">if</span> (data != <span class="keyword">null</span>){
+            tvCity.setText(data.getStringExtra(<span class="string">"city"</span>));
+        }
+    }
+</code></pre><p><strong>3.在B中回传数据时采用setResult方法，并且之后要调用finish方法。</strong></p>
+<pre><code><span class="function">setResult</span>(RESULT_OK, intent); <span class="comment">//intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle</span>
+<span class="function">finish</span>();<span class="comment">//此处一定要调用finish()方法</span>
+</code></pre><p>Android activity的setResult()在什么时候调用(重点也是难点)</p>
+<p>如果在startActivityForResult起来的Activity里面设置setResult,结果并不会马上返回给parent的Activity,只有当前Activity被finish,结果才会被发送给parent的onActivityResult去处理!</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cieckpc3h000ssgb2rsfjkx1v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-3/" data-id="cieckpbzz0003sgb2ulp8ai64" class="article-share-link">Share</a>
       
       
     </footer>
@@ -136,19 +168,10 @@ http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap">
     
 <nav id="article-nav">
   
-    <a href="/2015/08/24/2015-8-24/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          FrameLayout(框架布局)，shape包裹框的设置，ScrollView让页面也可以滚动拖，使用include重用UI組件，在textView上面在添加一张图片
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/08/21/2015-8-21/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/09/09/2015-9-9-2/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">android获取SHA1和MD5，LinearLayout中的控件对齐问题，Android之事件监听的使用(OnClickListener)</div>
+      <div class="article-nav-title">2015/9/9-2</div>
     </a>
   
 </nav>

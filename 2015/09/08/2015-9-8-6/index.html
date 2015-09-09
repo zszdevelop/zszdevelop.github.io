@@ -5,15 +5,18 @@
   
   <title>2015/9/8-6 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="实现接口Comparator排序int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。">
+  <meta name="description" content="实现接口Comparator排序int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。
+Java String.compareTo()方法Java String.compareTo()方法用法实例教程, 此方法如果这个字符串是等参数字符串那么​返回值0，如果这个字符串是按字典顺序">
 <meta property="og:type" content="article">
 <meta property="og:title" content="2015/9/8-6">
 <meta property="og:url" content="http://yoursite.com/2015/09/08/2015-9-8-6/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="实现接口Comparator排序int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。">
+<meta property="og:description" content="实现接口Comparator排序int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。
+Java String.compareTo()方法Java String.compareTo()方法用法实例教程, 此方法如果这个字符串是等参数字符串那么​返回值0，如果这个字符串是按字典顺序">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2015/9/8-6">
-<meta name="twitter:description" content="实现接口Comparator排序int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。">
+<meta name="twitter:description" content="实现接口Comparator排序int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。
+Java String.compareTo()方法Java String.compareTo()方法用法实例教程, 此方法如果这个字符串是等参数字符串那么​返回值0，如果这个字符串是按字典顺序">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -86,7 +89,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        63
+        66
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -138,11 +141,38 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="实现接口Comparator排序">实现接口Comparator排序</h1><p>int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。</p>
+<h2 id="Java_String-compareTo()方法">Java String.compareTo()方法</h2><p>Java String.compareTo()方法用法实例教程, 此方法如果这个字符串是等参数字符串那么​返回值0，如果这个字符串是按字典顺序小于字符串参数那么返回小于0的值，如果此字符串是按字典顺序大于字符串参数那么一个大于0的值</p>
+<h2 id="简单使用">简单使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.sortlistdemo;
+
+<span class="keyword">import</span> java.util.Comparator;
+
+<span class="javadoc">/**
+ * 
+ *<span class="javadoctag"> @author</span> xiaanming
+ *
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PinyinComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">SortModel</span>&gt; </span>{
+
+<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(SortModel o1, SortModel o2)</span> </span>{
+    <span class="comment">//这两个是不同的啊，一个是ol等于@，一个是ol等于#。对象就不一样了</span>
+    <span class="comment">//忘记了这是if语句啊！！！第一个if为真就不会再执行了。</span>
+    <span class="comment">//排个序。</span>
+    <span class="keyword">if</span> (o1.getSortLetters().equals(<span class="string">"@"</span>) || o2.getSortLetters().equals(<span class="string">"#"</span>)) {
+        <span class="keyword">return</span> -<span class="number">1</span>;
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(o1.getSortLetters()</span>.<span class="title">equals</span><span class="params">(<span class="string">"#"</span>)</span> || o2.<span class="title">getSortLetters</span><span class="params">()</span>.<span class="title">equals</span><span class="params">(<span class="string">"@"</span>)</span>) </span>{
+        <span class="keyword">return</span> <span class="number">1</span>;
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> o1.getSortLetters().compareTo(o2.getSortLetters());
+    }
+}
+
+}
+</code></pre><h2 id="java中Collections-sort排序">java中Collections.sort排序</h2><p>Comparator是个接口，可重写compare()及equals()这两个方法,用于比价功能；如果是null的话，就是使用元素的默认顺序，如a,b,c,d,e,f,g，就是a,b,c,d,e,f,g这样，当然数字也是这样的。<br>compare（a,b）方法:根据第一个参数小于、等于或大于第二个参数分别返回负整数、零或正整数。<br>equals（obj）方法：仅当指定的对象也是一个 Comparator，并且强行实施与此 Comparator 相同的排序时才返回 true。<br>Collections.sort(list, new PriceComparator());的第二个参数返回一个int型的值，就相当于一个标志，告诉sort方法按什么顺序来对list进行排序。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="cieb6uozy0003tob2k5j5kgtl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="cieckpc0z0006sgb2fitb68s5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -150,6 +180,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/2015/09/08/2015-9-9/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          2015/9/9
+        
+      </div>
+    </a>
   
   
     <a href="/2015/09/08/2015-9-8-5/" id="article-nav-older" class="article-nav-link-wrap">

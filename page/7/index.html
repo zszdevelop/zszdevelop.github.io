@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        63
+        66
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,212 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-5-27" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/27/2015-5-27/">Android 非同步任務 - AsyncTask</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/05/27/2015-5-27/">
+    <time datetime="2015-05-27T13:14:38.000Z" itemprop="datePublished">2015-05-27</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android_非同步任務_-_AsyncTask">Android 非同步任務 - AsyncTask</h1><h2 id="Android为什么要使用多线程">Android为什么要使用多线程</h2><ul>
+<li>提高用户体验或者避免ANR（如果在主线程（UI线程）操作一些耗时的操作容易造成卡顿<br>android 规定主线程中不可以做http 连接操作。）</li>
+<li>异步</li>
+<li>多任务</li>
+</ul>
+<p>当主线程（UI线程）操作到一些复杂的IO操作（文件操作，网络操作，数据库操作），复杂运算等耗时操作，容易造成卡顿。</p>
+<p>应用程序弹出“无响应”的对话框（ANR），那是因为在Android主线程中进行了超时的操作，过多的阻塞了主线程就会导致应用出现ANR的Waring。(android 规定主线程中不可以做http 连接操作)</p>
+<h2 id="AsyncTask是什么">AsyncTask是什么</h2><p>  AsyncTask,是android提供的輕量級的非同步類,可以直接繼承AsyncTask,在類中實現非同步操作,並提供介面反饋當前非同步執行的程度(可以通過介面實現UI進度更新),最後反饋執行的結果給UI主線程.</p>
+<h2 id="为什么使用AsyncTask">为什么使用AsyncTask</h2><ul>
+<li>AsyncTask能实现多线程，避免ANR</li>
+<li>简单快捷易操作</li>
+<li>过程可控</li>
+</ul>
+<h2 id="AsyncTask怎么使用">AsyncTask怎么使用</h2><p>AsyncTask定义了三种泛型类型 Params，Progress和Result。<br>Params 启动任务执行的输入参数，比如HTTP请求的URL。<br>Progress 后台任务执行的百分比。<br>Result 后台执行任务最终返回的结果，比如String。 </p>
+<pre><code>`private class <span class="type">TestAsyncTask</span> extends <span class="type">AsyncTask</span>&lt;<span class="type">String</span>, <span class="type">Void</span>, <span class="type">Boolean</span>&gt; 
+
+{
+
+ @<span class="type">Override</span>
+  protected <span class="type">void</span> onPreExecute() 
+  {
+    //最先执行的就是这个。一遍添加进度条
+ }
+
+  @<span class="type">Override</span>
+  protected <span class="type">Boolean</span> doInBackground(<span class="type">String</span>... params)
+  {
+    //这个是在后台执行的东西，就是说，它自动另外开了个线程运行，不影响你现在做的东西。
+    //复杂的<span class="type">IO</span>操作（文件操作，网络操作，数据库操作），复杂运算等耗时操作
+ }
+
+
+@<span class="type">Override</span>
+  protected <span class="type">void</span> onPostExecute(<span class="type">Boolean</span> <span class="literal">result</span>)
+  {
+    <span class="keyword">if</span> (<span class="literal">result</span>)
+    {
+      //后台执行的完毕后，它会用<span class="type">Result</span>通知这里，就是执行这里了。
+  }
+    <span class="keyword">else</span>
+    {
+      //所以最好判断一下<span class="literal">result</span>，写个<span class="keyword">else</span>，判断后台执行的东西是不是出问题了。
+  }
+  }
+}`
+</code></pre><p><a href="http://yuchen.blog.51cto.com/2739238/593019" title="如何在Android中用好多线程" target="_blank" rel="external">http://yuchen.blog.51cto.com/2739238/593019</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cieckpc6a001qsgb2tfi8jq8q" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-5-24" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/24/2015-5-24/">Dao模式</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/05/24/2015-5-24/">
+    <time datetime="2015-05-24T14:08:39.000Z" itemprop="datePublished">2015-05-24</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="DAO模式">DAO模式</h2><p>信息系统的架构分为：</p>
+<p>客户层———-显示层———-业务层————-数据层————-数据库</p>
+<ul>
+<li>1.客户层：客户层就是客户端，简单的来说就是浏览器。</li>
+<li>2.显示层：JSP/Servlet，用于给浏览器显示。</li>
+<li>3.业务层：对于数据层的原子操作进行整合。（Dao）</li>
+<li>4.数据层：对于数据库进行的原子操作，增加、删除等；（DaoImpl）</li>
+</ul>
+<p>说直白点就是定义了一个接口（Dao），让（DaoImpl）去实现这个接口。</p>
+<h2 id="Dao层包含的类">Dao层包含的类</h2><p>DAO层一般有接口和该接口的实现类！</p>
+<ul>
+<li>接口用于规范实现类！</li>
+<li>实现类一般用于用于操作数据库！ 一般操作修改，添加，删除数据库操作的步骤很相似，就写了一个公共类DAO类 ，修改，添加，删除数据库操作时 直接调用公共类DAO类！</li>
+</ul>
+<h2 id="为什么使用Dao">为什么使用Dao</h2><p>Dao是接口，他的优势就是接口的优势。</p>
+<p>接口作为系统与外界交互的窗口，接口体现是一种规范。</p>
+<p>对于接口的实现者而言，接口规定了实现者必须向外提供哪些服务(以方法的形式来提供)；</p>
+<p>对于接口调用者而言，接口规定了调用者可以调用哪些服务，以及如何调用这些服务（就是如何来调用方法的）。</p>
+<p>当一个程序中使用接口时，接口是多个模块之间的耦合标准；</p>
+<p>当多个应用程序之间使用时，接口时多个程序之间的通信标准。</p>
+<p>从某种程度来说，接口类型整个系统中的“总纲”，它制定了系统之间各个模块应该遵循的标准，因此一个系统中的接口不应该经常改变。一旦接口改变，对整个系统<br>甚至其他系统的影响将是辐射式的，导致系统中大部分类需要重写。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cieckpc6c001rsgb26pu9w11u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-5-17" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/05/17/2015-5-17/">jsp两种设计模型 </a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/05/17/2015-5-17/">
+    <time datetime="2015-05-17T11:14:59.000Z" itemprop="datePublished">2015-05-17</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="jsp两种设计模型">jsp两种设计模型</h1><ul>
+<li>jsp+javaBean</li>
+<li>jsp+javaBean+Servlet</li>
+</ul>
+<p>其实还有第三种，纯粹用jsp来编写。由jsp来处理业务逻辑，显示页面，控制流程。由于这种代码繁琐，可重复性差、不易于维护所以很快被市场抛弃了</p>
+<h2 id="jsp+javaBean">jsp+javaBean</h2><p>页面显示和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现商业逻辑</p>
+<p> 工作原理是：当浏览器发出请求时，jsp接受请求并访问javabean。若需要访问数据库后台服务器，则通过javaBean连接数据库或后台服务器，执行相应的处理。javaBean将处理的结果数据交给jsp。jsp提取结果并重新组织后，动态生成HRML页面，返回给浏览器。用户从浏览器显示的页面中得到交互的结果</p>
+<h2 id="jsp+javaBean+Servlet">jsp+javaBean+Servlet</h2><p>把流程控制代码和部分的逻辑处理代码提取到servlet中去。</p>
+<p>mvc架构：model层  +view层 controller层</p>
+<ul>
+<li>model：实现业务逻辑，包括了web应用程序功能的核心，负责存储与<br>应用程序相关的数据</li>
+<li>view：用于用户的页面显示，他可以访问model层数据，但不能更改这些数据</li>
+<li>Controller：主要负责model和view的控制关系，负责处理http的请求等</li>
+</ul>
+<p>并不是说mvc架构就更好。<br>根据实际来选择：</p>
+<ul>
+<li>当事务逻辑比较负责、分支较多或需要涉及很多JavaBean组件时，由于JSP和JavaBean+Servlet模型比JSP和JavaBean模型有更清晰的页面表现、更明确的开发模块的划分，所以使用JSP和JavaBean+Servlet模型比较适合</li>
+<li>对于简单的交互处理，利用JSP和JavaBean模型，JSP主要是使用HTML工具开发，然后再插入少量的Java代码就可以实现动态交互。在这种情况下，使用JSP和JavaBean模型更加方便快捷</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cieckpc6f001ssgb2fmywszxq" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-5-16" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -172,7 +378,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cieb6up7g001qtob27dmh7b0j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/16/2015-5-16/" data-id="cieckpc6j001tsgb2ybpct84z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -243,7 +449,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cieb6uolx0000tob2gf2g0svg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/15/2015-5-15/" data-id="cieckpbof0000sgb2ynlalidx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -298,7 +504,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cieb6uomq0001tob27k5y6hdv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/14/First-Blog/" data-id="cieckpbpv0001sgb2qc7vhp05" class="article-share-link">Share</a>
       
       
     </footer>

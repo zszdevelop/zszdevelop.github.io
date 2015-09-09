@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        63
+        66
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,368 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-9-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/09/2015-9-9-3/">2015/9/9/3</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/09/2015-9-9-3/">
+    <time datetime="2015-09-09T07:30:20.000Z" itemprop="datePublished">2015-09-09</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="startActivityForResult与startActivity的不同之处">startActivityForResult与startActivity的不同之处</h2><p>1、startActivity( )<br>仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。<br>2、startActivityForResult( )<br>可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个T2Activity，而当这个T2Activity调用了finish()方法以后，程序会自动跳转回T1Activity，并调用前一个T1Activity中的onActivityResult( )方法。</p>
+<pre><code>Intent toChooseCityActivity=new Intent<span class="list">(<span class="keyword">this</span>,ChooseCityActivity.class)</span><span class="comment">;</span>
+            startActivityForResult<span class="list">(<span class="keyword">toChooseCityActivity</span>, <span class="number">1</span>)</span><span class="comment">;</span>
+</code></pre><p>startActivityForResult( )第一个Intent，第二个是个标识，但一定要&gt;=0。</p>
+<p><strong>2.重写onActivityResult方法，用来接收B回传的数据。</strong></p>
+<pre><code> <span class="annotation">@Override</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
+    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);
+    <span class="keyword">if</span> (resultCode == <span class="number">2</span>){
+        <span class="keyword">if</span> (data != <span class="keyword">null</span>){
+            tvCity.setText(data.getStringExtra(<span class="string">"city"</span>));
+        }
+    }
+</code></pre><p><strong>3.在B中回传数据时采用setResult方法，并且之后要调用finish方法。</strong></p>
+<pre><code><span class="function">setResult</span>(RESULT_OK, intent); <span class="comment">//intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle</span>
+<span class="function">finish</span>();<span class="comment">//此处一定要调用finish()方法</span>
+</code></pre><p>Android activity的setResult()在什么时候调用(重点也是难点)</p>
+<p>如果在startActivityForResult起来的Activity里面设置setResult,结果并不会马上返回给parent的Activity,只有当前Activity被finish,结果才会被发送给parent的onActivityResult去处理!</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-3/" data-id="cieckpbzz0003sgb2ulp8ai64" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-9-9-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/09/2015-9-9-2/">2015/9/9-2</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/09/2015-9-9-2/">
+    <time datetime="2015-09-09T01:13:02.000Z" itemprop="datePublished">2015-09-09</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/9问题集">2015/9/9问题集</h1><h2 id="Android_带清除功能的输入框控件ClearEditText,仿IOS的输入框">Android 带清除功能的输入框控件ClearEditText,仿IOS的输入框</h2><p> 出处<a href="http://blog.csdn.net/xiaanming/article/details/11066685" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/11066685</a></p>
+<p>就是在Android系统的输入框右边加入一个小图标，点击小图标可以清除输入框里面的内容，IOS上面直接设置某个属性就可以实现这一功能，但是Android原生EditText不具备此功能，所以要想实现这一功能我们需要重写EditText，接下来就带大家来实现这一小小的功能<br>我们知道，我们可以为我们的输入框在上下左右设置图片，所以我们可以利用属性android:drawableRight设置我们的删除小图标</p>
+<p>如果我们能为右边的图片设置监听，点击右边的图片清除输入框的内容并隐藏删除图标，这样子这个小功能就迎刃而解了，可是Android并没有给允许我们给右边小图标加监听的功能，这时候你是不是发现这条路走不通呢，其实不是，我们可能模拟点击事件，用输入框的的onTouchEvent()方法来模拟，<br>当我们触摸抬起（就是ACTION_UP的时候）的范围  大于输入框左侧到清除图标左侧的距离，小与输入框左侧到清除图片右侧的距离，我们则认为是点击清除图片，当然我这里没有考虑竖直方向，只要给清除小图标就上了监听，其他的就都好处理了</p>
+<p>ClearEditText的代码</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.clearedittextdemo;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.graphics.drawable.Drawable;
+<span class="keyword">import</span> android.text.Editable;
+<span class="keyword">import</span> android.text.TextWatcher;
+<span class="keyword">import</span> android.util.AttributeSet;
+<span class="keyword">import</span> android.view.MotionEvent;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.View.OnFocusChangeListener;
+<span class="keyword">import</span> android.view.animation.Animation;
+<span class="keyword">import</span> android.view.animation.CycleInterpolator;
+<span class="keyword">import</span> android.view.animation.TranslateAnimation;
+<span class="keyword">import</span> android.widget.EditText;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClearEditText</span> <span class="keyword">extends</span> <span class="title">EditText</span> <span class="keyword">implements</span>  
+    <span class="title">OnFocusChangeListener</span>, <span class="title">TextWatcher</span> </span>{ 
+
+<span class="keyword">private</span> Drawable mClearDrawable; 
+
+<span class="function"><span class="keyword">public</span> <span class="title">ClearEditText</span><span class="params">(Context context)</span> </span>{ 
+    <span class="keyword">this</span>(context, <span class="keyword">null</span>); 
+} 
+
+<span class="function"><span class="keyword">public</span> <span class="title">ClearEditText</span><span class="params">(Context context, AttributeSet attrs)</span> </span>{
+    <span class="comment">//这里构造方法也很重要，不加这个很多属性不能再XML里面定义  </span>
+    <span class="keyword">this</span>(context, attrs, android.R.attr.editTextStyle);
+} 
+
+<span class="function"><span class="keyword">public</span> <span class="title">ClearEditText</span><span class="params">(Context context, AttributeSet attrs, <span class="keyword">int</span> defStyle)</span> </span>{
+    <span class="keyword">super</span>(context, attrs, defStyle);
+    init();
+}
+
+
+<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{ 
+    mClearDrawable = getCompoundDrawables()[<span class="number">2</span>];
+    <span class="keyword">if</span> (mClearDrawable == <span class="keyword">null</span>) { 
+        mClearDrawable = getResources() 
+                .getDrawable(R.drawable.emotionstore_progresscancelbtn);
+    } 
+    mClearDrawable.setBounds(<span class="number">0</span>, <span class="number">0</span>, mClearDrawable.getIntrinsicWidth(), mClearDrawable.getIntrinsicHeight());
+    <span class="comment">//默认设置隐藏图标</span>
+    setClearIconVisible(<span class="keyword">false</span>);
+    <span class="comment">//设置焦点改变的监听</span>
+    setOnFocusChangeListener(<span class="keyword">this</span>);
+    <span class="comment">//设置输入框里面内容发生改变的监听 </span>
+    addTextChangedListener(<span class="keyword">this</span>); 
+}
+<span class="javadoc">/**
+ * 因为我们不能直接给EditText设置点击事件，所以我们用记住我们按下的位置来模拟点击事件
+ * 当我们按下的位置 在  EditText的宽度 - 图标到控件右边的间距 - 图标的宽度  和
+ * EditText的宽度 - 图标到控件右边的间距之间我们就算点击了图标，竖直方向就没有考虑
+ */</span>
+
+<span class="annotation">@Override</span> 
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">onTouchEvent</span><span class="params">(MotionEvent event)</span> </span>{ 
+    <span class="keyword">if</span> (getCompoundDrawables()[<span class="number">2</span>] != <span class="keyword">null</span>) { 
+        <span class="keyword">if</span> (event.getAction() == MotionEvent.ACTION_UP) { 
+            <span class="keyword">boolean</span> touchable = event.getX() &gt; (getWidth() 
+                    - getPaddingRight() - mClearDrawable.getIntrinsicWidth()) 
+                    &amp;&amp; (event.getX() &lt; ((getWidth() - getPaddingRight())));
+            <span class="keyword">if</span> (touchable) { 
+                <span class="keyword">this</span>.setText(<span class="string">""</span>); 
+            } 
+        } 
+    } 
+
+    <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">onTouchEvent</span><span class="params">(event)</span></span>; 
+}
+<span class="javadoc">/**
+ * 当ClearEditText焦点发生变化的时候，判断里面字符串长度设置清除图标的显示与隐藏
+ */</span>
+
+<span class="annotation">@Override</span> 
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onFocusChange</span><span class="params">(View v, <span class="keyword">boolean</span> hasFocus)</span> </span>{ 
+    <span class="keyword">if</span> (hasFocus) { 
+        setClearIconVisible(getText().length() &gt; <span class="number">0</span>); 
+    } <span class="keyword">else</span> { 
+        setClearIconVisible(<span class="keyword">false</span>); 
+    } 
+}
+
+<span class="javadoc">/**
+ * 设置清除图标的显示与隐藏，调用setCompoundDrawables为EditText绘制上去
+ *<span class="javadoctag"> @param</span> visible
+ */</span>
+
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">setClearIconVisible</span><span class="params">(<span class="keyword">boolean</span> visible)</span> </span>{ 
+    Drawable right = visible ? mClearDrawable : <span class="keyword">null</span>; 
+    setCompoundDrawables(getCompoundDrawables()[<span class="number">0</span>], 
+            getCompoundDrawables()[<span class="number">1</span>], right, getCompoundDrawables()[<span class="number">3</span>]); 
+}
+
+<span class="javadoc">/**
+ * 当输入框里面内容发生变化的时候回调的方法
+ */</span>
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onTextChanged</span><span class="params">(CharSequence s, <span class="keyword">int</span> start, <span class="keyword">int</span> count, 
+        <span class="keyword">int</span> after)</span> </span>{ 
+    setClearIconVisible(s.length() &gt; <span class="number">0</span>); 
+} 
+
+<span class="annotation">@Override</span> 
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">beforeTextChanged</span><span class="params">(CharSequence s, <span class="keyword">int</span> start, <span class="keyword">int</span> count, 
+        <span class="keyword">int</span> after)</span> </span>{ 
+
+} 
+
+<span class="annotation">@Override</span> 
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">afterTextChanged</span><span class="params">(Editable s)</span> </span>{ 
+
+}
+
+
+<span class="javadoc">/**
+ * 设置晃动动画
+ */</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">setShakeAnimation</span><span class="params">()</span></span>{
+    <span class="keyword">this</span>.setAnimation(shakeAnimation(<span class="number">50</span>));
+}
+
+<span class="javadoc">/**
+ * 晃动动画
+ *<span class="javadoctag"> @param</span> counts 1秒钟晃动多少下
+ *<span class="javadoctag"> @return</span>
+ */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="function">Animation <span class="title">shakeAnimation</span><span class="params">(<span class="keyword">int</span> counts)</span></span>{
+    Animation translateAnimation = <span class="keyword">new</span> TranslateAnimation(<span class="number">0</span>, <span class="number">10</span>, <span class="number">0</span>, <span class="number">0</span>);
+    translateAnimation.setInterpolator(<span class="keyword">new</span> CycleInterpolator(counts));
+    translateAnimation.setDuration(<span class="number">1000</span>);
+    <span class="keyword">return</span> translateAnimation;
+}
+
+
+}
+</code></pre><p>xml的设置</p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+&gt;
+
+
+&lt;com.zsz.develop.clearedittextdemo.ClearEditText
+    android:<span class="variable">id=</span><span class="string">"@+id/filter_edit"</span>
+    android:<span class="variable">layout_marginTop=</span><span class="string">"5dip"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+
+    android:<span class="variable">drawableLeft=</span><span class="string">"@drawable/search_bar_icon_normal"</span>
+    android:<span class="variable">hint=</span><span class="string">"dd"</span>
+    android:<span class="variable">singleLine=</span><span class="string">"true"</span>
+    android:<span class="variable">textSize=</span><span class="string">"15.0dip"</span> /&gt;
+&lt;/RelativeLayout&gt;
+</code></pre><h2 id="ListView的setSelection()和setSelectionFromTop()联系">ListView的setSelection()和setSelectionFromTop()联系</h2><p>通常，app中的数据都是以ListView的形式展示的。默认地，把“新”数据添加到数据列表的尾部。<br>但是，如果是IM类型的app，比如查看历史消息这个模块。新数据并不是插到数据列表的尾部，而是插到数据列表的头部。<br>要实现比较好的用户体验，需要保持当前的ListView的位置。换句话说，如果我们能够随心所欲地指定ListView滚动的位置，那么这个问题就迎刃而解。<br>在ListView中，有一个setSelectionFromTop()方法</p>
+<p>他的源码如下：</p>
+<pre><code><span class="comment">/** 
+ * Sets the selected item and positions the selection y pixels from the top edge 
+ * of the ListView. (If in touch mode, the item will not be selected but it will 
+ * still be positioned appropriately.) 
+ * 
+ * @param position Index (starting at 0) of the data item to be selected. 
+ * @param y The distance from the top edge of the ListView (plus padding) that the 
+ *        item will be positioned. 
+ */</span>  
+public void setSelectionFromTop(int position, int y) {  
+<span class="keyword">if</span> (<span class="variable">mAdapter =</span>= <span class="constant">null</span>) {  
+    return;  
+}  
+
+<span class="keyword">if</span> (!isInTouchMode()) {  
+    <span class="variable">position =</span> lookForSelectablePosition(position, <span class="constant">true</span>);  
+    <span class="keyword">if</span> (position &gt;= <span class="number">0</span>) {  
+        setNextSelectedPositionInt(position);  
+    }  
+} <span class="keyword">else</span> {  
+    <span class="variable">mResurrectToPosition =</span> position;  
+}  
+
+<span class="keyword">if</span> (position &gt;= <span class="number">0</span>) {  
+    <span class="variable">mLayoutMode =</span> LAYOUT_SPECIFIC;  
+    <span class="variable">mSpecificTop =</span> mListPadding.top + y;  
+
+    <span class="keyword">if</span> (mNeedSync) {  
+        <span class="variable">mSyncPosition =</span> position;  
+        <span class="variable">mSyncRowId =</span> mAdapter.getItemId(position);  
+    }  
+
+    requestLayout();  
+}  
+}  
+</code></pre><p>从上面的代码可以得知，setSelectionFromTop()的作用是设置ListView选中的位置，同时在Y轴设置一个偏移量（padding值）。<br>ListView还有一个方法叫setSelection()，传入一个index整型数值，就可以让ListView定位到指定Item的位置。<br>这两个方法有什么区别呢？看一下setSelection()的具体实现，代码如下：</p>
+<pre><code>/** 
+ * Sets <span class="keyword">the</span> currently selected <span class="property">item</span>. If <span class="keyword">in</span> touch mode, <span class="keyword">the</span> <span class="property">item</span> will <span class="keyword">not</span> be selected 
+ * <span class="keyword">but</span> <span class="keyword">it</span> will still be positioned appropriately. If <span class="keyword">the</span> specified selection position 
+ * <span class="keyword">is</span> <span class="keyword">less than</span> <span class="number">0</span>, <span class="keyword">then</span> <span class="keyword">the</span> <span class="property">item</span> <span class="keyword">at</span> position <span class="number">0</span> will be selected. 
+ * 
+ * @param position Index (starting <span class="keyword">at</span> <span class="number">0</span>) <span class="keyword">of</span> <span class="keyword">the</span> data <span class="property">item</span> <span class="keyword">to</span> be selected. 
+ */  
+@Override  
+public void setSelection(int position) {  
+    setSelectionFromTop(position, <span class="number">0</span>);  
+}  
+</code></pre><p>原来，setSelection()内部就是调用了setSelectionFromTop()，只不过是Y轴的偏移量是0而已。<br>现在应该对setSelection()和setSelectionFromTop()有了更深刻的认识了。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-2/" data-id="cieckpc020004sgb26oh6kuwv" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-9-9" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/08/2015-9-9/">2015/9/9</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/08/2015-9-9/">
+    <time datetime="2015-09-08T11:10:07.000Z" itemprop="datePublished">2015-09-08</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/9日">2015/9/9日</h1><p><a href="http://www.jb51.net/article/16829.htm" target="_blank" rel="external">http://www.jb51.net/article/16829.htm</a></p>
+<h2 id="Java正则表达式">Java正则表达式</h2><h3 id="基础知识">基础知识</h3><p>我们先从简单的开始。假设你要搜索一个包含字符“cat”的字符串，搜索用的正则表达式就是“cat”。如果搜索对大小写不敏感，单词“catalog”、“Catherine”、“sophisticated”都可以匹配。</p>
+<p><strong>1.1 句点符号</strong></p>
+<p>假设你在玩英文拼字游戏，想要找出三个字母的单词，而且这些单词必须以“t”字母开头，以“n”字母结束。另外，假设有一本英文字典，你可以用正则表达式搜索它的全部内容。要构造出这个正则表达式，你可以使用一个通配符——句点符号“.”。这样，完整的表达式就是“t.n”，它匹配“tan”、“ten”、“tin”和“ton”，还匹配“t#n”、“tpn”甚至“t n”，还有其他许多无意义的组合。这是因为句点符号匹配所有字符，包括空格、Tab字符甚至换行符：</p>
+<p><strong>1.2 方括号符号</strong></p>
+<p>为了解决句点符号匹配范围过于广泛这一问题，你可以在方括号（“[]”）里面指定看来有意义的字符。此时，只有方括号里面指定的字符才参与匹配。也就是说，正则表达式“t[aeio]n”只匹配“tan”、“Ten”、“tin”和“ton”。但“Toon”不匹配，因为在方括号之内你只能匹配单个字符：</p>
+<p><strong>1.3 “或”符号</strong></p>
+<p>如果除了上面匹配的所有单词之外，你还想要匹配“toon”，那么，你可以使用“|”操作符。“|”操作符的基本意义就是“或”运算。要匹配“toon”，使用“t(a|e|i|o|oo)n”正则表达式。这里不能使用方扩号，因为方括号只允许匹配单个字符；这里必须使用圆括号“()”。圆括号还可以用来分组，具体请参见后面介绍。</p>
+<p>1.4 表示匹配次数的符号<br>表一显示了表示匹配次数的符号，这些符号用来确定紧靠该符号左边的符号出现的次数：</p>
+<h2 id="Java中正则Matcher类的matches()、lookAt()和find()的区别">Java中正则Matcher类的matches()、lookAt()和find()的区别</h2><p>在Matcher类中有matches、lookingAt和find都是匹配目标的方法，但容易混淆，整理它们的区别如下：</p>
+<p>matches:整个匹配，只有整个字符序列完全匹配成功，才返回True，否则返回False。但如果前部分匹配成功，将移动下次匹配的位置。</p>
+<p>lookingAt:部分匹配，总是从第一个字符进行匹配,匹配成功了不再继续匹配，匹配失败了,也不继续匹配。</p>
+<p>find:部分匹配，从当前位置开始匹配，找到一个匹配的子串，将移动下次匹配的位置。</p>
+<p>reset:给当前的Matcher对象配上个新的目标，目标是就该方法的参数；如果不给参数，reset会把Matcher设到当前字符串的开始处。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-9/" data-id="cieckpbzv0002sgb2ed8w1xna" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-8-6" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -139,11 +501,38 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="实现接口Comparator排序">实现接口Comparator排序</h1><p>int compare(Object o1, Object o2) 返回一个基本类型的整型，返回负数表示o1 小于o2，返回0 表示o1和o2相等，返回正数表示o1大于o2。</p>
+<h2 id="Java_String-compareTo()方法">Java String.compareTo()方法</h2><p>Java String.compareTo()方法用法实例教程, 此方法如果这个字符串是等参数字符串那么​返回值0，如果这个字符串是按字典顺序小于字符串参数那么返回小于0的值，如果此字符串是按字典顺序大于字符串参数那么一个大于0的值</p>
+<h2 id="简单使用">简单使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.sortlistdemo;
+
+<span class="keyword">import</span> java.util.Comparator;
+
+<span class="javadoc">/**
+ * 
+ *<span class="javadoctag"> @author</span> xiaanming
+ *
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PinyinComparator</span> <span class="keyword">implements</span> <span class="title">Comparator</span>&lt;<span class="title">SortModel</span>&gt; </span>{
+
+<span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(SortModel o1, SortModel o2)</span> </span>{
+    <span class="comment">//这两个是不同的啊，一个是ol等于@，一个是ol等于#。对象就不一样了</span>
+    <span class="comment">//忘记了这是if语句啊！！！第一个if为真就不会再执行了。</span>
+    <span class="comment">//排个序。</span>
+    <span class="keyword">if</span> (o1.getSortLetters().equals(<span class="string">"@"</span>) || o2.getSortLetters().equals(<span class="string">"#"</span>)) {
+        <span class="keyword">return</span> -<span class="number">1</span>;
+    } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(o1.getSortLetters()</span>.<span class="title">equals</span><span class="params">(<span class="string">"#"</span>)</span> || o2.<span class="title">getSortLetters</span><span class="params">()</span>.<span class="title">equals</span><span class="params">(<span class="string">"@"</span>)</span>) </span>{
+        <span class="keyword">return</span> <span class="number">1</span>;
+    } <span class="keyword">else</span> {
+        <span class="keyword">return</span> o1.getSortLetters().compareTo(o2.getSortLetters());
+    }
+}
+
+}
+</code></pre><h2 id="java中Collections-sort排序">java中Collections.sort排序</h2><p>Comparator是个接口，可重写compare()及equals()这两个方法,用于比价功能；如果是null的话，就是使用元素的默认顺序，如a,b,c,d,e,f,g，就是a,b,c,d,e,f,g这样，当然数字也是这样的。<br>compare（a,b）方法:根据第一个参数小于、等于或大于第二个参数分别返回负整数、零或正整数。<br>equals（obj）方法：仅当指定的对象也是一个 Comparator，并且强行实施与此 Comparator 相同的排序时才返回 true。<br>Collections.sort(list, new PriceComparator());的第二个参数返回一个int型的值，就相当于一个标志，告诉sort方法按什么顺序来对list进行排序。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="cieb6uozy0003tob2k5j5kgtl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="cieckpc0z0006sgb2fitb68s5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -270,7 +659,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-5/" data-id="cieb6up040004tob2uqsmddz6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-5/" data-id="cieckpc140007sgb28cursn4w" class="article-share-link">Share</a>
       
       
     </footer>
@@ -389,7 +778,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-4/" data-id="cieb6up0s0005tob2qe1b2w6i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-4/" data-id="cieckpc180008sgb2hxg9r4mb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -585,7 +974,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-3/" data-id="cieb6up0w0006tob21qsiadg2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-3/" data-id="cieckpc1c0009sgb2uru878p3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -710,7 +1099,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-2/" data-id="cieb6up0z0007tob2bmsgqe1z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-2/" data-id="cieckpc1h000asgb2ozwt7pr2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -751,7 +1140,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8/" data-id="cieb6uoyr0002tob2ginca7cr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8/" data-id="cieckpc050005sgb2ju6oltlf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -798,353 +1187,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-3/" data-id="cieb6up190009tob2z11n734l" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-7-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/07/2015-9-7-2/">2015/9/9-2</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/07/2015-9-7-2/">
-    <time datetime="2015-09-07T06:28:52.000Z" itemprop="datePublished">2015-09-07</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android中的Animation的使用">Android中的Animation的使用</h1><p>原文链接：<a href="http://txlong-onz.iteye.com/blog/965727" target="_blank" rel="external">http://txlong-onz.iteye.com/blog/965727</a></p>
-<p><strong>透明度控制动画效果 alpha的xml</strong></p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>  
-<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>  
-    <span class="tag">&lt;<span class="title">alpha</span>   
-        <span class="attribute">android:fromAlpha</span>=<span class="value">"0.2"</span>   
-        <span class="attribute">android:toAlpha</span>=<span class="value">"1.0"</span>  
-        <span class="attribute">android:duration</span>=<span class="value">"3000"</span> /&gt;</span>  
-    <span class="comment">&lt;!-- 透明度控制动画效果 alpha 浮点型值：fromAlpha 属性为动画起始时透明度 toAlpha 属性为动画结束时透明度 说明:0.0表示完全透明 1.0表示完全不透明 以上值取0.0-1.0之间的float数据类型的数字 长整型值： duration 属性为动画持续时间 说明: 时间以毫秒为单位 --&gt;</span>  
-<span class="tag">&lt;/<span class="title">set</span>&gt;</span>  
-</code></pre><p><strong>rotate 旋转动画效果的xml</strong></p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>  
-<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>  
-    <span class="tag">&lt;<span class="title">rotate</span> <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/accelerate_decelerate_interpolator"</span>  
-        <span class="attribute">android:fromDegrees</span>=<span class="value">"0"</span>   
-        <span class="attribute">android:toDegrees</span>=<span class="value">"+360"</span>   
-        <span class="attribute">android:pivotX</span>=<span class="value">"50%"</span>  
-        <span class="attribute">android:pivotY</span>=<span class="value">"50%"</span>   
-        <span class="attribute">android:duration</span>=<span class="value">"3000"</span> /&gt;</span>  
-    <span class="comment">&lt;!-- rotate 旋转动画效果 属性：interpolator 指定一个动画的插入器 在我试验过程中，使用android.res.anim中的资源时候发现有三种动画插入器 accelerate_decelerate_interpolator 加速-减速 动画插入器 accelerate_interpolator 加速-动画插入器 decelerate_interpolator 减速- 动画插入器 其他的属于特定的动画效果 浮点数型值: fromDegrees 属性为动画起始时物件的角度 toDegrees 属性为动画结束时物件旋转的角度 可以大于360度 说明: 当角度为负数——表示逆时针旋转 当角度为正数——表示顺时针旋转 (负数from——to正数:顺时针旋转) (负数from——to负数:逆时针旋转) (正数from——to正数:顺时针旋转) (正数from——to负数:逆时针旋转) pivotX 属性为动画相对于物件的X坐标的开始位置 pivotY 属性为动画相对于物件的Y坐标的开始位置 说明: 以上两个属性值 从0%-100%中取值 50%为物件的X或Y方向坐标上的中点位置 长整型值： duration 属性为动画持续时间 说明: 时间以毫秒为单位 --&gt;</span>  
-<span class="tag">&lt;/<span class="title">set</span>&gt;</span> 
-</code></pre><p><strong>尺寸伸缩动画效果 scale的xml</strong> </p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>  
-<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>  
-    <span class="tag">&lt;<span class="title">scale</span> <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/accelerate_decelerate_interpolator"</span>  
-        <span class="attribute">android:fromXScale</span>=<span class="value">"0.0"</span>   
-        <span class="attribute">android:toXScale</span>=<span class="value">"1.4"</span>   
-        <span class="attribute">android:fromYScale</span>=<span class="value">"0.0"</span>  
-        <span class="attribute">android:toYScale</span>=<span class="value">"1.4"</span>   
-        <span class="attribute">android:pivotX</span>=<span class="value">"50%"</span>   
-        <span class="attribute">android:pivotY</span>=<span class="value">"50%"</span>  
-        <span class="attribute">android:fillAfter</span>=<span class="value">"true"</span>   
-        <span class="attribute">android:duration</span>=<span class="value">"700"</span> /&gt;</span>  
-    <span class="comment">&lt;!-- 尺寸伸缩动画效果 scale 属性：interpolator 指定一个动画的插入器 在我试验过程中，使用android.res.anim中的资源时候发现有三种动画插入器 accelerate_decelerate_interpolator 加速-减速 动画插入器 accelerate_interpolator 加速-动画插入器 decelerate_interpolator 减速- 动画插入器 其他的属于特定的动画效果 浮点型值： fromXScale 属性为动画起始时 X坐标上的伸缩尺寸 toXScale 属性为动画结束时 X坐标上的伸缩尺寸 fromYScale 属性为动画起始时Y坐标上的伸缩尺寸 toYScale 属性为动画结束时Y坐标上的伸缩尺寸 说明: 以上四种属性值 0.0表示收缩到没有 1.0表示正常无伸缩 值小于1.0表示收缩 值大于1.0表示放大 pivotX 属性为动画相对于物件的X坐标的开始位置 pivotY 属性为动画相对于物件的Y坐标的开始位置 说明: 以上两个属性值 从0%-100%中取值 50%为物件的X或Y方向坐标上的中点位置 长整型值： duration 属性为动画持续时间 说明: 时间以毫秒为单位 布尔型值: fillAfter 属性 当设置为true ，该动画转化在动画结束后被应用 --&gt;</span>  
-<span class="tag">&lt;/<span class="title">set</span>&gt;</span>  
-</code></pre><p><strong>translate 位置转移动画效果的xml</strong></p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>  
-<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>  
-    <span class="tag">&lt;<span class="title">translate</span>   
-        <span class="attribute">android:fromXDelta</span>=<span class="value">"30"</span>   
-        <span class="attribute">android:toXDelta</span>=<span class="value">"-80"</span>  
-        <span class="attribute">android:fromYDelta</span>=<span class="value">"30"</span>   
-        <span class="attribute">android:toYDelta</span>=<span class="value">"300"</span>   
-        <span class="attribute">android:duration</span>=<span class="value">"2000"</span> /&gt;</span>  
-    <span class="comment">&lt;!-- translate 位置转移动画效果 整型值: fromXDelta 属性为动画起始时 X坐标上的位置 toXDelta 属性为动画结束时X坐标上的位置 fromYDelta 属性为动画起始时 Y坐标上的位置 toYDelta 属性为动画结束时 Y坐标上的位置 注意: 没有指定fromXType toXType fromYType toYType 时候，默认是以自己为相对参照物 长整型值： duration 属性为动画持续时间 说明: 时间以毫秒为单位 --&gt;</span>  
-<span class="tag">&lt;/<span class="title">set</span>&gt;</span>  
-</code></pre><p><strong>MainActivity的调用</strong></p>
-<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">myActionAnimation</span> <span class="keyword">extends</span> <span class="title">Activity</span> <span class="keyword">implements</span> <span class="title">OnClickListener</span> {</span>  
-<span class="keyword">private</span> Button button_alpha;  
-<span class="keyword">private</span> Button button_scale;  
-<span class="keyword">private</span> Button button_translate;  
-<span class="keyword">private</span> Button button_rotate;  
-<span class="keyword">private</span> Animation myAnimation_Alpha;  
-<span class="keyword">private</span> Animation myAnimation_Scale;  
-<span class="keyword">private</span> Animation myAnimation_Translate;  
-<span class="keyword">private</span> Animation myAnimation_Rotate;  
-<span class="annotation">@Override</span>  
-<span class="keyword">public</span> <span class="typename">void</span> onCreate(Bundle savedInstanceState) {  
-    <span class="keyword">super</span>.onCreate(savedInstanceState);  
-    setContentView(R.layout.main);  
-
-    button_alpha = (Button) findViewById(R.id.button_Alpha);  
-    button_alpha.setOnClickListener(<span class="keyword">this</span>);  
-
-    button_scale = (Button) findViewById(R.id.button_Scale);  
-    button_scale.setOnClickListener(<span class="keyword">this</span>);  
-
-    button_translate = (Button) findViewById(R.id.button_Translate);  
-    button_translate.setOnClickListener(<span class="keyword">this</span>);  
-
-    button_rotate = (Button) findViewById(R.id.button_Rotate);  
-    button_rotate.setOnClickListener(<span class="keyword">this</span>);  
-}  
-<span class="keyword">public</span> <span class="typename">void</span> onClick(View button) {  
-    <span class="keyword">switch</span> (button.getId()) {  
-    <span class="keyword">case</span> R.id.<span class="string">button_Alpha:</span> {  
-        myAnimation_Alpha = AnimationUtils.loadAnimation(<span class="keyword">this</span>,R.anim.my_alpha_action);  
-        button_alpha.startAnimation(myAnimation_Alpha);  
-    }  
-        <span class="keyword">break</span>;  
-    <span class="keyword">case</span> R.id.<span class="string">button_Scale:</span> {  
-        myAnimation_Scale= AnimationUtils.loadAnimation(<span class="keyword">this</span>,R.anim.my_scale_action);  
-        button_scale.startAnimation(myAnimation_Scale);  
-    }  
-        <span class="keyword">break</span>;  
-    <span class="keyword">case</span> R.id.<span class="string">button_Translate:</span> {  
-        myAnimation_Translate= AnimationUtils.loadAnimation(<span class="keyword">this</span>,R.anim.my_translate_action);  
-        button_translate.startAnimation(myAnimation_Translate);  
-    }  
-        <span class="keyword">break</span>;  
-    <span class="keyword">case</span> R.id.<span class="string">button_Rotate:</span> {  
-        myAnimation_Rotate= AnimationUtils.loadAnimation(<span class="keyword">this</span>,R.anim.my_rotate_action);  
-        button_rotate.startAnimation(myAnimation_Rotate);  
-    }  
-        <span class="keyword">break</span>;  
-<span class="label">
-    default:</span>  
-        <span class="keyword">break</span>;  
-    }  
-}  
-}  
-</code></pre><p>还用另外一个调用方法</p>
-<pre><code>activity.overridePendingTransition(R.anim.in_from_right,
-            R.anim.out_to_left);
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-2/" data-id="cieb6up1x000atob2dlo70fxv" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-7" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/07/2015-9-7/">2015/9/7</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/07/2015-9-7/">
-    <time datetime="2015-09-07T01:39:27.000Z" itemprop="datePublished">2015-09-07</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/9/7问题集">2015/9/7问题集</h1><h2 id="理解_Android_Build_系统">理解 Android Build 系统</h2><p>Android Build 系统是用来编译 Android 系统，Android SDK 以及相关文档的一套框架。众所周知，Android 是一个开源的操作系统。Android 的源码中包含了许许多多的模块。 不同产商的不同设备对于 Android 系统的定制都是不一样的。如何将这些模块统一管理起来，如何能够在不同的操作系统上进行编译，如何在编译时能够支持面向不同的硬件设备，不同的编译类型，且还要提供面向各个产商的定制扩展，是非常有难度的。 但 Android Build 系统很好的解决了这些问题，这里面有很多值得我们开发人员学习的地方。</p>
-<h2 id="Build的参数：">Build的参数：</h2><p><strong>、内部类：</strong></p>
-<p>1、Build.VERSION    各种版本字符串</p>
-<p>2、Build.VERSION_CODES    目前已知的版本代码的枚举类</p>
-<p><strong>静态属性</strong></p>
-<p>1、BOARD   主板：The name of the underlying board, like “goldfish”.</p>
-<p>2、BOOTLOADER 系统启动程序版本号：The system bootloader version number.</p>
-<p>3、BRAND  系统定制商：The consumer-visible brand with which the product/hardware will be associated, if any.</p>
-<p>4、CPU_ABI  cpu指令集：The name of the instruction set (CPU type + ABI convention) of native code.</p>
-<p>5、CPU_ABI2 cpu指令集2：The name of the second instruction set (CPU type + ABI convention) of native code.</p>
-<p>6、DEVICE 设备参数：The name of the industrial design.</p>
-<p>7、DISPLAY  显示屏参数：A build ID string meant for displaying to the user</p>
-<p>8、FINGERPRINT   唯一识别码：A string that uniquely identifies this build. Do not attempt to parse this value.</p>
-<p>9、HARDWARE   硬件名称：The name of the hardware (from the kernel command line or /proc).</p>
-<p>10、HOST</p>
-<p>11、ID  修订版本列表：Either a changelist number, or a label like “M4-rc20”.</p>
-<p>12、MANUFACTURER  硬件制造商：The manufacturer of the product/hardware.</p>
-<p>13、MODEL  版本即最终用户可见的名称：The end-user-visible name for the end product.</p>
-<p>14、PRODUCT 整个产品的名称：The name of the overall product.</p>
-<p>15、RADIO  无线电固件版本：The radio firmware version number.   在API14后已过时。使用 getRadioVersion()代替。</p>
-<p>16、SERIAL 硬件序列号：A hardware serial number, if available. Alphanumeric only, case-insensitive.</p>
-<p>17、TAGS  描述build的标签,如未签名，debug等等。：Comma-separated tags describing the build, like “unsigned,debug”.</p>
-<p>18、TIME</p>
-<p>19、TYPE build的类型：The type of build, like “user” or “eng”.</p>
-<p>20、USER</p>
-<h2 id="Build小Demo">Build小Demo</h2><pre><code>package com.zsz.develop.builddemo;
-
-<span class="keyword">import</span> android.os.Build;
-<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.view.Menu;
-<span class="keyword">import</span> android.view.MenuItem;
-<span class="keyword">import</span> android.widget.TextView;
-
-<span class="component">public class MainActivity <span class="keyword">extends</span> AppCompatActivity {
-private TextView tvBuild01,tvBuild02,tvBuild03,tvBuild04,tvBuild05,tvBuild06,tvBuild07;
-
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-    super<span class="string">.onCreate(savedInstanceState)</span>;
-    setContentView(R<span class="string">.layout.activity_main)</span>;
-    tvBuild01= (TextView) findViewById(R<span class="string">.id.tvBuild01)</span>;
-    tvBuild02= (TextView) findViewById(R<span class="string">.id.tvBuild02)</span>;
-    tvBuild03= (TextView) findViewById(R<span class="string">.id.tvBuild03)</span>;
-    tvBuild04= (TextView) findViewById(R<span class="string">.id.tvBuild04)</span>;
-    tvBuild05= (TextView) findViewById(R<span class="string">.id.tvBuild05)</span>;
-    tvBuild06= (TextView) findViewById(R<span class="string">.id.tvBuild06)</span>;
-    tvBuild07= (TextView) findViewById(R<span class="string">.id.tvBuild07)</span>;
-
-    tvBuild01<span class="string">.setText("版本号：</span> "+ Build<span class="string">.VERSION.SDK_INT)</span>;
-    tvBuild02<span class="string">.setText("版本字符串号：</span> "+ Build<span class="string">.VERSION.RELEASE)</span>;
-    tvBuild03<span class="string">.setText("屏幕参数：</span> "+ Build<span class="string">.DISPLAY)</span>;
-    tvBuild04<span class="string">.setText("主板：</span> "+  Build<span class="string">.BOARD)</span>;
-    tvBuild05<span class="string">.setText("android系统定制商：</span> "+ Build<span class="string">.BRAND)</span>;
-    tvBuild06<span class="string">.setText("硬件名称：</span> "+Build<span class="string">.FINGERPRINT)</span>;
-    tvBuild07<span class="string">.setText("手机制造商：</span> "+ Build<span class="string">.PRODUCT)</span>;
-
-
-
-
-}</span>
-
-}
-</code></pre><p><img src="http://ww4.sinaimg.cn/large/81eeb0fcgw1evtooxq3scj20ku0rstai.jpg" alt=""></p>
-<h2 id="getWindow()-setFlags()设置窗体">getWindow().setFlags()设置窗体</h2><p>//设置窗体全屏</p>
-<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);</p>
-<p>//设置窗体始终点亮</p>
-<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,</p>
-<pre><code>WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-</code></pre><p>//设置窗体背景模糊</p>
-<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,<br>                WindowManager.LayoutParams.FLAG_BLUR_BEHIND);</p>
-<h2 id="Android的kitkat是什么？">Android的kitkat是什么？</h2><p>Android 4.4，是由Google公司制作和研发的代号为KitKat的手机操作系统</p>
-<h2 id="android4-4以后的透明状态栏一体化">android4.4以后的透明状态栏一体化</h2><pre><code><span class="comment">//信号栏一体化</span>
-<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">initSystembarTint</span><span class="params">()</span> </span>{
-    <span class="comment">//kitkat代表android4.4.大于4.4才可以设置这些东西</span>
-    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) {
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);<span class="comment">//设置透明状态栏</span>
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);<span class="comment">//设置透明导航栏</span>
-        <span class="comment">// 创建状态栏的管理实例</span>
-        SystemBarTintManager tintManager = <span class="keyword">new</span> SystemBarTintManager(<span class="keyword">this</span>);
-        <span class="comment">// 激活状态栏设置</span>
-        tintManager.setStatusBarTintEnabled(<span class="keyword">true</span>);
-        <span class="comment">// 激活导航栏设置  </span>
-        tintManager.setStatusBarTintColor(Color.parseColor(<span class="string">"#3B87C5"</span>));
-    }
-}
-</code></pre><h2 id="Android_动画（anim）">Android 动画（anim）</h2><p> Android的animation由四种类型组成：alpha(透明度)、scale(缩放)、translate(位移)、rotate(旋转)</p>
-<set xmlns:android="http://schemas.android.com/apk/res/android"><br>  <alpha><br>  <scale><br>  <translate><br>  <rotate><br></rotate></translate></scale></alpha></set>
-
-
-<h2 id="Animation的简单使用">Animation的简单使用</h2><p>实现左边进入效果</p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> &gt;</span>
-
-    <span class="tag">&lt;<span class="title">translate</span>
-        <span class="attribute">android:duration</span>=<span class="value">"300"</span>
-        <span class="attribute">android:fromXDelta</span>=<span class="value">"-100%p"</span>
-        <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/decelerate_interpolator"</span>
-        <span class="attribute">android:toXDelta</span>=<span class="value">"0%p"</span> /&gt;</span>
-
-<span class="tag">&lt;/<span class="title">set</span>&gt;</span>
-</code></pre><p>实现右边退出效果</p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>
-
-    <span class="tag">&lt;<span class="title">translate</span>
-
-        <span class="attribute">android:toXDelta</span>=<span class="value">"-100%p"</span>
-        <span class="attribute">android:toYDelta</span>=<span class="value">"0%p"</span>
-        <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/decelerate_interpolator"</span>
-        <span class="attribute">android:duration</span>=<span class="value">"100"</span>
-
-        /&gt;</span>
-<span class="tag">&lt;/<span class="title">set</span>&gt;</span>
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cieb6up120008tob2cfxikbso" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-6" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/06/2015-9-6/">2015/9/6</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/06/2015-9-6/">
-    <time datetime="2015-09-06T03:02:11.000Z" itemprop="datePublished">2015-09-06</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="20/9/6问题集">20/9/6问题集</h1><h2 id="Android应用性能优化之使用SparseArray替代HashMap">Android应用性能优化之使用SparseArray替代HashMap</h2><p>SparseArray是Android提供的一个工具类。</p>
-<p>SparseArray指的是稀疏数组(Sparse array)，所谓稀疏数组就是数组中大部分的内容值都未被使用（或都为零），在数组中仅有少部分的空间使用。因此造成内存空间的浪费，为了节省内存空间，并且不影响数组中原有的内容值，我们可以采用一种压缩的方式来表示稀疏数组的内容。</p>
-<h2 id="android之ViewGroup">android之ViewGroup</h2><p>作过Android 应用开发的朋友都知道，Android的UI界面都是由View和ViewGroup及其派生类组合而成的。其中，View是所有UI组件的基类，而ViewGroup是容纳这些组件的容器，其本身也是从View派生出来的。AndroidUI界面的一般结构可参见下面的示意图：</p>
-<p><img src="http://ww4.sinaimg.cn/large/81eeb0fcgw1evskanwpjej20ae06d74h.jpg" alt=""></p>
-<h2 id="关于LayoutInflater类inflate(int_resource,_ViewGroup_root,_boolean_attachToRoot)方法三个参数的含义">关于LayoutInflater类inflate(int resource, ViewGroup root, boolean attachToRoot)方法三个参数的含义</h2><p>resource：需要加载布局文件的id，意思是需要将这个布局文件中加载到Activity中来操作。</p>
-<p>root：需要附加到resource资源文件的根控件，什么意思呢，就是inflate()会返回一个View对象，如果第三个参数attachToRoot为true，就将这个root作为根对象返回，否则仅仅将这个root对象的LayoutParams属性附加到resource对象的根布局对象上，也就是布局文件resource的最外层的View上，比如是一个LinearLayout或者其它的Layout对象。</p>
-<p>attachToRoot：是否将root附加到布局文件的根视图上</p>
-<p>attachToRoot就例如fragment和viewpager的结合使用的时候。问是否需要添加到布局文件上。笨蛋肯定要啊</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="cieb6up23000btob2u58qar9d" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-3/" data-id="cieckpc1p000csgb2qn37oxqc" class="article-share-link">Share</a>
       
       
     </footer>
