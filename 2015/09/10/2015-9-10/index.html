@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>2015/9/10 | zszBlog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="2015/9/10问题集Android取得经纬度从中取得经纬度。记得要添加权限
+&amp;lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&amp;gt;
+-
+package com.zsz.develop.gpsfixdemo;
+
+import android.Manifest;
+import android.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2015/9/10">
+<meta property="og:url" content="http://yoursite.com/2015/09/10/2015-9-10/index.html">
+<meta property="og:site_name" content="zszBlog">
+<meta property="og:description" content="2015/9/10问题集Android取得经纬度从中取得经纬度。记得要添加权限
+&amp;lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&amp;gt;
+-
+package com.zsz.develop.gpsfixdemo;
+
+import android.Manifest;
+import android.">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="2015/9/10">
+<meta name="twitter:description" content="2015/9/10问题集Android取得经纬度从中取得经纬度。记得要添加权限
+&amp;lt;uses-permission android:name=&quot;android.permission.ACCESS_FINE_LOCATION&quot; /&amp;gt;
+-
+package com.zsz.develop.gpsfixdemo;
+
+import android.Manifest;
+import android.">
+  
+  
+  <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
+  <link href="//fonts.useso.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css" type="text/css">
+  
+
+  
+</head>
+<body>
+  <div id="container">
+    <header id="header">
+  <div id="header-main" class="header-inner">
+    <div class="outer">
+      <a href="/" id="logo"><i class="logo"></i><span class="site-title">zszBlog</span></a>
+      <nav id="main-nav">
+        
+          <a class="main-nav-link" href="/.">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/categories">Categories</a>
+        
+          <a class="main-nav-link" href="/tags">Tags</a>
+        
+          <a class="main-nav-link" href="/about">About</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        <div class="profile" id="profile-nav">
+          <a id="profile-anchor" href="javascript:;"><img class="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png"><i class="fa fa-caret-down"></i></a>
+        </div>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit"> </button><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+  <div id="main-nav-mobile" class="header-sub header-inner">
+    <table class="menu outer">
+      <tr>
+      
+        <td><a class="main-nav-link" href="/.">Home</a></td>
+      
+        <td><a class="main-nav-link" href="/archives">Archives</a></td>
+      
+        <td><a class="main-nav-link" href="/categories">Categories</a></td>
+      
+        <td><a class="main-nav-link" href="/tags">Tags</a></td>
+      
+        <td><a class="main-nav-link" href="/about">About</a></td>
+      
+      <td>
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><input type="hidden" name="q" value="site:http://yoursite.com"></form>
+      </td>
+      </tr>
+    </table>
+  </div>
+</header>
+    <div class="outer">
+      <aside id="profile">
+  <div class="inner profile-inner">
+  	<div class="base-info profile-block">
+		  <img id="avatar" src="http://cl.ly/image/382p262u1E3o/%60IF)_M7]QGJMAK096_$F$$6.png">
+      <h2 id="name">zszdevelop</h2>
+      <h3 id="title">Java&amp;Android Developer</h3>
+      <span id="location"><i class="fa fa-map-marker"></i>XiaMen, China</span>
+      <a id="follow" href="undefined">FOLLOW</a>
+  	</div>
+    <div class="article-info profile-block">
+      <div class="article-info-block">
+        68
+        <span>posts</span>
+      </div>
+      <div class="article-info-block">
+        0
+        <span>tag</span>
+      </div>
+    </div>
+    
+    <div class="contact-info profile-block">
+      <table class="contact-list">
+        <tr>
+        
+          <td><a href="https://github.com/zszdevelop" target="_blank" title="github"><i class="fa fa-github"></i></a></td>
+        
+          <td><a href="/#" target="_blank" title="twitter"><i class="fa fa-twitter"></i></a></td>
+        
+          <td><a href="https://www.facebook.com/profile.php?id=100007317255366" target="_blank" title="facebook"><i class="fa fa-facebook"></i></a></td>
+        
+        </tr>
+      </table>
+    </div>
+    
+  </div>
+</aside>
+      <section id="main"><article id="post-2015-9-10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      2015/9/10
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/10/2015-9-10/">
+    <time datetime="2015-09-10T06:00:17.000Z" itemprop="datePublished">2015-09-10</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/10问题集">2015/9/10问题集</h1><h2 id="Android取得经纬度">Android取得经纬度</h2><p>从中取得经纬度。<br>记得要添加权限</p>
+<pre><code>&lt;uses-permission android:<span class="property">name</span>=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span> /&gt;
+</code></pre><p>-</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.gpsfixdemo;
+
+<span class="keyword">import</span> android.Manifest;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.pm.PackageManager;
+<span class="keyword">import</span> android.location.Address;
+<span class="keyword">import</span> android.location.Geocoder;
+<span class="keyword">import</span> android.location.Location;
+<span class="keyword">import</span> android.location.LocationListener;
+<span class="keyword">import</span> android.location.LocationManager;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.TextView;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.net.HttpURLConnection;
+<span class="keyword">import</span> java.net.URL;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GPSActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+String latLongString;
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_gps);
+    init();
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{
+    <span class="javadoc">/**
+     *取得系统位置管理的引用，
+     *getSystem这个一定要在activity里面引用
+     */</span>
+
+    LocationManager locationManager = (LocationManager) <span class="keyword">this</span>.getSystemService(Context.LOCATION_SERVICE);
+    <span class="comment">//添加位置监听。Define a listener that responds to location updates</span>
+    LocationListener locationListener = <span class="keyword">new</span> LocationListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLocationChanged</span><span class="params">(Location location)</span> </span>{
+            <span class="comment">// Called when a new location is found by the network location provider.</span>
+            <span class="comment">//当找到新的位置提供者</span>
+            makeUseOfNewLocation(location);
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStatusChanged</span><span class="params">(String provider, <span class="keyword">int</span> status, Bundle extras)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderEnabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderDisabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+    };
+    <span class="comment">// 设置监听器，自动更新的最小时间为间隔N秒(1秒为1*1000，这样写主要为了方便)或最小位移变化超过N米</span>
+    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, <span class="number">0</span>, <span class="number">0</span>, locationListener);
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">makeUseOfNewLocation</span><span class="params">(Location location)</span> </span>{
+    TextView tv1;
+    tv1 = (TextView) <span class="keyword">this</span>.findViewById(R.id.tv1);
+    <span class="keyword">if</span> (location != <span class="keyword">null</span>) {
+        <span class="keyword">double</span>  latitude = location.getLatitude();
+        <span class="keyword">double</span> longitude= location.getLongitude();
+        tv1.setText(<span class="string">"维度："</span> +  latitude+ <span class="string">"\n经度"</span> + longitude);
+    } <span class="keyword">else</span> {
+        tv1.setText(<span class="string">"无法获取地理信息"</span>);
+    }
+}
+</code></pre><p><strong>如果还要将经纬度转化为城市</strong></p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.gpsfixdemo;
+
+<span class="keyword">import</span> android.Manifest;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.content.pm.PackageManager;
+<span class="keyword">import</span> android.location.Address;
+<span class="keyword">import</span> android.location.Criteria;
+<span class="keyword">import</span> android.location.Geocoder;
+<span class="keyword">import</span> android.location.Location;
+<span class="keyword">import</span> android.location.LocationListener;
+<span class="keyword">import</span> android.location.LocationManager;
+<span class="keyword">import</span> android.provider.Settings;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.util.Log;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.TextView;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.net.HttpURLConnection;
+<span class="keyword">import</span> java.net.URL;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GPSActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+String latLongString;
+<span class="keyword">double</span>  latitude;
+<span class="keyword">double</span> longitude;
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_gps);
+    init();
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{
+
+    openGPSSettings();
+    getLaction();
+
+}
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">openGPSSettings</span><span class="params">()</span> </span>{
+    LocationManager alm = (LocationManager) <span class="keyword">this</span>
+            .getSystemService(Context.LOCATION_SERVICE);
+    <span class="keyword">if</span> (alm
+            .isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
+        Toast.makeText(<span class="keyword">this</span>, <span class="string">"GPS模块正常"</span>, Toast.LENGTH_SHORT)
+                .show();
+        Log.w(<span class="string">"gps "</span>, <span class="string">"正常"</span>);
+        <span class="keyword">return</span>;
+    }
+
+    Toast.makeText(<span class="keyword">this</span>, <span class="string">"请开启GPS！"</span>, Toast.LENGTH_SHORT).show();
+    Intent intent = <span class="keyword">new</span> Intent(Settings.ACTION_SECURITY_SETTINGS);
+    startActivityForResult(intent, <span class="number">0</span>); <span class="comment">//此为设置完成后返回到获取界面</span>
+
+}
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getLaction</span><span class="params">()</span></span>{
+    <span class="javadoc">/**
+     *取得系统位置管理的引用，
+     *getSystem这个一定要在activity里面引用
+     */</span>
+
+    LocationManager locationManager = (LocationManager) <span class="keyword">this</span>.getSystemService(Context.LOCATION_SERVICE);
+
+    String serviceName = Context.LOCATION_SERVICE;
+    locationManager = (LocationManager) <span class="keyword">this</span>.getSystemService(serviceName);
+    <span class="comment">// 查找到服务信息</span>
+    Criteria criteria = <span class="keyword">new</span> Criteria();
+    criteria.setAccuracy(Criteria.ACCURACY_FINE); <span class="comment">// 高精度</span>
+    criteria.setAltitudeRequired(<span class="keyword">false</span>);
+    criteria.setBearingRequired(<span class="keyword">false</span>);
+    criteria.setCostAllowed(<span class="keyword">true</span>);
+    criteria.setPowerRequirement(Criteria.POWER_LOW); <span class="comment">// 低功耗</span>
+
+    String provider = locationManager.getBestProvider(criteria, <span class="keyword">true</span>); <span class="comment">// 获取GPS信息</span>
+
+    <span class="comment">//添加位置监听。Define a listener that responds to location updates</span>
+    LocationListener locationListener = <span class="keyword">new</span> LocationListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLocationChanged</span><span class="params">(Location location)</span> </span>{
+            <span class="comment">// Called when a new location is found by the network location provider.</span>
+            <span class="comment">//当找到新的位置提供者</span>
+            makeUseOfNewLocation(location);
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStatusChanged</span><span class="params">(String provider, <span class="keyword">int</span> status, Bundle extras)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderEnabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderDisabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+    };
+    <span class="comment">// 设置监听器，自动更新的最小时间为间隔N秒(1秒为1*1000，这样写主要为了方便)或最小位移变化超过N米</span>
+    locationManager.requestLocationUpdates(provider, <span class="number">1000</span> * <span class="number">60</span>, <span class="number">100</span>, locationListener);
+
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">makeUseOfNewLocation</span><span class="params">(Location location)</span> </span>{
+    TextView tv1;
+
+    tv1 = (TextView) <span class="keyword">this</span>.findViewById(R.id.tv1);
+    <span class="keyword">if</span> (location != <span class="keyword">null</span>) {
+         latitude = location.getLatitude();
+        longitude= location.getLongitude();
+        tv1.setText(<span class="string">"维度："</span> +  latitude+ <span class="string">"\n经度"</span> + longitude);
+    } <span class="keyword">else</span> {
+        tv1.setText(<span class="string">"无法获取地理信息"</span>);
+    }
+
+
+
+    List&lt;Address&gt; addList = <span class="keyword">null</span>;
+    Geocoder ge = <span class="keyword">new</span> Geocoder(<span class="keyword">this</span>);
+    <span class="keyword">try</span> {
+        addList = ge.getFromLocation(latitude, longitude, <span class="number">2</span>);
+        tv1.append(addList+<span class="string">""</span>);
+    } <span class="keyword">catch</span> (IOException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }
+    <span class="keyword">if</span>(addList!=<span class="keyword">null</span> &amp;&amp; addList.size()&gt;<span class="number">0</span>){
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;addList.size(); i++){
+            Address ad = addList.get(i);
+            latLongString += <span class="string">"\n"</span>;
+            latLongString += ad.getCountryName() + <span class="string">";"</span> + ad.getLocality();
+            tv1.append(<span class="string">"您当前的位置是:\n"</span> + latLongString);
+        }
+    }
+
+}
+
+
+
+}
+</code></pre><h2 id="Location服务之Geocoder">Location服务之Geocoder</h2><p>提到Android基于位置的服务，就不得不提android.location包，</p>
+<p>location包提供了很便捷的API来实现基于位置的服务。主要包括Geocoder和LocationManager。今天就先来介绍一下Geocoder。</p>
+<p>Geocoder可以在街道地址和经纬度地图坐标之间进行转换。它提供了对两种地理编码功能的访问：</p>
+<p><strong>Forward Geocoding(前向地理编码)</strong>：查找某个地址的经纬度</p>
+<p><strong>Reverse Geocoding(反向地理编码)</strong>：查找一个给定的经纬度所对应的街道地址。</p>
+<h2 id="Location获取地理位置信息（中）Criteria类的简单使用">Location获取地理位置信息（中）Criteria类的简单使用</h2><p>在使用android lcoation的时候，可能不希望自己去硬性的选择是GPS服务还是NETWORK服务，可能是我们考虑的因素有很多，自己很难决定，Android SDK提供了一个类Criteria，直译为标准。</p>
+<p>//翻译：返回满足给定的criteria(标准)的最佳provider，（前面一篇文章提到过两种重要provider的区别）。只有当provider权限允许的时候才会返回，如果几个provider均满足criteria设定的标准，最贴近标准的provider将会被返回。如果没有provider满足，标准将按照下面的序列放宽松。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/10/2015-9-10/" data-id="ciee1qhxx000hc8b2eigzqvb7" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/09/09/2015-9-9-4/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">2015/9/9/4</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+      
+    </div>
+    <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2015 zszdevelop<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+    </div>
+  </div>
+</footer>
+    
+
+
+<script src="//ajax.useso.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+  <script src="/fancybox/jquery.fancybox.pack.js" type="text/javascript"></script>
+
+
+<script src="/js/script.js" type="text/javascript"></script>
+
+  </div>
+</body>
+</html>

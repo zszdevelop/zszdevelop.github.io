@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        66
+        68
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,94 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/08/2015-9-8/">2015/9/8</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/08/2015-9-8/">
+    <time datetime="2015-09-08T01:04:46.000Z" itemprop="datePublished">2015-09-08</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/8问题集">2015/9/8问题集</h1><h2 id="android实现ListView的A-Z字母排序和过滤搜索功能，实现汉字转拼音">android实现ListView的A-Z字母排序和过滤搜索功能，实现汉字转拼音</h2><h2 id="paint这个类的使用">paint这个类的使用</h2><h2 id="dispatchTouchEvent（）这个类的使用">dispatchTouchEvent（）这个类的使用</h2><h2 id="SectionIndexer接口">SectionIndexer接口</h2><p>参考的原文：<a href="http://blog.csdn.net/xiaanming/article/details/12684155" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/12684155</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8/" data-id="ciee1qhwh0006c8b2nojrky14" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-9-7-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/2015-9-7-3/">2015/9/7/3</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/07/2015-9-7-3/">
+    <time datetime="2015-09-07T07:16:13.000Z" itemprop="datePublished">2015-09-07</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="adapter">adapter</h1><h2 id="通过ViewHolder">通过ViewHolder</h2><p>首先分析下ViewHolder的作用，通过convertView.setTag与convertView进行绑定，然后当convertView复用时，直接从与之对于的ViewHolder(getTag)中拿到convertView布局中的控件，省去了findViewById的时间~</p>
+<p>也就是说，实际上们每个convertView会绑定一个ViewHolder对象，这个viewHolder主要用于帮convertView存储布局中的控件。</p>
+<p>那么我们只要写出一个通用的ViewHolder，然后对于任意的convertView，提供一个对象让其setTag即可；</p>
+<p>既然是通用，那么我们这个ViewHolder就不可能含有各种控件的成员变量了，因为每个Item的布局是不同的，最好的方式是什么呢？</p>
+<p>提供一个容器，专门存每个Item布局中的所有控件，而且还要能够查找出来；既然需要查找，那么ListView肯定是不行了，需要一个键值对进行保存，键为控件的Id，值为控件的引用，相信大家立刻就能想到Map；但是我们不用Map，因为有更好的替代类，就是我们android提供的SparseArray这个类，和Map类似，但是比Map效率，不过键只能为Integer.</p>
+<p><strong>还需要重温好多边</strong></p>
+<p><a href="http://blog.csdn.net/lmj623565791/article/details/38902805/" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/38902805/</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-3/" data-id="ciee1qhxh000dc8b26kw35v6i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-7-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -246,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-2/" data-id="cieckpc1t000dsgb2ozcfjlf4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-2/" data-id="ciee1qhxl000ec8b2bycot5wt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -400,7 +488,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cieckpc1n000bsgb29vwp1w7s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="ciee1qhxd000cc8b2ev35h1kt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -448,7 +536,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="cieckpc1w000esgb24ae9xgqq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="ciee1qhxp000fc8b24o5asb0i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +583,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cieckpc22000fsgb29efhrs8l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="ciee1qhxt000gc8b2jteesfh2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -841,7 +929,7 @@ tools:<span class="variable">context=</span><span class="string">"com.example.nl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cieckpc25000gsgb2pcyqeapr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="ciee1qhxz000ic8b2i30937rt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -992,7 +1080,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cieckpc2n000jsgb2lmts5uud" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="ciee1qhyf000lc8b2jwo7p6hq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1065,7 +1153,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cieckpc2i000isgb2ynh7vd09" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="ciee1qhy9000kc8b2vredfvwc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1320,198 +1408,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cieckpc2u000lsgb2u1doz4gk" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-28" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/28/2015-8-28/">Android Studio 国内镜像文件地址，Fragment使用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/28/2015-8-28/">
-    <time datetime="2015-08-28T03:00:40.000Z" itemprop="datePublished">2015-08-28</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/28">2015/8/28</h1><h2 id="Android_Studio_国内镜像文件地址">Android Studio 国内镜像文件地址</h2><p><img src="http://ww1.sinaimg.cn/large/81eeb0fcgw1evi9o8rcckj20cs0bjdge.jpg" alt=""></p>
-<h2 id="Fragment的使用">Fragment的使用</h2><p>其实Fragment是个小Activiyt，那么他和Activity的区别。</p>
-<ul>
-<li>继承的时候继承Fragment。（layout还是那个layout）</li>
-<li>重写的是onCreateView（Activiyt重写的是onCreate）</li>
-</ul>
-<h2 id="举例">举例</h2><p>创建onCreateView，添加要返回的东西。inflater</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
-
-
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
-<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
-<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
-<span class="keyword">import</span> android.view.<span class="type">View</span>;
-<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
-
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/8/28.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">FragmentCloud</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
-
-<span class="annotation">@Nullable</span>
-<span class="annotation">@Override</span>
-public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
-
-    <span class="type">View</span> view=inflater.inflate(<span class="type">R</span>.layout.cloud_view_pager, <span class="literal">null</span>);
-    <span class="keyword">return</span> view;
-
-}
-}
-</code></pre><h2 id="Fragment_问题之一">Fragment 问题之一</h2><p>Fragment是通过inflater来加载布局，布局控件都是view。<br>在此找控件的时候就要采用</p>
-<pre><code><span class="keyword">ll</span>= (LinearLayout)<span class="keyword">view</span>.findViewById(R.id.<span class="keyword">ll</span>);
-</code></pre><h2 id="Fragment_问题之二">Fragment 问题之二</h2><p>在Fragment中要得到context，只需要采用getActivity（）</p>
-<p>例如：</p>
-<pre><code><span class="type">Intent</span> <span class="type">Intent</span>=new <span class="type">Intent</span>(getActivity(),StairsMouthActivity.<span class="keyword">class</span>);
-</code></pre><h2 id="#">#</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cieckpc2r000ksgb2piet6ksn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-27" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/27/2015-8-27/">listview没有显示，让按钮距离底部100dp，界面设置</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/27/2015-8-27/">
-    <time datetime="2015-08-27T00:47:41.000Z" itemprop="datePublished">2015-08-27</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/27">2015/8/27</h1><h2 id="listview没有显示">listview没有显示</h2><p>原因之一：</p>
-<p>父布局没改垂直导致错误，</p>
-<p>因为listview要不断向父类添加，没有看到</p>
-<h2 id="让按钮距离底部100dp">让按钮距离底部100dp</h2><pre><code>&lt;RelativeLayout
-android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>
-android:<span class="variable">layout_marginBottom=</span><span class="string">"100dp"</span>
-&gt;
-&lt;TextView
-    android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
-    android:<span class="variable">text=</span><span class="string">"外呼"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/tv_my_view_pager_Call"</span>
-    android:<span class="variable">textSize=</span><span class="string">"25sp"</span>
-    android:<span class="variable">gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">textColor=</span><span class="string">"#FFFFFF"</span>
-    android:<span class="variable">background=</span><span class="string">"@drawable/call_shape"</span>
-    android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
-
-    /&gt;
-
-
-
-
-
-&lt;TextView
-    android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
-    android:<span class="variable">text=</span><span class="string">"梯口机"</span>
-    android:<span class="variable">textSize=</span><span class="string">"30sp"</span>
-    android:<span class="variable">layout_toRightOf=</span><span class="string">"@id/tv_my_view_pager_Call"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/tv_my_view_pager_Stairs"</span>
-    android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
-    android:<span class="variable">gravity=</span><span class="string">"center"</span>
-    android:<span class="variable">textColor=</span><span class="string">"#FFFFFF"</span>
-    android:<span class="variable">background=</span><span class="string">"@drawable/stairs_shape"</span>
-    /&gt;
-
-&lt;/RelativeLayout&gt;
-</code></pre><h2 id="界面设置方法之一">界面设置方法之一</h2><p>几个文本宽设置，要先设置父级的高（例如50dp），再让布局立面的文字按钮等垂直居中。</p>
-<h2 id="界面设置方法之二">界面设置方法之二</h2><p>每个文本之间的间隔线</p>
-<pre><code>&lt;View
-       android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-       android:<span class="variable">layout_height=</span><span class="string">"0.5dp"</span>
-       android:<span class="variable">background=</span><span class="string">"#cdcdcd"</span>&gt;&lt;/View&gt;
-</code></pre><h2 id="界面设置之三_—-按钮变色">界面设置之三 —-按钮变色</h2><p>给他在drawable文件中设置一个按钮按下的xml文件，并设置里面按钮按下的变化。</p>
-<p>例如：</p>
-<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> &gt;</span>
-    <span class="comment">&lt;!--&lt;item android:state_selected="true" android:drawable="@drawable/btn_blue_press" /&gt;--&gt;</span>
-<span class="comment">&lt;!--&lt;item android:drawable="@drawable/appbar_sd_selected" android:state_checked="true"/&gt;--&gt;</span>
-<span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/btn_blue_press"</span>/&gt;</span>
-<span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/newbtn_blue"</span> /&gt;</span>
-<span class="tag">&lt;/<span class="title">selector</span>&gt;</span>
-</code></pre><p>再在按钮图标上设置背景直接改为这个文件</p>
-<h2 id="界面设置之四——-使用styles是管理">界面设置之四——-使用styles是管理</h2><pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
-<span class="tag">&lt;<span class="title">resources</span>&gt;</span>
-<span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"mine_cicyle_style"</span>&gt;</span><span class="css">
-    &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="rule"><span class="attribute">android</span>:<span class="value">layout_width<span class="string">"&gt;90dp&lt;/item&gt;
-    &lt;item name="</span>android:layout_height<span class="string">"&gt;90dp&lt;/item&gt;
-    &lt;item name="</span>android:orientation<span class="string">"&gt;vertical&lt;/item&gt;
-</span></span></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">resources</span>&gt;</span>
-</code></pre><p>当调用的时候：    </p>
-<pre><code><span class="setting">style=<span class="value"><span class="string">"@style/mine_cicyle_style"</span></span></span>
-</code></pre><h2 id="拉界面设置之五——editText自动适配">拉界面设置之五——editText自动适配</h2><p>配置editText的时候，他两边都有控件。这时候设置的时候就要让宽度为0dp，权重为1.只有他设置</p>
-<pre><code>&lt;EditText
-        android:<span class="variable">layout_width=</span><span class="string">"0dp"</span>
-        android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-
-        /&gt;
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cieckpc2y000msgb2ib4tqzu6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="ciee1qhyp000nc8b2l1qgv17x" class="article-share-link">Share</a>
       
       
     </footer>

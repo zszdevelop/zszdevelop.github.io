@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        66
+        68
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,196 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-28" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/28/2015-7-28/">json转化异常，JDBC查询之感悟</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/28/2015-7-28/">
+    <time datetime="2015-07-28T12:50:57.000Z" itemprop="datePublished">2015-07-28</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/7/28问题集">2015/7/28问题集</h1><h2 id="json转化异常">json转化异常</h2><p>异常信息为：Expected BEGIN_ARRAY but was BEGIN_OBJECT<br>说不是数组，查找到当时的json数据.</p>
+<p>{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}<br>这并不是一条数组信息</p>
+<p>不管你有几条数据：他都要是一个数组类型。也就是返回的是一个list集合。</p>
+<p>[{“id”:0,”name”:”zsz”,”age”:22,”goalTime”:”2015/7/28”,”goalWeight”:0.0,”height”:2.0}]</p>
+<h3 id="修改方法_###添加的时候、不要在for循环里添加。"><strong>修改方法    </strong> ###添加的时候、不要在for循环里添加。</h3><pre><code>listDataBeans=dataDao.getEditData(jsonNameStr);
+            <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; listDataBeans.<span class="built_in">size</span>(); i++) {
+               DataBean dataBean=listDataBeans.<span class="built_in">get</span>(i);
+               System.out.<span class="built_in">println</span>(dataBean.getGoalTime()+<span class="string">"傻逼"</span>);
+           }
+            dataString = gson.toJson(listDataBeans);
+</code></pre><h2 id="JDBC查询之感悟">JDBC查询之感悟</h2><p>查询必定是通过一个条件来查找，返回的数据可能会有多条（List）。<br>查询出来是一个ResultSet，所以也需要一条一条读取出来。有值得时候就设置进属性。</p>
+<pre><code>    <span class="keyword">public</span> ArrayList&lt;ManBean&gt; getAllMan(<span class="keyword">String</span> name) {
+
+    <span class="built_in">boolean</span> b=<span class="keyword">false</span>;
+    ArrayList&lt;ManBean&gt; arrayList=<span class="keyword">new</span> ArrayList&lt;ManBean&gt;();
+    Connection conn=<span class="keyword">null</span>;
+    PreparedStatement ps=<span class="keyword">null</span>;
+    ResultSet rs=<span class="keyword">null</span>;
+    <span class="keyword">String</span> getAllManSQL=<span class="string">"SELECT * FROM man "</span>+<span class="string">"WHERE name=?"</span>;
+    <span class="keyword">try</span> {
+        conn=BaseConnection.getConnection();
+        ps=(PreparedStatement) conn.prepareStatement(getAllManSQL);
+        ps.setString(<span class="number">1</span>, name);
+        System.out.<span class="built_in">println</span>(ps+<span class="string">")))))"</span>+name);
+        rs=ps.executeQuery();
+        <span class="keyword">String</span> <span class="built_in">line</span>;
+        StringBuffer sb=<span class="keyword">new</span> StringBuffer();
+        <span class="keyword">while</span> (rs.next()) {
+            ManBean manBean=<span class="keyword">new</span> ManBean();
+            manBean.setArm(rs.getString(<span class="string">"arm"</span>));
+            manBean.setChest(rs.getString(<span class="string">"chest"</span>));
+            manBean.setImage(rs.getBytes(<span class="string">"image"</span>));
+            manBean.setTime(rs.getString(<span class="string">"time"</span>));
+            manBean.setName(rs.getString(<span class="string">"name"</span>));
+            manBean.setWeight(rs.getString(<span class="string">"weight"</span>));
+            manBean.setWaust(rs.getString(<span class="string">"waust"</span>));
+            manBean.setId(rs.getInt(<span class="string">"id"</span>));
+            arrayList.<span class="built_in">add</span>(manBean);
+        }
+    } <span class="keyword">catch</span> (SQLException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }<span class="keyword">finally</span> {
+        BaseConnection.closeResource(rs, ps, conn);
+    }
+
+    <span class="keyword">return</span> arrayList;
+}
+</code></pre><h2 id="JDBC等一干操作">JDBC等一干操作</h2><pre><code><span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">deleteMan</span><span class="params">(<span class="keyword">int</span> id)</span> </span>{
+
+    <span class="keyword">boolean</span> b=<span class="keyword">false</span>;
+    Connection conn=<span class="keyword">null</span>;
+    PreparedStatement ps=<span class="keyword">null</span>;
+    String deleteManSQL=<span class="string">"DELETE FROM man WHERE id=?"</span>;
+    <span class="keyword">try</span> {
+        conn=BaseConnection.getConnection();
+        ps=(PreparedStatement) conn.prepareStatement(deleteManSQL);
+        ps.setInt(<span class="number">1</span>, id);
+        System.out.println(deleteManSQL);
+        <span class="keyword">int</span> i=ps.executeUpdate();
+        <span class="keyword">if</span> (i&gt;<span class="number">0</span>) {
+            b=<span class="keyword">true</span>;
+        }
+
+
+    } <span class="keyword">catch</span> (Exception e) {
+        e.printStackTrace();
+    }<span class="keyword">finally</span> {
+        BaseConnection.closeResource(ps, conn);
+    }
+
+    <span class="keyword">return</span> b;
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="ciee1qi0e0016c8b2g2yoxwt5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-27" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/26/2015-7-27/">控件对齐方式 </a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/26/2015-7-27/">
+    <time datetime="2015-07-26T13:24:57.000Z" itemprop="datePublished">2015-07-26</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="控件对齐方式">控件对齐方式</h1><p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>&lt;!—</p>
+<ul>
+<li><p>android:layout_above 将该控件的底部至于给定ID的控件之上</p>
+</li>
+<li><p>android:layout_below 将该控件的顶部至于给定ID的控件之下</p>
+</li>
+<li>android:layout_toLeftOf 将该控件的右边缘和给定ID的控件的左边缘对齐</li>
+<li><p>android:layout_toRightOf 将该控件的左边缘和给定ID的控件的右边缘对齐</p>
+</li>
+<li><p>android:layout_alignBaseline 该控件的baseline和给定ID的控件的baseline对齐</p>
+</li>
+<li>android:layout_alignBottom 将该控件的底部边缘与给定ID控件的底部边缘</li>
+<li>android:layout_alignLeft 将该控件的左边缘与给定ID控件的左边缘对齐</li>
+<li>android:layout_alignRight 将该控件的右边缘与给定ID控件的右边缘对齐</li>
+<li>android:layout_alignTop 将给定控件的顶部边缘与给定ID控件的顶部对齐</li>
+</ul>
+<ul>
+<li>android:alignParentBottom 如果该值为true，则将该控件的底部和父控件的底部对齐</li>
+<li>android:layout_alignParentLeft 如果该值为true，则将该控件的左边与父控件的左边对齐</li>
+<li>android:layout_alignParentRight 如果该值为true，则将该控件的右边与父控件的右边对齐</li>
+<li><p>android:layout_alignParentTop 如果该值为true，则将空间的顶部与父控件的顶部对齐</p>
+</li>
+<li><p>android:layout_centerHorizontal 如果值为真，该控件将被至于水平方向的中央</p>
+</li>
+<li>android:layout_centerInParent 如果值为真，该控件将被至于父控件水平方向和垂直方向的中央</li>
+<li>android:layout_centerVertical 如果值为真，该控件将被至于垂直方向的中央</li>
+</ul>
+<ul>
+<li>android:padding和android:layout_margin    通俗的理解 Padding 为内边框，Margin 为外边框</li>
+<li><p>android:padding和android:layout_margin的区别，其实概念很简单，padding是站在父view的角度描述问题，它规定它里面的内容必须与这个父view边界的距离。margin则是站在自己的角度描述问题，规定自己和其他（上下左右）的view之间的距离，如果同一级只有一个view，那么它的效果基本上就和padding一样了。</p>
+</li>
+<li><p>android:layout_gravity=”center”</p>
+</li>
+<li>android:gravity　属性是对该view 内容的限定．比如一个button 上面的text.  你可以设置该text 在view的靠左，靠右等位置．．</li>
+<li>android:layout_gravity是用来设置该view相对与起父view 的位置．比如一个button 在linearlayout里，你想把该button放在靠左　　靠右等位置就可以通过该属性设置．</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="ciee1qi0i0017c8b2r9n4ssmf" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-26-TabHost" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -230,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cieckpc540017sgb2uge3tjnn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="ciee1qi0n0019c8b2k22z7mfz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -431,7 +621,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cieckpc500016sgb20khqyowc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="ciee1qi0l0018c8b2vmtkuoh2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -476,7 +666,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cieckpc560018sgb2202i9gsy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="ciee1qi0q001ac8b2o7x7oj9j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -640,7 +830,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cieckpc5b001asgb2zgdhbf3v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="ciee1qi0z001cc8b2pks1ivjn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -696,7 +886,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cieckpc590019sgb2zj3gofvj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="ciee1qi0v001bc8b2kqnxqpxi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -899,7 +1089,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cieckpc5c001bsgb2gqgc6f2l" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="ciee1qi12001dc8b2f73ot39t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1029,7 +1219,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cieckpc5e001csgb2wo4xti38" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="ciee1qi16001ec8b22kdwm0k0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1108,178 +1298,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cieckpc5f001dsgb21n7gqxsy" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-18-adapter" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/19/2015-7-18-adapter/">adapter</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/19/2015-7-18-adapter/">
-    <time datetime="2015-07-19T05:10:37.000Z" itemprop="datePublished">2015-07-19</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Adapter">Adapter</h1><h2 id="Adapter的概念">Adapter的概念</h2><p> Adapter是连接后端数据和前端显示的适配器接口，是数据和UI（View）之间一个重要的纽带。在常见的View(List View,Grid View)等地方都需要用到Adapter。如下图直观的表达了Data、Adapter、View三者的关系：</p>
-<h2 id="常用Adapter">常用Adapter</h2><ul>
-<li>BaseAdapter是一个抽象类，继承它需要实现较多的方法，所以也就具有较高的灵活性；</li>
-<li>ArrayAdapter支持泛型操作，最为简单，只能展示一行字。</li>
-<li>SimpleAdapter有最好的扩充性，可以自定义出各种效果。</li>
-<li>SimpleCursorAdapter可以适用于简单的纯文字型ListView，它需要Cursor的字段和UI的id对应起来。如需要实现更复杂的UI也可以重写其他方法。可以认为是SimpleAdapter对数据库的简单结合，可以方便地把数据库的内容以列表的形式展示出来。</li>
-</ul>
-<h2 id="ArrayAdapter的操作">ArrayAdapter的操作</h2><p>ArrayAdapter的操作很简单，构建一个ArrayAdapter（）实例。其中要传入三个参数。</p>
-<p>依次为this,布局文件（注意这里的布局文件描述的是列表的每一行的布局，android.R.layout.simple_list_item_1是系统定义好的布局文件只显示一行文字，数据源(一个List集合)。</p>
-<p>最后绑定显示。</p>
-<pre><code>package com.zsz.develop.adaptertest;
-
-<span class="keyword">import</span> android.app.ListActivity;
-<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.view.Menu;
-<span class="keyword">import</span> android.view.MenuItem;
-<span class="keyword">import</span> android.widget.Adapter;
-<span class="keyword">import</span> android.widget.ArrayAdapter;
-<span class="keyword">import</span> android.widget.ListView;
-
-<span class="keyword">import</span> java.util.ArrayList;
-
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> </span>{
-
-private ListView lv;
-private ArrayList&lt;<span class="built_in">String</span>&gt; mArrayList = <span class="keyword">new</span> ArrayList&lt;<span class="built_in">String</span>&gt;();
-@Override
-protected <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    ArrayAdapter&lt;<span class="built_in">String</span>&gt; adapter=<span class="keyword">new</span> ArrayAdapter&lt;<span class="built_in">String</span>&gt;(<span class="keyword">this</span>,android.R.layout.simple_list_item_1,getData());
-    lv= (ListView) findViewById(R.id.lv);
-    lv.setAdapter(adapter);
-
-}
-private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
-
-    mArrayList.add(<span class="string">"测试一"</span>);
-    mArrayList.add(<span class="string">"测试二"</span>);
-    mArrayList.add(<span class="string">"测试三"</span>);
-    mArrayList.add(<span class="string">"测试死"</span>);
-    <span class="keyword">return</span> mArrayList;
-
-}
-
-
-
-}
-</code></pre><h2 id="java与Mysql类型对应">java与Mysql类型对应</h2><p><img src="http://cl.ly/image/1k1z2h033V2O/QL" alt="">TTDB2<a href="RH(0A]8QQRR.png">N</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cieckpc5k001fsgb2681evkpu" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-18" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/18/2015-7-18/">ListView设置，相对位置，inflater 用法</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/18/2015-7-18/">
-    <time datetime="2015-07-18T14:16:28.000Z" itemprop="datePublished">2015-07-18</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="7-18日问题集">7.18日问题集</h1><h2 id="ListView_可滚动与间隔设置">ListView 可滚动与间隔设置</h2><p>1.可滚动设置：transcriptMode<br>2.间隔设置：divider</p>
-<pre><code>&lt;ListView
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"0dp"</span>
-    android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
-    android:<span class="variable">transcriptMode=</span><span class="string">"alwaysScroll"</span>
-    android:<span class="variable">divider=</span><span class="string">"@null"</span>
-    &gt;&lt;/ListView&gt;
-</code></pre><h2 id="图片设置内边距padding">图片设置内边距padding</h2><p>图片对其方式：layout_alignParentRight</p>
-<pre><code>&lt;ImageView
-     android:<span class="variable">layout_alignParentRight=</span><span class="string">"true"</span>
-    android:<span class="variable">layout_width=</span><span class="string">"70dp"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"70dp"</span>
-    android:<span class="variable">padding=</span><span class="string">"10dp"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/iv"</span>
-    android:<span class="variable">src=</span><span class="string">"@drawable/robot"</span>
-    /&gt;
-</code></pre><h2 id="设置相对位置">设置相对位置</h2><p>如设置textview的右边：layout_toRightOf<br>设置与有边框的距离：android:layout_marginRight=”50dp”<br>设置在谁的下面：android:layout_below=”@+id/time”</p>
-<pre><code>&lt;TextView
-    android:<span class="variable">layout_below=</span><span class="string">"@+id/time"</span>
-    android:<span class="variable">layout_marginRight=</span><span class="string">"50dp"</span>
-    android:<span class="variable">layout_toRightOf=</span><span class="string">"@+id/iv"</span>
-    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/tv"</span>
-    android:<span class="variable">background=</span><span class="string">"@drawable/aio_friend_bg_nor_11"</span>
-    android:<span class="variable">gravity=</span><span class="string">"center"</span>
-    /&gt;
-</code></pre><h2 id="android_inflater_用法">android inflater 用法</h2><p>在实际开发中LayoutInflater这个类还是非常有用的，它的作用类似于findViewById()。不同点是LayoutInflater是用来找res/layout/下的xml布局文件，并且实例化；而findViewById()是找xml布局文件下的具体widget控件(如Button、TextView等)。 具体作用： 1、对于一个没有被载入或者想要动态载入的界面，都需要使用LayoutInflater.inflate()来载入；</p>
-<p>2、对于一个已经载入的界面，就可以使用Activiyt.findViewById()方法来获得其中的界面元素。</p>
-<p>LayoutInflater 是一个抽象类，在文档中如下声明：</p>
-<p>publicabstractclass LayoutInflater extends Object </p>
-<p>获得 LayoutInflater 实例的三种方式</p>
-<p>1.LayoutInflater inflater = getLayoutInflater();  //调用Activity的getLayoutInflater()</p>
-<p>2.LayoutInflater localinflater =(LayoutInflater)context.getSystemService</p>
-<pre><code><span class="list">(<span class="keyword">Context.LAYOUT_INFLATER_SERVICE</span>)</span><span class="comment">;</span>
-</code></pre><ol>
-<li>LayoutInflater inflater = LayoutInflater.from(context);</li>
-</ol>
-<h2 id="-9图片">.9图片</h2><h2 id="adapter-notifyDataSetChanged();Adapter设置更改">adapter.notifyDataSetChanged();Adapter设置更改</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cieckpc5h001esgb2j8nsajl9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="ciee1qi18001fc8b2fynwignc" class="article-share-link">Share</a>
       
       
     </footer>
