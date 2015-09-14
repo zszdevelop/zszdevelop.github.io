@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        68
+        70
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,334 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-31" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/31/2015-8-31/">2015/8/31</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/31/2015-8-31/">
+    <time datetime="2015-08-31T01:03:43.000Z" itemprop="datePublished">2015-08-31</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/31问题集">2015/8/31问题集</h1><h2 id="for_each循环">for each循环</h2><ul>
+<li>1.首先要传入多个参数</li>
+<li>2.for（View i：view）这里这个View要与传入的类型是相同的。</li>
+<li>3.i是要传入的每个值</li>
+</ul>
+<p>o</p>
+<pre><code>private void ViewGone(<span class="keyword">View</span>... <span class="keyword">view</span>){
+    <span class="keyword">for</span> (<span class="keyword">View</span> i:<span class="keyword">view</span>){
+        i.setVisibility(<span class="keyword">View</span>.GONE);
+    }
+</code></pre><h2 id="使用theme将ActionBar隐藏">使用theme将ActionBar隐藏</h2><p>再目录：\main\res\values\strings.xml 中的theme中更改</p>
+<pre><code><span class="tag">&lt;<span class="title">resources</span>&gt;</span>
+
+<span class="comment">&lt;!-- Base application theme. --&gt;</span>
+<span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"AppTheme"</span> <span class="attribute">parent</span>=<span class="value">"Theme.AppCompat.Light.NoActionBar"</span>&gt;</span><span class="css">
+    &lt;!<span class="tag">--</span> <span class="tag">Customize</span> <span class="tag">your</span> <span class="tag">theme</span> <span class="tag">here</span>. <span class="tag">--</span>&gt;
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+
+<span class="tag">&lt;/<span class="title">resources</span>&gt;</span>
+</code></pre><p>再AndroidManifest.xml的application中更改设置</p>
+<pre><code>&lt;<span class="type">application</span>
+
+ android:theme=<span class="string">"@style/AppTheme"</span> &gt;
+</code></pre><h2 id="EditText_不要背景下面的横线">EditText 不要背景下面的横线</h2><pre><code><span class="tag">&lt;<span class="title">EditText</span>
+
+              <span class="attribute">android:background</span>=<span class="value">"@null"</span>
+              /&gt;</span>
+</code></pre><h2 id="text文字加粗">text文字加粗</h2><pre><code><span class="label">android:</span>textStyle=”bold”
+</code></pre><h2 id="调用string中的东西">调用string中的东西</h2><pre><code>tvTopBarTitle.setText(R.<span class="type">string</span>.myinfo_title);
+</code></pre><h2 id="主布局LinearLayout之—-fitsSystemWindows">主布局LinearLayout之—-fitsSystemWindows</h2><p>设置应用布局时是否考虑系统窗口布局；如果为true</p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:fitsSystemWindows"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
+</code></pre><h2 id="主布局LinearLayout_之——clipToPadding">主布局LinearLayout 之——clipToPadding</h2><p>clipToPadding:控件的绘制区域是否在padding里面, 值为true时padding那么绘制的区域就不包括padding区域;<br>定义一个孩子是否仅限于画里面的界限。 </p>
+<pre><code>&lt;<span class="property">item</span> <span class="property">name</span>=<span class="string">"android:clipToPadding"</span>&gt;<span class="constant">true</span>&lt;/<span class="property">item</span>&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="ciejpjini000md0b2kh4m6r1o" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-28-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/28/2015-8-28-2/">pager和fragment绑定使用的完整代码。</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/28/2015-8-28-2/">
+    <time datetime="2015-08-28T09:36:21.000Z" itemprop="datePublished">2015-08-28</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="pager和fragment绑定使用的完整代码。">pager和fragment绑定使用的完整代码。</h2><p>Fragment的代码，没什么特别就只是一个界面而已。<br>但是这里要实现的方法和activity有点不同是实现OnCreateView(activity是实现OnCreate)</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
+
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
+<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
+
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/28.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">FragmentDoor</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
+
+<span class="annotation">@Nullable</span>
+<span class="annotation">@Override</span>
+public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
+
+    <span class="type">View</span> view=inflater.inflate(<span class="type">R</span>.layout.door_view_pager,<span class="literal">null</span>);
+    <span class="keyword">return</span> view;
+
+}
+}
+</code></pre><h2 id="pager页面">pager页面</h2><ul>
+<li>1.定义好两个list一个装view、一个装fragment</li>
+<li>2.对于pager这种需要后期添加的都需要对他设置adapter</li>
+<li>3.pager是针对fragment设置的adapter所以他就要使用fragment的适配器。中间要加个管理器。</li>
+</ul>
+<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
+
+<span class="keyword">import</span> android.app.FragmentManager;
+<span class="keyword">import</span> android.app.FragmentTransaction;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.support.v4.app.Fragment;
+<span class="keyword">import</span> android.support.v4.app.FragmentPagerAdapter;
+<span class="keyword">import</span> android.support.v4.view.PagerAdapter;
+<span class="keyword">import</span> android.support.v4.view.ViewPager;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.util.Log;
+<span class="keyword">import</span> android.view.LayoutInflater;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.ViewGroup;
+<span class="keyword">import</span> android.widget.Button;
+<span class="keyword">import</span> android.widget.LinearLayout;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.R;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.function.StairsMouthActivity;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyBillActivity;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyHomeActivity;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyInfoActivity;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyMonitoringActivity;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myTwoLine.MyExpressActivity;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myTwoLine.MyInterflowMainActivity;
+<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myTwoLine.MyNeighbourActivity;
+
+<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainViewPagerActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>{
+
+<span class="keyword">private</span> ViewPager pager = <span class="keyword">null</span>;
+<span class="keyword">private</span> List&lt;Fragment&gt; fragmentlist=<span class="keyword">new</span> ArrayList&lt;&gt;();
+ArrayList&lt;View&gt; viewContainter = <span class="keyword">new</span> ArrayList&lt;View&gt;();
+
+<span class="keyword">private</span> LinearLayout llCloud,llDoor,llMy;
+<span class="keyword">private</span> View myView;
+<span class="keyword">public</span> String TAG = <span class="string">"tag"</span>;
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main_view_pager);
+
+
+
+    pager= (ViewPager) findViewById(R.id.viewPager);
+
+    llCloud= (LinearLayout) findViewById(R.id.llCloud);
+    llDoor= (LinearLayout) findViewById(R.id.llDoor);
+    llMy= (LinearLayout) findViewById(R.id.llMy);
+
+    llMy.setOnClickListener(<span class="keyword">this</span>);
+    llDoor.setOnClickListener(<span class="keyword">this</span>);
+    llCloud.setOnClickListener(<span class="keyword">this</span>);
+
+    fragmentlist.add(<span class="keyword">new</span> FragmentCloud());
+    fragmentlist.add(<span class="keyword">new</span> FragmentDoor());
+    fragmentlist.add(<span class="keyword">new</span> FragmentMy());
+
+    myView= LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.my_view_pager,<span class="keyword">null</span>);
+    View doorView= LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.door_view_pager,<span class="keyword">null</span>);
+    View cloudView= LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.cloud_view_pager,<span class="keyword">null</span>);
+
+    viewContainter.add(cloudView);
+    viewContainter.add(doorView);
+    viewContainter.add(myView);
+
+
+
+
+
+    pager.setAdapter(<span class="keyword">new</span> FragmentPagerAdapter(getSupportFragmentManager()) {
+
+
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+            <span class="function"><span class="keyword">return</span> fragmentlist.<span class="title">size</span><span class="params">()</span></span>;
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function">Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>{
+            <span class="function"><span class="keyword">return</span> fragmentlist.<span class="title">get</span><span class="params">(position)</span></span>;
+        }
+    });
+
+
+    pager.setCurrentItem(<span class="number">1</span>);
+    pager.addOnPageChangeListener(<span class="keyword">new</span> ViewPager.OnPageChangeListener() {
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrollStateChanged</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
+            Log.d(TAG, <span class="string">"--------changed:"</span> + arg0);
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrolled</span><span class="params">(<span class="keyword">int</span> arg0, <span class="keyword">float</span> arg1, <span class="keyword">int</span> arg2)</span> </span>{
+            Log.d(TAG, <span class="string">"-------scrolled arg0:"</span> + arg0);
+            Log.d(TAG, <span class="string">"-------scrolled arg1:"</span> + arg1);
+            Log.d(TAG, <span class="string">"-------scrolled arg2:"</span> + arg2);
+        }
+
+        <span class="comment">//选择的位置</span>
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageSelected</span><span class="params">(<span class="keyword">int</span> position)</span> </span>{
+            Log.d(TAG, <span class="string">"------selected:"</span> + position);
+        }
+    });
+
+
+
+}
+
+
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
+    <span class="keyword">int</span> id=view.getId();
+    <span class="keyword">switch</span> (id){
+        <span class="keyword">case</span> R.id.llCloud:
+            pager.setCurrentItem(0);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> R.id.llDoor:
+            pager.setCurrentItem(1);
+            <span class="keyword">break</span>;
+        <span class="keyword">case</span> R.id.llMy:
+            pager.setCurrentItem(2);
+            <span class="keyword">break</span>;
+
+   }
+
+}
+
+}
+</code></pre><p>对于viewpager的layout</p>
+<pre><code>&lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>
+    android:id=<span class="string">"@+id/viewPager"</span>
+    android:layout_width=<span class="string">"wrap_content"</span>
+    android:layout_height=<span class="string">"0dp"</span>
+    android:layout_weight=<span class="string">"1"</span>
+    &gt;
+
+&lt;/android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>&gt;
+</code></pre><h2 id="最简单的pager和fragment的结合使用">最简单的pager和fragment的结合使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.exercisedemo;
+
+<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
+<span class="keyword">import</span> android.support.v4.app.<span class="type">FragmentPagerAdapter</span>;
+<span class="keyword">import</span> android.support.v4.view.<span class="type">ViewPager</span>;
+<span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.view.<span class="type">View</span>;
+
+<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">ViewPagerActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
+
+<span class="keyword">private</span> <span class="type">ViewPager</span> viewPager;
+<span class="keyword">private</span> <span class="type">ArrayList</span>&lt;<span class="type">Fragment</span>&gt; fragmentArrayList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+<span class="keyword">private</span> <span class="type">ArrayList</span>&lt;<span class="type">View</span>&gt; viewArrayList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
+
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_view_pager);
+    viewPager= (<span class="type">ViewPager</span>) findViewById(<span class="type">R</span>.id.vp);
+    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment</span>());
+    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment02</span>());
+    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment</span>());
+</code></pre><p>//        viewArrayList.add()<br>        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {<br>            @Override<br>            public Fragment getItem(int i) {<br>                return fragmentArrayList.get(i);<br>            }</p>
+<pre><code>        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+            <span class="function"><span class="keyword">return</span> fragmentArrayList.<span class="title">size</span><span class="params">()</span></span>;
+        }
+    });
+
+}
+</code></pre><p>}</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="ciejpjino000pd0b2pizraiy9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-28" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -180,7 +508,7 @@ public <span class="type">View</span> onCreateView(<span class="type">LayoutInfl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="ciee1qhym000mc8b25sc7lr6s" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="ciejpjinm000od0b2y2cn8xe2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -293,7 +621,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="ciee1qhyr000oc8b2be9npx4i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="ciejpjinu000qd0b20qeib7jj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -603,7 +931,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="ciee1qhyx000qc8b2ijud9q2m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="ciejpjio1000sd0b2va0c7shf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -658,7 +986,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="ciee1qhys000pc8b2o51te6bp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="ciejpjiny000rd0b2oo1oy859" class="article-share-link">Share</a>
       
       
     </footer>
@@ -870,7 +1198,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="ciee1qhz2000rc8b2vt1dj83a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="ciejpjio5000td0b2su19swxb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -944,7 +1272,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="ciee1qhz5000sc8b28t56najs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="ciejpjio8000ud0b2oa398kqr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -967,7 +1295,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="ciee1qhz8000uc8b2btsvkhbz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="ciejpjioe000wd0b2xd8y0fce" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1039,425 +1367,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="ciee1qhz6000tc8b21aq8rg09" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-20-3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/20/2015-8-20-3/">ViewPager,ViewPager实现的功能,setOnPageChangeListener的三个方法,pager error</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/20/2015-8-20-3/">
-    <time datetime="2015-08-20T09:28:16.000Z" itemprop="datePublished">2015-08-20</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="ViewPager">ViewPager</h1><h2 id="ViewPager的简介">ViewPager的简介</h2><p> ViewPager是android扩展包v4包中的类，这个类可以让用户左右切换当前的view。</p>
-<p>所以这时候定义View要这么定义android.support.v4.view.ViewPager</p>
-<p>我们首先来看看API对于这个类的表述：</p>
-<blockquote>
-<p>Layout manager that allows the user to flip left and right through pages of data. You supply an implementation of a PagerAdapter to generate the pages that the view shows.<br>    Note this class is currently under early design and development. The API will likely change in later updates of the compatibility library, requiring changes to the source code of apps when they are compiled against the newer version.<br>    ViewPager is most often used in conjunction with Fragment, which is a convenient way to supply and manage the lifecycle of each page. There are standard adapters implemented for using fragments with the ViewPager, which cover the most common use cases. These are FragmentPagerAdapter andFragmentStatePagerAdapter; each of these classes have simple code showing how to build a full user interface with them.</p>
-</blockquote>
-<p>在编写ViewPager的应用的使用，还需要使用两个组件类分别是PagerTitleStrip类和PagerTabStrip类，PagerTitleStrip类直接继承自ViewGroup类，而PagerTabStrip类继承PagerTitleStrip类，所以这两个类也是容器类。但是有一点需要注意，在定义XML的layout的时候，这两个类必须是ViewPager标签的子标签，不然会出错。</p>
-<h2 id="ViewPager实现的功能">ViewPager实现的功能</h2><p>ViewPager类提供了多界面切换的新效果，<br>新效果有如下特征：</p>
-<ul>
-<li><1>当前显示一组界面中的其中一个界面；</1></li>
-<li><2>当用户通过左右滑动界面时，当前的屏幕显示当前界面和下一个界面的一部分；</2></li>
-<li><3>滑动结束后，界面自动跳转到当前选择的界面中。</3></li>
-</ul>
-<h2 id="setOnPageChangeListener的三个方法">setOnPageChangeListener的三个方法</h2><ul>
-<li><p>1.onPageSelected(int position)：这个方法有一个参数position，代表哪个页面被选中。当用手指滑动翻页的时候，如果翻动成功了（滑动的距离够长），手指抬起来就会立即执行这个方法，position就是当前滑动到的页面。如果直接setCurrentItem翻页，那position就和setCurrentItem的参数一致，这种情况在onPageScrolled执行方法前就会立即执行。</p>
-</li>
-<li><p>2.onPageScrolled(int position,float positionOffset, int positionOffsetPixels)：这个方法会在屏幕滚动过程中不断被调用。<br>有三个参数，第一个position，这个参数要特别注意一下。当用手指滑动时，如果手指按在页面上不动，position和当前页面index是一致的；如果手指向左拖动（相应页面向右翻动），这时候position大部分时间和当前页面是一致的，只有翻页成功的情况下最后一次调用才会变为目标页面；如果手指向右拖动（相应页面向左翻动），这时候position大部分时间和目标页面是一致的，只有翻页不成功的情况下最后一次调用才会变为原页面。<br>当直接设置setCurrentItem翻页时，如果是相邻的情况（比如现在是第二个页面，跳到第一或者第三个页面），如果页面向右翻动，大部分时间是和当前页面是一致的，只有最后才变成目标页面；如果向左翻动，position和目标页面是一致的。这和用手指拖动页面翻动是基本一致的。<br>如果不是相邻的情况，比如我从第一个页面跳到第三个页面，position先是0，然后逐步变成1，然后逐步变成2；我从第三个页面跳到第一个页面，position先是1，然后逐步变成0，并没有出现为2的情况。<br>positionOffset是当前页面滑动比例，如果页面向右翻动，这个值不断变大，最后在趋近1的情况后突变为0。如果页面向左翻动，这个值不断变小，最后变为0。<br>positionOffsetPixels是当前页面滑动像素，变化情况和positionOffset一致。</p>
-</li>
-<li><p>3.onPageScrollStateChanged(int state)：这个方法在手指操作屏幕的时候发生变化。有三个值：0（END）,1(PRESS) , 2(UP) 。<br>当用手指滑动翻页时，手指按下去的时候会触发这个方法，state值为1，手指抬起时，如果发生了滑动（即使很小），这个值会变为2，然后最后变为0 。总共执行这个方法三次。一种特殊情况是手指按下去以后一点滑动也没有发生，这个时候只会调用这个方法两次，state值分别是1,0 。<br>当setCurrentItem翻页时，会执行这个方法两次，state值分别为2 , 0 。</p>
-</li>
-</ul>
-<p><strong>三个方法的执行顺序为</strong>：用手指拖动翻页时，最先执行一遍onPageScrollStateChanged（1），然后不断执行onPageScrolled，放手指的时候，直接立即执行一次onPageScrollStateChanged（2），然后立即执行一次onPageSelected，然后再不断执行onPageScrollStateChanged，最后执行一次onPageScrollStateChanged（0）。<br>其它的情况由这个可以推出来，不再赘述。</p>
-<h2 id="pager-setCurrentItem(0)的使用">pager.setCurrentItem(0)的使用</h2><p> pager.setCurrentItem(0)直接设置显示的页面。0代表第一个页面，1代表第二个。</p>
-<h2 id="简单小实例">简单小实例</h2><p>layout.xml:</p>
-<pre><code>&lt;RelativeLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
-xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span>
-android:layout_width=<span class="string">"match_parent"</span>
-android:layout_height=<span class="string">"match_parent"</span>
-tools:context=<span class="string">".MainActivity"</span> &gt;
-
-&lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>
-    android:id=<span class="string">"@+id/viewpager"</span>
-    android:layout_width=<span class="string">"wrap_content"</span>
-    android:layout_height=<span class="string">"wrap_content"</span> &gt;
-
-    &lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.PagerTabStrip</span>
-        android:id=<span class="string">"@+id/tabstrip"</span>
-        android:layout_width=<span class="string">"wrap_content"</span>
-        android:layout_height=<span class="string">"50dip"</span>
-        android:gravity=<span class="string">"center"</span> /&gt;
-&lt;/android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>&gt;
-
-&lt;/RelativeLayout&gt;
-</code></pre><p>MainActivity.java</p>
-<ul>
-<li><p>1.先找到viewPager和pagerTabStrip。</p>
-</li>
-<li><p>2.定义两个Array来当容器一个装载view一个装载title</p>
-</li>
-<li><p>3.pagerTabStrip对设置</p>
-</li>
-<li>4.把view和title装载进去</li>
-<li><p>5.设置Adapter</p>
-<p>  package com.example.android_viewpager1;</p>
-<p>  import java.util.ArrayList;</p>
-<p>  import android.annotation.SuppressLint;<br>  import android.app.Activity;<br>  import android.os.Bundle;<br>  import android.support.v4.view.PagerAdapter;<br>  import android.support.v4.view.PagerTabStrip;<br>  import android.support.v4.view.ViewPager;<br>  import android.support.v4.view.ViewPager.OnPageChangeListener;<br>  import android.util.Log;<br>  import android.view.LayoutInflater;<br>  import android.view.View;<br>  import android.view.ViewGroup;</p>
-<p>  public class MainActivity extends Activity {</p>
-<p>  ViewPager pager = null;<br>  PagerTabStrip tabStrip = null;<br>  ArrayList<view> viewContainter = new ArrayList<view>();<br>  ArrayList<string> titleContainer = new ArrayList<string>();<br>  public String TAG = “tag”;</string></string></view></view></p>
-<p>  @SuppressLint(“ResourceAsColor”)<br>  @Override<br>  protected void onCreate(Bundle savedInstanceState) {</p>
-<pre><code>  <span class="keyword">super</span>.onCreate(savedInstanceState);
-  setContentView(R.layout.activity_main);
-
-  pager = (ViewPager) <span class="keyword">this</span>.findViewById(R.id.viewpager);
-  tabStrip = (PagerTabStrip) <span class="keyword">this</span>.findViewById(R.id.tabstrip);
-  <span class="comment">//取消tab下面的长横线</span>
-  tabStrip.setDrawFullUnderline(<span class="keyword">false</span>);
-  <span class="comment">//设置tab的背景色</span>
-  tabStrip.setBackgroundColor(<span class="keyword">this</span>.getResources().getColor(R.color.bg));
-  <span class="comment">//设置当前tab页签的下划线颜色</span>
-  tabStrip.setTabIndicatorColor(<span class="keyword">this</span>.getResources().getColor(R.color.red));
-  tabStrip.setTextSpacing(<span class="number">200</span>);
-
-  View view1 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab1, <span class="keyword">null</span>);
-  View view2 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab2, <span class="keyword">null</span>);
-  View view3 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab3, <span class="keyword">null</span>);
-  View view4 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab4, <span class="keyword">null</span>);
-<span class="comment">//viewpager开始添加view</span>
-  viewContainter.add(view1);
-  viewContainter.add(view2);
-  viewContainter.add(view3);
-  viewContainter.add(view4);
-<span class="comment">//页签项</span>
-  titleContainer.add(<span class="string">"网易新闻"</span>);
-  titleContainer.add(<span class="string">"网易体育"</span>);
-  titleContainer.add(<span class="string">"网易财经"</span>);
-  titleContainer.add(<span class="string">"网易女人"</span>);
-
-  pager.setAdapter(<span class="keyword">new</span> PagerAdapter() {
-
-      <span class="comment">//viewpager中的组件数量</span>
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
-          <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">size</span><span class="params">()</span></span>;
-      }
-    <span class="comment">//滑动切换的时候销毁当前的组件</span>
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position,
-              Object object)</span> </span>{
-          ((ViewPager) container).removeView(viewContainter.get(position));
-      }
-    <span class="comment">//每次滑动的时候生成的组件</span>
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function">Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>{
-          ((ViewPager) container).addView(viewContainter.get(position));
-          <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">get</span><span class="params">(position)</span></span>;
-      }
-
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isViewFromObject</span><span class="params">(View arg0, Object arg1)</span> </span>{
-          <span class="keyword">return</span> arg0 == arg1;
-      }
-
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getItemPosition</span><span class="params">(Object object)</span> </span>{
-          <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">getItemPosition</span><span class="params">(object)</span></span>;
-      }
-
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function">CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>{
-          <span class="function"><span class="keyword">return</span> titleContainer.<span class="title">get</span><span class="params">(position)</span></span>;
-      }
-  });
-
-  pager.setOnPageChangeListener(<span class="keyword">new</span> OnPageChangeListener() {
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrollStateChanged</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
-          Log.d(TAG, <span class="string">"--------changed:"</span> + arg0);
-      }
-
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrolled</span><span class="params">(<span class="keyword">int</span> arg0, <span class="keyword">float</span> arg1, <span class="keyword">int</span> arg2)</span> </span>{
-          Log.d(TAG, <span class="string">"-------scrolled arg0:"</span> + arg0);
-          Log.d(TAG, <span class="string">"-------scrolled arg1:"</span> + arg1);
-          Log.d(TAG, <span class="string">"-------scrolled arg2:"</span> + arg2);
-      }
-
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageSelected</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
-          Log.d(TAG, <span class="string">"------selected:"</span> + arg0);
-      }
-  });
-</code></pre><p>  }</p>
-<p>  }</p>
-</li>
-</ul>
-<p>程式中要使用ViewPager來顯示資訊必須自己繼承PagerAdapter，來完成手指滑動切換視窗的動作。 </p>
-<h2 id="ViewPage_:Required_method_instantiateItem_was_not_overridde">ViewPage :Required method instantiateItem was not overridde</h2><p>错误代码提示</p>
-<pre><code>java.lang.<span class="type">UnsupportedOperationException</span>: <span class="type">Required</span> <span class="keyword">method</span> instantiateItem was <span class="keyword">not</span> overridden
-</code></pre><p>解决办法<br>把return super.instantiateItem(container, position);</p>
-<p>换成：</p>
-<p>return container;</p>
-<h2 id="pager错误之二">pager错误之二</h2><p>java.lang.UnsupportedOperationException: Required method destroyItem was not overridden</p>
-<p>这里说必须的方法没有实现，因为先super了。所以就没有实现了。把super删除就可以实现</p>
-<pre><code><span class="comment">//每次滑动删除的页面</span>
-    @<span class="function">Override
-    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object <span class="keyword">object</span>)</span> </span>{
-
-<span class="comment">//就是删除这行        super.destroyItem(container, position, object);</span>
-        ((ViewPager) container).removeView(viewContainter.<span class="keyword">get</span>(position));
-    }
-</code></pre><h2 id="pager错误之三">pager错误之三</h2><p>页面没有显示出来，</p>
-<p>解决过程</p>
-<ul>
-<li>1.查看页面本身是否有问题</li>
-<li>2.ArrayList有没有添加页面</li>
-<li>3.在instantiateItem中有没有添加页面并返回页面。</li>
-</ul>
-<p>我的原因是没有返回页面所以导致错误</p>
-<pre><code><span class="comment">//每次滑动增加的页面</span>
-
-        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function">Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>{
-            container.addView(viewContainter.get(position));
-
-            <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">get</span><span class="params">(position)</span></span>;
-        }
-</code></pre><h2 id="pager错误之四">pager错误之四</h2><p>pager.setCurrentItem(1);</p>
-<p>设置初始值没有反应。<br>设置的时候要放在Adapter里面</p>
-<hr>
-<h2 id="设置只可以通过点选，而不是滑动来切换页面">设置只可以通过点选，而不是滑动来切换页面</h2><ul>
-<li>1.首先去掉layout中PagerTabStrip，采用TextView来当tab</li>
-<li>2.点击TextView的时候再通过pager.setCurrentItem(0)来设置切换的页面</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="ciee1qhzi000wc8b2m75sr0uc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-20-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/20/2015-8-20-2/">动态加载Fragment，Fragment常用的API</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/20/2015-8-20-2/">
-    <time datetime="2015-08-20T07:32:15.000Z" itemprop="datePublished">2015-08-20</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="动态加载Fragment">动态加载Fragment</h1><p>在动态加载Fragment里面，就不需要把Fragment写死,写成View.而是采用动态加载的方式来实现操作。</p>
-<p>我们先看布局文件：他是由一个FragmentLayout容器来存放Fragmeng（动态加载就是加载到这个地方）。还有两个选择按钮组成</p>
-<pre><code>&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
-xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
-android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span> android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
-android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
-android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
-android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span>
-android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
-&gt;
-
-&lt;TextView android:<span class="variable">text=</span><span class="string">"@string/hello_world"</span> android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span> /&gt;
-&lt;FrameLayout
-    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/fl"</span>
-    &gt;&lt;/FrameLayout&gt;
-
-&lt;LinearLayout
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>&gt;
-    &lt;TextView
-        android:<span class="variable">layout_width=</span><span class="string">"0dp"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
-        android:<span class="variable">text=</span><span class="string">"tv01"</span>
-        android:<span class="variable">id=</span><span class="string">"@+id/tv01"</span>
-        /&gt;
-    &lt;TextView
-        android:<span class="variable">layout_width=</span><span class="string">"0dp"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
-        android:<span class="variable">text=</span><span class="string">"tv02"</span>
-        android:<span class="variable">id=</span><span class="string">"@+id/tv02"</span>
-        /&gt;
-
-    &lt;/LinearLayout&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><p>在mainActivity里面就实现他的动态添加与管理</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.firstfragment;
-
-<span class="keyword">import</span> android.app.FragmentManager;
-<span class="keyword">import</span> android.app.FragmentTransaction;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.widget.TextView;
-
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">ActionBarActivity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>{
-
-
-<span class="keyword">private</span> FragmentTest fragmentTest;
-<span class="keyword">private</span> FragmentTest02 fragmentTest02;
-<span class="keyword">private</span> TextView tv01,tv02;
-
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-
-    initView();
-}
-
-<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">initView</span><span class="params">()</span> </span>{
-    tv01= (TextView) findViewById(R.id.tv01);
-    tv02= (TextView) findViewById(R.id.tv02);
-    tv01.setOnClickListener(<span class="keyword">this</span>);
-    tv02.setOnClickListener(<span class="keyword">this</span>);
-
-    <span class="comment">// 设置默认的Fragment</span>
-    setDefaultFragment();
-
-}
-
-<span class="keyword">private</span> <span class="function"><span class="keyword">void</span> <span class="title">setDefaultFragment</span><span class="params">()</span> </span>{
-    <span class="comment">//使用FragmentManager来管理</span>
-    FragmentManager manager=getFragmentManager();
-    FragmentTransaction transaction = manager.beginTransaction();
-
-    fragmentTest=<span class="keyword">new</span> FragmentTest();
-    <span class="comment">//使用transaction.replace去FragmentLayout里添加Fragment。</span>
-    transaction.replace(R.id.fl,fragmentTest);
-    transaction.commit();
-}
-
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-
-    FragmentManager fm = getFragmentManager();
-    <span class="comment">// 开启Fragment事务</span>
-    FragmentTransaction transaction = fm.beginTransaction();
-    <span class="keyword">switch</span> (view.getId()) {
-        <span class="keyword">case</span> R.id.tv01:
-            <span class="keyword">if</span> ( fragmentTest== <span class="keyword">null</span>) {
-                fragmentTest = <span class="keyword">new</span> FragmentTest();
-            }
-            <span class="comment">// 使用当前Fragment的布局替代id_content的控件</span>
-            transaction.replace(R.id.fl, fragmentTest);
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> R.id.tv02:
-            <span class="keyword">if</span> (fragmentTest02 == <span class="keyword">null</span>) {
-                fragmentTest02 = <span class="keyword">new</span> FragmentTest02();
-            }
-            transaction.replace(R.id.fl, fragmentTest02);
-            <span class="keyword">break</span>;
-    }
-    <span class="comment">// transaction.addToBackStack();</span>
-    <span class="comment">// 事务提交</span>
-    transaction.commit();
-}
-}
-</code></pre><h2 id="Fragment常用的API：">Fragment常用的API：</h2><p><strong>Fragment常用的三个类：</strong></p>
-<ul>
-<li><p>android.app.Fragment 主要用于定义Fragment</p>
-</li>
-<li><p>android.app.FragmentManager 主要用于在Activity中操作Fragment</p>
-</li>
-<li><p>android.app.FragmentTransaction 保证一些列Fragment操作的原子性，熟悉事务这个词，一定能明白~</p>
-</li>
-</ul>
-<p><strong>a、获取FragmentManage的方式：</strong></p>
-<p>getFragmentManager() // v4中，getSupportFragmentManager</p>
-<p><strong>b、主要的操作都是FragmentTransaction的方法</strong></p>
-<p>FragmentTransaction transaction = fm.benginTransatcion();//开启一个事务</p>
-<p>transaction.add() </p>
-<p>往Activity中添加一个Fragment</p>
-<p>transaction.remove()</p>
-<p>从Activity中移除一个Fragment，如果被移除的Fragment没有添加到回退栈（回退栈后面会详细说），这个Fragment实例将会被销毁。</p>
-<p>transaction.replace()</p>
-<p>使用另一个Fragment替换当前的，实际上就是remove()然后add()的合体~</p>
-<p>transaction.hide()</p>
-<p>隐藏当前的Fragment，仅仅是设为不可见，并不会销毁</p>
-<p>transaction.show()</p>
-<p>显示之前隐藏的Fragment</p>
-<p>detach()</p>
-<p>将此Fragment从Activity中分离，会销毁其布局，但不会销毁该实例</p>
-<p>attach()</p>
-<p>将从Activity中分离的Fragment，重新关联到该Activity，重新创建其视图层次</p>
-<p>transatcion.commit()//提交一个事务</p>
-<p><strong>注意：常用Fragment的哥们，可能会经常遇到这样Activity状态不一致：State loss这样的错误。主要是因为：commit方法一定要在Activity.onSaveInstance()之前调用。</strong></p>
-<p>上述，基本是操作Fragment的所有的方式了，在一个事务开启到提交可以进行多个的添加、移除、替换等操作。</p>
-<p>值得注意的是：如果你喜欢使用Fragment，一定要清楚这些方法，哪个会销毁视图，哪个会销毁实例，哪个仅仅只是隐藏，这样才能更好的使用它们。</p>
-<ul>
-<li><p>a、比如：我在FragmentA中的EditText填了一些数据，当切换到FragmentB时，如果希望会到A还能看到数据，则适合你的就是hide和show；也就是说，希望保留用户操作的面板，你可以使用hide和show，当然了不要使劲在那new实例，进行下非null判断。</p>
-</li>
-<li><p>b、再比如：我不希望保留用户操作，你可以使用remove()，然后add()；或者使用replace()这个和remove,add是相同的效果。</p>
-</li>
-<li><p>c、remove和detach有一点细微的区别，在不考虑回退栈的情况下，remove会销毁整个Fragment实例，而detach则只是销毁其视图结构，实例并不会被销毁。那么二者怎么取舍使用呢？如果你的当前Activity一直存在，那么在不希望保留用户操作的时候，你可以优先使用detach。</p>
-</li>
-</ul>
-<p>上述已经介绍完成了Fragment常用的一些方法，相信看完，大家一定清楚了Fragment的产生理由，以及如何使用Fragment，再根据API的讲解，也能明白，曾经为何觉得Fragment会出现一些列乱七八槽的问题，终究是因为没有弄清楚其生命周期。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="ciee1qhzp000xc8b2mrrbalmf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="ciejpjiob000vd0b26p46hiy2" class="article-share-link">Share</a>
       
       
     </footer>
