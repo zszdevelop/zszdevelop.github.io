@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        76
+        77
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,153 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/19/2015-8-19/">volley的简单使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/19/2015-8-19/">
+    <time datetime="2015-08-19T08:36:41.000Z" itemprop="datePublished">2015-08-19</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/19问题集">2015/8/19问题集</h1><h2 id="volley的简单使用">volley的简单使用</h2><p>MyApplication中的代码：主要是建立一个queue对列。并给出一个调用方法</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.volleydemo;
+
+<span class="keyword">import</span> android.app.<span class="type">Application</span>;
+
+<span class="keyword">import</span> com.android.volley.<span class="type">RequestQueue</span>;
+<span class="keyword">import</span> com.android.volley.toolbox.<span class="type">Volley</span>;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/19.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Application</span> {</span>
+
+public static <span class="type">RequestQueue</span> queue;
+
+<span class="annotation">@Override</span>
+public void onCreate() {
+    <span class="keyword">super</span>.onCreate();
+    queue= <span class="type">Volley</span>.newRequestQueue(getApplicationContext());
+}
+
+public static <span class="type">RequestQueue</span> getHttpQueue(){
+    <span class="keyword">return</span> queue;
+}
+
+}
+</code></pre><p>=</p>
+<p>MainActivity中的代码。调用和实现volley的post和get方法</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.volleydemo;
+
+<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> com.android.volley.AuthFailureError;
+<span class="keyword">import</span> com.android.volley.Request;
+<span class="keyword">import</span> com.android.volley.Response;
+<span class="keyword">import</span> com.android.volley.VolleyError;
+<span class="keyword">import</span> com.android.volley.toolbox.StringRequest;
+
+<span class="keyword">import</span> java.lang.reflect.Method;
+<span class="keyword">import</span> java.util.<span class="keyword">HashMap</span>;
+<span class="keyword">import</span> java.util.Map;
+
+
+<span class="keyword">public</span> class MainActivity extends ActionBarActivity {
+
+@Override
+<span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+<span class="comment">//        volley_Get();</span>
+    volley_Post();
+}
+
+<span class="keyword">private</span> <span class="keyword">void</span> volley_Post() {
+    <span class="keyword">String</span> url=<span class="string">"http://apis.juhe.cn/mobile/get?"</span>;
+    StringRequest request=<span class="keyword">new</span> StringRequest(Request.Method.POST,url,<span class="keyword">new</span> Response.Listener&lt;<span class="keyword">String</span>&gt;() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onResponse(<span class="keyword">String</span> s) {
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,s,Toast.LENGTH_LONG).show();
+        }
+    },<span class="keyword">new</span> Response.ErrorListener() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onErrorResponse(VolleyError volleyError) {
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"网络请求失败"</span>,Toast.LENGTH_LONG).show();
+        }
+    }){
+        <span class="comment">//与get最大的不同就是在这后面要添加getParams的方法来传递参数</span>
+        @Override
+        <span class="keyword">protected</span> Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; getParams() <span class="keyword">throws</span> AuthFailureError {
+            <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>,<span class="keyword">String</span>&gt; <span class="built_in">map</span>=<span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;&gt;();
+            <span class="built_in">map</span>.put(<span class="string">"phone"</span>,<span class="string">"13616008640"</span>);
+            <span class="built_in">map</span>.put(<span class="string">"key"</span>,<span class="string">"a8d4ff7a12cabef64ac6fe7871baf073"</span>);
+            <span class="comment">//返回map就好了</span>
+            <span class="keyword">return</span> <span class="built_in">map</span>;
+        }
+    };
+    request.setTag(<span class="string">"abcPost"</span>);
+    MyApplication.getHttpQueue().<span class="built_in">add</span>(request);
+}
+
+<span class="keyword">private</span> <span class="keyword">void</span> volley_Get() {
+    <span class="keyword">String</span> url=<span class="string">"http://apis.juhe.cn/mobile/get?phone=13616008640&amp;key=a8d4ff7a12cabef64ac6fe7871baf073"</span>;
+    StringRequest request=<span class="keyword">new</span> StringRequest(Request.Method.GET,url,<span class="keyword">new</span> Response.Listener&lt;<span class="keyword">String</span>&gt;() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onResponse(<span class="keyword">String</span> s) {
+
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,s,Toast.LENGTH_LONG).show();
+        }
+    },<span class="keyword">new</span> Response.ErrorListener() {
+        @Override
+        <span class="keyword">public</span> <span class="keyword">void</span> onErrorResponse(VolleyError volleyError) {
+            Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"网络请求失败"</span>,Toast.LENGTH_LONG).show();
+        }
+    });
+    <span class="comment">//添加标签，当取消这个请求的时候可以取消这个标签</span>
+    request.setTag(<span class="string">"abcGET"</span>);
+    <span class="comment">//将我们的请求添加到我们的对列里面</span>
+    MyApplication.getHttpQueue().<span class="built_in">add</span>(request);
+
+}
+
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cieo1ciuj0017uwb2zcrudv62" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-17" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -160,7 +307,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="ciel5v51q0017hob204gatk1a" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cieo1ciun0018uwb22efhkfn7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -376,7 +523,7 @@ android:<span class="variable">versionName=</span><span class="string">"1.0"</sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="ciel5v51t0018hob2eaqbgf6k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cieo1ciuq0019uwb29km4xxs6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -741,7 +888,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="ciel5v51v0019hob29r77rcy9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cieo1ciut001auwb2daqn13rl" class="article-share-link">Share</a>
       
       
     </footer>
@@ -787,7 +934,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="ciel5v51x001ahob26ck2kum3" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cieo1ciuv001buwb2jehf2evf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -872,7 +1019,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="ciel5v50o000rhob2zzso6avp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cieo1cit8000suwb2r5ci8har" class="article-share-link">Share</a>
       
       
     </footer>
@@ -988,7 +1135,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="ciel5v51z001bhob2355nlao9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cieo1ciux001cuwb2qt1hmf03" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1154,7 +1301,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="ciel5v524001dhob2e1t9q1r5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cieo1civ4001euwb2xobp41s7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1962,7 +2109,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="ciel5v521001chob2qv6nvqyw" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cieo1civ0001duwb2g8zxc9pb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -2076,83 +2223,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="ciel5v526001ehob2xoxfv23m" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-27" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/26/2015-7-27/">控件对齐方式 </a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/26/2015-7-27/">
-    <time datetime="2015-07-26T13:24:57.000Z" itemprop="datePublished">2015-07-26</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="控件对齐方式">控件对齐方式</h1><p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;<br>&lt;!—</p>
-<ul>
-<li><p>android:layout_above 将该控件的底部至于给定ID的控件之上</p>
-</li>
-<li><p>android:layout_below 将该控件的顶部至于给定ID的控件之下</p>
-</li>
-<li>android:layout_toLeftOf 将该控件的右边缘和给定ID的控件的左边缘对齐</li>
-<li><p>android:layout_toRightOf 将该控件的左边缘和给定ID的控件的右边缘对齐</p>
-</li>
-<li><p>android:layout_alignBaseline 该控件的baseline和给定ID的控件的baseline对齐</p>
-</li>
-<li>android:layout_alignBottom 将该控件的底部边缘与给定ID控件的底部边缘</li>
-<li>android:layout_alignLeft 将该控件的左边缘与给定ID控件的左边缘对齐</li>
-<li>android:layout_alignRight 将该控件的右边缘与给定ID控件的右边缘对齐</li>
-<li>android:layout_alignTop 将给定控件的顶部边缘与给定ID控件的顶部对齐</li>
-</ul>
-<ul>
-<li>android:alignParentBottom 如果该值为true，则将该控件的底部和父控件的底部对齐</li>
-<li>android:layout_alignParentLeft 如果该值为true，则将该控件的左边与父控件的左边对齐</li>
-<li>android:layout_alignParentRight 如果该值为true，则将该控件的右边与父控件的右边对齐</li>
-<li><p>android:layout_alignParentTop 如果该值为true，则将空间的顶部与父控件的顶部对齐</p>
-</li>
-<li><p>android:layout_centerHorizontal 如果值为真，该控件将被至于水平方向的中央</p>
-</li>
-<li>android:layout_centerInParent 如果值为真，该控件将被至于父控件水平方向和垂直方向的中央</li>
-<li>android:layout_centerVertical 如果值为真，该控件将被至于垂直方向的中央</li>
-</ul>
-<ul>
-<li>android:padding和android:layout_margin    通俗的理解 Padding 为内边框，Margin 为外边框</li>
-<li><p>android:padding和android:layout_margin的区别，其实概念很简单，padding是站在父view的角度描述问题，它规定它里面的内容必须与这个父view边界的距离。margin则是站在自己的角度描述问题，规定自己和其他（上下左右）的view之间的距离，如果同一级只有一个view，那么它的效果基本上就和padding一样了。</p>
-</li>
-<li><p>android:layout_gravity=”center”</p>
-</li>
-<li>android:gravity　属性是对该view 内容的限定．比如一个button 上面的text.  你可以设置该text 在view的靠左，靠右等位置．．</li>
-<li>android:layout_gravity是用来设置该view相对与起父view 的位置．比如一个button 在linearlayout里，你想把该button放在靠左　　靠右等位置就可以通过该属性设置．</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="ciel5v528001fhob2ym6rvsph" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cieo1civ6001fuwb2gyzbkmr7" class="article-share-link">Share</a>
       
       
     </footer>

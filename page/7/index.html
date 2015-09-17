@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        76
+        77
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,85 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-18" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/18/2015-7-18/">ListView设置，相对位置，inflater 用法</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/18/2015-7-18/">
+    <time datetime="2015-07-18T14:16:28.000Z" itemprop="datePublished">2015-07-18</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="7-18日问题集">7.18日问题集</h1><h2 id="ListView_可滚动与间隔设置">ListView 可滚动与间隔设置</h2><p>1.可滚动设置：transcriptMode<br>2.间隔设置：divider</p>
+<pre><code>&lt;ListView
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"0dp"</span>
+    android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
+    android:<span class="variable">transcriptMode=</span><span class="string">"alwaysScroll"</span>
+    android:<span class="variable">divider=</span><span class="string">"@null"</span>
+    &gt;&lt;/ListView&gt;
+</code></pre><h2 id="图片设置内边距padding">图片设置内边距padding</h2><p>图片对其方式：layout_alignParentRight</p>
+<pre><code>&lt;ImageView
+     android:<span class="variable">layout_alignParentRight=</span><span class="string">"true"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"70dp"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"70dp"</span>
+    android:<span class="variable">padding=</span><span class="string">"10dp"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/iv"</span>
+    android:<span class="variable">src=</span><span class="string">"@drawable/robot"</span>
+    /&gt;
+</code></pre><h2 id="设置相对位置">设置相对位置</h2><p>如设置textview的右边：layout_toRightOf<br>设置与有边框的距离：android:layout_marginRight=”50dp”<br>设置在谁的下面：android:layout_below=”@+id/time”</p>
+<pre><code>&lt;TextView
+    android:<span class="variable">layout_below=</span><span class="string">"@+id/time"</span>
+    android:<span class="variable">layout_marginRight=</span><span class="string">"50dp"</span>
+    android:<span class="variable">layout_toRightOf=</span><span class="string">"@+id/iv"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/tv"</span>
+    android:<span class="variable">background=</span><span class="string">"@drawable/aio_friend_bg_nor_11"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    /&gt;
+</code></pre><h2 id="android_inflater_用法">android inflater 用法</h2><p>在实际开发中LayoutInflater这个类还是非常有用的，它的作用类似于findViewById()。不同点是LayoutInflater是用来找res/layout/下的xml布局文件，并且实例化；而findViewById()是找xml布局文件下的具体widget控件(如Button、TextView等)。 具体作用： 1、对于一个没有被载入或者想要动态载入的界面，都需要使用LayoutInflater.inflate()来载入；</p>
+<p>2、对于一个已经载入的界面，就可以使用Activiyt.findViewById()方法来获得其中的界面元素。</p>
+<p>LayoutInflater 是一个抽象类，在文档中如下声明：</p>
+<p>publicabstractclass LayoutInflater extends Object </p>
+<p>获得 LayoutInflater 实例的三种方式</p>
+<p>1.LayoutInflater inflater = getLayoutInflater();  //调用Activity的getLayoutInflater()</p>
+<p>2.LayoutInflater localinflater =(LayoutInflater)context.getSystemService</p>
+<pre><code><span class="list">(<span class="keyword">Context.LAYOUT_INFLATER_SERVICE</span>)</span><span class="comment">;</span>
+</code></pre><ol>
+<li>LayoutInflater inflater = LayoutInflater.from(context);</li>
+</ol>
+<h2 id="-9图片">.9图片</h2><h2 id="adapter-notifyDataSetChanged();Adapter设置更改">adapter.notifyDataSetChanged();Adapter设置更改</h2>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cieo1civv001puwb2muxbtnr9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-15" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -164,7 +243,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="ciel5v533001qhob2gftfcsao" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cieo1ciw0001ruwb2e1jco8y2" class="article-share-link">Share</a>
       
       
     </footer>
@@ -212,7 +291,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="ciel5v537001shob2ee5zt74q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cieo1ciwg001tuwb2njggsrwj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -321,7 +400,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="ciel5v535001rhob214l88ua1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cieo1ciwb001suwb28a68akuk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -767,7 +846,7 @@ java<span class="class">.lang</span><span class="class">.RuntimeException</span>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="ciel5v53a001thob2foo9rg3x" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cieo1ciwl001uuwb2t8lq6hcs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -921,7 +1000,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="ciel5v53f001uhob2u0zrk6uc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cieo1ciwp001vuwb2ciwligo9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1015,7 +1094,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="ciel5v53h001vhob24h9zyqib" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cieo1ciws001wuwb2n8l3i9en" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1219,7 +1298,7 @@ public <span class="keyword">static</span> <span class="type">void</span> main(<
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="ciel5v53k001xhob2tqbjt5o8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cieo1ciwx001yuwb23k1sls3f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1356,7 +1435,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="ciel5v53j001whob2glgz3fgk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cieo1ciwu001xuwb24d7rsh7t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1471,110 +1550,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="ciel5v53m001yhob2x6ay8g8d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-5-31" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/31/2015-5-31/">Android设置日期与时间</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/05/31/2015-5-31/">
-    <time datetime="2015-05-31T11:51:39.000Z" itemprop="datePublished">2015-05-31</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android设置日期与时间">Android设置日期与时间</h1><p>取得设置系统时间是Android非常实用的一个功能</p>
-<h2 id="取得系统时间">取得系统时间</h2><p>实例化Calendar时，他已经默认的设置了系统时间。<br>setTimeInMillis（）这个方法，会根据你传入的毫秒数对日历对象中的变量进行相应设置。System.currentTimeMillis()可以得到系统到距离1970年1月1日0时的毫秒数</p>
-<pre><code>      <span class="comment">//Calendar定义日历对象</span>
-<span class="keyword">private</span> Calendar calendar;
-    <span class="comment">//实例化日历对象</span>
-    calendar=Calendar.getInstance();
-    <span class="comment">//设置系统时间</span>
-    calendar.setTimeInMillis(System.currentTimeMillis());
-    <span class="comment">//得到系统时间</span>
-   <span class="keyword">final</span> Date time=calendar.getTime();
-    <span class="comment">//得到时和分</span>
-   <span class="keyword">final</span> <span class="built_in">int</span> <span class="built_in">hour</span>= calendar.<span class="built_in">get</span>(Calendar.HOUR_OF_DAY);
-    <span class="keyword">final</span> <span class="built_in">int</span> <span class="built_in">minute</span>=calendar.<span class="built_in">get</span>(Calendar.MINUTE);
-</code></pre><h2 id="时间选择器">时间选择器</h2><p>时间选择器：<br>TimePickerDialog(Contextcontext,TimePickerDialog.OnTimeSetListenercallBack, int hourOfDay, int minute, boolean is24HourView)</p>
-<ul>
-<li><p>其中TimePickerDialog.OnTimeSetListenercallBack是用户选择好时间后，通知应用的回调函数。监听用户更改时间参数，调用的方法。</p>
-</li>
-<li><p>is24HourView选择是否为24小时制</p>
-</li>
-<li></li>
-</ul>
-<pre><code>tvTime= (TextView) findViewById(R.id.tvTime);
-   tvTime.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
-       <span class="annotation">@Override</span>
-       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-           <span class="keyword">new</span> TimePickerDialog(MainActivity.<span class="keyword">this</span>,<span class="keyword">new</span> TimePickerDialog.OnTimeSetListener() {
-               <span class="annotation">@Override</span>
-               <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onTimeSet</span><span class="params">(TimePicker timePicker, <span class="keyword">int</span> i, <span class="keyword">int</span> i2)</span> </span>{
-                   tvTime.setText(<span class="string">"shi"</span>+i+<span class="string">"fen"</span>+i2);
-               }
-           },<span class="number">10</span>,<span class="number">20</span>,<span class="keyword">true</span>).show();
-       }
-   });
-</code></pre><h2 id="日期选择器">日期选择器</h2><p>同理时间选择器</p>
-<pre><code>tvDate= (TextView) findViewById(R.id.tvDate);
-   tvDate.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
-       <span class="annotation">@Override</span>
-       <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-
-           <span class="keyword">new</span> DatePickerDialog(MainActivity.<span class="keyword">this</span>, <span class="keyword">new</span> DatePickerDialog.OnDateSetListener() {
-               <span class="annotation">@Override</span>
-               <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onDateSet</span><span class="params">(DatePicker view, <span class="keyword">int</span> year, <span class="keyword">int</span> monthOfYear, <span class="keyword">int</span> dayOfMonth)</span> </span>{
-
-                   tvDate.setText(String.format(<span class="string">"%d:%d:%d"</span>,year,monthOfYear,dayOfMonth));
-               }
-
-           },<span class="number">2015</span>,<span class="number">6</span>,<span class="number">2</span>).show();
-       }
-   });
-</code></pre><p>Layout档</p>
-<pre><code>   &lt;TextView
-    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">text=</span><span class="string">"0000:00:00"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/tvDate"</span>
-    /&gt;
-
-&lt;TextView
-    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">text=</span><span class="string">"00:00:00"</span>
-    android:<span class="variable">id=</span><span class="string">"@+id/tvTime"</span>
-    /&gt;
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="ciel5v53o001zhob2olan6814" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cieo1ciwz001zuwb2e5psuq4g" class="article-share-link">Share</a>
       
       
     </footer>

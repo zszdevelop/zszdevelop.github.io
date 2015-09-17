@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        76
+        77
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,119 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-27" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/27/2015-8-27/">listview没有显示，让按钮距离底部100dp，界面设置</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/27/2015-8-27/">
+    <time datetime="2015-08-27T00:47:41.000Z" itemprop="datePublished">2015-08-27</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/27">2015/8/27</h1><h2 id="listview没有显示">listview没有显示</h2><p>原因之一：</p>
+<p>父布局没改垂直导致错误，</p>
+<p>因为listview要不断向父类添加，没有看到</p>
+<h2 id="让按钮距离底部100dp">让按钮距离底部100dp</h2><pre><code>&lt;RelativeLayout
+android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>
+android:<span class="variable">layout_marginBottom=</span><span class="string">"100dp"</span>
+&gt;
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
+    android:<span class="variable">text=</span><span class="string">"外呼"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/tv_my_view_pager_Call"</span>
+    android:<span class="variable">textSize=</span><span class="string">"25sp"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    android:<span class="variable">textColor=</span><span class="string">"#FFFFFF"</span>
+    android:<span class="variable">background=</span><span class="string">"@drawable/call_shape"</span>
+    android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
+
+    /&gt;
+
+
+
+
+
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
+    android:<span class="variable">text=</span><span class="string">"梯口机"</span>
+    android:<span class="variable">textSize=</span><span class="string">"30sp"</span>
+    android:<span class="variable">layout_toRightOf=</span><span class="string">"@id/tv_my_view_pager_Call"</span>
+    android:<span class="variable">id=</span><span class="string">"@+id/tv_my_view_pager_Stairs"</span>
+    android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>
+    android:<span class="variable">textColor=</span><span class="string">"#FFFFFF"</span>
+    android:<span class="variable">background=</span><span class="string">"@drawable/stairs_shape"</span>
+    /&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><h2 id="界面设置方法之一">界面设置方法之一</h2><p>几个文本宽设置，要先设置父级的高（例如50dp），再让布局立面的文字按钮等垂直居中。</p>
+<h2 id="界面设置方法之二">界面设置方法之二</h2><p>每个文本之间的间隔线</p>
+<pre><code>&lt;View
+       android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+       android:<span class="variable">layout_height=</span><span class="string">"0.5dp"</span>
+       android:<span class="variable">background=</span><span class="string">"#cdcdcd"</span>&gt;&lt;/View&gt;
+</code></pre><h2 id="界面设置之三_—-按钮变色">界面设置之三 —-按钮变色</h2><p>给他在drawable文件中设置一个按钮按下的xml文件，并设置里面按钮按下的变化。</p>
+<p>例如：</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">selector</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> &gt;</span>
+    <span class="comment">&lt;!--&lt;item android:state_selected="true" android:drawable="@drawable/btn_blue_press" /&gt;--&gt;</span>
+<span class="comment">&lt;!--&lt;item android:drawable="@drawable/appbar_sd_selected" android:state_checked="true"/&gt;--&gt;</span>
+<span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:state_pressed</span>=<span class="value">"true"</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/btn_blue_press"</span>/&gt;</span>
+<span class="tag">&lt;<span class="title">item</span> <span class="attribute">android:drawable</span>=<span class="value">"@drawable/newbtn_blue"</span> /&gt;</span>
+<span class="tag">&lt;/<span class="title">selector</span>&gt;</span>
+</code></pre><p>再在按钮图标上设置背景直接改为这个文件</p>
+<h2 id="界面设置之四——-使用styles是管理">界面设置之四——-使用styles是管理</h2><pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">resources</span>&gt;</span>
+<span class="tag">&lt;<span class="title">style</span> <span class="attribute">name</span>=<span class="value">"mine_cicyle_style"</span>&gt;</span><span class="css">
+    &lt;<span class="tag">item</span> <span class="tag">name</span>="<span class="rule"><span class="attribute">android</span>:<span class="value">layout_width<span class="string">"&gt;90dp&lt;/item&gt;
+    &lt;item name="</span>android:layout_height<span class="string">"&gt;90dp&lt;/item&gt;
+    &lt;item name="</span>android:orientation<span class="string">"&gt;vertical&lt;/item&gt;
+</span></span></span></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">resources</span>&gt;</span>
+</code></pre><p>当调用的时候：    </p>
+<pre><code><span class="setting">style=<span class="value"><span class="string">"@style/mine_cicyle_style"</span></span></span>
+</code></pre><h2 id="拉界面设置之五——editText自动适配">拉界面设置之五——editText自动适配</h2><p>配置editText的时候，他两边都有控件。这时候设置的时候就要让宽度为0dp，权重为1.只有他设置</p>
+<pre><code>&lt;EditText
+        android:<span class="variable">layout_width=</span><span class="string">"0dp"</span>
+        android:<span class="variable">layout_weight=</span><span class="string">"1"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+
+        /&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cieo1citm000xuwb2w9y1v4ti" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-26-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -412,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="ciel5v513000yhob2apjo3b4t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cieo1citr000zuwb2h5t4tpqw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -467,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="ciel5v511000xhob2hvlsicgi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cieo1citp000yuwb25dpnbjqc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -679,7 +792,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="ciel5v515000zhob2pubr0jd9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cieo1citu0010uwb2tw6pto5k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -753,7 +866,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="ciel5v5190010hob262n4oi62" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cieo1city0011uwb2mfjh02cs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -776,7 +889,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="ciel5v51d0012hob21e6ogyso" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cieo1ciu90013uwb2ncqd2cun" class="article-share-link">Share</a>
       
       
     </footer>
@@ -848,7 +961,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="ciel5v51b0011hob23lyhcad1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cieo1ciu40012uwb2cqi9j4uv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1071,7 +1184,7 @@ tools:context=<span class="string">".MainActivity"</span> &gt;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="ciel5v51i0014hob2fkk7kve4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cieo1ciud0015uwb2vwqonrqk" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1266,7 +1379,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="ciel5v51l0015hob2b7ycp2nf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cieo1ciug0016uwb2igpb0ett" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1410,154 +1523,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="ciel5v51f0013hob2rijf50lj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-19" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/19/2015-8-19/">volley的简单使用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/19/2015-8-19/">
-    <time datetime="2015-08-19T08:36:41.000Z" itemprop="datePublished">2015-08-19</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/19问题集">2015/8/19问题集</h1><h2 id="volley的简单使用">volley的简单使用</h2><p>MyApplication中的代码：主要是建立一个queue对列。并给出一个调用方法</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.volleydemo;
-
-<span class="keyword">import</span> android.app.<span class="type">Application</span>;
-
-<span class="keyword">import</span> com.android.volley.<span class="type">RequestQueue</span>;
-<span class="keyword">import</span> com.android.volley.toolbox.<span class="type">Volley</span>;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/8/19.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Application</span> {</span>
-
-public static <span class="type">RequestQueue</span> queue;
-
-<span class="annotation">@Override</span>
-public void onCreate() {
-    <span class="keyword">super</span>.onCreate();
-    queue= <span class="type">Volley</span>.newRequestQueue(getApplicationContext());
-}
-
-public static <span class="type">RequestQueue</span> getHttpQueue(){
-    <span class="keyword">return</span> queue;
-}
-
-}
-</code></pre><p>=</p>
-<p>MainActivity中的代码。调用和实现volley的post和get方法</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.volleydemo;
-
-<span class="keyword">import</span> android.support.v7.app.ActionBarActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.view.Menu;
-<span class="keyword">import</span> android.view.MenuItem;
-<span class="keyword">import</span> android.widget.Toast;
-
-<span class="keyword">import</span> com.android.volley.AuthFailureError;
-<span class="keyword">import</span> com.android.volley.Request;
-<span class="keyword">import</span> com.android.volley.Response;
-<span class="keyword">import</span> com.android.volley.VolleyError;
-<span class="keyword">import</span> com.android.volley.toolbox.StringRequest;
-
-<span class="keyword">import</span> java.lang.reflect.Method;
-<span class="keyword">import</span> java.util.<span class="keyword">HashMap</span>;
-<span class="keyword">import</span> java.util.Map;
-
-
-<span class="keyword">public</span> class MainActivity extends ActionBarActivity {
-
-@Override
-<span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main);
-<span class="comment">//        volley_Get();</span>
-    volley_Post();
-}
-
-<span class="keyword">private</span> <span class="keyword">void</span> volley_Post() {
-    <span class="keyword">String</span> url=<span class="string">"http://apis.juhe.cn/mobile/get?"</span>;
-    StringRequest request=<span class="keyword">new</span> StringRequest(Request.Method.POST,url,<span class="keyword">new</span> Response.Listener&lt;<span class="keyword">String</span>&gt;() {
-        @Override
-        <span class="keyword">public</span> <span class="keyword">void</span> onResponse(<span class="keyword">String</span> s) {
-            Toast.makeText(MainActivity.<span class="keyword">this</span>,s,Toast.LENGTH_LONG).show();
-        }
-    },<span class="keyword">new</span> Response.ErrorListener() {
-        @Override
-        <span class="keyword">public</span> <span class="keyword">void</span> onErrorResponse(VolleyError volleyError) {
-            Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"网络请求失败"</span>,Toast.LENGTH_LONG).show();
-        }
-    }){
-        <span class="comment">//与get最大的不同就是在这后面要添加getParams的方法来传递参数</span>
-        @Override
-        <span class="keyword">protected</span> Map&lt;<span class="keyword">String</span>, <span class="keyword">String</span>&gt; getParams() <span class="keyword">throws</span> AuthFailureError {
-            <span class="keyword">HashMap</span>&lt;<span class="keyword">String</span>,<span class="keyword">String</span>&gt; <span class="built_in">map</span>=<span class="keyword">new</span> <span class="keyword">HashMap</span>&lt;&gt;();
-            <span class="built_in">map</span>.put(<span class="string">"phone"</span>,<span class="string">"13616008640"</span>);
-            <span class="built_in">map</span>.put(<span class="string">"key"</span>,<span class="string">"a8d4ff7a12cabef64ac6fe7871baf073"</span>);
-            <span class="comment">//返回map就好了</span>
-            <span class="keyword">return</span> <span class="built_in">map</span>;
-        }
-    };
-    request.setTag(<span class="string">"abcPost"</span>);
-    MyApplication.getHttpQueue().<span class="built_in">add</span>(request);
-}
-
-<span class="keyword">private</span> <span class="keyword">void</span> volley_Get() {
-    <span class="keyword">String</span> url=<span class="string">"http://apis.juhe.cn/mobile/get?phone=13616008640&amp;key=a8d4ff7a12cabef64ac6fe7871baf073"</span>;
-    StringRequest request=<span class="keyword">new</span> StringRequest(Request.Method.GET,url,<span class="keyword">new</span> Response.Listener&lt;<span class="keyword">String</span>&gt;() {
-        @Override
-        <span class="keyword">public</span> <span class="keyword">void</span> onResponse(<span class="keyword">String</span> s) {
-
-            Toast.makeText(MainActivity.<span class="keyword">this</span>,s,Toast.LENGTH_LONG).show();
-        }
-    },<span class="keyword">new</span> Response.ErrorListener() {
-        @Override
-        <span class="keyword">public</span> <span class="keyword">void</span> onErrorResponse(VolleyError volleyError) {
-            Toast.makeText(MainActivity.<span class="keyword">this</span>,<span class="string">"网络请求失败"</span>,Toast.LENGTH_LONG).show();
-        }
-    });
-    <span class="comment">//添加标签，当取消这个请求的时候可以取消这个标签</span>
-    request.setTag(<span class="string">"abcGET"</span>);
-    <span class="comment">//将我们的请求添加到我们的对列里面</span>
-    MyApplication.getHttpQueue().<span class="built_in">add</span>(request);
-
-}
-
-
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="ciel5v51o0016hob2025lb246" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cieo1ciua0014uwb2c2fj7xym" class="article-share-link">Share</a>
       
       
     </footer>
