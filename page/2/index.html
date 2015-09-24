@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        77
+        79
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,319 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-11" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/11/2015-9-11/">2015/9/11</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/11/2015-9-11/">
+    <time datetime="2015-09-11T01:02:00.000Z" itemprop="datePublished">2015-09-11</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/11/2015-9-11/" data-id="ciexyqvbj000r1wb2gimr348g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-9-10" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/10/2015-9-10/">2015/9/10</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/10/2015-9-10/">
+    <time datetime="2015-09-10T06:00:17.000Z" itemprop="datePublished">2015-09-10</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/10问题集">2015/9/10问题集</h1><h2 id="Android取得经纬度">Android取得经纬度</h2><p>从中取得经纬度。<br>记得要添加权限</p>
+<pre><code>&lt;uses-permission android:<span class="property">name</span>=<span class="string">"android.permission.ACCESS_FINE_LOCATION"</span> /&gt;
+</code></pre><p>-</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.gpsfixdemo;
+
+<span class="keyword">import</span> android.Manifest;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.pm.PackageManager;
+<span class="keyword">import</span> android.location.Address;
+<span class="keyword">import</span> android.location.Geocoder;
+<span class="keyword">import</span> android.location.Location;
+<span class="keyword">import</span> android.location.LocationListener;
+<span class="keyword">import</span> android.location.LocationManager;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.TextView;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.net.HttpURLConnection;
+<span class="keyword">import</span> java.net.URL;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GPSActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+String latLongString;
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_gps);
+    init();
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{
+    <span class="javadoc">/**
+     *取得系统位置管理的引用，
+     *getSystem这个一定要在activity里面引用
+     */</span>
+
+    LocationManager locationManager = (LocationManager) <span class="keyword">this</span>.getSystemService(Context.LOCATION_SERVICE);
+    <span class="comment">//添加位置监听。Define a listener that responds to location updates</span>
+    LocationListener locationListener = <span class="keyword">new</span> LocationListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLocationChanged</span><span class="params">(Location location)</span> </span>{
+            <span class="comment">// Called when a new location is found by the network location provider.</span>
+            <span class="comment">//当找到新的位置提供者</span>
+            makeUseOfNewLocation(location);
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStatusChanged</span><span class="params">(String provider, <span class="keyword">int</span> status, Bundle extras)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderEnabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderDisabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+    };
+    <span class="comment">// 设置监听器，自动更新的最小时间为间隔N秒(1秒为1*1000，这样写主要为了方便)或最小位移变化超过N米</span>
+    locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, <span class="number">0</span>, <span class="number">0</span>, locationListener);
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">makeUseOfNewLocation</span><span class="params">(Location location)</span> </span>{
+    TextView tv1;
+    tv1 = (TextView) <span class="keyword">this</span>.findViewById(R.id.tv1);
+    <span class="keyword">if</span> (location != <span class="keyword">null</span>) {
+        <span class="keyword">double</span>  latitude = location.getLatitude();
+        <span class="keyword">double</span> longitude= location.getLongitude();
+        tv1.setText(<span class="string">"维度："</span> +  latitude+ <span class="string">"\n经度"</span> + longitude);
+    } <span class="keyword">else</span> {
+        tv1.setText(<span class="string">"无法获取地理信息"</span>);
+    }
+}
+</code></pre><p><strong>如果还要将经纬度转化为城市</strong></p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.gpsfixdemo;
+
+<span class="keyword">import</span> android.Manifest;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.content.pm.PackageManager;
+<span class="keyword">import</span> android.location.Address;
+<span class="keyword">import</span> android.location.Criteria;
+<span class="keyword">import</span> android.location.Geocoder;
+<span class="keyword">import</span> android.location.Location;
+<span class="keyword">import</span> android.location.LocationListener;
+<span class="keyword">import</span> android.location.LocationManager;
+<span class="keyword">import</span> android.provider.Settings;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.util.Log;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.TextView;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> java.io.IOException;
+<span class="keyword">import</span> java.net.HttpURLConnection;
+<span class="keyword">import</span> java.net.URL;
+<span class="keyword">import</span> java.util.List;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GPSActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+String latLongString;
+<span class="keyword">double</span>  latitude;
+<span class="keyword">double</span> longitude;
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_gps);
+    init();
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">()</span> </span>{
+
+    openGPSSettings();
+    getLaction();
+
+}
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">openGPSSettings</span><span class="params">()</span> </span>{
+    LocationManager alm = (LocationManager) <span class="keyword">this</span>
+            .getSystemService(Context.LOCATION_SERVICE);
+    <span class="keyword">if</span> (alm
+            .isProviderEnabled(android.location.LocationManager.GPS_PROVIDER)) {
+        Toast.makeText(<span class="keyword">this</span>, <span class="string">"GPS模块正常"</span>, Toast.LENGTH_SHORT)
+                .show();
+        Log.w(<span class="string">"gps "</span>, <span class="string">"正常"</span>);
+        <span class="keyword">return</span>;
+    }
+
+    Toast.makeText(<span class="keyword">this</span>, <span class="string">"请开启GPS！"</span>, Toast.LENGTH_SHORT).show();
+    Intent intent = <span class="keyword">new</span> Intent(Settings.ACTION_SECURITY_SETTINGS);
+    startActivityForResult(intent, <span class="number">0</span>); <span class="comment">//此为设置完成后返回到获取界面</span>
+
+}
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getLaction</span><span class="params">()</span></span>{
+    <span class="javadoc">/**
+     *取得系统位置管理的引用，
+     *getSystem这个一定要在activity里面引用
+     */</span>
+
+    LocationManager locationManager = (LocationManager) <span class="keyword">this</span>.getSystemService(Context.LOCATION_SERVICE);
+
+    String serviceName = Context.LOCATION_SERVICE;
+    locationManager = (LocationManager) <span class="keyword">this</span>.getSystemService(serviceName);
+    <span class="comment">// 查找到服务信息</span>
+    Criteria criteria = <span class="keyword">new</span> Criteria();
+    criteria.setAccuracy(Criteria.ACCURACY_FINE); <span class="comment">// 高精度</span>
+    criteria.setAltitudeRequired(<span class="keyword">false</span>);
+    criteria.setBearingRequired(<span class="keyword">false</span>);
+    criteria.setCostAllowed(<span class="keyword">true</span>);
+    criteria.setPowerRequirement(Criteria.POWER_LOW); <span class="comment">// 低功耗</span>
+
+    String provider = locationManager.getBestProvider(criteria, <span class="keyword">true</span>); <span class="comment">// 获取GPS信息</span>
+
+    <span class="comment">//添加位置监听。Define a listener that responds to location updates</span>
+    LocationListener locationListener = <span class="keyword">new</span> LocationListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onLocationChanged</span><span class="params">(Location location)</span> </span>{
+            <span class="comment">// Called when a new location is found by the network location provider.</span>
+            <span class="comment">//当找到新的位置提供者</span>
+            makeUseOfNewLocation(location);
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onStatusChanged</span><span class="params">(String provider, <span class="keyword">int</span> status, Bundle extras)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderEnabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onProviderDisabled</span><span class="params">(String provider)</span> </span>{
+
+        }
+    };
+    <span class="comment">// 设置监听器，自动更新的最小时间为间隔N秒(1秒为1*1000，这样写主要为了方便)或最小位移变化超过N米</span>
+    locationManager.requestLocationUpdates(provider, <span class="number">1000</span> * <span class="number">60</span>, <span class="number">100</span>, locationListener);
+
+}
+
+<span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">makeUseOfNewLocation</span><span class="params">(Location location)</span> </span>{
+    TextView tv1;
+
+    tv1 = (TextView) <span class="keyword">this</span>.findViewById(R.id.tv1);
+    <span class="keyword">if</span> (location != <span class="keyword">null</span>) {
+         latitude = location.getLatitude();
+        longitude= location.getLongitude();
+        tv1.setText(<span class="string">"维度："</span> +  latitude+ <span class="string">"\n经度"</span> + longitude);
+    } <span class="keyword">else</span> {
+        tv1.setText(<span class="string">"无法获取地理信息"</span>);
+    }
+
+
+
+    List&lt;Address&gt; addList = <span class="keyword">null</span>;
+    Geocoder ge = <span class="keyword">new</span> Geocoder(<span class="keyword">this</span>);
+    <span class="keyword">try</span> {
+        addList = ge.getFromLocation(latitude, longitude, <span class="number">2</span>);
+        tv1.append(addList+<span class="string">""</span>);
+    } <span class="keyword">catch</span> (IOException e) {
+        <span class="comment">// TODO Auto-generated catch block</span>
+        e.printStackTrace();
+    }
+    <span class="keyword">if</span>(addList!=<span class="keyword">null</span> &amp;&amp; addList.size()&gt;<span class="number">0</span>){
+        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;addList.size(); i++){
+            Address ad = addList.get(i);
+            latLongString += <span class="string">"\n"</span>;
+            latLongString += ad.getCountryName() + <span class="string">";"</span> + ad.getLocality();
+            tv1.append(<span class="string">"您当前的位置是:\n"</span> + latLongString);
+        }
+    }
+
+}
+
+
+
+}
+</code></pre><h2 id="Location服务之Geocoder">Location服务之Geocoder</h2><p>提到Android基于位置的服务，就不得不提android.location包，</p>
+<p>location包提供了很便捷的API来实现基于位置的服务。主要包括Geocoder和LocationManager。今天就先来介绍一下Geocoder。</p>
+<p>Geocoder可以在街道地址和经纬度地图坐标之间进行转换。它提供了对两种地理编码功能的访问：</p>
+<p><strong>Forward Geocoding(前向地理编码)</strong>：查找某个地址的经纬度</p>
+<p><strong>Reverse Geocoding(反向地理编码)</strong>：查找一个给定的经纬度所对应的街道地址。</p>
+<h2 id="Location获取地理位置信息（中）Criteria类的简单使用">Location获取地理位置信息（中）Criteria类的简单使用</h2><p>在使用android lcoation的时候，可能不希望自己去硬性的选择是GPS服务还是NETWORK服务，可能是我们考虑的因素有很多，自己很难决定，Android SDK提供了一个类Criteria，直译为标准。</p>
+<p>//翻译：返回满足给定的criteria(标准)的最佳provider，（前面一篇文章提到过两种重要provider的区别）。只有当provider权限允许的时候才会返回，如果几个provider均满足criteria设定的标准，最贴近标准的provider将会被返回。如果没有provider满足，标准将按照下面的序列放宽松。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/10/2015-9-10/" data-id="ciexyqvbl000s1wb2gbh51lgi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-9-4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -244,7 +557,7 @@ private <span class="keyword">void</span> updateToNewLocation(Location location)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-4/" data-id="cieo1ciqn0003uwb2lde90j4q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-4/" data-id="ciexyqv9e00031wb2fjehc5wg" class="article-share-link">Share</a>
       
       
     </footer>
@@ -302,7 +615,7 @@ private <span class="keyword">void</span> updateToNewLocation(Location location)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-3/" data-id="cieo1ciqp0004uwb2sdi1neop" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-3/" data-id="ciexyqv9h00041wb247isfxky" class="article-share-link">Share</a>
       
       
     </footer>
@@ -552,7 +865,7 @@ public void setSelection(int position) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-2/" data-id="cieo1ciqx0005uwb2gmfzy5ja" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-2/" data-id="ciexyqv9o00051wb21fcfy7d6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -606,7 +919,7 @@ public void setSelection(int position) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-9/" data-id="cieo1ciql0002uwb265qfc4ql" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-9/" data-id="ciexyqv9400021wb2tlumvypd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -674,7 +987,7 @@ public void setSelection(int position) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="cieo1cir50007uwb2osid1prd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="ciexyqv9u00071wb2pr27zetf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -801,7 +1114,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-5/" data-id="cieo1cira0008uwb2yiqt52a0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-5/" data-id="ciexyqv9w00081wb2at59yx6c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -920,7 +1233,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-4/" data-id="cieo1cird0009uwb26q4hogtq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-4/" data-id="ciexyqv9y00091wb2h1vfiqkc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1116,173 +1429,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-3/" data-id="cieo1cirh000auwb258b15ep4" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-8-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/08/2015-9-8-2/">Android Paint类的介绍</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/08/2015-9-8-2/">
-    <time datetime="2015-09-08T05:41:42.000Z" itemprop="datePublished">2015-09-08</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android_Paint类的介绍">Android Paint类的介绍</h1><p>要绘图，首先得调整画笔，待画笔调整好之后，再将图像绘制到画布上，这样才可以显示在手机屏幕上。Android 中的画笔是 Paint类，Paint 中包含了很多方法对其属性进行设置，主要方法如下： </p>
-<p>   setAntiAlias: 设置画笔的锯齿效果。<br>   setColor: 设置画笔颜色<br>   setARGB:  设置画笔的a,r,p,g值。<br>   setAlpha:  设置Alpha值<br>   setTextSize: 设置字体尺寸。<br>   setStyle:  设置画笔风格，空心或者实心。<br>   setStrokeWidth: 设置空心的边框宽度。<br>   getColor:  得到画笔的颜色<br>   getAlpha:  得到画笔的Alpha值。 </p>
-<pre><code> <span class="keyword">*</span> Paint类介绍  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> Paint即画笔，在绘图过程中起到了极其重要的作用，画笔主要保存了颜色，  
- <span class="keyword">*</span> 样式等绘制信息，指定了如何绘制文本和图形，画笔对象有很多设置方法，  
- <span class="keyword">*</span> 大体上可以分为两类，一类与图形绘制相关，一类与文本绘制相关。         
- <span class="keyword">*</span>   
- <span class="keyword">*</span> 1.图形绘制  
- <span class="keyword">*</span> setARGB(int a,int r,int g,int b);  
- <span class="keyword">*</span> 设置绘制的颜色，a代表透明度，r，g，b代表颜色值。  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setAlpha(int a);  
- <span class="keyword">*</span> 设置绘制图形的透明度。  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setColor(int color);  
- <span class="keyword">*</span> 设置绘制的颜色，使用颜色值来表示，该颜色值包括透明度和RGB颜色。  
- <span class="keyword">*</span>   
-<span class="keyword">*</span> setAntiAlias(boolean aa);  
- <span class="keyword">*</span> 设置是否使用抗锯齿功能，会消耗较大资源，绘制图形速度会变慢。  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setDither(boolean dither);  
- <span class="keyword">*</span> 设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setFilterBitmap(boolean filter);  
- <span class="keyword">*</span> 如果该项设置为true，则图像在动画进行中会滤掉对Bitmap图像的优化操作，加快显示  
- <span class="keyword">*</span> 速度，本设置项依赖于dither和xfermode的设置  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setMaskFilter(MaskFilter maskfilter);  
- <span class="keyword">*</span> 设置MaskFilter，可以用不同的MaskFilter实现滤镜的效果，如滤化，立体等       <span class="keyword">*</span>   
- <span class="keyword">*</span> setColorFilter(ColorFilter colorfilter);  
- <span class="keyword">*</span> 设置颜色过滤器，可以在绘制颜色时实现不用颜色的变换效果  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setPathEffect(PathEffect effect);  
- <span class="keyword">*</span> 设置绘制路径的效果，如点画线等  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setShader(Shader shader);  
- <span class="keyword">*</span> 设置图像效果，使用Shader可以绘制出各种渐变效果  
- <span class="keyword">*</span>  
- <span class="keyword">*</span> setShadowLayer(float radius ,float dx,float dy,int color);  
- <span class="keyword">*</span> 在图形下面设置阴影层，产生阴影效果，radius为阴影的角度，dx和dy为阴影在x轴和y轴上的距离，color为阴影的颜色  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setStyle(Paint.Style style);  
- <span class="keyword">*</span> 设置画笔的样式，为FILL，FILL_OR_STROKE，或STROKE  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setStrokeCap(Paint.Cap cap);  
- <span class="keyword">*</span> 当画笔样式为STROKE或FILL_OR_STROKE时，设置笔刷的图形样式，如圆形样式  
- <span class="keyword">*</span> Cap.ROUND,或方形样式Cap.SQUARE  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setSrokeJoin(Paint.Join join);  
- <span class="keyword">*</span> 设置绘制时各图形的结合方式，如平滑效果等  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setStrokeWidth(float width);  
- <span class="keyword">*</span> 当画笔样式为STROKE或FILL_OR_STROKE时，设置笔刷的粗细度  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setXfermode(Xfermode xfermode);  
- <span class="keyword">*</span> 设置图形重叠时的处理方式，如合并，取交集或并集，经常用来制作橡皮的擦除效果  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> 2.文本绘制  
- <span class="keyword">*</span> setFakeBoldText(boolean fakeBoldText);  
- <span class="keyword">*</span> 模拟实现粗体文字，设置在小字体上效果会非常差  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setSubpixelText(boolean subpixelText);  
- <span class="keyword">*</span> 设置该项为true，将有助于文本在LCD屏幕上的显示效果  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setTextAlign(Paint.Align align);  
- <span class="keyword">*</span> 设置绘制文字的对齐方向  
- <span class="keyword">*</span>   
-   <span class="keyword">*</span> setTextScaleX(float scaleX);  
-<span class="keyword">*</span> 设置绘制文字x轴的缩放比例，可以实现文字的拉伸的效果  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setTextSize(float textSize);  
- <span class="keyword">*</span> 设置绘制文字的字号大小  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setTextSkewX(float skewX);  
- <span class="keyword">*</span> 设置斜体文字，skewX为倾斜弧度  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setTypeface(Typeface typeface);  
- <span class="keyword">*</span> 设置Typeface对象，即字体风格，包括粗体，斜体以及衬线体，非衬线体等  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setUnderlineText(boolean underlineText);  
- <span class="keyword">*</span> 设置带有下划线的文字效果  
- <span class="keyword">*</span>   
- <span class="keyword">*</span> setStrikeThruText(boolean strikeThruText);  
- <span class="keyword">*</span> 设置带有删除线的效果  
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-2/" data-id="cieo1cirj000buwb227i0ww9j" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-8" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/08/2015-9-8/">2015/9/8</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/08/2015-9-8/">
-    <time datetime="2015-09-08T01:04:46.000Z" itemprop="datePublished">2015-09-08</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/9/8问题集">2015/9/8问题集</h1><h2 id="android实现ListView的A-Z字母排序和过滤搜索功能，实现汉字转拼音">android实现ListView的A-Z字母排序和过滤搜索功能，实现汉字转拼音</h2><h2 id="paint这个类的使用">paint这个类的使用</h2><h2 id="dispatchTouchEvent（）这个类的使用">dispatchTouchEvent（）这个类的使用</h2><h2 id="SectionIndexer接口">SectionIndexer接口</h2><p>参考的原文：<a href="http://blog.csdn.net/xiaanming/article/details/12684155" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/12684155</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8/" data-id="cieo1cir00006uwb202aqlw3b" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-3/" data-id="ciexyqva0000a1wb23bvydiez" class="article-share-link">Share</a>
       
       
     </footer>

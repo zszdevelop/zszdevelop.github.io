@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        77
+        79
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,172 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-8-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/08/2015-9-8-2/">Android Paint类的介绍</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/08/2015-9-8-2/">
+    <time datetime="2015-09-08T05:41:42.000Z" itemprop="datePublished">2015-09-08</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android_Paint类的介绍">Android Paint类的介绍</h1><p>要绘图，首先得调整画笔，待画笔调整好之后，再将图像绘制到画布上，这样才可以显示在手机屏幕上。Android 中的画笔是 Paint类，Paint 中包含了很多方法对其属性进行设置，主要方法如下： </p>
+<p>   setAntiAlias: 设置画笔的锯齿效果。<br>   setColor: 设置画笔颜色<br>   setARGB:  设置画笔的a,r,p,g值。<br>   setAlpha:  设置Alpha值<br>   setTextSize: 设置字体尺寸。<br>   setStyle:  设置画笔风格，空心或者实心。<br>   setStrokeWidth: 设置空心的边框宽度。<br>   getColor:  得到画笔的颜色<br>   getAlpha:  得到画笔的Alpha值。 </p>
+<pre><code> <span class="keyword">*</span> Paint类介绍  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> Paint即画笔，在绘图过程中起到了极其重要的作用，画笔主要保存了颜色，  
+ <span class="keyword">*</span> 样式等绘制信息，指定了如何绘制文本和图形，画笔对象有很多设置方法，  
+ <span class="keyword">*</span> 大体上可以分为两类，一类与图形绘制相关，一类与文本绘制相关。         
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> 1.图形绘制  
+ <span class="keyword">*</span> setARGB(int a,int r,int g,int b);  
+ <span class="keyword">*</span> 设置绘制的颜色，a代表透明度，r，g，b代表颜色值。  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setAlpha(int a);  
+ <span class="keyword">*</span> 设置绘制图形的透明度。  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setColor(int color);  
+ <span class="keyword">*</span> 设置绘制的颜色，使用颜色值来表示，该颜色值包括透明度和RGB颜色。  
+ <span class="keyword">*</span>   
+<span class="keyword">*</span> setAntiAlias(boolean aa);  
+ <span class="keyword">*</span> 设置是否使用抗锯齿功能，会消耗较大资源，绘制图形速度会变慢。  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setDither(boolean dither);  
+ <span class="keyword">*</span> 设定是否使用图像抖动处理，会使绘制出来的图片颜色更加平滑和饱满，图像更加清晰  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setFilterBitmap(boolean filter);  
+ <span class="keyword">*</span> 如果该项设置为true，则图像在动画进行中会滤掉对Bitmap图像的优化操作，加快显示  
+ <span class="keyword">*</span> 速度，本设置项依赖于dither和xfermode的设置  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setMaskFilter(MaskFilter maskfilter);  
+ <span class="keyword">*</span> 设置MaskFilter，可以用不同的MaskFilter实现滤镜的效果，如滤化，立体等       <span class="keyword">*</span>   
+ <span class="keyword">*</span> setColorFilter(ColorFilter colorfilter);  
+ <span class="keyword">*</span> 设置颜色过滤器，可以在绘制颜色时实现不用颜色的变换效果  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setPathEffect(PathEffect effect);  
+ <span class="keyword">*</span> 设置绘制路径的效果，如点画线等  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setShader(Shader shader);  
+ <span class="keyword">*</span> 设置图像效果，使用Shader可以绘制出各种渐变效果  
+ <span class="keyword">*</span>  
+ <span class="keyword">*</span> setShadowLayer(float radius ,float dx,float dy,int color);  
+ <span class="keyword">*</span> 在图形下面设置阴影层，产生阴影效果，radius为阴影的角度，dx和dy为阴影在x轴和y轴上的距离，color为阴影的颜色  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setStyle(Paint.Style style);  
+ <span class="keyword">*</span> 设置画笔的样式，为FILL，FILL_OR_STROKE，或STROKE  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setStrokeCap(Paint.Cap cap);  
+ <span class="keyword">*</span> 当画笔样式为STROKE或FILL_OR_STROKE时，设置笔刷的图形样式，如圆形样式  
+ <span class="keyword">*</span> Cap.ROUND,或方形样式Cap.SQUARE  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setSrokeJoin(Paint.Join join);  
+ <span class="keyword">*</span> 设置绘制时各图形的结合方式，如平滑效果等  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setStrokeWidth(float width);  
+ <span class="keyword">*</span> 当画笔样式为STROKE或FILL_OR_STROKE时，设置笔刷的粗细度  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setXfermode(Xfermode xfermode);  
+ <span class="keyword">*</span> 设置图形重叠时的处理方式，如合并，取交集或并集，经常用来制作橡皮的擦除效果  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> 2.文本绘制  
+ <span class="keyword">*</span> setFakeBoldText(boolean fakeBoldText);  
+ <span class="keyword">*</span> 模拟实现粗体文字，设置在小字体上效果会非常差  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setSubpixelText(boolean subpixelText);  
+ <span class="keyword">*</span> 设置该项为true，将有助于文本在LCD屏幕上的显示效果  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setTextAlign(Paint.Align align);  
+ <span class="keyword">*</span> 设置绘制文字的对齐方向  
+ <span class="keyword">*</span>   
+   <span class="keyword">*</span> setTextScaleX(float scaleX);  
+<span class="keyword">*</span> 设置绘制文字x轴的缩放比例，可以实现文字的拉伸的效果  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setTextSize(float textSize);  
+ <span class="keyword">*</span> 设置绘制文字的字号大小  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setTextSkewX(float skewX);  
+ <span class="keyword">*</span> 设置斜体文字，skewX为倾斜弧度  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setTypeface(Typeface typeface);  
+ <span class="keyword">*</span> 设置Typeface对象，即字体风格，包括粗体，斜体以及衬线体，非衬线体等  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setUnderlineText(boolean underlineText);  
+ <span class="keyword">*</span> 设置带有下划线的文字效果  
+ <span class="keyword">*</span>   
+ <span class="keyword">*</span> setStrikeThruText(boolean strikeThruText);  
+ <span class="keyword">*</span> 设置带有删除线的效果  
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-2/" data-id="ciexyqva2000b1wb297wplskd" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-9-8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/08/2015-9-8/">2015/9/8</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/08/2015-9-8/">
+    <time datetime="2015-09-08T01:04:46.000Z" itemprop="datePublished">2015-09-08</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/8问题集">2015/9/8问题集</h1><h2 id="android实现ListView的A-Z字母排序和过滤搜索功能，实现汉字转拼音">android实现ListView的A-Z字母排序和过滤搜索功能，实现汉字转拼音</h2><h2 id="paint这个类的使用">paint这个类的使用</h2><h2 id="dispatchTouchEvent（）这个类的使用">dispatchTouchEvent（）这个类的使用</h2><h2 id="SectionIndexer接口">SectionIndexer接口</h2><p>参考的原文：<a href="http://blog.csdn.net/xiaanming/article/details/12684155" target="_blank" rel="external">http://blog.csdn.net/xiaanming/article/details/12684155</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8/" data-id="ciexyqv9r00061wb2jahf019e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-7-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -149,7 +315,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-3/" data-id="cieo1cirr000duwb26levjh2y" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-3/" data-id="ciexyqva7000d1wb2mjz389ee" class="article-share-link">Share</a>
       
       
     </footer>
@@ -293,7 +459,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-2/" data-id="cieo1ciru000euwb2wwxjzwfe" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-2/" data-id="ciexyqva9000e1wb24llvxnnx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,7 +613,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cieo1cirn000cuwb2dt0mxnbz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="ciexyqva4000c1wb2ulqb047p" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +661,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="cieo1cirx000fuwb2sczzoagq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="ciexyqvad000f1wb2uo1jptxb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -542,7 +708,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cieo1cis3000guwb2j4y5uq4z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="ciexyqvaj000g1wb2nevc8ah3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -888,7 +1054,7 @@ tools:<span class="variable">context=</span><span class="string">"com.example.nl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cieo1cit6000ruwb23xm7q876" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="ciexyqvbn000t1wb23y5h74wc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1039,7 +1205,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cieo1citd000uuwb2mdpo8ww4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="ciexyqvbt000w1wb28zbpkf2c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1112,340 +1278,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cieo1cita000tuwb2oy0cgg1j" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-28-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/28/2015-8-28-2/">pager和fragment绑定使用的完整代码。</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/28/2015-8-28-2/">
-    <time datetime="2015-08-28T09:36:21.000Z" itemprop="datePublished">2015-08-28</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="pager和fragment绑定使用的完整代码。">pager和fragment绑定使用的完整代码。</h2><p>Fragment的代码，没什么特别就只是一个界面而已。<br>但是这里要实现的方法和activity有点不同是实现OnCreateView(activity是实现OnCreate)</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
-
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
-<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
-<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
-<span class="keyword">import</span> android.view.<span class="type">View</span>;
-<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
-
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/8/28.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">FragmentDoor</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
-
-<span class="annotation">@Nullable</span>
-<span class="annotation">@Override</span>
-public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
-
-    <span class="type">View</span> view=inflater.inflate(<span class="type">R</span>.layout.door_view_pager,<span class="literal">null</span>);
-    <span class="keyword">return</span> view;
-
-}
-}
-</code></pre><h2 id="pager页面">pager页面</h2><ul>
-<li>1.定义好两个list一个装view、一个装fragment</li>
-<li>2.对于pager这种需要后期添加的都需要对他设置adapter</li>
-<li>3.pager是针对fragment设置的adapter所以他就要使用fragment的适配器。中间要加个管理器。</li>
-</ul>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
-
-<span class="keyword">import</span> android.app.FragmentManager;
-<span class="keyword">import</span> android.app.FragmentTransaction;
-<span class="keyword">import</span> android.content.Intent;
-<span class="keyword">import</span> android.support.v4.app.Fragment;
-<span class="keyword">import</span> android.support.v4.app.FragmentPagerAdapter;
-<span class="keyword">import</span> android.support.v4.view.PagerAdapter;
-<span class="keyword">import</span> android.support.v4.view.ViewPager;
-<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
-<span class="keyword">import</span> android.os.Bundle;
-<span class="keyword">import</span> android.util.Log;
-<span class="keyword">import</span> android.view.LayoutInflater;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.view.ViewGroup;
-<span class="keyword">import</span> android.widget.Button;
-<span class="keyword">import</span> android.widget.LinearLayout;
-<span class="keyword">import</span> android.widget.TextView;
-
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.R;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.function.StairsMouthActivity;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyBillActivity;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyHomeActivity;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyInfoActivity;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myOneLine.MyMonitoringActivity;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myTwoLine.MyExpressActivity;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myTwoLine.MyInterflowMainActivity;
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.myTwoLine.MyNeighbourActivity;
-
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.List;
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainViewPagerActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span> </span>{
-
-<span class="keyword">private</span> ViewPager pager = <span class="keyword">null</span>;
-<span class="keyword">private</span> List&lt;Fragment&gt; fragmentlist=<span class="keyword">new</span> ArrayList&lt;&gt;();
-ArrayList&lt;View&gt; viewContainter = <span class="keyword">new</span> ArrayList&lt;View&gt;();
-
-<span class="keyword">private</span> LinearLayout llCloud,llDoor,llMy;
-<span class="keyword">private</span> View myView;
-<span class="keyword">public</span> String TAG = <span class="string">"tag"</span>;
-
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_main_view_pager);
-
-
-
-    pager= (ViewPager) findViewById(R.id.viewPager);
-
-    llCloud= (LinearLayout) findViewById(R.id.llCloud);
-    llDoor= (LinearLayout) findViewById(R.id.llDoor);
-    llMy= (LinearLayout) findViewById(R.id.llMy);
-
-    llMy.setOnClickListener(<span class="keyword">this</span>);
-    llDoor.setOnClickListener(<span class="keyword">this</span>);
-    llCloud.setOnClickListener(<span class="keyword">this</span>);
-
-    fragmentlist.add(<span class="keyword">new</span> FragmentCloud());
-    fragmentlist.add(<span class="keyword">new</span> FragmentDoor());
-    fragmentlist.add(<span class="keyword">new</span> FragmentMy());
-
-    myView= LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.my_view_pager,<span class="keyword">null</span>);
-    View doorView= LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.door_view_pager,<span class="keyword">null</span>);
-    View cloudView= LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.cloud_view_pager,<span class="keyword">null</span>);
-
-    viewContainter.add(cloudView);
-    viewContainter.add(doorView);
-    viewContainter.add(myView);
-
-
-
-
-
-    pager.setAdapter(<span class="keyword">new</span> FragmentPagerAdapter(getSupportFragmentManager()) {
-
-
-        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
-            <span class="function"><span class="keyword">return</span> fragmentlist.<span class="title">size</span><span class="params">()</span></span>;
-        }
-
-        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function">Fragment <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> position)</span> </span>{
-            <span class="function"><span class="keyword">return</span> fragmentlist.<span class="title">get</span><span class="params">(position)</span></span>;
-        }
-    });
-
-
-    pager.setCurrentItem(<span class="number">1</span>);
-    pager.addOnPageChangeListener(<span class="keyword">new</span> ViewPager.OnPageChangeListener() {
-        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrollStateChanged</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
-            Log.d(TAG, <span class="string">"--------changed:"</span> + arg0);
-        }
-
-        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrolled</span><span class="params">(<span class="keyword">int</span> arg0, <span class="keyword">float</span> arg1, <span class="keyword">int</span> arg2)</span> </span>{
-            Log.d(TAG, <span class="string">"-------scrolled arg0:"</span> + arg0);
-            Log.d(TAG, <span class="string">"-------scrolled arg1:"</span> + arg1);
-            Log.d(TAG, <span class="string">"-------scrolled arg2:"</span> + arg2);
-        }
-
-        <span class="comment">//选择的位置</span>
-        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageSelected</span><span class="params">(<span class="keyword">int</span> position)</span> </span>{
-            Log.d(TAG, <span class="string">"------selected:"</span> + position);
-        }
-    });
-
-
-
-}
-
-
-
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-    <span class="keyword">int</span> id=view.getId();
-    <span class="keyword">switch</span> (id){
-        <span class="keyword">case</span> R.id.llCloud:
-            pager.setCurrentItem(0);
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> R.id.llDoor:
-            pager.setCurrentItem(1);
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> R.id.llMy:
-            pager.setCurrentItem(2);
-            <span class="keyword">break</span>;
-
-   }
-
-}
-
-}
-</code></pre><p>对于viewpager的layout</p>
-<pre><code>&lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>
-    android:id=<span class="string">"@+id/viewPager"</span>
-    android:layout_width=<span class="string">"wrap_content"</span>
-    android:layout_height=<span class="string">"0dp"</span>
-    android:layout_weight=<span class="string">"1"</span>
-    &gt;
-
-&lt;/android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>&gt;
-</code></pre><h2 id="最简单的pager和fragment的结合使用">最简单的pager和fragment的结合使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.exercisedemo;
-
-<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
-<span class="keyword">import</span> android.support.v4.app.<span class="type">FragmentPagerAdapter</span>;
-<span class="keyword">import</span> android.support.v4.view.<span class="type">ViewPager</span>;
-<span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
-<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
-<span class="keyword">import</span> android.view.<span class="type">View</span>;
-
-<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">ViewPagerActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
-
-<span class="keyword">private</span> <span class="type">ViewPager</span> viewPager;
-<span class="keyword">private</span> <span class="type">ArrayList</span>&lt;<span class="type">Fragment</span>&gt; fragmentArrayList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
-<span class="keyword">private</span> <span class="type">ArrayList</span>&lt;<span class="type">View</span>&gt; viewArrayList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
-
-
-
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.activity_view_pager);
-    viewPager= (<span class="type">ViewPager</span>) findViewById(<span class="type">R</span>.id.vp);
-    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment</span>());
-    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment02</span>());
-    fragmentArrayList.add(<span class="keyword">new</span> <span class="type">MyFragment</span>());
-</code></pre><p>//        viewArrayList.add()<br>        viewPager.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {<br>            @Override<br>            public Fragment getItem(int i) {<br>                return fragmentArrayList.get(i);<br>            }</p>
-<pre><code>        <span class="annotation">@Override</span>
-        <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
-            <span class="function"><span class="keyword">return</span> fragmentArrayList.<span class="title">size</span><span class="params">()</span></span>;
-        }
-    });
-
-}
-</code></pre><p>}</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cieo1cith000wuwb2n4x51iit" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-28" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/28/2015-8-28/">Android Studio 国内镜像文件地址，Fragment使用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/28/2015-8-28/">
-    <time datetime="2015-08-28T03:00:40.000Z" itemprop="datePublished">2015-08-28</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/28">2015/8/28</h1><h2 id="Android_Studio_国内镜像文件地址">Android Studio 国内镜像文件地址</h2><p><img src="http://ww1.sinaimg.cn/large/81eeb0fcgw1evi9o8rcckj20cs0bjdge.jpg" alt=""></p>
-<h2 id="Fragment的使用">Fragment的使用</h2><p>其实Fragment是个小Activiyt，那么他和Activity的区别。</p>
-<ul>
-<li>继承的时候继承Fragment。（layout还是那个layout）</li>
-<li>重写的是onCreateView（Activiyt重写的是onCreate）</li>
-</ul>
-<h2 id="举例">举例</h2><p>创建onCreateView，添加要返回的东西。inflater</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.main;
-
-
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.support.annotation.<span class="type">Nullable</span>;
-<span class="keyword">import</span> android.support.v4.app.<span class="type">Fragment</span>;
-<span class="keyword">import</span> android.view.<span class="type">LayoutInflater</span>;
-<span class="keyword">import</span> android.view.<span class="type">View</span>;
-<span class="keyword">import</span> android.view.<span class="type">ViewGroup</span>;
-
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
-
-<span class="comment">/**
- * Created by shengzhong on 2015/8/28.
- */</span>
-public <span class="class"><span class="keyword">class</span> <span class="title">FragmentCloud</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Fragment</span> {</span>
-
-<span class="annotation">@Nullable</span>
-<span class="annotation">@Override</span>
-public <span class="type">View</span> onCreateView(<span class="type">LayoutInflater</span> inflater, <span class="type">ViewGroup</span> container, <span class="type">Bundle</span> savedInstanceState) {
-
-    <span class="type">View</span> view=inflater.inflate(<span class="type">R</span>.layout.cloud_view_pager, <span class="literal">null</span>);
-    <span class="keyword">return</span> view;
-
-}
-}
-</code></pre><h2 id="Fragment_问题之一">Fragment 问题之一</h2><p>Fragment是通过inflater来加载布局，布局控件都是view。<br>在此找控件的时候就要采用</p>
-<pre><code><span class="keyword">ll</span>= (LinearLayout)<span class="keyword">view</span>.findViewById(R.id.<span class="keyword">ll</span>);
-</code></pre><h2 id="Fragment_问题之二">Fragment 问题之二</h2><p>在Fragment中要得到context，只需要采用getActivity（）</p>
-<p>例如：</p>
-<pre><code><span class="type">Intent</span> <span class="type">Intent</span>=new <span class="type">Intent</span>(getActivity(),StairsMouthActivity.<span class="keyword">class</span>);
-</code></pre><h2 id="#">#</h2>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cieo1citf000vuwb2dag8xll1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="ciexyqvbr000v1wb27x509tam" class="article-share-link">Share</a>
       
       
     </footer>
