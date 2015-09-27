@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        79
+        80
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,229 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-20-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/20/2015-8-20-3/">ViewPager,ViewPager实现的功能,setOnPageChangeListener的三个方法,pager error</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/20/2015-8-20-3/">
+    <time datetime="2015-08-20T09:28:16.000Z" itemprop="datePublished">2015-08-20</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="ViewPager">ViewPager</h1><h2 id="ViewPager的简介">ViewPager的简介</h2><p> ViewPager是android扩展包v4包中的类，这个类可以让用户左右切换当前的view。</p>
+<p>所以这时候定义View要这么定义android.support.v4.view.ViewPager</p>
+<p>我们首先来看看API对于这个类的表述：</p>
+<blockquote>
+<p>Layout manager that allows the user to flip left and right through pages of data. You supply an implementation of a PagerAdapter to generate the pages that the view shows.<br>    Note this class is currently under early design and development. The API will likely change in later updates of the compatibility library, requiring changes to the source code of apps when they are compiled against the newer version.<br>    ViewPager is most often used in conjunction with Fragment, which is a convenient way to supply and manage the lifecycle of each page. There are standard adapters implemented for using fragments with the ViewPager, which cover the most common use cases. These are FragmentPagerAdapter andFragmentStatePagerAdapter; each of these classes have simple code showing how to build a full user interface with them.</p>
+</blockquote>
+<p>在编写ViewPager的应用的使用，还需要使用两个组件类分别是PagerTitleStrip类和PagerTabStrip类，PagerTitleStrip类直接继承自ViewGroup类，而PagerTabStrip类继承PagerTitleStrip类，所以这两个类也是容器类。但是有一点需要注意，在定义XML的layout的时候，这两个类必须是ViewPager标签的子标签，不然会出错。</p>
+<h2 id="ViewPager实现的功能">ViewPager实现的功能</h2><p>ViewPager类提供了多界面切换的新效果，<br>新效果有如下特征：</p>
+<ul>
+<li><1>当前显示一组界面中的其中一个界面；</1></li>
+<li><2>当用户通过左右滑动界面时，当前的屏幕显示当前界面和下一个界面的一部分；</2></li>
+<li><3>滑动结束后，界面自动跳转到当前选择的界面中。</3></li>
+</ul>
+<h2 id="setOnPageChangeListener的三个方法">setOnPageChangeListener的三个方法</h2><ul>
+<li><p>1.onPageSelected(int position)：这个方法有一个参数position，代表哪个页面被选中。当用手指滑动翻页的时候，如果翻动成功了（滑动的距离够长），手指抬起来就会立即执行这个方法，position就是当前滑动到的页面。如果直接setCurrentItem翻页，那position就和setCurrentItem的参数一致，这种情况在onPageScrolled执行方法前就会立即执行。</p>
+</li>
+<li><p>2.onPageScrolled(int position,float positionOffset, int positionOffsetPixels)：这个方法会在屏幕滚动过程中不断被调用。<br>有三个参数，第一个position，这个参数要特别注意一下。当用手指滑动时，如果手指按在页面上不动，position和当前页面index是一致的；如果手指向左拖动（相应页面向右翻动），这时候position大部分时间和当前页面是一致的，只有翻页成功的情况下最后一次调用才会变为目标页面；如果手指向右拖动（相应页面向左翻动），这时候position大部分时间和目标页面是一致的，只有翻页不成功的情况下最后一次调用才会变为原页面。<br>当直接设置setCurrentItem翻页时，如果是相邻的情况（比如现在是第二个页面，跳到第一或者第三个页面），如果页面向右翻动，大部分时间是和当前页面是一致的，只有最后才变成目标页面；如果向左翻动，position和目标页面是一致的。这和用手指拖动页面翻动是基本一致的。<br>如果不是相邻的情况，比如我从第一个页面跳到第三个页面，position先是0，然后逐步变成1，然后逐步变成2；我从第三个页面跳到第一个页面，position先是1，然后逐步变成0，并没有出现为2的情况。<br>positionOffset是当前页面滑动比例，如果页面向右翻动，这个值不断变大，最后在趋近1的情况后突变为0。如果页面向左翻动，这个值不断变小，最后变为0。<br>positionOffsetPixels是当前页面滑动像素，变化情况和positionOffset一致。</p>
+</li>
+<li><p>3.onPageScrollStateChanged(int state)：这个方法在手指操作屏幕的时候发生变化。有三个值：0（END）,1(PRESS) , 2(UP) 。<br>当用手指滑动翻页时，手指按下去的时候会触发这个方法，state值为1，手指抬起时，如果发生了滑动（即使很小），这个值会变为2，然后最后变为0 。总共执行这个方法三次。一种特殊情况是手指按下去以后一点滑动也没有发生，这个时候只会调用这个方法两次，state值分别是1,0 。<br>当setCurrentItem翻页时，会执行这个方法两次，state值分别为2 , 0 。</p>
+</li>
+</ul>
+<p><strong>三个方法的执行顺序为</strong>：用手指拖动翻页时，最先执行一遍onPageScrollStateChanged（1），然后不断执行onPageScrolled，放手指的时候，直接立即执行一次onPageScrollStateChanged（2），然后立即执行一次onPageSelected，然后再不断执行onPageScrollStateChanged，最后执行一次onPageScrollStateChanged（0）。<br>其它的情况由这个可以推出来，不再赘述。</p>
+<h2 id="pager-setCurrentItem(0)的使用">pager.setCurrentItem(0)的使用</h2><p> pager.setCurrentItem(0)直接设置显示的页面。0代表第一个页面，1代表第二个。</p>
+<h2 id="简单小实例">简单小实例</h2><p>layout.xml:</p>
+<pre><code>&lt;RelativeLayout xmlns:android=<span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:tools=<span class="string">"http://schemas.android.com/tools"</span>
+android:layout_width=<span class="string">"match_parent"</span>
+android:layout_height=<span class="string">"match_parent"</span>
+tools:context=<span class="string">".MainActivity"</span> &gt;
+
+&lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>
+    android:id=<span class="string">"@+id/viewpager"</span>
+    android:layout_width=<span class="string">"wrap_content"</span>
+    android:layout_height=<span class="string">"wrap_content"</span> &gt;
+
+    &lt;android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.PagerTabStrip</span>
+        android:id=<span class="string">"@+id/tabstrip"</span>
+        android:layout_width=<span class="string">"wrap_content"</span>
+        android:layout_height=<span class="string">"50dip"</span>
+        android:gravity=<span class="string">"center"</span> /&gt;
+&lt;/android<span class="class">.support</span><span class="class">.v4</span><span class="class">.view</span><span class="class">.ViewPager</span>&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>MainActivity.java</p>
+<ul>
+<li><p>1.先找到viewPager和pagerTabStrip。</p>
+</li>
+<li><p>2.定义两个Array来当容器一个装载view一个装载title</p>
+</li>
+<li><p>3.pagerTabStrip对设置</p>
+</li>
+<li>4.把view和title装载进去</li>
+<li><p>5.设置Adapter</p>
+<p>  package com.example.android_viewpager1;</p>
+<p>  import java.util.ArrayList;</p>
+<p>  import android.annotation.SuppressLint;<br>  import android.app.Activity;<br>  import android.os.Bundle;<br>  import android.support.v4.view.PagerAdapter;<br>  import android.support.v4.view.PagerTabStrip;<br>  import android.support.v4.view.ViewPager;<br>  import android.support.v4.view.ViewPager.OnPageChangeListener;<br>  import android.util.Log;<br>  import android.view.LayoutInflater;<br>  import android.view.View;<br>  import android.view.ViewGroup;</p>
+<p>  public class MainActivity extends Activity {</p>
+<p>  ViewPager pager = null;<br>  PagerTabStrip tabStrip = null;<br>  ArrayList<view> viewContainter = new ArrayList<view>();<br>  ArrayList<string> titleContainer = new ArrayList<string>();<br>  public String TAG = “tag”;</string></string></view></view></p>
+<p>  @SuppressLint(“ResourceAsColor”)<br>  @Override<br>  protected void onCreate(Bundle savedInstanceState) {</p>
+<pre><code>  <span class="keyword">super</span>.onCreate(savedInstanceState);
+  setContentView(R.layout.activity_main);
+
+  pager = (ViewPager) <span class="keyword">this</span>.findViewById(R.id.viewpager);
+  tabStrip = (PagerTabStrip) <span class="keyword">this</span>.findViewById(R.id.tabstrip);
+  <span class="comment">//取消tab下面的长横线</span>
+  tabStrip.setDrawFullUnderline(<span class="keyword">false</span>);
+  <span class="comment">//设置tab的背景色</span>
+  tabStrip.setBackgroundColor(<span class="keyword">this</span>.getResources().getColor(R.color.bg));
+  <span class="comment">//设置当前tab页签的下划线颜色</span>
+  tabStrip.setTabIndicatorColor(<span class="keyword">this</span>.getResources().getColor(R.color.red));
+  tabStrip.setTextSpacing(<span class="number">200</span>);
+
+  View view1 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab1, <span class="keyword">null</span>);
+  View view2 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab2, <span class="keyword">null</span>);
+  View view3 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab3, <span class="keyword">null</span>);
+  View view4 = LayoutInflater.from(<span class="keyword">this</span>).inflate(R.layout.tab4, <span class="keyword">null</span>);
+<span class="comment">//viewpager开始添加view</span>
+  viewContainter.add(view1);
+  viewContainter.add(view2);
+  viewContainter.add(view3);
+  viewContainter.add(view4);
+<span class="comment">//页签项</span>
+  titleContainer.add(<span class="string">"网易新闻"</span>);
+  titleContainer.add(<span class="string">"网易体育"</span>);
+  titleContainer.add(<span class="string">"网易财经"</span>);
+  titleContainer.add(<span class="string">"网易女人"</span>);
+
+  pager.setAdapter(<span class="keyword">new</span> PagerAdapter() {
+
+      <span class="comment">//viewpager中的组件数量</span>
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+          <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">size</span><span class="params">()</span></span>;
+      }
+    <span class="comment">//滑动切换的时候销毁当前的组件</span>
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position,
+              Object object)</span> </span>{
+          ((ViewPager) container).removeView(viewContainter.get(position));
+      }
+    <span class="comment">//每次滑动的时候生成的组件</span>
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function">Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>{
+          ((ViewPager) container).addView(viewContainter.get(position));
+          <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">get</span><span class="params">(position)</span></span>;
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">boolean</span> <span class="title">isViewFromObject</span><span class="params">(View arg0, Object arg1)</span> </span>{
+          <span class="keyword">return</span> arg0 == arg1;
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getItemPosition</span><span class="params">(Object object)</span> </span>{
+          <span class="function"><span class="keyword">return</span> <span class="keyword">super</span>.<span class="title">getItemPosition</span><span class="params">(object)</span></span>;
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function">CharSequence <span class="title">getPageTitle</span><span class="params">(<span class="keyword">int</span> position)</span> </span>{
+          <span class="function"><span class="keyword">return</span> titleContainer.<span class="title">get</span><span class="params">(position)</span></span>;
+      }
+  });
+
+  pager.setOnPageChangeListener(<span class="keyword">new</span> OnPageChangeListener() {
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrollStateChanged</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
+          Log.d(TAG, <span class="string">"--------changed:"</span> + arg0);
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageScrolled</span><span class="params">(<span class="keyword">int</span> arg0, <span class="keyword">float</span> arg1, <span class="keyword">int</span> arg2)</span> </span>{
+          Log.d(TAG, <span class="string">"-------scrolled arg0:"</span> + arg0);
+          Log.d(TAG, <span class="string">"-------scrolled arg1:"</span> + arg1);
+          Log.d(TAG, <span class="string">"-------scrolled arg2:"</span> + arg2);
+      }
+
+      <span class="annotation">@Override</span>
+      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onPageSelected</span><span class="params">(<span class="keyword">int</span> arg0)</span> </span>{
+          Log.d(TAG, <span class="string">"------selected:"</span> + arg0);
+      }
+  });
+</code></pre><p>  }</p>
+<p>  }</p>
+</li>
+</ul>
+<p>程式中要使用ViewPager來顯示資訊必須自己繼承PagerAdapter，來完成手指滑動切換視窗的動作。 </p>
+<h2 id="ViewPage_:Required_method_instantiateItem_was_not_overridde">ViewPage :Required method instantiateItem was not overridde</h2><p>错误代码提示</p>
+<pre><code>java.lang.<span class="type">UnsupportedOperationException</span>: <span class="type">Required</span> <span class="keyword">method</span> instantiateItem was <span class="keyword">not</span> overridden
+</code></pre><p>解决办法<br>把return super.instantiateItem(container, position);</p>
+<p>换成：</p>
+<p>return container;</p>
+<h2 id="pager错误之二">pager错误之二</h2><p>java.lang.UnsupportedOperationException: Required method destroyItem was not overridden</p>
+<p>这里说必须的方法没有实现，因为先super了。所以就没有实现了。把super删除就可以实现</p>
+<pre><code><span class="comment">//每次滑动删除的页面</span>
+    @<span class="function">Override
+    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroyItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position, Object <span class="keyword">object</span>)</span> </span>{
+
+<span class="comment">//就是删除这行        super.destroyItem(container, position, object);</span>
+        ((ViewPager) container).removeView(viewContainter.<span class="keyword">get</span>(position));
+    }
+</code></pre><h2 id="pager错误之三">pager错误之三</h2><p>页面没有显示出来，</p>
+<p>解决过程</p>
+<ul>
+<li>1.查看页面本身是否有问题</li>
+<li>2.ArrayList有没有添加页面</li>
+<li>3.在instantiateItem中有没有添加页面并返回页面。</li>
+</ul>
+<p>我的原因是没有返回页面所以导致错误</p>
+<pre><code><span class="comment">//每次滑动增加的页面</span>
+
+        <span class="annotation">@Override</span>
+        <span class="keyword">public</span> <span class="function">Object <span class="title">instantiateItem</span><span class="params">(ViewGroup container, <span class="keyword">int</span> position)</span> </span>{
+            container.addView(viewContainter.get(position));
+
+            <span class="function"><span class="keyword">return</span> viewContainter.<span class="title">get</span><span class="params">(position)</span></span>;
+        }
+</code></pre><h2 id="pager错误之四">pager错误之四</h2><p>pager.setCurrentItem(1);</p>
+<p>设置初始值没有反应。<br>设置的时候要放在Adapter里面</p>
+<hr>
+<h2 id="设置只可以通过点选，而不是滑动来切换页面">设置只可以通过点选，而不是滑动来切换页面</h2><ul>
+<li>1.首先去掉layout中PagerTabStrip，采用TextView来当tab</li>
+<li>2.点击TextView的时候再通过pager.setCurrentItem(0)来设置切换的页面</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-3/" data-id="cif1ucmfu0018h4b2nj3kv8yx" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-20-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -297,7 +520,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="ciexyqvcl00181wb2dibf0ppq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20-2/" data-id="cif1ucmfw0019h4b2mummr8m6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -441,7 +664,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="ciexyqvcg00161wb2g1svw75i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/20/2015-8-20/" data-id="cif1ucmfr0017h4b2j32rlvt4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -588,7 +811,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="ciexyqvcn00191wb2kq10mvg1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/19/2015-8-19/" data-id="cif1ucmfx001ah4b27r3992lq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -646,7 +869,7 @@ public static <span class="type">RequestQueue</span> getHttpQueue(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="ciexyqvcp001a1wb23uj0c6dn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/17/2015-8-17/" data-id="cif1ucmfz001bh4b2u3f2pp4z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -862,7 +1085,7 @@ android:<span class="variable">versionName=</span><span class="string">"1.0"</sp
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="ciexyqvcq001b1wb2pupunrhf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cif1ucmg1001ch4b2651jm2r7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1227,7 +1450,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="ciexyqvcr001c1wb24bnfizzq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cif1ucmg3001dh4b2p6doi5z8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1273,7 +1496,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="ciexyqvcu001d1wb2zqsm7qxx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cif1ucmg6001eh4b2we5b3rdj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1358,7 +1581,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="ciexyqvbp000u1wb2yacxoki1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cif1ucmf1000vh4b2ri4keesq" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1474,173 +1697,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="ciexyqvcx001e1wb2354axkgg" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-29-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/29/2015-7-29-1/">AChartEngine超简单实例</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/29/2015-7-29-1/">
-    <time datetime="2015-07-29T13:19:12.000Z" itemprop="datePublished">2015-07-29</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="AChartEngine超简单实例">AChartEngine超简单实例</h1><p>其实无非就在做三件事</p>
-<ul>
-<li>1.添加数据进图标</li>
-<li>2.线或条等设置</li>
-<li>3.制作成什么表。仅此而已</li>
-</ul>
-<p>package com.zsz.develop.mychart02;</p>
-<pre><code><span class="preprocessor"><span class="keyword">import</span> android.app.Activity;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.content.Intent;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.graphics.Color;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.widget.Button;</span>
-<span class="preprocessor"><span class="keyword">import</span> android.widget.LinearLayout;</span>
-
-
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.ChartFactory;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.GraphicalView;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.chart.PointStyle;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYMultipleSeriesDataset;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.model.XYSeries;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYMultipleSeriesRenderer;</span>
-<span class="preprocessor"><span class="keyword">import</span> org.achartengine.renderer.XYSeriesRenderer;</span>
-
-<span class="preprocessor"><span class="keyword">import</span> java.util.Random;</span>
-
-<span class="comment">/**
- * Created by shengzhong on 2015/7/29.
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShowExamActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span>{
-<span class="keyword">private</span> LinearLayout llChart;
-<span class="keyword">private</span> Button btn;
-@Override
-<span class="keyword">protected</span> <span class="keyword">void</span> onCreate(Bundle savedInstanceState) {
-
-    <span class="comment">// TODO Auto-generated method stub</span>
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(R.layout.show_exam_activity);
-    <span class="comment">// 1, 构造显示用渲染图</span>
-    XYMultipleSeriesRenderer renderer = <span class="keyword">new</span> XYMultipleSeriesRenderer();
-    <span class="comment">// 2,进行显示</span>
-    XYMultipleSeriesDataset dataset = <span class="keyword">new</span> XYMultipleSeriesDataset();
-    <span class="comment">// 2.1, 构建数据</span>
-    Random r = <span class="keyword">new</span> Random();
-    <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; <span class="number">2</span>; i++) {
-        XYSeries series = <span class="keyword">new</span> XYSeries(<span class="string">"test"</span> + (i + <span class="number">1</span>));
-        <span class="comment">// 填充数据</span>
-        <span class="keyword">for</span> (int k = <span class="number">0</span>; k &lt; <span class="number">10</span>; k++) {
-            <span class="comment">// 填x,y值</span>
-            series.add(k, <span class="number">20</span> + r.nextInt() % <span class="number">100</span>);
-        }
-        <span class="comment">// 需要绘制的点放进dataset中</span>
-        dataset.addSeries(series);
-    }
-    <span class="comment">// 3, 对点的绘制进行设置</span>
-    XYSeriesRenderer xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
-    <span class="comment">// 3.1设置颜色</span>
-    xyRenderer.setColor(Color.BLUE);
-    <span class="comment">// 3.2设置点的样式</span>
-    xyRenderer.setPointStyle(PointStyle.SQUARE);
-    <span class="comment">// 3.3, 将要绘制的点添加到坐标绘制中</span>
-    renderer.addSeriesRenderer(xyRenderer);
-    <span class="comment">// 3.4,重复 1~3的步骤绘制第二个系列点</span>
-    xyRenderer = <span class="keyword">new</span> XYSeriesRenderer();
-    xyRenderer.setColor(Color.RED);
-    xyRenderer.setPointStyle(PointStyle.CIRCLE);
-    renderer.addSeriesRenderer(xyRenderer);
-<span class="comment">//        Intent intent = new LinChart().execute(this);</span>
-<span class="comment">//        Intent intent = ChartFactory</span>
-<span class="comment">//                .getLineChartIntent(this, dataset, renderer);</span>
-    GraphicalView graphicalView = ChartFactory.getLineChartView(<span class="keyword">this</span>, dataset, renderer);
-    llChart= (LinearLayout) findViewById(R.id.llChart);
-    llChart.addView(graphicalView);
-<span class="comment">//                startActivity(intent);</span>
-
-}
-
-}
-</code></pre><h2 id="详细配置。">详细配置。</h2><p>上面的配置只配置了几个基础的，还要进行更多配置才能使得图标更加简单通熟易懂。</p>
-<ul>
-<li>XYSeries: 最常用的数据结构，主要包括一系列的double型（x,y）点对及一个名称（title）。</li>
-<li>XYValueSeries:包括一系列的(x,y,value)点对及一个名称（title）。</li>
-<li>XYMultipleSeriesDataset:包含一系列XYSeries，是最终的数据结构</li>
-<li>TimeSeries:与XYSeries类似，x变为Date型,可以转化为XYSeries。</li>
-<li>CategorySeries:与XYSeries类似，x变为string型，可以转化为XYSeries。</li>
-<li><p>MultipleCategorySeries:一系列CategorySeries。</p>
-</li>
-<li><p>XYSeriesRenderer，impleSeriesRenderer、用于设置每张图中每一个序列的绘制方法。- XYMultipleSeries，RendererDefaultRenderer用于设置整张图的绘制格式。</p>
-</li>
-</ul>
-<p>XYMultipleSeriesRenderer.setAxisTitleTextSize</p>
-<h2 id="详细配置">详细配置</h2><ul>
-<li>1.修改背景色或设置背景图片：<br>背景色设置需要设置两项：setMarginsColor（设置四边颜色）以及setBackgroundColor（设置中间背景色）</li>
-<li>设置背景图片：<pre><code><span class="symbol">http:</span>/<span class="regexp">/blog.csdn.net/kmyhy</span><span class="regexp">/article/details</span><span class="regexp">/6590294</span>
-</code></pre></li>
-</ul>
-<ol>
-<li>setAxisTitleTextSize(16);// 设置坐标轴标题文本大小</li>
-<li>setChartTitleTextSize(20); // 设置图表标题文本大小</li>
-<li>setLabelsTextSize(15); // 设置轴标签文本大小</li>
-<li>setLegendTextSize(15); // 设置图例文本大小</li>
-<li>renderer.setChartTitle( “个人收支表”);//设置柱图名称</li>
-<li>renderer.setXTitle( “名单” );//设置X轴名称</li>
-<li>renderer.setYTitle( “金额” );//设置Y轴名称</li>
-<li>renderer.setXAxisMin(0.5);//设置X轴的最小值为0.5</li>
-<li>renderer.setXAxisMax(5.5);//设置X轴的最大值为5</li>
-<li>renderer.setYAxisMin(0);//设置Y轴的最小值为0</li>
-<li>renderer.setYAxisMax(500);//设置Y轴最大值为500</li>
-<li>renderer.setDisplayChartValues(true);//设置是否在柱体上方显示值</li>
-<li>renderer.setShowGrid(true);//设置是否在图表中显示网格</li>
-<li>renderer.setXLabels(0);//设置X轴显示的刻度标签的个数</li>
-<li>如果想要在X轴显示自定义的标签，那么首先要设置renderer.setXLabels(0);  如果不设置为0，那么所设置的Labels会与原X坐标轴labels重叠<br>其次我们要renderer.addTextLabel()循环添加<br>eg：for(int i=0;i&lt;13;i++)<br>  {<pre><code><span class="keyword">renderer</span>.addTextLabel(i+<span class="number">1</span>,years[i]); <span class="comment">//循环添加Xlabel其中显示的label放在years数组中</span>
-</code></pre>  }</li>
-<li>renderer.setXLabelsAlign(Align.RIGHT);//设置刻度线与X轴之间的相对位置关系</li>
-<li>renderer.setYLabelsAlign(Align.RIGHT);//设置刻度线与Y轴之间的相对位置关系</li>
-<li>renderer.setZoomButtonsVisible(true);//设置可以缩放</li>
-<li>renderer.setPanLimits(newdouble[] { 0, 20, 0, 140 });//设置拉动的范围</li>
-<li>renderer.setZoomLimits(newdouble[] { 0.5, 20, 1, 150 });//设置缩放的范围</li>
-<li>renderer.setRange(newdouble[]{0d, 5d, 0d, 100d}); //设置chart的视图范围</li>
-<li>renderer.setFitLegend(true);// 调整合适的位置</li>
-<li>renderer.setClickEnabled(true)//设置是否可以滑动及放大缩小;</li>
-<li><p>Dataset和Render参数介绍：<br>  <a href="http://blog.csdn.net/lk_blog/article/details/7645661" target="_blank" rel="external">http://blog.csdn.net/lk_blog/article/details/7645661</a></p>
-</li>
-<li><p>ChartView.repaint()；是重新绘图的命令</p>
-</li>
-<li>renderer.setMargins(new int[] { 70, 70, 100, 70 });//设置图表的外边框(上/左/下/右)</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="ciexyqvd1001g1wb2ztrn3tnj" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cif1ucmg7001fh4b2st0a9tyn" class="article-share-link">Share</a>
       
       
     </footer>

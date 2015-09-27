@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        79
+        80
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,53 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-27" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/27/2015-9-27/">2015/9/27</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/27/2015-9-27/">
+    <time datetime="2015-09-27T01:35:42.000Z" itemprop="datePublished">2015-09-27</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/27友盟_问题集">2015/9/27友盟 问题集</h1><h2 id="用友盟的分享sdk遇到了这个问题：">用友盟的分享sdk遇到了这个问题：</h2><p>java.lang.NoClassDefFoundError:com.umeng.socialize.controller.UMServiceFactory。</p>
+<p>产生原因：android ADT版本升级后产生的。</p>
+<p>解决办法：①.build path—&gt;order and export中把第三方jar包的位置上调；</p>
+<p>  ②.如果第一种办法不好用，请试一试，右击项目名称—&gt;Build path—&gt;configure build path..</p>
+<p>此时会弹出类库设置对话框，点击选项卡“Order and Export”</p>
+<p><img src="http://ww2.sinaimg.cn/large/81eeb0fcgw1ewgrm8suqej20mf0fgq7w.jpg" alt=""></p>
+<p>把Android Private Libraries和Android Dependencies这两个选项勾选上，（貌似第三方类库的顺序也需要调整，之前有一个项目也是编译运行时出现同样的错误，把第三方类库的位置上调，把项目的src和gen两个包的位置下调，上一个项目的同样的错误问题是这样得到解决的）把项目Clean一下，重新编译，问题就迎刃而解了！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/27/2015-9-27/" data-id="cif1ucme0000hh4b26khsh39j" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-24" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -154,12 +201,14 @@
 }
 </code></pre><h3 id="2、_输入手机号的键盘直接以数字键盘显示">2、    输入手机号的键盘直接以数字键盘显示</h3><pre><code><span class="label">android:</span>inputType=<span class="string">"phone"</span>
 </code></pre><h3 id="3、_输入框禁止换行">3、    输入框禁止换行</h3><pre><code><span class="label">android:</span>singleLine=<span class="string">"true"</span>
+</code></pre><h3 id="4、_登录进去后“按返”键回不能再回到登录界面">4、    登录进去后“按返”键回不能再回到登录界面</h3><pre><code>startActivity(toHomeActivity);
+        <span class="keyword">this</span>.finish();
 </code></pre><h3 id="6、_忘记密码界面崩溃，错误提示">6、    忘记密码界面崩溃，错误提示</h3><p>v7包兼容问题，activity不能继承自actionBarActivity</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/24/2015-9-24/" data-id="ciexyqvan000h1wb2gwswnmub" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/24/2015-9-24/" data-id="cif1ucme2000ih4b2tgvxx04h" class="article-share-link">Share</a>
       
       
     </footer>
@@ -201,7 +250,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/21/2015-9-21/" data-id="ciexyqvap000i1wb2iza33rtu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/21/2015-9-21/" data-id="cif1ucme5000jh4b2yr0txj0v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +291,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/17/2015-9-17/" data-id="ciexyqvas000j1wb23xkcum2u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/17/2015-9-17/" data-id="cif1ucme8000kh4b2k83rzv6u" class="article-share-link">Share</a>
       
       
     </footer>
@@ -451,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-5/" data-id="ciexyqvb3000l1wb292g3sysh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-5/" data-id="cif1ucmed000mh4b2utqurlax" class="article-share-link">Share</a>
       
       
     </footer>
@@ -666,7 +715,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-4/" data-id="ciexyqvb7000m1wb2qb3vxnwq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-4/" data-id="cif1ucmef000nh4b2a5ifpqll" class="article-share-link">Share</a>
       
       
     </footer>
@@ -751,7 +800,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="ciexyqvb9000n1wb2d67tgfwz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cif1ucmeh000oh4b2nd75j2b5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -889,7 +938,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-2/" data-id="ciexyqvbb000o1wb2ku2fmxvh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-2/" data-id="cif1ucmej000ph4b2rgjv9u3d" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1030,7 +1079,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15/" data-id="ciexyqvax000k1wb2lrzjxh5w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15/" data-id="cif1ucmeb000lh4b24g7f12np" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1075,181 +1124,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/14/2015-9-14-1/" data-id="ciexyqvbf000q1wb2ur5nh2dp" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-14" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/14/2015-9-14/">2015/9/14</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/14/2015-9-14/">
-    <time datetime="2015-09-14T08:44:19.000Z" itemprop="datePublished">2015-09-14</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/9/14">2015/9/14</h1><h2 id="膜拜亮大神之—-Toast">膜拜亮大神之—-Toast</h2><p>不单纯的Toast，先上代码。</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.mytoast.mytoast;
-
-<span class="keyword">import</span> android.app.Activity;
-<span class="keyword">import</span> android.app.AlertDialog;
-<span class="keyword">import</span> android.view.Gravity;
-<span class="keyword">import</span> android.view.LayoutInflater;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.view.ViewGroup;
-<span class="keyword">import</span> android.widget.ImageView;
-<span class="keyword">import</span> android.widget.LinearLayout;
-<span class="keyword">import</span> android.widget.TextView;
-<span class="keyword">import</span> android.widget.Toast;
-
-<span class="keyword">import</span> com.zsz.develop.mytoast.R;
-
-
-<span class="javadoc">/**
- *<span class="javadoctag"> @author</span> LigthWang
- * 
- *         自定义土司
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyToast</span> </span>{
-
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_1 = <span class="string">"这是默认的Toast显示"</span>;
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_2 = <span class="string">"这是自定义位置的Toast显示"</span>;
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_3 = <span class="string">"这是带图片的Toast显示"</span>;
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_4 = <span class="string">"这是完全自定义的Toast显示"</span>;
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_5 = <span class="string">"这是长时间的Toast显示"</span>;
-<span class="keyword">private</span> <span class="keyword">static</span> Toast toast = <span class="keyword">null</span>;
-
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">showToast</span><span class="params">(<span class="keyword">int</span> witch, Activity context)</span> </span>{
-    AlertDialog.Builder builder;
-    AlertDialog dialog;
-    <span class="keyword">switch</span> (witch) {
-    <span class="keyword">case</span> <span class="number">0</span>:
-        toast.makeText(context, TOASTBTN_1, Toast.LENGTH_LONG).show();
-        <span class="keyword">break</span>;
-
-    <span class="keyword">case</span> <span class="number">1</span>:
-        toast = Toast.makeText(context, TOASTBTN_2, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, <span class="number">0</span>, <span class="number">0</span>);
-        toast.show();
-        <span class="keyword">break</span>;
-    <span class="keyword">case</span> <span class="number">2</span>:
-        toast = Toast.makeText(context, TOASTBTN_3, Toast.LENGTH_LONG);
-        toast.setGravity(Gravity.CENTER, <span class="number">50</span>, -<span class="number">100</span>);
-        LinearLayout layout = (LinearLayout) toast.getView();
-        ImageView image = <span class="keyword">new</span> ImageView(context);
-        image.setImageResource(R.drawable.wallpaper_tree_small);
-        layout.addView(image, <span class="number">0</span>);
-        toast.show();
-        <span class="keyword">break</span>;
-    <span class="keyword">case</span> <span class="number">3</span>:
-        LayoutInflater inflater = context.getLayoutInflater();
-        View view = inflater.inflate(R.layout.userdefinedtoast,
-                (ViewGroup) context.findViewById(R.id.toast_layout));
-        TextView txtView_Title = (TextView) view
-                .findViewById(R.id.txt_Title);
-        TextView txtView_Context = (TextView) view
-                .findViewById(R.id.txt_context);
-        ImageView imageView = (ImageView) view
-                .findViewById(R.id.image_toast);
-        toast = <span class="keyword">new</span> Toast(context);
-        toast.setGravity(Gravity.CENTER, <span class="number">0</span>, <span class="number">0</span>);
-        toast.setDuration(Toast.LENGTH_LONG);
-        toast.setView(view);
-        toast.show();
-        <span class="keyword">break</span>;
-    <span class="keyword">case</span> <span class="number">4</span>:
-        LayoutInflater inflater1 = context.getLayoutInflater();
-        View view1 = inflater1.inflate(R.layout.userdefinedtoast,
-                (ViewGroup) context.findViewById(R.id.toast_layout));
-        TextView txtView_Title1 = (TextView) view1
-                .findViewById(R.id.txt_Title);
-        TextView txtView_Context1 = (TextView) view1
-                .findViewById(R.id.txt_context);
-        ImageView imageView1 = (ImageView) view1
-                .findViewById(R.id.image_toast);
-        builder = <span class="keyword">new</span> AlertDialog.Builder(context);
-        builder.setView(view1);
-        dialog = builder.create();
-        dialog.show();
-        <span class="keyword">break</span>;
-    }
-}
-
-}
-</code></pre><p>需要通过加载xml的时候的Toast，这样就让Toast实现了彻底自定义。</p>
-<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
-&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
-android:<span class="variable">id=</span><span class="string">"@+id/toast_layout"</span>
-android:<span class="variable">layout_width=</span><span class="string">"200dip"</span>
-android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
-android:<span class="variable">background=</span><span class="string">"#111111"</span>
-android:<span class="variable">orientation=</span><span class="string">"vertical"</span> &gt;
-
-&lt;TextView
-    android:<span class="variable">id=</span><span class="string">"@+id/txt_Title"</span>
-    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_gravity=</span><span class="string">"center|top"</span>
-    android:<span class="variable">text=</span><span class="string">"@string/toast_text_1"</span>
-    android:<span class="variable">textColor=</span><span class="string">"#ffffff"</span>
-    android:<span class="variable">textSize=</span><span class="string">"20dip"</span> &gt;
-&lt;/TextView&gt;
-
-&lt;LinearLayout
-    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-    android:<span class="variable">background=</span><span class="string">"#999999"</span>
-    android:<span class="variable">orientation=</span><span class="string">"horizontal"</span> &gt;
-
-    &lt;ImageView
-        android:<span class="variable">id=</span><span class="string">"@+id/image_toast"</span>
-        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">layout_marginRight=</span><span class="string">"10dip"</span>
-        android:<span class="variable">src=</span><span class="string">"@drawable/wallpaper_field_small"</span> &gt;
-    &lt;/ImageView&gt;
-
-    &lt;TextView
-        android:<span class="variable">id=</span><span class="string">"@+id/txt_context"</span>
-        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">layout_gravity=</span><span class="string">"center|right"</span>
-        android:<span class="variable">text=</span><span class="string">"@string/toast_text_2"</span>
-        android:<span class="variable">textColor=</span><span class="string">"#ffffff"</span>
-        android:<span class="variable">textSize=</span><span class="string">"15dip"</span> &gt;
-    &lt;/TextView&gt;
-&lt;/LinearLayout&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><p>github代码地址：<a href="https://github.com/zszdevelop/WorshipLight" target="_blank" rel="external">https://github.com/zszdevelop/WorshipLight</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/14/2015-9-14/" data-id="ciexyqvbd000p1wb2eif7v84u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/14/2015-9-14-1/" data-id="cif1ucmer000rh4b29596dqlm" class="article-share-link">Share</a>
       
       
     </footer>

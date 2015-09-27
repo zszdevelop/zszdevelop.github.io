@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        79
+        80
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,180 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-14" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/14/2015-9-14/">2015/9/14</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/14/2015-9-14/">
+    <time datetime="2015-09-14T08:44:19.000Z" itemprop="datePublished">2015-09-14</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/14">2015/9/14</h1><h2 id="膜拜亮大神之—-Toast">膜拜亮大神之—-Toast</h2><p>不单纯的Toast，先上代码。</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.mytoast.mytoast;
+
+<span class="keyword">import</span> android.app.Activity;
+<span class="keyword">import</span> android.app.AlertDialog;
+<span class="keyword">import</span> android.view.Gravity;
+<span class="keyword">import</span> android.view.LayoutInflater;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.ViewGroup;
+<span class="keyword">import</span> android.widget.ImageView;
+<span class="keyword">import</span> android.widget.LinearLayout;
+<span class="keyword">import</span> android.widget.TextView;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> com.zsz.develop.mytoast.R;
+
+
+<span class="javadoc">/**
+ *<span class="javadoctag"> @author</span> LigthWang
+ * 
+ *         自定义土司
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyToast</span> </span>{
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_1 = <span class="string">"这是默认的Toast显示"</span>;
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_2 = <span class="string">"这是自定义位置的Toast显示"</span>;
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_3 = <span class="string">"这是带图片的Toast显示"</span>;
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_4 = <span class="string">"这是完全自定义的Toast显示"</span>;
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String TOASTBTN_5 = <span class="string">"这是长时间的Toast显示"</span>;
+<span class="keyword">private</span> <span class="keyword">static</span> Toast toast = <span class="keyword">null</span>;
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="function"><span class="keyword">void</span> <span class="title">showToast</span><span class="params">(<span class="keyword">int</span> witch, Activity context)</span> </span>{
+    AlertDialog.Builder builder;
+    AlertDialog dialog;
+    <span class="keyword">switch</span> (witch) {
+    <span class="keyword">case</span> <span class="number">0</span>:
+        toast.makeText(context, TOASTBTN_1, Toast.LENGTH_LONG).show();
+        <span class="keyword">break</span>;
+
+    <span class="keyword">case</span> <span class="number">1</span>:
+        toast = Toast.makeText(context, TOASTBTN_2, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, <span class="number">0</span>, <span class="number">0</span>);
+        toast.show();
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">2</span>:
+        toast = Toast.makeText(context, TOASTBTN_3, Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.CENTER, <span class="number">50</span>, -<span class="number">100</span>);
+        LinearLayout layout = (LinearLayout) toast.getView();
+        ImageView image = <span class="keyword">new</span> ImageView(context);
+        image.setImageResource(R.drawable.wallpaper_tree_small);
+        layout.addView(image, <span class="number">0</span>);
+        toast.show();
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">3</span>:
+        LayoutInflater inflater = context.getLayoutInflater();
+        View view = inflater.inflate(R.layout.userdefinedtoast,
+                (ViewGroup) context.findViewById(R.id.toast_layout));
+        TextView txtView_Title = (TextView) view
+                .findViewById(R.id.txt_Title);
+        TextView txtView_Context = (TextView) view
+                .findViewById(R.id.txt_context);
+        ImageView imageView = (ImageView) view
+                .findViewById(R.id.image_toast);
+        toast = <span class="keyword">new</span> Toast(context);
+        toast.setGravity(Gravity.CENTER, <span class="number">0</span>, <span class="number">0</span>);
+        toast.setDuration(Toast.LENGTH_LONG);
+        toast.setView(view);
+        toast.show();
+        <span class="keyword">break</span>;
+    <span class="keyword">case</span> <span class="number">4</span>:
+        LayoutInflater inflater1 = context.getLayoutInflater();
+        View view1 = inflater1.inflate(R.layout.userdefinedtoast,
+                (ViewGroup) context.findViewById(R.id.toast_layout));
+        TextView txtView_Title1 = (TextView) view1
+                .findViewById(R.id.txt_Title);
+        TextView txtView_Context1 = (TextView) view1
+                .findViewById(R.id.txt_context);
+        ImageView imageView1 = (ImageView) view1
+                .findViewById(R.id.image_toast);
+        builder = <span class="keyword">new</span> AlertDialog.Builder(context);
+        builder.setView(view1);
+        dialog = builder.create();
+        dialog.show();
+        <span class="keyword">break</span>;
+    }
+}
+
+}
+</code></pre><p>需要通过加载xml的时候的Toast，这样就让Toast实现了彻底自定义。</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">id=</span><span class="string">"@+id/toast_layout"</span>
+android:<span class="variable">layout_width=</span><span class="string">"200dip"</span>
+android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+android:<span class="variable">background=</span><span class="string">"#111111"</span>
+android:<span class="variable">orientation=</span><span class="string">"vertical"</span> &gt;
+
+&lt;TextView
+    android:<span class="variable">id=</span><span class="string">"@+id/txt_Title"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_gravity=</span><span class="string">"center|top"</span>
+    android:<span class="variable">text=</span><span class="string">"@string/toast_text_1"</span>
+    android:<span class="variable">textColor=</span><span class="string">"#ffffff"</span>
+    android:<span class="variable">textSize=</span><span class="string">"20dip"</span> &gt;
+&lt;/TextView&gt;
+
+&lt;LinearLayout
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">background=</span><span class="string">"#999999"</span>
+    android:<span class="variable">orientation=</span><span class="string">"horizontal"</span> &gt;
+
+    &lt;ImageView
+        android:<span class="variable">id=</span><span class="string">"@+id/image_toast"</span>
+        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_marginRight=</span><span class="string">"10dip"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/wallpaper_field_small"</span> &gt;
+    &lt;/ImageView&gt;
+
+    &lt;TextView
+        android:<span class="variable">id=</span><span class="string">"@+id/txt_context"</span>
+        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_gravity=</span><span class="string">"center|right"</span>
+        android:<span class="variable">text=</span><span class="string">"@string/toast_text_2"</span>
+        android:<span class="variable">textColor=</span><span class="string">"#ffffff"</span>
+        android:<span class="variable">textSize=</span><span class="string">"15dip"</span> &gt;
+    &lt;/TextView&gt;
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><p>github代码地址：<a href="https://github.com/zszdevelop/WorshipLight" target="_blank" rel="external">https://github.com/zszdevelop/WorshipLight</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/14/2015-9-14/" data-id="cif1ucmel000qh4b2jxoavewi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-11" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -142,7 +316,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/11/2015-9-11/" data-id="ciexyqvbj000r1wb2gimr348g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/11/2015-9-11/" data-id="cif1ucmet000sh4b2ge6xbpt0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -415,7 +589,7 @@ String latLongString;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/10/2015-9-10/" data-id="ciexyqvbl000s1wb2gbh51lgi" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/10/2015-9-10/" data-id="cif1ucmev000th4b25sk9keyz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -557,7 +731,7 @@ private <span class="keyword">void</span> updateToNewLocation(Location location)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-4/" data-id="ciexyqv9e00031wb2fjehc5wg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-4/" data-id="cif1ucmcw0003h4b2ybgeg7n6" class="article-share-link">Share</a>
       
       
     </footer>
@@ -615,7 +789,7 @@ private <span class="keyword">void</span> updateToNewLocation(Location location)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-3/" data-id="ciexyqv9h00041wb247isfxky" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-3/" data-id="cif1ucmd00004h4b26zmwvoto" class="article-share-link">Share</a>
       
       
     </footer>
@@ -865,7 +1039,7 @@ public void setSelection(int position) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-2/" data-id="ciexyqv9o00051wb21fcfy7d6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-2/" data-id="cif1ucmd60005h4b24fvf99o8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -919,7 +1093,7 @@ public void setSelection(int position) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-9/" data-id="ciexyqv9400021wb2tlumvypd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-9/" data-id="cif1ucmcu0002h4b2g81gqzdu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -987,7 +1161,7 @@ public void setSelection(int position) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="ciexyqv9u00071wb2pr27zetf" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-6/" data-id="cif1ucmdd0007h4b2y9dv3n0r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1114,7 +1288,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-5/" data-id="ciexyqv9w00081wb2at59yx6c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-5/" data-id="cif1ucmdf0008h4b2h1hxzatj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1233,203 +1407,7 @@ public void setTextView(TextView mTextDialog) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-4/" data-id="ciexyqv9y00091wb2h1vfiqkc" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-8-3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/08/2015-9-8-3/">2015/9/8-3</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/08/2015-9-8-3/">
-    <time datetime="2015-09-08T06:16:30.000Z" itemprop="datePublished">2015-09-08</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Java汉字转换为拼音">Java汉字转换为拼音</h1><p>使用类：CharacterParser。</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.characterparserdemo;
-
-<span class="keyword">import</span> android.util.Log;
-
-<span class="comment">/**
- * Java汉字转换为拼音
- *
- */</span>
-
-<span class="keyword">public</span> class CharacterParser {
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span>[] pyvalue = <span class="keyword">new</span> <span class="built_in">int</span>[] {-<span class="number">20319</span>, -<span class="number">20317</span>, -<span class="number">20304</span>, -<span class="number">20295</span>, -<span class="number">20292</span>, -<span class="number">20283</span>, -<span class="number">20265</span>, -<span class="number">20257</span>, -<span class="number">20242</span>, -<span class="number">20230</span>, -<span class="number">20051</span>, -<span class="number">20036</span>, -<span class="number">20032</span>,
-        -<span class="number">20026</span>, -<span class="number">20002</span>, -<span class="number">19990</span>, -<span class="number">19986</span>, -<span class="number">19982</span>, -<span class="number">19976</span>, -<span class="number">19805</span>, -<span class="number">19784</span>, -<span class="number">19775</span>, -<span class="number">19774</span>, -<span class="number">19763</span>, -<span class="number">19756</span>, -<span class="number">19751</span>, -<span class="number">19746</span>, -<span class="number">19741</span>, -<span class="number">19739</span>, -<span class="number">19728</span>,
-        -<span class="number">19725</span>, -<span class="number">19715</span>, -<span class="number">19540</span>, -<span class="number">19531</span>, -<span class="number">19525</span>, -<span class="number">19515</span>, -<span class="number">19500</span>, -<span class="number">19484</span>, -<span class="number">19479</span>, -<span class="number">19467</span>, -<span class="number">19289</span>, -<span class="number">19288</span>, -<span class="number">19281</span>, -<span class="number">19275</span>, -<span class="number">19270</span>, -<span class="number">19263</span>, -<span class="number">19261</span>,
-        -<span class="number">19249</span>, -<span class="number">19243</span>, -<span class="number">19242</span>, -<span class="number">19238</span>, -<span class="number">19235</span>, -<span class="number">19227</span>, -<span class="number">19224</span>, -<span class="number">19218</span>, -<span class="number">19212</span>, -<span class="number">19038</span>, -<span class="number">19023</span>, -<span class="number">19018</span>, -<span class="number">19006</span>, -<span class="number">19003</span>, -<span class="number">18996</span>, -<span class="number">18977</span>, -<span class="number">18961</span>,
-        -<span class="number">18952</span>, -<span class="number">18783</span>, -<span class="number">18774</span>, -<span class="number">18773</span>, -<span class="number">18763</span>, -<span class="number">18756</span>, -<span class="number">18741</span>, -<span class="number">18735</span>, -<span class="number">18731</span>, -<span class="number">18722</span>, -<span class="number">18710</span>, -<span class="number">18697</span>, -<span class="number">18696</span>, -<span class="number">18526</span>, -<span class="number">18518</span>, -<span class="number">18501</span>, -<span class="number">18490</span>,
-        -<span class="number">18478</span>, -<span class="number">18463</span>, -<span class="number">18448</span>, -<span class="number">18447</span>, -<span class="number">18446</span>, -<span class="number">18239</span>, -<span class="number">18237</span>, -<span class="number">18231</span>, -<span class="number">18220</span>, -<span class="number">18211</span>, -<span class="number">18201</span>, -<span class="number">18184</span>, -<span class="number">18183</span>, -<span class="number">18181</span>, -<span class="number">18012</span>, -<span class="number">17997</span>, -<span class="number">17988</span>,
-        -<span class="number">17970</span>, -<span class="number">17964</span>, -<span class="number">17961</span>, -<span class="number">17950</span>, -<span class="number">17947</span>, -<span class="number">17931</span>, -<span class="number">17928</span>, -<span class="number">17922</span>, -<span class="number">17759</span>, -<span class="number">17752</span>, -<span class="number">17733</span>, -<span class="number">17730</span>, -<span class="number">17721</span>, -<span class="number">17703</span>, -<span class="number">17701</span>, -<span class="number">17697</span>, -<span class="number">17692</span>,
-        -<span class="number">17683</span>, -<span class="number">17676</span>, -<span class="number">17496</span>, -<span class="number">17487</span>, -<span class="number">17482</span>, -<span class="number">17468</span>, -<span class="number">17454</span>, -<span class="number">17433</span>, -<span class="number">17427</span>, -<span class="number">17417</span>, -<span class="number">17202</span>, -<span class="number">17185</span>, -<span class="number">16983</span>, -<span class="number">16970</span>, -<span class="number">16942</span>, -<span class="number">16915</span>, -<span class="number">16733</span>,
-        -<span class="number">16708</span>, -<span class="number">16706</span>, -<span class="number">16689</span>, -<span class="number">16664</span>, -<span class="number">16657</span>, -<span class="number">16647</span>, -<span class="number">16474</span>, -<span class="number">16470</span>, -<span class="number">16465</span>, -<span class="number">16459</span>, -<span class="number">16452</span>, -<span class="number">16448</span>, -<span class="number">16433</span>, -<span class="number">16429</span>, -<span class="number">16427</span>, -<span class="number">16423</span>, -<span class="number">16419</span>,
-        -<span class="number">16412</span>, -<span class="number">16407</span>, -<span class="number">16403</span>, -<span class="number">16401</span>, -<span class="number">16393</span>, -<span class="number">16220</span>, -<span class="number">16216</span>, -<span class="number">16212</span>, -<span class="number">16205</span>, -<span class="number">16202</span>, -<span class="number">16187</span>, -<span class="number">16180</span>, -<span class="number">16171</span>, -<span class="number">16169</span>, -<span class="number">16158</span>, -<span class="number">16155</span>, -<span class="number">15959</span>,
-        -<span class="number">15958</span>, -<span class="number">15944</span>, -<span class="number">15933</span>, -<span class="number">15920</span>, -<span class="number">15915</span>, -<span class="number">15903</span>, -<span class="number">15889</span>, -<span class="number">15878</span>, -<span class="number">15707</span>, -<span class="number">15701</span>, -<span class="number">15681</span>, -<span class="number">15667</span>, -<span class="number">15661</span>, -<span class="number">15659</span>, -<span class="number">15652</span>, -<span class="number">15640</span>, -<span class="number">15631</span>,
-        -<span class="number">15625</span>, -<span class="number">15454</span>, -<span class="number">15448</span>, -<span class="number">15436</span>, -<span class="number">15435</span>, -<span class="number">15419</span>, -<span class="number">15416</span>, -<span class="number">15408</span>, -<span class="number">15394</span>, -<span class="number">15385</span>, -<span class="number">15377</span>, -<span class="number">15375</span>, -<span class="number">15369</span>, -<span class="number">15363</span>, -<span class="number">15362</span>, -<span class="number">15183</span>, -<span class="number">15180</span>,
-        -<span class="number">15165</span>, -<span class="number">15158</span>, -<span class="number">15153</span>, -<span class="number">15150</span>, -<span class="number">15149</span>, -<span class="number">15144</span>, -<span class="number">15143</span>, -<span class="number">15141</span>, -<span class="number">15140</span>, -<span class="number">15139</span>, -<span class="number">15128</span>, -<span class="number">15121</span>, -<span class="number">15119</span>, -<span class="number">15117</span>, -<span class="number">15110</span>, -<span class="number">15109</span>, -<span class="number">14941</span>,
-        -<span class="number">14937</span>, -<span class="number">14933</span>, -<span class="number">14930</span>, -<span class="number">14929</span>, -<span class="number">14928</span>, -<span class="number">14926</span>, -<span class="number">14922</span>, -<span class="number">14921</span>, -<span class="number">14914</span>, -<span class="number">14908</span>, -<span class="number">14902</span>, -<span class="number">14894</span>, -<span class="number">14889</span>, -<span class="number">14882</span>, -<span class="number">14873</span>, -<span class="number">14871</span>, -<span class="number">14857</span>,
-        -<span class="number">14678</span>, -<span class="number">14674</span>, -<span class="number">14670</span>, -<span class="number">14668</span>, -<span class="number">14663</span>, -<span class="number">14654</span>, -<span class="number">14645</span>, -<span class="number">14630</span>, -<span class="number">14594</span>, -<span class="number">14429</span>, -<span class="number">14407</span>, -<span class="number">14399</span>, -<span class="number">14384</span>, -<span class="number">14379</span>, -<span class="number">14368</span>, -<span class="number">14355</span>, -<span class="number">14353</span>,
-        -<span class="number">14345</span>, -<span class="number">14170</span>, -<span class="number">14159</span>, -<span class="number">14151</span>, -<span class="number">14149</span>, -<span class="number">14145</span>, -<span class="number">14140</span>, -<span class="number">14137</span>, -<span class="number">14135</span>, -<span class="number">14125</span>, -<span class="number">14123</span>, -<span class="number">14122</span>, -<span class="number">14112</span>, -<span class="number">14109</span>, -<span class="number">14099</span>, -<span class="number">14097</span>, -<span class="number">14094</span>,
-        -<span class="number">14092</span>, -<span class="number">14090</span>, -<span class="number">14087</span>, -<span class="number">14083</span>, -<span class="number">13917</span>, -<span class="number">13914</span>, -<span class="number">13910</span>, -<span class="number">13907</span>, -<span class="number">13906</span>, -<span class="number">13905</span>, -<span class="number">13896</span>, -<span class="number">13894</span>, -<span class="number">13878</span>, -<span class="number">13870</span>, -<span class="number">13859</span>, -<span class="number">13847</span>, -<span class="number">13831</span>,
-        -<span class="number">13658</span>, -<span class="number">13611</span>, -<span class="number">13601</span>, -<span class="number">13406</span>, -<span class="number">13404</span>, -<span class="number">13400</span>, -<span class="number">13398</span>, -<span class="number">13395</span>, -<span class="number">13391</span>, -<span class="number">13387</span>, -<span class="number">13383</span>, -<span class="number">13367</span>, -<span class="number">13359</span>, -<span class="number">13356</span>, -<span class="number">13343</span>, -<span class="number">13340</span>, -<span class="number">13329</span>,
-        -<span class="number">13326</span>, -<span class="number">13318</span>, -<span class="number">13147</span>, -<span class="number">13138</span>, -<span class="number">13120</span>, -<span class="number">13107</span>, -<span class="number">13096</span>, -<span class="number">13095</span>, -<span class="number">13091</span>, -<span class="number">13076</span>, -<span class="number">13068</span>, -<span class="number">13063</span>, -<span class="number">13060</span>, -<span class="number">12888</span>, -<span class="number">12875</span>, -<span class="number">12871</span>, -<span class="number">12860</span>,
-        -<span class="number">12858</span>, -<span class="number">12852</span>, -<span class="number">12849</span>, -<span class="number">12838</span>, -<span class="number">12831</span>, -<span class="number">12829</span>, -<span class="number">12812</span>, -<span class="number">12802</span>, -<span class="number">12607</span>, -<span class="number">12597</span>, -<span class="number">12594</span>, -<span class="number">12585</span>, -<span class="number">12556</span>, -<span class="number">12359</span>, -<span class="number">12346</span>, -<span class="number">12320</span>, -<span class="number">12300</span>,
-        -<span class="number">12120</span>, -<span class="number">12099</span>, -<span class="number">12089</span>, -<span class="number">12074</span>, -<span class="number">12067</span>, -<span class="number">12058</span>, -<span class="number">12039</span>, -<span class="number">11867</span>, -<span class="number">11861</span>, -<span class="number">11847</span>, -<span class="number">11831</span>, -<span class="number">11798</span>, -<span class="number">11781</span>, -<span class="number">11604</span>, -<span class="number">11589</span>, -<span class="number">11536</span>, -<span class="number">11358</span>,
-        -<span class="number">11340</span>, -<span class="number">11339</span>, -<span class="number">11324</span>, -<span class="number">11303</span>, -<span class="number">11097</span>, -<span class="number">11077</span>, -<span class="number">11067</span>, -<span class="number">11055</span>, -<span class="number">11052</span>, -<span class="number">11045</span>, -<span class="number">11041</span>, -<span class="number">11038</span>, -<span class="number">11024</span>, -<span class="number">11020</span>, -<span class="number">11019</span>, -<span class="number">11018</span>, -<span class="number">11014</span>,
-        -<span class="number">10838</span>, -<span class="number">10832</span>, -<span class="number">10815</span>, -<span class="number">10800</span>, -<span class="number">10790</span>, -<span class="number">10780</span>, -<span class="number">10764</span>, -<span class="number">10587</span>, -<span class="number">10544</span>, -<span class="number">10533</span>, -<span class="number">10519</span>, -<span class="number">10331</span>, -<span class="number">10329</span>, -<span class="number">10328</span>, -<span class="number">10322</span>, -<span class="number">10315</span>, -<span class="number">10309</span>,
-        -<span class="number">10307</span>, -<span class="number">10296</span>, -<span class="number">10281</span>, -<span class="number">10274</span>, -<span class="number">10270</span>, -<span class="number">10262</span>, -<span class="number">10260</span>, -<span class="number">10256</span>, -<span class="number">10254</span>};
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">String</span>[] pystr = <span class="keyword">new</span> <span class="keyword">String</span>[] {<span class="string">"a"</span>, <span class="string">"ai"</span>, <span class="string">"an"</span>, <span class="string">"ang"</span>, <span class="string">"ao"</span>, <span class="string">"ba"</span>, <span class="string">"bai"</span>, <span class="string">"ban"</span>, <span class="string">"bang"</span>, <span class="string">"bao"</span>, <span class="string">"bei"</span>, <span class="string">"ben"</span>, <span class="string">"beng"</span>, <span class="string">"bi"</span>, <span class="string">"bian"</span>,
-        <span class="string">"biao"</span>, <span class="string">"bie"</span>, <span class="string">"bin"</span>, <span class="string">"bing"</span>, <span class="string">"bo"</span>, <span class="string">"bu"</span>, <span class="string">"ca"</span>, <span class="string">"cai"</span>, <span class="string">"can"</span>, <span class="string">"cang"</span>, <span class="string">"cao"</span>, <span class="string">"ce"</span>, <span class="string">"ceng"</span>, <span class="string">"cha"</span>, <span class="string">"chai"</span>, <span class="string">"chan"</span>, <span class="string">"chang"</span>, <span class="string">"chao"</span>, <span class="string">"che"</span>,
-        <span class="string">"chen"</span>, <span class="string">"cheng"</span>, <span class="string">"chi"</span>, <span class="string">"chong"</span>, <span class="string">"chou"</span>, <span class="string">"chu"</span>, <span class="string">"chuai"</span>, <span class="string">"chuan"</span>, <span class="string">"chuang"</span>, <span class="string">"chui"</span>, <span class="string">"chun"</span>, <span class="string">"chuo"</span>, <span class="string">"ci"</span>, <span class="string">"cong"</span>, <span class="string">"cou"</span>, <span class="string">"cu"</span>, <span class="string">"cuan"</span>,
-        <span class="string">"cui"</span>, <span class="string">"cun"</span>, <span class="string">"cuo"</span>, <span class="string">"da"</span>, <span class="string">"dai"</span>, <span class="string">"dan"</span>, <span class="string">"dang"</span>, <span class="string">"dao"</span>, <span class="string">"de"</span>, <span class="string">"deng"</span>, <span class="string">"di"</span>, <span class="string">"dian"</span>, <span class="string">"diao"</span>, <span class="string">"die"</span>, <span class="string">"ding"</span>, <span class="string">"diu"</span>, <span class="string">"dong"</span>, <span class="string">"dou"</span>, <span class="string">"du"</span>,
-        <span class="string">"duan"</span>, <span class="string">"dui"</span>, <span class="string">"dun"</span>, <span class="string">"duo"</span>, <span class="string">"e"</span>, <span class="string">"en"</span>, <span class="string">"er"</span>, <span class="string">"fa"</span>, <span class="string">"fan"</span>, <span class="string">"fang"</span>, <span class="string">"fei"</span>, <span class="string">"fen"</span>, <span class="string">"feng"</span>, <span class="string">"fo"</span>, <span class="string">"fou"</span>, <span class="string">"fu"</span>, <span class="string">"ga"</span>, <span class="string">"gai"</span>, <span class="string">"gan"</span>, <span class="string">"gang"</span>,
-        <span class="string">"gao"</span>, <span class="string">"ge"</span>, <span class="string">"gei"</span>, <span class="string">"gen"</span>, <span class="string">"geng"</span>, <span class="string">"gong"</span>, <span class="string">"gou"</span>, <span class="string">"gu"</span>, <span class="string">"gua"</span>, <span class="string">"guai"</span>, <span class="string">"guan"</span>, <span class="string">"guang"</span>, <span class="string">"gui"</span>, <span class="string">"gun"</span>, <span class="string">"guo"</span>, <span class="string">"ha"</span>, <span class="string">"hai"</span>, <span class="string">"han"</span>, <span class="string">"hang"</span>,
-        <span class="string">"hao"</span>, <span class="string">"he"</span>, <span class="string">"hei"</span>, <span class="string">"hen"</span>, <span class="string">"heng"</span>, <span class="string">"hong"</span>, <span class="string">"hou"</span>, <span class="string">"hu"</span>, <span class="string">"hua"</span>, <span class="string">"huai"</span>, <span class="string">"huan"</span>, <span class="string">"huang"</span>, <span class="string">"hui"</span>, <span class="string">"hun"</span>, <span class="string">"huo"</span>, <span class="string">"ji"</span>, <span class="string">"jia"</span>, <span class="string">"jian"</span>,
-        <span class="string">"jiang"</span>, <span class="string">"jiao"</span>, <span class="string">"jie"</span>, <span class="string">"jin"</span>, <span class="string">"jing"</span>, <span class="string">"jiong"</span>, <span class="string">"jiu"</span>, <span class="string">"ju"</span>, <span class="string">"juan"</span>, <span class="string">"jue"</span>, <span class="string">"jun"</span>, <span class="string">"ka"</span>, <span class="string">"kai"</span>, <span class="string">"kan"</span>, <span class="string">"kang"</span>, <span class="string">"kao"</span>, <span class="string">"ke"</span>, <span class="string">"ken"</span>,
-        <span class="string">"keng"</span>, <span class="string">"kong"</span>, <span class="string">"kou"</span>, <span class="string">"ku"</span>, <span class="string">"kua"</span>, <span class="string">"kuai"</span>, <span class="string">"kuan"</span>, <span class="string">"kuang"</span>, <span class="string">"kui"</span>, <span class="string">"kun"</span>, <span class="string">"kuo"</span>, <span class="string">"la"</span>, <span class="string">"lai"</span>, <span class="string">"lan"</span>, <span class="string">"lang"</span>, <span class="string">"lao"</span>, <span class="string">"le"</span>, <span class="string">"lei"</span>, <span class="string">"leng"</span>,
-        <span class="string">"li"</span>, <span class="string">"lia"</span>, <span class="string">"lian"</span>, <span class="string">"liang"</span>, <span class="string">"liao"</span>, <span class="string">"lie"</span>, <span class="string">"lin"</span>, <span class="string">"ling"</span>, <span class="string">"liu"</span>, <span class="string">"long"</span>, <span class="string">"lou"</span>, <span class="string">"lu"</span>, <span class="string">"lv"</span>, <span class="string">"luan"</span>, <span class="string">"lue"</span>, <span class="string">"lun"</span>, <span class="string">"luo"</span>, <span class="string">"ma"</span>, <span class="string">"mai"</span>,
-        <span class="string">"man"</span>, <span class="string">"mang"</span>, <span class="string">"mao"</span>, <span class="string">"me"</span>, <span class="string">"mei"</span>, <span class="string">"men"</span>, <span class="string">"meng"</span>, <span class="string">"mi"</span>, <span class="string">"mian"</span>, <span class="string">"miao"</span>, <span class="string">"mie"</span>, <span class="string">"min"</span>, <span class="string">"ming"</span>, <span class="string">"miu"</span>, <span class="string">"mo"</span>, <span class="string">"mou"</span>, <span class="string">"mu"</span>, <span class="string">"na"</span>, <span class="string">"nai"</span>,
-        <span class="string">"nan"</span>, <span class="string">"nang"</span>, <span class="string">"nao"</span>, <span class="string">"ne"</span>, <span class="string">"nei"</span>, <span class="string">"nen"</span>, <span class="string">"neng"</span>, <span class="string">"ni"</span>, <span class="string">"nian"</span>, <span class="string">"niang"</span>, <span class="string">"niao"</span>, <span class="string">"nie"</span>, <span class="string">"nin"</span>, <span class="string">"ning"</span>, <span class="string">"niu"</span>, <span class="string">"nong"</span>, <span class="string">"nu"</span>, <span class="string">"nv"</span>, <span class="string">"nuan"</span>,
-        <span class="string">"nue"</span>, <span class="string">"nuo"</span>, <span class="string">"o"</span>, <span class="string">"ou"</span>, <span class="string">"pa"</span>, <span class="string">"pai"</span>, <span class="string">"pan"</span>, <span class="string">"pang"</span>, <span class="string">"pao"</span>, <span class="string">"pei"</span>, <span class="string">"pen"</span>, <span class="string">"peng"</span>, <span class="string">"pi"</span>, <span class="string">"pian"</span>, <span class="string">"piao"</span>, <span class="string">"pie"</span>, <span class="string">"pin"</span>, <span class="string">"ping"</span>, <span class="string">"po"</span>, <span class="string">"pu"</span>,
-        <span class="string">"qi"</span>, <span class="string">"qia"</span>, <span class="string">"qian"</span>, <span class="string">"qiang"</span>, <span class="string">"qiao"</span>, <span class="string">"qie"</span>, <span class="string">"qin"</span>, <span class="string">"qing"</span>, <span class="string">"qiong"</span>, <span class="string">"qiu"</span>, <span class="string">"qu"</span>, <span class="string">"quan"</span>, <span class="string">"que"</span>, <span class="string">"qun"</span>, <span class="string">"ran"</span>, <span class="string">"rang"</span>, <span class="string">"rao"</span>, <span class="string">"re"</span>,
-        <span class="string">"ren"</span>, <span class="string">"reng"</span>, <span class="string">"ri"</span>, <span class="string">"rong"</span>, <span class="string">"rou"</span>, <span class="string">"ru"</span>, <span class="string">"ruan"</span>, <span class="string">"rui"</span>, <span class="string">"run"</span>, <span class="string">"ruo"</span>, <span class="string">"sa"</span>, <span class="string">"sai"</span>, <span class="string">"san"</span>, <span class="string">"sang"</span>, <span class="string">"sao"</span>, <span class="string">"se"</span>, <span class="string">"sen"</span>, <span class="string">"seng"</span>, <span class="string">"sha"</span>,
-        <span class="string">"shai"</span>, <span class="string">"shan"</span>, <span class="string">"shang"</span>, <span class="string">"shao"</span>, <span class="string">"she"</span>, <span class="string">"shen"</span>, <span class="string">"sheng"</span>, <span class="string">"shi"</span>, <span class="string">"shou"</span>, <span class="string">"shu"</span>, <span class="string">"shua"</span>, <span class="string">"shuai"</span>, <span class="string">"shuan"</span>, <span class="string">"shuang"</span>, <span class="string">"shui"</span>, <span class="string">"shun"</span>,
-        <span class="string">"shuo"</span>, <span class="string">"si"</span>, <span class="string">"song"</span>, <span class="string">"sou"</span>, <span class="string">"su"</span>, <span class="string">"suan"</span>, <span class="string">"sui"</span>, <span class="string">"sun"</span>, <span class="string">"suo"</span>, <span class="string">"ta"</span>, <span class="string">"tai"</span>, <span class="string">"tan"</span>, <span class="string">"tang"</span>, <span class="string">"tao"</span>, <span class="string">"te"</span>, <span class="string">"teng"</span>, <span class="string">"ti"</span>, <span class="string">"tian"</span>, <span class="string">"tiao"</span>,
-        <span class="string">"tie"</span>, <span class="string">"ting"</span>, <span class="string">"tong"</span>, <span class="string">"tou"</span>, <span class="string">"tu"</span>, <span class="string">"tuan"</span>, <span class="string">"tui"</span>, <span class="string">"tun"</span>, <span class="string">"tuo"</span>, <span class="string">"wa"</span>, <span class="string">"wai"</span>, <span class="string">"wan"</span>, <span class="string">"wang"</span>, <span class="string">"wei"</span>, <span class="string">"wen"</span>, <span class="string">"weng"</span>, <span class="string">"wo"</span>, <span class="string">"wu"</span>, <span class="string">"xi"</span>,
-        <span class="string">"xia"</span>, <span class="string">"xian"</span>, <span class="string">"xiang"</span>, <span class="string">"xiao"</span>, <span class="string">"xie"</span>, <span class="string">"xin"</span>, <span class="string">"xing"</span>, <span class="string">"xiong"</span>, <span class="string">"xiu"</span>, <span class="string">"xu"</span>, <span class="string">"xuan"</span>, <span class="string">"xue"</span>, <span class="string">"xun"</span>, <span class="string">"ya"</span>, <span class="string">"yan"</span>, <span class="string">"yang"</span>, <span class="string">"yao"</span>, <span class="string">"ye"</span>, <span class="string">"yi"</span>,
-        <span class="string">"yin"</span>, <span class="string">"ying"</span>, <span class="string">"yo"</span>, <span class="string">"yong"</span>, <span class="string">"you"</span>, <span class="string">"yu"</span>, <span class="string">"yuan"</span>, <span class="string">"yue"</span>, <span class="string">"yun"</span>, <span class="string">"za"</span>, <span class="string">"zai"</span>, <span class="string">"zan"</span>, <span class="string">"zang"</span>, <span class="string">"zao"</span>, <span class="string">"ze"</span>, <span class="string">"zei"</span>, <span class="string">"zen"</span>, <span class="string">"zeng"</span>, <span class="string">"zha"</span>,
-        <span class="string">"zhai"</span>, <span class="string">"zhan"</span>, <span class="string">"zhang"</span>, <span class="string">"zhao"</span>, <span class="string">"zhe"</span>, <span class="string">"zhen"</span>, <span class="string">"zheng"</span>, <span class="string">"zhi"</span>, <span class="string">"zhong"</span>, <span class="string">"zhou"</span>, <span class="string">"zhu"</span>, <span class="string">"zhua"</span>, <span class="string">"zhuai"</span>, <span class="string">"zhuan"</span>, <span class="string">"zhuang"</span>, <span class="string">"zhui"</span>,
-        <span class="string">"zhun"</span>, <span class="string">"zhuo"</span>, <span class="string">"zi"</span>, <span class="string">"zong"</span>, <span class="string">"zou"</span>, <span class="string">"zu"</span>, <span class="string">"zuan"</span>, <span class="string">"zui"</span>, <span class="string">"zun"</span>, <span class="string">"zuo"</span>};
-<span class="keyword">private</span> StringBuilder buffer;
-<span class="keyword">private</span> <span class="keyword">String</span> resource;
-<span class="keyword">private</span> <span class="keyword">static</span> CharacterParser characterParser = <span class="keyword">new</span> CharacterParser();
-
-<span class="keyword">public</span> <span class="keyword">static</span> CharacterParser getInstance() {
-    <span class="keyword">return</span> characterParser;
-}
-
-<span class="keyword">public</span> <span class="keyword">String</span> getResource() {
-    <span class="keyword">return</span> resource;
-}
-
-<span class="keyword">public</span> <span class="keyword">void</span> setResource(<span class="keyword">String</span> resource) {
-    <span class="keyword">this</span>.resource = resource;
-}
-
-<span class="comment">/** * 汉字转成ASCII码 * * @param chs * @return */</span>
-<span class="keyword">private</span> <span class="built_in">int</span> getChsAscii(<span class="keyword">String</span> chs) {
-    <span class="built_in">int</span> asc = <span class="number">0</span>;
-    <span class="keyword">try</span> {
-<span class="comment">//            正确显示成中文就必须对编码进行转换"gb2312"是中文的一种编码方式。</span>
-        <span class="built_in">byte</span>[] bytes = chs.getBytes(<span class="string">"gb2312"</span>);
-        <span class="keyword">if</span> (bytes == <span class="keyword">null</span> || bytes.length &gt; <span class="number">2</span> || bytes.length &lt;= <span class="number">0</span>) {
-            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"illegal resource string"</span>);
-        }
-        <span class="keyword">if</span> (bytes.length == <span class="number">1</span>) {
-            asc = bytes[<span class="number">0</span>];
-        }
-        <span class="keyword">if</span> (bytes.length == <span class="number">2</span>) {
-            <span class="built_in">int</span> hightByte = <span class="number">256</span> + bytes[<span class="number">0</span>];
-            <span class="built_in">int</span> lowByte = <span class="number">256</span> + bytes[<span class="number">1</span>];
-            asc = (<span class="number">256</span> * hightByte + lowByte) - <span class="number">256</span> * <span class="number">256</span>;
-        }
-    } <span class="keyword">catch</span> (Exception e) {
-        System.out.<span class="built_in">println</span>(<span class="string">"ERROR:ChineseSpelling.class-getChsAscii(String chs)"</span> + e);
-    }
-    <span class="keyword">return</span> asc;
-}
-
-<span class="comment">/** * 单字解析 * * @param str * @return */</span>
-<span class="keyword">public</span> <span class="keyword">String</span> convert(<span class="keyword">String</span> <span class="built_in">str</span>) {
-    <span class="keyword">String</span> result = <span class="keyword">null</span>;
-    <span class="built_in">int</span> ascii = getChsAscii(<span class="built_in">str</span>);
-    Log.e(<span class="string">"ascii"</span>,ascii+<span class="string">""</span>);
-    <span class="keyword">if</span> (ascii &gt; <span class="number">0</span> &amp;&amp; ascii &lt; <span class="number">160</span>) {
-        result = <span class="keyword">String</span>.valueOf((<span class="built_in">char</span>) ascii);
-    } <span class="keyword">else</span> {
-        <span class="keyword">for</span> (<span class="built_in">int</span> i = (pyvalue.length - <span class="number">1</span>); i &gt;= <span class="number">0</span>; i--) {
-            <span class="keyword">if</span> (pyvalue[i] &lt;= ascii) {
-                result = pystr[i];
-                <span class="keyword">break</span>;
-            }
-        }
-    }
-    <span class="keyword">return</span> result;
-}
-
-<span class="comment">/** * 词组解析 * * @param chs * @return */</span>
-<span class="keyword">public</span> <span class="keyword">String</span> getSelling(<span class="keyword">String</span> chs) {
-    <span class="keyword">String</span> <span class="variable">key</span>, value;
-    buffer = <span class="keyword">new</span> StringBuilder();
-    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; chs.length(); i++) {
-        <span class="variable">key</span> = chs.substring(i, i + <span class="number">1</span>);
-        <span class="keyword">if</span> (<span class="variable">key</span>.getBytes().length &gt;= <span class="number">2</span>) {
-            value = (<span class="keyword">String</span>) convert(<span class="variable">key</span>);
-            <span class="keyword">if</span> (value == <span class="keyword">null</span>) {
-                value = <span class="string">"unknown"</span>;
-            }
-        } <span class="keyword">else</span> {
-            value = <span class="variable">key</span>;
-        }
-        buffer.<span class="built_in">append</span>(value);
-    }
-    <span class="keyword">return</span> buffer.toString();
-}
-
-<span class="keyword">public</span> <span class="keyword">String</span> getSpelling() {
-    <span class="keyword">return</span> <span class="keyword">this</span>.getSelling(<span class="keyword">this</span>.getResource());
-}
-
-}
-</code></pre><h2 id="实现原理">实现原理</h2><p>单字：</p>
-<ul>
-<li>1.先把输入的中文转成byte【】。</li>
-<li>2.再把byte【】转成ASCII码</li>
-<li>3.通过Ascii进行比对。</li>
-</ul>
-<p>对于词组</p>
-<ul>
-<li><p>通过String。substring（）的方法截取某一个字符。得到一个单字。接下去就一样了</p>
-<p>  key = chs.substring(i, i + 1);</p>
-</li>
-</ul>
-<h2 id="问题一chs-getBytes(“gb2312”)">问题一chs.getBytes(“gb2312”)</h2><pre><code>byte<span class="literal">[]</span> <span class="built_in">bytes</span> = chs.getBytes(<span class="string">"gb2312"</span>);
-</code></pre><p>getBytes（）：使用平台的默认字符集将此 String 编码为 byte 序列，并将结果存储到一个新的 byte 数组中。</p>
-<p>正确显示成中文就必须对编码进行转换”gb2312”是中文的一种编码方式。</p>
-<p>String.getBytes(String decode)方法会根据指定的decode编码返回某字符串在该编码下的byte数组表示，如 </p>
-<p>byte[] b_gbk = “中”.getBytes(“GBK”);<br>byte[] b_utf8 = “中”.getBytes(“UTF-8”);<br>byte[] b_iso88591 = “中”.getBytes(“ISO8859-1”); </p>
-<p>将分别返回“中”这个汉字在GBK、UTF-8和ISO8859-1编码下的byte数组表示，此时b_gbk的长度为2，b_utf8的长度为3，b_iso88591的长度为1。 </p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-3/" data-id="ciexyqva0000a1wb23bvydiez" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/08/2015-9-8-4/" data-id="cif1ucmdh0009h4b2wrvfqo84" class="article-share-link">Share</a>
       
       
     </footer>

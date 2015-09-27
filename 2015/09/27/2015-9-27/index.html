@@ -3,35 +3,27 @@
 <head>
   <meta charset="utf-8">
   
-  <title>jsp两种设计模型  | zszBlog</title>
+  <title>2015/9/27 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="jsp两种设计模型
-jsp+javaBean
-jsp+javaBean+Servlet
-
-其实还有第三种，纯粹用jsp来编写。由jsp来处理业务逻辑，显示页面，控制流程。由于这种代码繁琐，可重复性差、不易于维护所以很快被市场抛弃了
-jsp+javaBean页面显示和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现商业逻辑
- 工作原理是：当浏览器发出请求时，jsp接受请求">
+  <meta name="description" content="2015/9/27友盟 问题集用友盟的分享sdk遇到了这个问题：java.lang.NoClassDefFoundError:com.umeng.socialize.controller.UMServiceFactory。
+产生原因：android ADT版本升级后产生的。
+解决办法：①.build path—&amp;gt;order and export中把第三方jar包的位置上调；
+  ②.如果第一">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jsp两种设计模型 ">
-<meta property="og:url" content="http://yoursite.com/2015/05/17/2015-5-17/index.html">
+<meta property="og:title" content="2015/9/27">
+<meta property="og:url" content="http://yoursite.com/2015/09/27/2015-9-27/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="jsp两种设计模型
-jsp+javaBean
-jsp+javaBean+Servlet
-
-其实还有第三种，纯粹用jsp来编写。由jsp来处理业务逻辑，显示页面，控制流程。由于这种代码繁琐，可重复性差、不易于维护所以很快被市场抛弃了
-jsp+javaBean页面显示和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现商业逻辑
- 工作原理是：当浏览器发出请求时，jsp接受请求">
+<meta property="og:description" content="2015/9/27友盟 问题集用友盟的分享sdk遇到了这个问题：java.lang.NoClassDefFoundError:com.umeng.socialize.controller.UMServiceFactory。
+产生原因：android ADT版本升级后产生的。
+解决办法：①.build path—&amp;gt;order and export中把第三方jar包的位置上调；
+  ②.如果第一">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/81eeb0fcgw1ewgrm8suqej20mf0fgq7w.jpg">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jsp两种设计模型 ">
-<meta name="twitter:description" content="jsp两种设计模型
-jsp+javaBean
-jsp+javaBean+Servlet
-
-其实还有第三种，纯粹用jsp来编写。由jsp来处理业务逻辑，显示页面，控制流程。由于这种代码繁琐，可重复性差、不易于维护所以很快被市场抛弃了
-jsp+javaBean页面显示和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现商业逻辑
- 工作原理是：当浏览器发出请求时，jsp接受请求">
+<meta name="twitter:title" content="2015/9/27">
+<meta name="twitter:description" content="2015/9/27友盟 问题集用友盟的分享sdk遇到了这个问题：java.lang.NoClassDefFoundError:com.umeng.socialize.controller.UMServiceFactory。
+产生原因：android ADT版本升级后产生的。
+解决办法：①.build path—&amp;gt;order and export中把第三方jar包的位置上调；
+  ②.如果第一">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -129,7 +121,7 @@ jsp+javaBean页面显示和业务逻辑处理分开，JSP实现页面显示，Ja
     
   </div>
 </aside>
-      <section id="main"><article id="post-2015-5-17" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-2015-9-27" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -138,15 +130,15 @@ jsp+javaBean页面显示和业务逻辑处理分开，JSP实现页面显示，Ja
         
   
     <h1 class="article-title" itemprop="name">
-      jsp两种设计模型 
+      2015/9/27
     </h1>
   
 
         <div class="article-meta">
           <div class="article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/05/17/2015-5-17/">
-    <time datetime="2015-05-17T11:14:59.000Z" itemprop="datePublished">2015-05-17</time>
+  <a href="/2015/09/27/2015-9-27/">
+    <time datetime="2015-09-27T01:35:42.000Z" itemprop="datePublished">2015-09-27</time>
   </a>
 </div>
           
@@ -155,30 +147,18 @@ jsp+javaBean页面显示和业务逻辑处理分开，JSP实现页面显示，Ja
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="jsp两种设计模型">jsp两种设计模型</h1><ul>
-<li>jsp+javaBean</li>
-<li>jsp+javaBean+Servlet</li>
-</ul>
-<p>其实还有第三种，纯粹用jsp来编写。由jsp来处理业务逻辑，显示页面，控制流程。由于这种代码繁琐，可重复性差、不易于维护所以很快被市场抛弃了</p>
-<h2 id="jsp+javaBean">jsp+javaBean</h2><p>页面显示和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现商业逻辑</p>
-<p> 工作原理是：当浏览器发出请求时，jsp接受请求并访问javabean。若需要访问数据库后台服务器，则通过javaBean连接数据库或后台服务器，执行相应的处理。javaBean将处理的结果数据交给jsp。jsp提取结果并重新组织后，动态生成HRML页面，返回给浏览器。用户从浏览器显示的页面中得到交互的结果</p>
-<h2 id="jsp+javaBean+Servlet">jsp+javaBean+Servlet</h2><p>把流程控制代码和部分的逻辑处理代码提取到servlet中去。</p>
-<p>mvc架构：model层  +view层 controller层</p>
-<ul>
-<li>model：实现业务逻辑，包括了web应用程序功能的核心，负责存储与<br>应用程序相关的数据</li>
-<li>view：用于用户的页面显示，他可以访问model层数据，但不能更改这些数据</li>
-<li>Controller：主要负责model和view的控制关系，负责处理http的请求等</li>
-</ul>
-<p>并不是说mvc架构就更好。<br>根据实际来选择：</p>
-<ul>
-<li>当事务逻辑比较负责、分支较多或需要涉及很多JavaBean组件时，由于JSP和JavaBean+Servlet模型比JSP和JavaBean模型有更清晰的页面表现、更明确的开发模块的划分，所以使用JSP和JavaBean+Servlet模型比较适合</li>
-<li>对于简单的交互处理，利用JSP和JavaBean模型，JSP主要是使用HTML工具开发，然后再插入少量的Java代码就可以实现动态交互。在这种情况下，使用JSP和JavaBean模型更加方便快捷</li>
-</ul>
+        <h1 id="2015/9/27友盟_问题集">2015/9/27友盟 问题集</h1><h2 id="用友盟的分享sdk遇到了这个问题：">用友盟的分享sdk遇到了这个问题：</h2><p>java.lang.NoClassDefFoundError:com.umeng.socialize.controller.UMServiceFactory。</p>
+<p>产生原因：android ADT版本升级后产生的。</p>
+<p>解决办法：①.build path—&gt;order and export中把第三方jar包的位置上调；</p>
+<p>  ②.如果第一种办法不好用，请试一试，右击项目名称—&gt;Build path—&gt;configure build path..</p>
+<p>此时会弹出类库设置对话框，点击选项卡“Order and Export”</p>
+<p><img src="http://ww2.sinaimg.cn/large/81eeb0fcgw1ewgrm8suqej20mf0fgq7w.jpg" alt=""></p>
+<p>把Android Private Libraries和Android Dependencies这两个选项勾选上，（貌似第三方类库的顺序也需要调整，之前有一个项目也是编译运行时出现同样的错误，把第三方类库的位置上调，把项目的src和gen两个包的位置下调，上一个项目的同样的错误问题是这样得到解决的）把项目Clean一下，重新编译，问题就迎刃而解了！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cif1ucmhu0026h4b2tf4b6079" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/27/2015-9-27/" data-id="cif1ucme0000hh4b26khsh39j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -187,19 +167,10 @@ jsp+javaBean页面显示和业务逻辑处理分开，JSP实现页面显示，Ja
     
 <nav id="article-nav">
   
-    <a href="/2015/05/24/2015-5-24/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Dao模式
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/05/16/2015-5-16/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/09/24/2015-9-24/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">jsp九大内置对象</div>
+      <div class="article-nav-title">2015/9/24</div>
     </a>
   
 </nav>
