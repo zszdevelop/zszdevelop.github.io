@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        80
+        83
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,425 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-10-3-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/03/2015-10-3-2/">相对于屏幕的两边、相对于屏幕的中间、多控件位于屏幕的右边</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/10/03/2015-10-3-2/">
+    <time datetime="2015-10-03T10:38:13.000Z" itemprop="datePublished">2015-10-03</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="相对于屏幕的两边">相对于屏幕的两边</h1><p><img src="http://ww3.sinaimg.cn/large/81eeb0fcgw1ewo4wowadpj207b011t8i.jpg" alt=""></p>
+<pre><code>&lt;RelativeLayout android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_marginTop=</span><span class="string">"20dp"</span>
+        android:<span class="variable">layout_below=</span><span class="string">"@id/btnLogin"</span>
+        &gt;
+        &lt;TextView  <span class="variable">style=</span><span class="string">"@style/textview_small"</span>
+            android:<span class="variable">text=</span><span class="string">"注册Meng号"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/tvRegister"</span>
+            /&gt;
+
+           &lt;TextView <span class="variable">style=</span><span class="string">"@style/textview_small"</span>
+               android:<span class="variable">text=</span><span class="string">"忘记密码 "</span>
+               android:<span class="variable">layout_alignParentRight=</span><span class="string">"true"</span>
+               android:<span class="variable">id=</span><span class="string">"@+id/tvForgetPassword"</span>
+
+               /&gt;
+
+    &lt;/RelativeLayout&gt;
+</code></pre><h1 id="相对于屏幕的中间">相对于屏幕的中间</h1><pre><code>&lt;LinearLayout android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>
+        android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
+        android:<span class="variable">layout_centerHorizontal=</span><span class="string">"true"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/ll"</span>
+        &gt;
+          &lt;ImageView 
+              android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">src=</span><span class="string">"@drawable/qq"</span>
+              android:<span class="variable">id=</span><span class="string">"@+id/ivQQ"</span>
+              /&gt;
+          &lt;ImageView 
+              android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">layout_marginLeft=</span><span class="string">"20dp"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">src=</span><span class="string">"@drawable/wechat"</span>
+              android:<span class="variable">id=</span><span class="string">"@+id/ivWechat"</span>
+              /&gt;
+          &lt;ImageView 
+              android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+               android:<span class="variable">layout_marginLeft=</span><span class="string">"20dp"</span>
+              android:<span class="variable">src=</span><span class="string">"@drawable/weibo"</span>
+              android:<span class="variable">id=</span><span class="string">"@+id/ivWeibo"</span>
+              /&gt;
+  &lt;/LinearLayout&gt;
+</code></pre><h1 id="多控件位于屏幕的右边">多控件位于屏幕的右边</h1><pre><code>&lt;RelativeLayout android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+       android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
+
+       &gt;
+       &lt;LinearLayout android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+           android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+           android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+           android:<span class="variable">layout_alignParentRight=</span><span class="string">"true"</span>
+           &gt;
+       &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+           android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+           android:<span class="variable">src=</span><span class="string">"@drawable/favour"</span>
+
+
+           /&gt;
+        &lt;TextView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+                   android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+                   android:<span class="variable">text=</span><span class="string">"123456"</span>
+                   android:<span class="variable">textSize=</span><span class="string">"@dimen/text_size_small"</span>
+                   android:<span class="variable">layout_marginLeft=</span><span class="string">"10dp"</span>
+                   /&gt;
+       &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+           android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+           android:<span class="variable">src=</span><span class="string">"@drawable/criticism1"</span>
+           android:<span class="variable">layout_marginLeft=</span><span class="string">"10dp"</span>
+           android:<span class="variable">id=</span><span class="string">"@+id/ivComment"</span>
+           /&gt;
+        &lt;TextView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+                   android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+                   android:<span class="variable">text=</span><span class="string">"100人评论"</span>
+
+                   android:<span class="variable">textSize=</span><span class="string">"@dimen/text_size_small"</span>
+
+                   android:<span class="variable">id=</span><span class="string">"@+id/tvComment"</span>
+                   android:<span class="variable">layout_marginLeft=</span><span class="string">"10dp"</span>
+                   /&gt;
+           &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+               android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+                  android:<span class="variable">src=</span><span class="string">"@drawable/transmit1"</span>
+             android:<span class="variable">layout_marginLeft=</span><span class="string">"10dp"</span>
+               /&gt;
+       &lt;/LinearLayout&gt;
+   &lt;/RelativeLayout&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/03/2015-10-3-2/" data-id="cifaydljj002avcb29k7vbfem" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-10-3-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/03/2015-10-3-1/">相对布局的登陆界面</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/10/03/2015-10-3-1/">
+    <time datetime="2015-10-03T10:32:09.000Z" itemprop="datePublished">2015-10-03</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="相对布局的登陆界面">相对布局的登陆界面</h2><p><img src="http://ww4.sinaimg.cn/large/81eeb0fcgw1ewo4te503qj205105pmx7.jpg" alt=""></p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+    xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+       android:<span class="variable">background=</span><span class="string">"@drawable/background"</span>
+
+       android:<span class="variable">padding=</span><span class="string">"30dp"</span>
+    tools:<span class="variable">context=</span><span class="string">"com.iwmclub.nutriliteau.activity.LoginActivity"</span> &gt;
+
+
+    &lt;ImageView 
+       android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_marginTop=</span><span class="string">"30dp"</span>
+        android:<span class="variable">background=</span><span class="string">"@drawable/logo"</span>
+        android:<span class="variable">layout_centerHorizontal=</span><span class="string">"true"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/ivLogo"</span>
+        /&gt;
+
+
+    &lt;LinearLayout 
+        android:<span class="variable">layout_below=</span><span class="string">"@id/ivLogo"</span>
+        android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
+        android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+        android:<span class="variable">gravity=</span><span class="string">"center_vertical"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/llName"</span>
+        &gt;
+        &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+
+            android:<span class="variable">src=</span><span class="string">"@drawable/uesr"</span>
+            /&gt;
+        &lt;EditText 
+             android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">hint=</span><span class="string">"输入手机号码"</span>
+            android:<span class="variable">gravity=</span><span class="string">"center_horizontal"</span>
+            android:<span class="variable">singleLine=</span><span class="string">"true"</span>
+            android:<span class="variable">inputType=</span><span class="string">"phone"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/etName"</span>
+            android:<span class="variable">background=</span><span class="string">"@null"</span>
+            /&gt;
+    &lt;/LinearLayout&gt;
+
+    &lt;View <span class="variable">style=</span><span class="string">"@style/view_lines_login_gray"</span>
+        android:<span class="variable">layout_below=</span><span class="string">"@id/llName"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/llLine02"</span>
+        /&gt;
+
+    &lt;LinearLayout 
+        android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
+        android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+         android:<span class="variable">gravity=</span><span class="string">"center_vertical"</span>
+         android:<span class="variable">layout_below=</span><span class="string">"@id/llLine02"</span>
+         android:<span class="variable">id=</span><span class="string">"@+id/llPassword"</span>
+        &gt;
+        &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+
+            android:<span class="variable">src=</span><span class="string">"@drawable/password"</span>
+            /&gt;
+        &lt;EditText 
+            android:<span class="variable">id=</span><span class="string">"@+id/etPassword"</span>
+             android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">hint=</span><span class="string">"输入登陆密码"</span>
+            android:<span class="variable">gravity=</span><span class="string">"center_horizontal"</span>
+            android:<span class="variable">background=</span><span class="string">"@null"</span>
+            android:<span class="variable">inputType=</span><span class="string">"textPassword"</span>
+            android:<span class="variable">singleLine=</span><span class="string">"true"</span>
+            /&gt;
+    &lt;/LinearLayout&gt;
+
+     &lt;View <span class="variable">style=</span><span class="string">"@style/view_lines_login_gray"</span>
+        android:<span class="variable">layout_below=</span><span class="string">"@id/llPassword"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/viewLine"</span>
+        /&gt;
+
+    &lt;Button 
+        android:<span class="variable">layout_marginTop=</span><span class="string">"30dp"</span>
+        android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
+        android:<span class="variable">text=</span><span class="string">"登陆"</span>
+          android:<span class="variable">id=</span><span class="string">"@+id/btnLogin"</span>
+        android:<span class="variable">textColor=</span><span class="string">"@color/white"</span>
+        android:<span class="variable">gravity=</span><span class="string">"center"</span>
+        android:<span class="variable">background=</span><span class="string">"@drawable/landing"</span>
+        android:<span class="variable">layout_below=</span><span class="string">"@id/viewLine"</span>
+        /&gt;
+
+    &lt;RelativeLayout android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_marginTop=</span><span class="string">"20dp"</span>
+        android:<span class="variable">layout_below=</span><span class="string">"@id/btnLogin"</span>
+        &gt;
+        &lt;TextView  <span class="variable">style=</span><span class="string">"@style/textview_small"</span>
+            android:<span class="variable">text=</span><span class="string">"注册Meng号"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/tvRegister"</span>
+            /&gt;
+
+           &lt;TextView <span class="variable">style=</span><span class="string">"@style/textview_small"</span>
+               android:<span class="variable">text=</span><span class="string">"忘记密码 "</span>
+               android:<span class="variable">layout_alignParentRight=</span><span class="string">"true"</span>
+               android:<span class="variable">id=</span><span class="string">"@+id/tvForgetPassword"</span>
+
+               /&gt;
+
+    &lt;/RelativeLayout&gt;
+
+       &lt;LinearLayout android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_gravity=</span><span class="string">"center_horizontal"</span>
+        android:<span class="variable">layout_alignParentBottom=</span><span class="string">"true"</span>
+        android:<span class="variable">layout_centerHorizontal=</span><span class="string">"true"</span>
+        android:<span class="variable">id=</span><span class="string">"@+id/ll"</span>
+        &gt;
+          &lt;ImageView 
+              android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">src=</span><span class="string">"@drawable/qq"</span>
+              android:<span class="variable">id=</span><span class="string">"@+id/ivQQ"</span>
+              /&gt;
+          &lt;ImageView 
+              android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">layout_marginLeft=</span><span class="string">"20dp"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">src=</span><span class="string">"@drawable/wechat"</span>
+              android:<span class="variable">id=</span><span class="string">"@+id/ivWechat"</span>
+              /&gt;
+          &lt;ImageView 
+              android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+               android:<span class="variable">layout_marginLeft=</span><span class="string">"20dp"</span>
+              android:<span class="variable">src=</span><span class="string">"@drawable/weibo"</span>
+              android:<span class="variable">id=</span><span class="string">"@+id/ivWeibo"</span>
+              /&gt;
+  &lt;/LinearLayout&gt;
+
+
+           &lt;LinearLayout android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+               android:<span class="variable">layout_height=</span><span class="string">"50dp"</span>
+               android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+               android:<span class="variable">layout_above=</span><span class="string">"@id/ll"</span>
+               android:<span class="variable">gravity=</span><span class="string">"center_horizontal"</span>
+               android:<span class="variable">id=</span><span class="string">"@+id/llLine"</span>
+               &gt;
+                &lt;View android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"1dp"</span>
+              android:<span class="variable">layout_centerVertical=</span><span class="string">"true"</span>
+              android:<span class="variable">background=</span><span class="string">"@color/line_view"</span>
+             android:<span class="variable">layout_gravity=</span><span class="string">"center_vertical"</span>
+
+              /&gt;
+          &lt;TextView <span class="variable">style=</span><span class="string">"@style/textview_small"</span>
+              android:<span class="variable">text=</span><span class="string">"第三方登陆"</span>
+             android:<span class="variable">layout_centerVertical=</span><span class="string">"true"</span>
+              android:<span class="variable">layout_centerHorizontal=</span><span class="string">"true"</span>
+              android:<span class="variable">layout_gravity=</span><span class="string">"center_vertical"</span>
+              /&gt;
+          &lt;View android:<span class="variable">layout_width=</span><span class="string">"100dp"</span>
+              android:<span class="variable">layout_height=</span><span class="string">"1dp"</span>
+
+              android:<span class="variable">layout_alignParentRight=</span><span class="string">"true"</span>
+              android:<span class="variable">background=</span><span class="string">"@color/line_view"</span>
+             android:<span class="variable">layout_gravity=</span><span class="string">"center_vertical"</span>
+              /&gt;
+
+           &lt;/LinearLayout&gt;
+
+
+
+&lt;/RelativeLayout&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/03/2015-10-3-1/" data-id="cifaydl1e0000vcb2zhatb3my" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-10-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/03/2015-10-3/">带有男女图标的头像</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/10/03/2015-10-3/">
+    <time datetime="2015-10-03T10:26:09.000Z" itemprop="datePublished">2015-10-03</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="带有男女图标的头像">带有男女图标的头像</h1><p><img src="http://ww3.sinaimg.cn/large/81eeb0fcgw1ewo4mmbpzcj205s05iglo.jpg" alt=""></p>
+<pre><code>    &lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+    xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+    android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
+            tools:<span class="variable">context=</span><span class="string">"com.zszdevelop.layouttest.MainActivity"</span> &gt;
+
+ &lt;FrameLayout android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+
+
+
+            &gt;
+            &lt;com.zszdevelop.layouttest.CircleImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">src=</span><span class="string">"@drawable/git01"</span>
+
+            /&gt;
+        &lt;ImageView android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">src=</span><span class="string">"@drawable/female"</span>
+           android:<span class="variable">layout_gravity=</span><span class="string">"right|bottom"</span>
+            /&gt;
+
+        &lt;ImageView
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_gravity=</span><span class="string">"right|bottom"</span>
+            android:<span class="variable">src=</span><span class="string">"@drawable/male"</span> /&gt;
+
+        &lt;/FrameLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/03/2015-10-3/" data-id="cifaydljg0029vcb2ve9ye4qu" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-27" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -149,7 +568,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/27/2015-9-27/" data-id="cif1ucme0000hh4b26khsh39j" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/27/2015-9-27/" data-id="cifaydlf4000hvcb214xg536i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,7 +627,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/24/2015-9-24/" data-id="cif1ucme2000ih4b2tgvxx04h" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/24/2015-9-24/" data-id="cifaydlf8000ivcb2r5e8mntp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -250,7 +669,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/21/2015-9-21/" data-id="cif1ucme5000jh4b2yr0txj0v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/21/2015-9-21/" data-id="cifaydlfb000jvcb2t53bs411" class="article-share-link">Share</a>
       
       
     </footer>
@@ -291,7 +710,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/17/2015-9-17/" data-id="cif1ucme8000kh4b2k83rzv6u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/17/2015-9-17/" data-id="cifaydlfd000kvcb2bcgtbofd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -500,7 +919,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-5/" data-id="cif1ucmed000mh4b2utqurlax" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-5/" data-id="cifaydlfm000mvcb2ncv3t6i9" class="article-share-link">Share</a>
       
       
     </footer>
@@ -715,7 +1134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-4/" data-id="cif1ucmef000nh4b2a5ifpqll" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-4/" data-id="cifaydlfn000nvcb2kza32eaj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -800,331 +1219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cif1ucmeh000oh4b2nd75j2b5" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-15-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/15/2015-9-15-2/">判断网络是否可以用</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/15/2015-9-15-2/">
-    <time datetime="2015-09-15T02:56:30.000Z" itemprop="datePublished">2015-09-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="膜拜大神亮之—-_判断网络是否可以用">膜拜大神亮之—- 判断网络是否可以用</h1><pre><code><span class="keyword">package</span> com.zsz.develop.registerutils;
-
-<span class="keyword">import</span> android.app.AlertDialog;
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.content.DialogInterface;
-<span class="keyword">import</span> android.content.Intent;
-<span class="keyword">import</span> android.net.ConnectivityManager;
-<span class="keyword">import</span> android.net.NetworkInfo;
-<span class="keyword">import</span> android.provider.Settings;
-
-<span class="javadoc">/**
- *<span class="javadoctag"> @author</span> LigthWang
- *
- *         描述：判断网络的类型的封装
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CheckNetwork</span> </span>{
-<span class="keyword">private</span> Context context;
-
-<span class="function"><span class="keyword">public</span> <span class="title">CheckNetwork</span><span class="params">(Context context)</span> </span>{
-    <span class="keyword">this</span>.context = context;
-}
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">IsWifiAvailable</span><span class="params">(Context context)</span> </span>{
-    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;
-    ConnectivityManager manager = (ConnectivityManager) context
-            .getSystemService(Context.CONNECTIVITY_SERVICE);
-
-    NetworkInfo activeInfo = manager.getActiveNetworkInfo();
-    <span class="keyword">if</span> (activeInfo != <span class="keyword">null</span> &amp;&amp; activeInfo.isConnected()) {
-        flag = activeInfo.getType() == ConnectivityManager.TYPE_WIFI;
-        <span class="comment">// mobileConnected = activeInfo.getType() ==</span>
-        <span class="comment">// ConnectivityManager.TYPE_MOBILE;</span>
-    }
-    <span class="keyword">return</span> flag;
-}
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">IsNetworkAvailable</span><span class="params">(Context context)</span> </span>{
-    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;
-    ConnectivityManager manager = (ConnectivityManager) context
-            .getSystemService(Context.CONNECTIVITY_SERVICE);
-    <span class="keyword">if</span> (manager.getActiveNetworkInfo() != <span class="keyword">null</span>) {
-        flag = manager.getActiveNetworkInfo().isAvailable();
-    }
-
-    <span class="keyword">return</span> flag;
-}
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">CheckNetworkAvailable</span><span class="params">()</span> </span>{
-    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;
-    ConnectivityManager manager = (ConnectivityManager) context
-            .getSystemService(Context.CONNECTIVITY_SERVICE);
-    <span class="keyword">if</span> (manager.getActiveNetworkInfo() != <span class="keyword">null</span>) {
-        flag = manager.getActiveNetworkInfo().isAvailable();
-    }
-    <span class="keyword">if</span> (!flag) {
-        <span class="comment">// ToastUtil.show(context, "连接不可用，请确认您的网络通畅，稍后再试！");</span>
-    }
-    <span class="keyword">return</span> flag;
-}
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">CheckNetworkAndSet</span><span class="params">()</span> </span>{
-    <span class="keyword">boolean</span> flag = <span class="keyword">false</span>;
-    ConnectivityManager manager = (ConnectivityManager) context
-            .getSystemService(Context.CONNECTIVITY_SERVICE);
-    <span class="keyword">if</span> (manager.getActiveNetworkInfo() != <span class="keyword">null</span>) {
-        flag = manager.getActiveNetworkInfo().isAvailable();
-    }
-    <span class="keyword">if</span> (!flag) {
-        AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(context);
-        builder.setIcon(android.R.drawable.ic_dialog_alert);
-        builder.setTitle(<span class="string">"网络状态 "</span>);
-        builder.setMessage(<span class="string">"当前网络不可用，是否设置网络？"</span>);
-        builder.setPositiveButton(<span class="string">"设置"</span>,
-                <span class="keyword">new</span> DialogInterface.OnClickListener() {
-
-                    <span class="annotation">@Override</span>
-                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
-                        context.startActivity(<span class="keyword">new</span> Intent(
-                                Settings.ACTION_SETTINGS)); <span class="comment">// ACTION_WIRELESS_SETTINGS</span>
-                                                            <span class="comment">// 网络设</span>
-                    }
-                });
-        builder.setNegativeButton(<span class="string">"离线浏览"</span>,
-                <span class="keyword">new</span> DialogInterface.OnClickListener() {
-
-                    <span class="annotation">@Override</span>
-                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
-                        dialog.cancel();
-                    }
-                });
-        builder.create();
-        builder.show();
-    }
-
-    <span class="keyword">return</span> flag;
-
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-2/" data-id="cif1ucmej000ph4b2rgjv9u3d" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-15" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/15/2015-9-15/">2015/9/15</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/15/2015-9-15/">
-    <time datetime="2015-09-15T01:10:45.000Z" itemprop="datePublished">2015-09-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/9/15日">2015/9/15日</h1><p>膜拜大神亮之通过正则表达式来判断是否为指定字符串。</p>
-<ul>
-<li>判断电话号码</li>
-<li>验证邮箱</li>
-<li>验证数字</li>
-<li>验证姓名</li>
-</ul>
-<pre><code><span class="keyword">package</span> com.zsz.develop.lightverify;
-
-<span class="keyword">import</span> java.util.regex.Matcher;
-<span class="keyword">import</span> java.util.regex.Pattern;
-
-<span class="keyword">import</span> android.<span class="built_in">text</span>.TextUtils;
-
-<span class="comment">/**
- * @author LigthWang
- *
- * 描述：验证的处理封装
- */</span>
-<span class="keyword">public</span> class YanZhengUtil {
-
-<span class="comment">// 验证电话号码</span>
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">boolean</span> isPhoneNumber(<span class="keyword">String</span> phoneNumber) {
-    <span class="keyword">if</span> (TextUtils.isEmpty(phoneNumber)) {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-
-    <span class="keyword">String</span> expression = <span class="string">"^1[0-9]{10}$"</span>;
-
-    Pattern pattern = Pattern.compile(expression);
-    Matcher matcher = pattern.matcher(phoneNumber);
-
-    <span class="keyword">if</span> (matcher.matches()) {
-        <span class="keyword">return</span> <span class="keyword">true</span>;
-    } <span class="keyword">else</span> {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-}
-
-<span class="comment">// 验证邮箱</span>
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">boolean</span> isEmail(<span class="keyword">String</span> email) {
-    <span class="keyword">if</span> (TextUtils.isEmpty(email)) {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-
-    <span class="keyword">final</span> <span class="keyword">String</span> expression = <span class="string">"[\\w!#$%&amp;'*+/=?^_`{|}~-]+(?:\\.[\\w!#$%&amp;'*+/=?^_`{|}~-]+)*@(?:[\\w](?:[\\w-]*[\\w])?\\.)+[\\w](?:[\\w-]*[\\w])?"</span>;
-
-    Pattern pattern = Pattern.compile(expression);
-    Matcher matcher = pattern.matcher(email);
-
-    <span class="keyword">if</span> (matcher.matches()) {
-        <span class="keyword">return</span> <span class="keyword">true</span>;
-    } <span class="keyword">else</span> {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-}
-
-<span class="comment">// 验证数字</span>
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">boolean</span> isNumeric(<span class="keyword">String</span> <span class="built_in">str</span>) {
-    <span class="keyword">if</span> (TextUtils.isEmpty(<span class="built_in">str</span>)) {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-    Pattern pattern = Pattern.compile(<span class="string">"^[0-9]*$"</span>);
-    Matcher isNum = pattern.matcher(<span class="built_in">str</span>);
-    <span class="keyword">if</span> (isNum.matches()) {
-        <span class="keyword">return</span> <span class="keyword">true</span>;
-    } <span class="keyword">else</span> {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-}
-
-<span class="comment">/**
- * 验证姓名&lt;br/&gt;
- * 中文2-20个字符&lt;br/&gt;
- * 英文2-20个字符&lt;br/&gt;
- * 中英文不能混用
- * 
- * @param name
- *            姓名字符串
- * @return
- */</span>
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="built_in">boolean</span> validateName(<span class="keyword">String</span> name) {
-
-    <span class="keyword">if</span> (TextUtils.isEmpty(name)) {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-    <span class="comment">// 2-4中文</span>
-    Pattern pattern1 = Pattern.compile(<span class="string">"^[\u4E00-\u9FA5]{2,20}$"</span>);
-    Matcher matcher1 = pattern1.matcher(name);
-
-    <span class="comment">// 2-12英文</span>
-    Pattern pattern2 = Pattern.compile(<span class="string">"^[a-zA-Z]{2,20}$"</span>);
-    Matcher matcher2 = pattern2.matcher(name);
-
-    <span class="keyword">if</span> (matcher1.matches() || matcher2.matches()) {
-        <span class="keyword">return</span> <span class="keyword">true</span>;
-    } <span class="keyword">else</span> {
-        <span class="keyword">return</span> <span class="keyword">false</span>;
-    }
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15/" data-id="cif1ucmeb000lh4b24g7f12np" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-14-1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/14/2015-9-14-1/">2015/9/14</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/14/2015-9-14-1/">
-    <time datetime="2015-09-14T10:42:38.000Z" itemprop="datePublished">2015-09-14</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/9/14">2015/9/14</h1><p>为膜拜亮神做铺垫</p>
-<h2 id="自定义ListView下拉刷新遇到的问题">自定义ListView下拉刷新遇到的问题</h2><h3 id="关于ListView的_addHeaderView(…)_方法">关于ListView的 addHeaderView(…) 方法</h3><p>在代码中使用 listView .addHeaderView(…) 方法可以在ListView组件上方添加上其他组件，并且连结在一起像是一个新组件。如果多次使用 .addHeaderView(…) ,则最先添加的组件在最上方，按添加的先后顺序由上到下罗列。</p>
-<p><img src="http://ww1.sinaimg.cn/large/81eeb0fcgw1ew26bev5ntj20ba0d9q48.jpg" alt=""></p>
-<p>此时listView 的 position = 0 的位置对应的是view1，而不再是原来listView中的第一条了。</p>
-<h3 id="OnGlobalLayoutListener获得一个视图的高度">OnGlobalLayoutListener获得一个视图的高度</h3><p>我们知道在oncreate中View.getWidth和View.getHeight无法获得一个view的高度和宽度，这是因为View组件布局要在onResume回调后完成。所以现在需要使用getViewTreeObserver().addOnGlobalLayoutListener()来获得宽度或者高度。这是获得一个view的宽度和高度的方法之一。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/14/2015-9-14-1/" data-id="cif1ucmer000rh4b29596dqlm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cifaydlfp000ovcb2o5kfglgx" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1135,7 +1230,7 @@
 
     
       <nav id="page-nav">
-        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
       </nav>
     </section>
       

@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        80
+        83
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,550 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-3" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/03/2015-9-3/">2015/9/3</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/03/2015-9-3/">
+    <time datetime="2015-09-03T00:54:52.000Z" itemprop="datePublished">2015-09-03</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/3日问题集">2015/9/3日问题集</h1><p>奇葩的selector。</p>
+<ul>
+<li>1.item结尾直接/&gt; 不要加《/item》</li>
+<li><p>2.有状态的selector要在前面。没有的在后面</p>
+<p>  &lt;?xml version=”1.0” encoding=”utf-8” ?&gt;</p>
+  <selector xmlns:android="http://schemas.android.com/apk/res/android"><br>  <item android:state_pressed="true" android:drawable="@drawable/new_ic_tab_cloud02"><br>  <item android:drawable="@drawable/new_ic_tab_cloud01"><br>  </item></item></selector></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cifaydlf1000gvcb2dvsdwway" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-9-1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/01/2015-9-1/">2015/9/1</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/01/2015-9-1/">
+    <time datetime="2015-09-01T00:59:27.000Z" itemprop="datePublished">2015-09-01</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/2问题集">2015/9/2问题集</h1><h2 id="AlertDialog">AlertDialog</h2><p>AlertDialog是Dialog的一个直接子类</p>
+<p>一个AlertDialog可以有两个Button或者3个Button</p>
+<p>可以对一个AlertDialog设置title、message。</p>
+<p>不能直接通过AlertDialog的构造函数来生成一个AlertDialog</p>
+<p>一般生成的时候都是通过它的的一个内部静态类AlertDialog.Builder来构造的。</p>
+<h2 id="AlertDialog的使用_利用系统自带的进行设置">AlertDialog的使用 利用系统自带的进行设置</h2><p>跟其他提示框一样要先创建成dialog，然后才可以show或者dismiss</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.alertdialogdemo;
+
+    <span class="keyword">import</span> android.app.AlertDialog;
+    <span class="keyword">import</span> android.content.DialogInterface;
+    <span class="keyword">import</span> android.content.Intent;
+    <span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+    <span class="keyword">import</span> android.os.Bundle;
+    <span class="keyword">import</span> android.util.Log;
+    <span class="keyword">import</span> android.view.Menu;
+    <span class="keyword">import</span> android.view.MenuItem;
+
+    <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    send();
+}
+
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span>
+</span>{
+<span class="comment">// ....... 构造一个 AlertDialog</span>
+    AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>)
+            <span class="comment">// 对话框标题</span>
+            .setTitle(<span class="string">"简单对话框"</span>)
+                    <span class="comment">// 对话框图标</span>
+            .setIcon(R.mipmap.ic_launcher);
+    <span class="comment">// 对话框内容</span>
+    <span class="comment">// .setMessage("对话框内容.");</span>
+<span class="comment">// 添加一个按钮，并监听按钮事件 (积极的;确实的)</span>
+    builder.setPositiveButton(<span class="string">"确定"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
+            Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, ControlActivity.class);
+            startActivity(intent);
+        }
+    });
+<span class="comment">// 添加一个按钮，并监听按钮事件 (消极的;否认的)</span>
+    builder.setNegativeButton(<span class="string">"取消"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
+            Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, ControlActivity.class);
+            startActivity(intent);
+        }
+    });
+<span class="comment">// 添加一个按钮，并监听按钮事件 (中立的)</span>
+    builder.setNeutralButton(<span class="string">"帮助"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
+            Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, ControlActivity.class);
+            startActivity(intent);
+        }
+    });
+<span class="comment">// 列表</span>
+    CharSequence chars[] = {<span class="string">"hello"</span>, <span class="string">"wrold"</span>};
+<span class="comment">// 列表项目对话框</span>
+    builder.setItems(chars, <span class="keyword">new</span> DialogInterface.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
+            <span class="comment">// 点击了第几列</span>
+            Log.i(<span class="string">"info"</span>, String.valueOf(which));
+            <span class="comment">// ... 动作</span>
+            Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, ControlActivity.class);
+            startActivity(intent);
+        }
+    });
+<span class="comment">// 单选按钮</span>
+    builder.setSingleChoiceItems(chars, <span class="number">0</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
+            <span class="comment">// 点击了第几列</span>
+            Log.i(<span class="string">"info"</span>, String.valueOf(which));
+            <span class="comment">// ... 动作</span>
+            Intent intent = <span class="keyword">new</span> Intent(MainActivity.<span class="keyword">this</span>, ControlActivity.class);
+            startActivity(intent);
+        }
+    });
+    <span class="keyword">boolean</span> m_boolean[] = {<span class="keyword">false</span>, <span class="keyword">false</span>};
+<span class="comment">// 多选按钮</span>
+    builder.setMultiChoiceItems(chars, m_boolean, <span class="keyword">new</span> DialogInterface.OnMultiChoiceClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which, <span class="keyword">boolean</span> isChecked)</span> </span>{
+            <span class="comment">// 获取点击事件，并进行记录</span>
+            Log.i(<span class="string">"info"</span>, String.valueOf(which) + <span class="string">" "</span> + String.valueOf(isChecked));
+        }
+        });
+<span class="comment">// 获取一个 View</span>
+<span class="comment">// View root = this.getLayoutInflater().inflate(R.layout.activity_control, null);</span>
+<span class="comment">// 可以设置 View</span>
+<span class="comment">// builder.setView(root);</span>
+<span class="comment">// 创建及显示</span>
+    builder.create().show();
+<span class="comment">// .......</span>
+}
+}
+</code></pre><h3 id="CharSequence与String之间的区别">CharSequence与String之间的区别</h3><p>CharSequence与String都能用于定义字符串，但CharSequence的值是可读可写序列，而String的值是只读序列。</p>
+<h3 id="有message就没有item">有message就没有item</h3><h3 id="还可以设置单选框多选框">还可以设置单选框多选框</h3><p>单选框</p>
+<pre><code>.setSingleChoiceItems(<span class="keyword">new</span> <span class="built_in">String</span>[] {<span class="string">"选项1"</span>,<span class="string">"选项2"</span>,<span class="string">"选项3"</span>,<span class="string">"选项4"</span>}, <span class="number">0</span>, 
+</code></pre><p>多选框</p>
+<pre><code>.setMultiChoiceItems(<span class="keyword">new</span> <span class="built_in">String</span>[] {<span class="string">"选项1"</span>,<span class="string">"选项2"</span>,<span class="string">"选项3"</span>,<span class="string">"选项4"</span>}, <span class="keyword">null</span>, <span class="keyword">null</span>)
+</code></pre><h2 id="#">#</h2><h2 id=""> </h2><h2 id="AlertDialog的使用_自定义设置">AlertDialog的使用 自定义设置</h2><pre><code><span class="keyword">package</span> com.zsz.develop.alertdialogdemo;
+
+<span class="keyword">import</span> android.app.AlertDialog;
+<span class="keyword">import</span> android.content.DialogInterface;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.util.Log;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.Button;
+<span class="keyword">import</span> android.widget.EditText;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControlActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+View root;
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_control);
+    findViewById(R.id.btn).setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
+            send();
+        }
+    });
+}
+<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">send</span><span class="params">()</span>
+</span>{
+    <span class="comment">// 获取一个 View</span>
+    root = <span class="keyword">this</span>.getLayoutInflater().inflate(R.layout.activity_control, <span class="keyword">null</span>);
+    <span class="comment">// .......</span>
+    AlertDialog.Builder builder = <span class="keyword">new</span> AlertDialog.Builder(<span class="keyword">this</span>)
+            <span class="comment">// 对话框标题</span>
+            .setTitle(<span class="string">"简单对话框"</span>)
+                    <span class="comment">// 对话框图标</span>
+            .setIcon(R.mipmap.ic_launcher);
+    <span class="comment">// 对话框内容</span>
+    <span class="comment">// .setMessage("对话框内容.");</span>
+    <span class="comment">// 添加一个按钮，并监听按钮事件 (积极的;确实的)</span>
+    builder.setPositiveButton(<span class="string">"确定"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
+            <span class="comment">// 获取结果</span>
+            EditText edit = (EditText) root.findViewById(R.id.editText);
+            EditText edit2 = (EditText) root.findViewById(R.id.editText2);
+            Log.i(<span class="string">"info"</span>, edit.getText().toString());
+            Log.i(<span class="string">"info"</span>, edit2.getText().toString());
+        }
+    });
+    <span class="comment">// 添加一个按钮，并监听按钮事件 (消极的;否认的)</span>
+    builder.setNegativeButton(<span class="string">"取消"</span>, <span class="keyword">new</span> DialogInterface.OnClickListener() {
+        <span class="annotation">@Override</span>
+        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span> </span>{
+            Intent intent = <span class="keyword">new</span> Intent(ControlActivity.<span class="keyword">this</span>, ControlActivity.class);
+            startActivity(intent);
+        }
+    });
+    <span class="comment">// 可以设置 View</span>
+    builder.setView(root);
+    <span class="comment">// 创建及显示</span>
+    builder.create().show();
+    <span class="comment">// .......</span>
+}
+}
+</code></pre><p>布局文件</p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span> android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span> android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+tools:<span class="variable">context=</span><span class="string">"com.example.nljb.nljb.ControlActivity"</span>&gt;
+
+
+&lt;LinearLayout
+    android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_centerHorizontal=</span><span class="string">"true"</span>
+    android:<span class="variable">layout_alignParentTop=</span><span class="string">"true"</span>&gt;
+    &lt;LinearLayout
+        android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+        android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">gravity=</span><span class="string">"center"</span>&gt;
+        &lt;Button
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">text=</span><span class="string">"btn"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/btn"</span>
+            /&gt;
+        &lt;TextView
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">text=</span><span class="string">"用户名"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/textView"</span> /&gt;
+        &lt;EditText
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">inputType=</span><span class="string">"textPersonName"</span>
+            android:<span class="variable">text=</span><span class="string">"Name"</span>
+            android:<span class="variable">ems=</span><span class="string">"10"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/editText"</span> /&gt;
+    &lt;/LinearLayout&gt;
+    &lt;LinearLayout
+        android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+        android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"fill_parent"</span>
+        android:<span class="variable">gravity=</span><span class="string">"center"</span>&gt;
+        &lt;TextView
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">text=</span><span class="string">"密    码"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/textView2"</span> /&gt;
+        &lt;EditText
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">inputType=</span><span class="string">"numberPassword"</span>
+            android:<span class="variable">ems=</span><span class="string">"10"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/editText2"</span> /&gt;
+    &lt;/LinearLayout&gt;
+&lt;/LinearLayout&gt;
+&lt;/RelativeLayout&gt;
+</code></pre><h2 id="drawerlayoutandroid_抽屉效果的导航菜单实现">drawerlayoutandroid 抽屉效果的导航菜单实现</h2><h2 id="Spinner的使用">Spinner的使用</h2><pre><code><span class="keyword">package</span> com.zsz.develop.spinnerdemo;
+
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.AdapterView;
+<span class="keyword">import</span> android.widget.ArrayAdapter;
+<span class="keyword">import</span> android.widget.Spinner;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> </span>{
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String[] m={<span class="string">"A型"</span>,<span class="string">"B型"</span>,<span class="string">"O型"</span>,<span class="string">"AB型"</span>,<span class="string">"其他"</span>};
+<span class="keyword">private</span> TextView view ;
+<span class="keyword">private</span> Spinner spinner;
+<span class="keyword">private</span> ArrayAdapter&lt;String&gt; adapter;
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+
+    setContentView(R.layout.activity_main);
+
+    view = (TextView) findViewById(R.id.spinnerText);
+    spinner = (Spinner) findViewById(R.id.Spinner01);
+    <span class="comment">//将可选内容与ArrayAdapter连接起来</span>
+    adapter = <span class="keyword">new</span> ArrayAdapter&lt;String&gt;(<span class="keyword">this</span>,android.R.layout.simple_spinner_item,m);
+
+    <span class="comment">//设置下拉列表的风格</span>
+    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+    <span class="comment">//将adapter 添加到spinner中</span>
+    spinner.setAdapter(adapter);
+
+    <span class="comment">//添加事件Spinner事件监听</span>
+    spinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) <span class="keyword">new</span> SpinnerSelectedListener());
+
+    <span class="comment">//设置默认值</span>
+    spinner.setVisibility(View.VISIBLE);
+
+}
+
+<span class="comment">//使用数组形式操作</span>
+<span class="class"><span class="keyword">class</span> <span class="title">SpinnerSelectedListener</span> <span class="keyword">implements</span> <span class="title">AdapterView</span>.<span class="title">OnItemSelectedListener</span> </span>{
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onItemSelected</span><span class="params">(AdapterView&lt;?&gt; arg0, View arg1, <span class="keyword">int</span> arg2,
+                               <span class="keyword">long</span> arg3)</span> </span>{
+        view.setText(<span class="string">"你的血型是："</span>+m[arg2]);
+
+<span class="comment">//这是得到spinner里面的内容</span>
+<span class="comment">//        String selectedValue = (String)spType.getSelectedItem();</span>
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onNothingSelected</span><span class="params">(AdapterView&lt;?&gt; arg0)</span> </span>{
+    }
+}
+}
+</code></pre><p>layout</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">LinearLayout</span>
+<span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+<span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+<span class="attribute">android:layout_height</span>=<span class="value">"fill_parent"</span>
+<span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>
+&gt;</span>
+<span class="tag">&lt;<span class="title">TextView</span> <span class="attribute">android:id</span>=<span class="value">"@+id/spinnerText"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span><span class="tag">&lt;/<span class="title">TextView</span>&gt;</span>
+<span class="tag">&lt;<span class="title">Spinner</span> <span class="attribute">android:id</span>=<span class="value">"@+id/Spinner01"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"fill_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span><span class="tag">&lt;/<span class="title">Spinner</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cifaydlg5000uvcb2aijtd001" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-31-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/31/2015-8-31-2/">2015/8/31-2</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/31/2015-8-31-2/">
+    <time datetime="2015-08-31T11:38:25.000Z" itemprop="datePublished">2015-08-31</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="PopupWindow">PopupWindow</h1><p>PopupWindow这个类用来实现一个弹出框，可以使用任意布局的View作为其内容，这个弹出框是悬浮在当前activity之上的。</p>
+<p>Android的对话框有两种：PopupWindow和AlertDialog。它们的不同点在于：</p>
+<p>AlertDialog的位置固定，而PopupWindow的位置可以随意</p>
+<p>AlertDialog是非阻塞线程的，而PopupWindow是阻塞线程的</p>
+<p>PopupWindow的位置按照有无偏移分，可以分为偏移和无偏移两种；按照参照物的不同，可以分为相对于某个控件（Anchor锚）和相对于父控件。具体如下</p>
+<p>showAsDropDown(View anchor)：相对某个控件的位置（正左下方），无偏移</p>
+<p>showAsDropDown(View anchor, int xoff, int yoff)：相对某个控件的位置，有偏移</p>
+<p>showAtLocation(View parent, int gravity, int x, int y)：相对于父控件的位置（例如正中央Gravity.CENTER，下方Gravity.BOTTOM等），可以设置偏移或无偏移</p>
+<h2 id="PopupWindow的使用">PopupWindow的使用</h2><p><strong>PopupWindow</strong>的构造函数为</p>
+<pre><code><span class="keyword">public</span> PopupWindow(View contentView, <span class="built_in">int</span> <span class="variable">width</span>, <span class="built_in">int</span> <span class="variable">height</span>, <span class="built_in">boolean</span> focusable)
+</code></pre><p>contentView为要显示的view，width和height为宽和高，值为像素值，也可以是MATCHT_PARENT和WRAP_CONTENT。</p>
+<p><strong>focusable</strong>为是否可以获得焦点，这是一个很重要的参数，也可以通过</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">void</span> setFocusable(<span class="keyword">boolean</span> focusable)
+</code></pre><p>来设置，如果focusable为false，在一个Activity弹出一个PopupWindow，按返回键，由于PopupWindow没有焦点，会直接退出Activity。如果focusable为true，PopupWindow弹出后，所有的触屏和物理按键都有PopupWindows处理。</p>
+<pre><code>mPopupWindow.setBackgroundDrawable(<span class="keyword">new</span> BitmapDrawable(getResources(), (Bitmap) <span class="literal">null</span>));
+</code></pre><p>设置了上面的就可以点击外面返回了。</p>
+<h2 id="简单使用">简单使用</h2><p>mianLayout</p>
+<pre><code>&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+xmlns:<span class="variable">tools=</span><span class="string">"http://schemas.android.com/tools"</span>
+android:<span class="variable">id=</span><span class="string">"@+id/layout_main"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span>
+android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+android:<span class="variable">paddingBottom=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+android:<span class="variable">paddingLeft=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingRight=</span><span class="string">"@dimen/activity_horizontal_margin"</span>
+android:<span class="variable">paddingTop=</span><span class="string">"@dimen/activity_vertical_margin"</span>
+tools:<span class="variable">context=</span><span class="string">".MainActivity"</span> &gt;
+
+&lt;Button
+    android:<span class="variable">id=</span><span class="string">"@+id/btn_test_popupwindow"</span>
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_centerInParent=</span><span class="string">"true"</span>
+    android:<span class="variable">text=</span><span class="string">"@string/app_name"</span> /&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>popudWindow 的布局文件</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;RelativeLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+android:<span class="variable">background=</span><span class="string">"#000000"</span> &gt;
+
+&lt;TextView
+    android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"80dp"</span>
+    android:<span class="variable">text=</span><span class="string">"wusisan"</span>
+    android:<span class="variable">textColor=</span><span class="string">"#ffffffff"</span>
+    android:<span class="variable">layout_centerInParent=</span><span class="string">"true"</span>
+    android:<span class="variable">gravity=</span><span class="string">"center"</span>/&gt;
+
+&lt;/RelativeLayout&gt;
+</code></pre><p>mainActivity</p>
+<pre><code>package com.zsz.develop.popupwindowdemo;
+
+<span class="preprocessor"><span class="keyword">import</span> android.content.DialogInterface;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.Bitmap;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.graphics.drawable.BitmapDrawable;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.support.v7.app.AppCompatActivity;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.os.Bundle;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.Menu;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.MenuItem;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.View;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.view.ViewGroup;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.Button;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.PopupWindow;</span>
+<span class="preprocessor"><span class="keyword">import</span> android.widget.RelativeLayout;</span>
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">AppCompatActivity</span> {</span>
+
+<span class="keyword">private</span> Button mButton;
+<span class="keyword">private</span> PopupWindow mPopupWindow;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    <span class="variable">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    View popupView = getLayoutInflater().inflate(R.layout.popup_window, <span class="literal">null</span>);
+
+    mPopupWindow = <span class="keyword">new</span> PopupWindow(popupView, ViewGroup.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT, <span class="literal">true</span>);
+    mPopupWindow.setTouchable(<span class="literal">true</span>);
+    mPopupWindow.setOutsideTouchable(<span class="literal">true</span>);
+    mPopupWindow.setBackgroundDrawable(<span class="keyword">new</span> BitmapDrawable(getResources(), (Bitmap) <span class="literal">null</span>));
+
+    mButton = (Button) findViewById(R.id.btn_test_popupwindow);
+    mButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener() {
+
+        @Override
+        <span class="keyword">public</span> void onClick(View v) {
+            mPopupWindow.showAsDropDown(v);
+        }
+    });
+}
+
+
+}
+</code></pre><h2 id="PopupWIndow的使用">PopupWIndow的使用</h2><pre><code>View popupView= LayoutInflater.<span class="keyword">from</span>(<span class="keyword">this</span>).inflate(R.layout.popup_window_layout,<span class="keyword">null</span>);
+  mPopupWindow=<span class="keyword">new</span> PopupWindow(popupView,<span class="number">200</span>, RelativeLayout.LayoutParams.WRAP_CONTENT);
+  mPopupWindow.setOutsideTouchable(<span class="keyword">true</span>);
+  mPopupWindow.setFocusable(<span class="keyword">true</span>);
+  mPopupWindow.setTouchable(<span class="keyword">true</span>);
+  mPopupWindow.setBackgroundDrawable(<span class="keyword">new</span> BitmapDrawable(getResources(), (Bitmap) <span class="keyword">null</span>));
+
+  lvPopupWindow= (ListView) popupView.findViewById(R.id.lvPopupWindow);
+  <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++){
+      titleItemData=<span class="keyword">new</span> TitleItemData(<span class="string">"快递箱"</span>+i);
+      titleItemDataList.add(titleItemData);
+  }
+  titleItemAdapter=<span class="keyword">new</span> TitleItemAdapter(MyExpressActivity.<span class="keyword">this</span>,titleItemDataList);
+  lvPopupWindow.setAdapter(titleItemAdapter);
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cifaydlgb000xvcb28big0df8" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-31" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -175,7 +719,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cif1ucmf2000wh4b2vlub2tnb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cifaydlg8000wvcb2yc1xst00" class="article-share-link">Share</a>
       
       
     </footer>
@@ -430,7 +974,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cif1ucmf9000zh4b2lqjblpbq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cifaydlge000zvcb2uuoz926z" class="article-share-link">Share</a>
       
       
     </footer>
@@ -508,7 +1052,7 @@ public <span class="type">View</span> onCreateView(<span class="type">LayoutInfl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cif1ucmf7000yh4b2ayrry43w" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cifaydlgc000yvcb23up8e7cs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -621,7 +1165,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cif1ucmfc0010h4b2hyeg301k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cifaydlgg0010vcb25qtl0d01" class="article-share-link">Share</a>
       
       
     </footer>
@@ -931,7 +1475,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cif1ucmfh0012h4b23gqwz44f" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cifaydlgj0012vcb266l46fml" class="article-share-link">Share</a>
       
       
     </footer>
@@ -986,7 +1530,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cif1ucmff0011h4b2cqi7jyc9" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cifaydlgh0011vcb28cdi23jo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1198,176 +1742,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cif1ucmfj0013h4b2k9d3upv7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-24" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/24/2015-8-24/">FrameLayout(框架布局)，shape包裹框的设置，ScrollView让页面也可以滚动拖，使用include重用UI組件，在textView上面在添加一张图片</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/24/2015-8-24/">
-    <time datetime="2015-08-24T02:20:42.000Z" itemprop="datePublished">2015-08-24</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/24问题集">2015/8/24问题集</h1><h2 id="FrameLayout(框架布局)">FrameLayout(框架布局)</h2><p>框架布局是最简单的布局形式。所有添加到这个布局中的视图都以层叠的方式显示。第一个添加的控件被放在最底层，最后一个添加到框架布局中的视图显示在最顶层，上一层的控件会覆盖下一层的控件。这种显示方式有些类似于堆栈。</p>
-<h2 id="shape包裹框的设置">shape包裹框的设置</h2><p>xml要添加在drawable</p>
-<p>&lt;?xml version=”1.0” encoding=”utf-8”?&gt;</p>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"><br>    <!-- 圆角 --><br>    <corners android:radius="5dp"><br>    <!-- 背景色 --><br>    <solid android:color="#FFFFFF"><br>    <!-- 线框 --><br>    <stroke android:color="#EEEEEE" android:width="0.5dp"><br><br></stroke></solid></corners></shape>
-
-<h2 id="ScrollView让页面也可以滚动拖">ScrollView让页面也可以滚动拖</h2><pre><code> &lt;ScrollView
-    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>&gt;
-    &lt;LinearLayout
-        android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
-        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
-        android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
-
-    //这里面填写要滚动的内容
- &lt;/ScrollView&gt;
-
-&lt;/LinearLayout&gt;
-</code></pre><h2 id="使用include重用UI組件">使用include重用UI組件</h2><p>把需要重用的Ui组件单独列在layout中</p>
-<p>当再次需要使用的时候，在其他布局中使用include来调用。</p>
-<pre><code><span class="keyword">include</span> android:id=<span class="string">"@+id/title"</span> layout=<span class="string">"@layout/title_include"</span>&gt;&lt;/<span class="keyword">include</span>&gt;
-</code></pre><h2 id="在textView上面在添加一张图片">在textView上面在添加一张图片</h2><p>android:drawableTop=”@drawable/3to1”</p>
-<h2 id="android布局—Android_fill_parent、wrap_content和match_parent的区别">android布局—Android fill_parent、wrap_content和match_parent的区别</h2><p>三个属性都用来适应视图的水平或垂直大小，一个以视图的内容或尺寸为基础的布局比精确地指定视图范围更加方便。</p>
-<ul>
-<li>1）fill_parent</li>
-</ul>
-<p>设置一个构件的布局为fill_parent将强制性地使构件扩展，以填充布局单元内尽可能多的空间。这跟Windows控件的dockstyle属性大体一致。设置一个顶部布局或控件为fill_parent将强制性让它布满整个屏幕。</p>
-<ul>
-<li>2） wrap_content</li>
-</ul>
-<p>设置一个视图的尺寸为wrap_content将强制性地使视图扩展以显示全部内容。以TextView和ImageView控件为例，设置为wrap_content将完整显示其内部的文本和图像。布局元素将根据内容更改大小。设置一个视图的尺寸为wrap_content大体等同于设置Windows控件的Autosize属性为True。</p>
-<ul>
-<li>3）match_parent<br> Android2.2中match_parent和fill_parent是一个意思 .两个参数意思一样，match_parent更贴切，于是从2.2开始两个词都可以用。那么如果考虑低版本的使用情况你就需要用fill_parent了a</li>
-</ul>
-<h2 id="Android颜色对比">Android颜色对比</h2><p><a href="http://www.cnblogs.com/bluestorm/p/3644669.html" target="_blank" rel="external">http://www.cnblogs.com/bluestorm/p/3644669.html</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/24/2015-8-24/" data-id="cif1ucmfl0014h4b29k6bvz6a" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-21-2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="百度地图开发">百度地图开发</h1><p>自己回去看发开文档吧</p>
-<p><a href="http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap" target="_blank" rel="external">http://developer.baidu.com/map/index.php?title=androidsdk/guide/hellobaidumap</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21-2/" data-id="cif1ucmfp0016h4b2max0jm7w" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-21" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/21/2015-8-21/">android获取SHA1和MD5，LinearLayout中的控件对齐问题，Android之事件监听的使用(OnClickListener)</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/21/2015-8-21/">
-    <time datetime="2015-08-21T03:22:27.000Z" itemprop="datePublished">2015-08-21</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/21问题集">2015/8/21问题集</h1><h2 id="android获取SHA1和MD5">android获取SHA1和MD5</h2><p>android studio安全码，在许多申请key的时候都要用到安全码。例如百度地图等</p>
-<p>具体的操作方法：</p>
-<ul>
-<li>1.找到debug.keystore的位置，默认位置在C:\Users\shengzhong.android</li>
-<li>2.cmd打开命令提示符，cd到keystore的位置</li>
-<li>3.输入 keytool -list -v -keystore debug.keystore</li>
-<li>回车就显示了要的SHA1和MD5</li>
-</ul>
-<h2 id="java-lang-IllegalArgumentException:_No_config_chosen">java.lang.IllegalArgumentException: No config chosen</h2><p>这种情况：</p>
-<p>解决1.模拟器选项勾选gpu</p>
-<p>解决2.用真机测试</p>
-<h2 id="LinearLayout中的控件对齐问题">LinearLayout中的控件对齐问题</h2><p>LinearLayout中的控件对齐，如果他是水平布局，那么当他向左向右对齐的时候。他就不行，水平没有边界</p>
-<p>解决办法：用相对布局啊！！RelativeLayout</p>
-<p>android:layout_alignParentLeft 如果该值为true，则将该控件的左边与父控件的左边对齐<br>android:layout_alignParentRight 如果该值为true，则将该控件的右边与父控件的右边对齐</p>
-<h2 id="Android之事件监听的使用(OnClickListener)">Android之事件监听的使用(OnClickListener)</h2><ul>
-<li>实现implements View.OnClickListener接口</li>
-<li>并实现OnClick方法。</li>
-<li>取得每个的id，并根据id去判断</li>
-</ul>
-<pre><code><span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span> </span>{
-    <span class="keyword">int</span> id=view.getId();
-    <span class="keyword">switch</span> (id){
-        <span class="keyword">case</span> R.id.tvCloud:
-            pager.setCurrentItem(0);
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> R.id.tvDoor:
-            pager.setCurrentItem(1);
-            <span class="keyword">break</span>;
-        <span class="keyword">case</span> R.id.tvMy:
-            pager.setCurrentItem(2);
-            <span class="keyword">break</span>;
-    }
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/21/2015-8-21/" data-id="cif1ucmfn0015h4b2yupp2a87" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cifaydlgm0013vcb2ms6iznes" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1378,7 +1753,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
 
     
       <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
+        <a class="extend prev" rel="prev" href="/page/3/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/">Next &raquo;</a>
       </nav>
     </section>
       
