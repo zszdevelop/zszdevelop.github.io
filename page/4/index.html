@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        83
+        85
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,208 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-7" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/07/2015-9-7/">2015/9/7</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/07/2015-9-7/">
+    <time datetime="2015-09-07T01:39:27.000Z" itemprop="datePublished">2015-09-07</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/9/7问题集">2015/9/7问题集</h1><h2 id="理解_Android_Build_系统">理解 Android Build 系统</h2><p>Android Build 系统是用来编译 Android 系统，Android SDK 以及相关文档的一套框架。众所周知，Android 是一个开源的操作系统。Android 的源码中包含了许许多多的模块。 不同产商的不同设备对于 Android 系统的定制都是不一样的。如何将这些模块统一管理起来，如何能够在不同的操作系统上进行编译，如何在编译时能够支持面向不同的硬件设备，不同的编译类型，且还要提供面向各个产商的定制扩展，是非常有难度的。 但 Android Build 系统很好的解决了这些问题，这里面有很多值得我们开发人员学习的地方。</p>
+<h2 id="Build的参数：">Build的参数：</h2><p><strong>、内部类：</strong></p>
+<p>1、Build.VERSION    各种版本字符串</p>
+<p>2、Build.VERSION_CODES    目前已知的版本代码的枚举类</p>
+<p><strong>静态属性</strong></p>
+<p>1、BOARD   主板：The name of the underlying board, like “goldfish”.</p>
+<p>2、BOOTLOADER 系统启动程序版本号：The system bootloader version number.</p>
+<p>3、BRAND  系统定制商：The consumer-visible brand with which the product/hardware will be associated, if any.</p>
+<p>4、CPU_ABI  cpu指令集：The name of the instruction set (CPU type + ABI convention) of native code.</p>
+<p>5、CPU_ABI2 cpu指令集2：The name of the second instruction set (CPU type + ABI convention) of native code.</p>
+<p>6、DEVICE 设备参数：The name of the industrial design.</p>
+<p>7、DISPLAY  显示屏参数：A build ID string meant for displaying to the user</p>
+<p>8、FINGERPRINT   唯一识别码：A string that uniquely identifies this build. Do not attempt to parse this value.</p>
+<p>9、HARDWARE   硬件名称：The name of the hardware (from the kernel command line or /proc).</p>
+<p>10、HOST</p>
+<p>11、ID  修订版本列表：Either a changelist number, or a label like “M4-rc20”.</p>
+<p>12、MANUFACTURER  硬件制造商：The manufacturer of the product/hardware.</p>
+<p>13、MODEL  版本即最终用户可见的名称：The end-user-visible name for the end product.</p>
+<p>14、PRODUCT 整个产品的名称：The name of the overall product.</p>
+<p>15、RADIO  无线电固件版本：The radio firmware version number.   在API14后已过时。使用 getRadioVersion()代替。</p>
+<p>16、SERIAL 硬件序列号：A hardware serial number, if available. Alphanumeric only, case-insensitive.</p>
+<p>17、TAGS  描述build的标签,如未签名，debug等等。：Comma-separated tags describing the build, like “unsigned,debug”.</p>
+<p>18、TIME</p>
+<p>19、TYPE build的类型：The type of build, like “user” or “eng”.</p>
+<p>20、USER</p>
+<h2 id="Build小Demo">Build小Demo</h2><pre><code>package com.zsz.develop.builddemo;
+
+<span class="keyword">import</span> android.os.Build;
+<span class="keyword">import</span> android.support.v7.app.AppCompatActivity;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.Menu;
+<span class="keyword">import</span> android.view.MenuItem;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="component">public class MainActivity <span class="keyword">extends</span> AppCompatActivity {
+private TextView tvBuild01,tvBuild02,tvBuild03,tvBuild04,tvBuild05,tvBuild06,tvBuild07;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super<span class="string">.onCreate(savedInstanceState)</span>;
+    setContentView(R<span class="string">.layout.activity_main)</span>;
+    tvBuild01= (TextView) findViewById(R<span class="string">.id.tvBuild01)</span>;
+    tvBuild02= (TextView) findViewById(R<span class="string">.id.tvBuild02)</span>;
+    tvBuild03= (TextView) findViewById(R<span class="string">.id.tvBuild03)</span>;
+    tvBuild04= (TextView) findViewById(R<span class="string">.id.tvBuild04)</span>;
+    tvBuild05= (TextView) findViewById(R<span class="string">.id.tvBuild05)</span>;
+    tvBuild06= (TextView) findViewById(R<span class="string">.id.tvBuild06)</span>;
+    tvBuild07= (TextView) findViewById(R<span class="string">.id.tvBuild07)</span>;
+
+    tvBuild01<span class="string">.setText("版本号：</span> "+ Build<span class="string">.VERSION.SDK_INT)</span>;
+    tvBuild02<span class="string">.setText("版本字符串号：</span> "+ Build<span class="string">.VERSION.RELEASE)</span>;
+    tvBuild03<span class="string">.setText("屏幕参数：</span> "+ Build<span class="string">.DISPLAY)</span>;
+    tvBuild04<span class="string">.setText("主板：</span> "+  Build<span class="string">.BOARD)</span>;
+    tvBuild05<span class="string">.setText("android系统定制商：</span> "+ Build<span class="string">.BRAND)</span>;
+    tvBuild06<span class="string">.setText("硬件名称：</span> "+Build<span class="string">.FINGERPRINT)</span>;
+    tvBuild07<span class="string">.setText("手机制造商：</span> "+ Build<span class="string">.PRODUCT)</span>;
+
+
+
+
+}</span>
+
+}
+</code></pre><p><img src="http://ww4.sinaimg.cn/large/81eeb0fcgw1evtooxq3scj20ku0rstai.jpg" alt=""></p>
+<h2 id="getWindow()-setFlags()设置窗体">getWindow().setFlags()设置窗体</h2><p>//设置窗体全屏</p>
+<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);</p>
+<p>//设置窗体始终点亮</p>
+<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,</p>
+<pre><code>WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+</code></pre><p>//设置窗体背景模糊</p>
+<p>getWindow().setFlags(WindowManager.LayoutParams.FLAG_BLUR_BEHIND,<br>                WindowManager.LayoutParams.FLAG_BLUR_BEHIND);</p>
+<h2 id="Android的kitkat是什么？">Android的kitkat是什么？</h2><p>Android 4.4，是由Google公司制作和研发的代号为KitKat的手机操作系统</p>
+<h2 id="android4-4以后的透明状态栏一体化">android4.4以后的透明状态栏一体化</h2><pre><code><span class="comment">//信号栏一体化</span>
+<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">initSystembarTint</span><span class="params">()</span> </span>{
+    <span class="comment">//kitkat代表android4.4.大于4.4才可以设置这些东西</span>
+    <span class="keyword">if</span> (Build.VERSION.SDK_INT &gt;= Build.VERSION_CODES.KITKAT) {
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);<span class="comment">//设置透明状态栏</span>
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);<span class="comment">//设置透明导航栏</span>
+        <span class="comment">// 创建状态栏的管理实例</span>
+        SystemBarTintManager tintManager = <span class="keyword">new</span> SystemBarTintManager(<span class="keyword">this</span>);
+        <span class="comment">// 激活状态栏设置</span>
+        tintManager.setStatusBarTintEnabled(<span class="keyword">true</span>);
+        <span class="comment">// 激活导航栏设置  </span>
+        tintManager.setStatusBarTintColor(Color.parseColor(<span class="string">"#3B87C5"</span>));
+    }
+}
+</code></pre><h2 id="Android_动画（anim）">Android 动画（anim）</h2><p> Android的animation由四种类型组成：alpha(透明度)、scale(缩放)、translate(位移)、rotate(旋转)</p>
+<set xmlns:android="http://schemas.android.com/apk/res/android"><br>  <alpha><br>  <scale><br>  <translate><br>  <rotate><br></rotate></translate></scale></alpha></set>
+
+
+<h2 id="Animation的简单使用">Animation的简单使用</h2><p>实现左边进入效果</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span> &gt;</span>
+
+    <span class="tag">&lt;<span class="title">translate</span>
+        <span class="attribute">android:duration</span>=<span class="value">"300"</span>
+        <span class="attribute">android:fromXDelta</span>=<span class="value">"-100%p"</span>
+        <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/decelerate_interpolator"</span>
+        <span class="attribute">android:toXDelta</span>=<span class="value">"0%p"</span> /&gt;</span>
+
+<span class="tag">&lt;/<span class="title">set</span>&gt;</span>
+</code></pre><p>实现右边退出效果</p>
+<pre><code><span class="pi">&lt;?xml version="1.0" encoding="utf-8"?&gt;</span>
+<span class="tag">&lt;<span class="title">set</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">translate</span>
+
+        <span class="attribute">android:toXDelta</span>=<span class="value">"-100%p"</span>
+        <span class="attribute">android:toYDelta</span>=<span class="value">"0%p"</span>
+        <span class="attribute">android:interpolator</span>=<span class="value">"@android:anim/decelerate_interpolator"</span>
+        <span class="attribute">android:duration</span>=<span class="value">"100"</span>
+
+        /&gt;</span>
+<span class="tag">&lt;/<span class="title">set</span>&gt;</span>
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/07/2015-9-7/" data-id="cifytg39j000cpwb2rzomuq7e" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-9-6" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/06/2015-9-6/">2015/9/6</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/06/2015-9-6/">
+    <time datetime="2015-09-06T03:02:11.000Z" itemprop="datePublished">2015-09-06</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="20/9/6问题集">20/9/6问题集</h1><h2 id="Android应用性能优化之使用SparseArray替代HashMap">Android应用性能优化之使用SparseArray替代HashMap</h2><p>SparseArray是Android提供的一个工具类。</p>
+<p>SparseArray指的是稀疏数组(Sparse array)，所谓稀疏数组就是数组中大部分的内容值都未被使用（或都为零），在数组中仅有少部分的空间使用。因此造成内存空间的浪费，为了节省内存空间，并且不影响数组中原有的内容值，我们可以采用一种压缩的方式来表示稀疏数组的内容。</p>
+<h2 id="android之ViewGroup">android之ViewGroup</h2><p>作过Android 应用开发的朋友都知道，Android的UI界面都是由View和ViewGroup及其派生类组合而成的。其中，View是所有UI组件的基类，而ViewGroup是容纳这些组件的容器，其本身也是从View派生出来的。AndroidUI界面的一般结构可参见下面的示意图：</p>
+<p><img src="http://ww4.sinaimg.cn/large/81eeb0fcgw1evskanwpjej20ae06d74h.jpg" alt=""></p>
+<h2 id="关于LayoutInflater类inflate(int_resource,_ViewGroup_root,_boolean_attachToRoot)方法三个参数的含义">关于LayoutInflater类inflate(int resource, ViewGroup root, boolean attachToRoot)方法三个参数的含义</h2><p>resource：需要加载布局文件的id，意思是需要将这个布局文件中加载到Activity中来操作。</p>
+<p>root：需要附加到resource资源文件的根控件，什么意思呢，就是inflate()会返回一个View对象，如果第三个参数attachToRoot为true，就将这个root作为根对象返回，否则仅仅将这个root对象的LayoutParams属性附加到resource对象的根布局对象上，也就是布局文件resource的最外层的View上，比如是一个LinearLayout或者其它的Layout对象。</p>
+<p>attachToRoot：是否将root附加到布局文件的根视图上</p>
+<p>attachToRoot就例如fragment和viewpager的结合使用的时候。问是否需要添加到布局文件上。笨蛋肯定要啊</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/06/2015-9-6/" data-id="cifytg39q000fpwb2855qgpr4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-3" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -149,7 +351,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cifaydlf1000gvcb2dvsdwway" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/03/2015-9-3/" data-id="cifytg39t000gpwb2e6q518fj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -495,7 +697,7 @@ tools:<span class="variable">context=</span><span class="string">"com.example.nl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cifaydlg5000uvcb2aijtd001" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/01/2015-9-1/" data-id="cifytg3av000upwb2a1y54m0o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -646,7 +848,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cifaydlgb000xvcb28big0df8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31-2/" data-id="cifytg3b2000xpwb22lt6h74f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -719,7 +921,7 @@ protected void onCreate(Bundle savedInstanceState) {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cifaydlg8000wvcb2yc1xst00" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/31/2015-8-31/" data-id="cifytg3ay000wpwb2xy1c236i" class="article-share-link">Share</a>
       
       
     </footer>
@@ -974,7 +1176,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cifaydlge000zvcb2uuoz926z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28-2/" data-id="cifytg3b6000zpwb2ce3sxvm8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1052,7 +1254,7 @@ public <span class="type">View</span> onCreateView(<span class="type">LayoutInfl
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cifaydlgc000yvcb23up8e7cs" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/28/2015-8-28/" data-id="cifytg3b4000ypwb25pg3u14g" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1165,7 +1367,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cifaydlgg0010vcb25qtl0d01" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/27/2015-8-27/" data-id="cifytg3b80010pwb2zz93o0iu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1475,274 +1677,7 @@ android:<span class="variable">layout_marginBottom=</span><span class="string">"
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cifaydlgj0012vcb266l46fml" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-26" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/26/2015-8-26/">控件布局心得</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/26/2015-8-26/">
-    <time datetime="2015-08-26T00:56:15.000Z" itemprop="datePublished">2015-08-26</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/26问题集">2015/8/26问题集</h1><h2 id="让控制置于底部">让控制置于底部</h2><p>android 让一个控件按钮居于底部的几种方法</p>
-<ul>
-<li><p>1.采用linearlayout布局：<br>android:layout_height=”0dp” !— 这里不能设置fill_parent —&gt;<br>android:layout_weight=”1” !— 这里设置layout_weight=1是最关键的，否则底部的LinearLayout无法到底部 —&gt;</p>
-</li>
-<li><p>2：采用relativelayout布局：<br>android:layout_alignParentBottom=”true” !— 这里设置layout_alignParentBottom=true是最关键的，这个属性上级必须是RelativeLayout —&gt;</p>
-</li>
-<li><p>3： 采用 fragment 布局(activitygroup 已经被弃用不建议使用)</p>
-</li>
-</ul>
-<p><a href="http://www.cnblogs.com/zdz8207/archive/2012/12/13/2816906.html" target="_blank" rel="external">http://www.cnblogs.com/zdz8207/archive/2012/12/13/2816906.html</a></p>
-<h2 id="与底部之间的距离">与底部之间的距离</h2><p>这个要设置在布局文件中（learnlayout之类的）</p>
-<pre><code><span class="label">android:</span>layout_marginBottom=<span class="string">"100dp"</span>
-</code></pre><h2 id="将控件底部与父类底部对齐">将控件底部与父类底部对齐</h2><pre><code><span class="label">android:</span>layout_alignParentBottom=<span class="string">"true"</span>
-</code></pre><h2 id="将控件底部与父类右边对齐">将控件底部与父类右边对齐</h2><pre><code><span class="label">android:</span>layout_alignParentRight=<span class="string">"true"</span>
-</code></pre><h2 id="相对布局中居中对齐">相对布局中居中对齐</h2><pre><code><span class="label">android:</span>layout_centerHorizontal=<span class="string">"true"</span>
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/26/2015-8-26/" data-id="cifaydlgh0011vcb28cdi23jo" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-8-25" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/08/25/2015-8-25/">pager使用，listview绑定adapter之感悟，Adapter的操作，item点击</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/08/25/2015-8-25/">
-    <time datetime="2015-08-25T02:12:35.000Z" itemprop="datePublished">2015-08-25</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/8/25问题集">2015/8/25问题集</h1><h2 id="pager页面加载顺序问题">pager页面加载顺序问题</h2><p>ViewPager页面加载时要先把Pager加载进来，然后才能加载里面的控件</p>
-<h2 id="pager先加载进来的layout">pager先加载进来的layout</h2><p>用pager加载的页面，只预先加载了一个页面。<br>而其他页面的控件并没有加载进来，这就导致了null指针异常。</p>
-<p>解决办法：在前面先加上一个view名称。</p>
-<pre><code><span class="keyword">ll</span>= (LinearLayout) myView.findViewById(R.id.<span class="keyword">ll</span>);
-</code></pre><h2 id="listview绑定adapter">listview绑定adapter</h2><p>这回竟然是因为忘记吧List  NEW出来了</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.my;
-
-<span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
-<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
-<span class="keyword">import</span> android.widget.<span class="type">ArrayAdapter</span>;
-<span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
-
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
-
-<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
-<span class="keyword">import</span> java.util.<span class="type">List</span>;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MyHomeActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
-
-<span class="keyword">private</span> <span class="type">ListView</span> lvMyHome;
-<span class="keyword">private</span> <span class="type">MyHomeAdapter</span> adapter;
-<span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">MyHomeData</span>&gt; myHomeLists;
-<span class="keyword">private</span> <span class="type">MyHomeData</span> myHomeData;
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.activity_my_home);
-    lvMyHome= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lvMyHome);
-    lvMyHome=<span class="keyword">new</span> <span class="type">ListView</span>(<span class="keyword">this</span>);
-    myHomeLists=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
-    <span class="keyword">for</span> (int i=<span class="number">0</span>;i&lt;<span class="number">5</span>;i++){
-        myHomeData=<span class="keyword">new</span> <span class="type">MyHomeData</span>(i+<span class="string">" 父子"</span>,<span class="string">"天大地大"</span>,<span class="string">"审核中"</span>);
-
-        myHomeLists.add(myHomeData);
-
-    }
-
-    adapter=<span class="keyword">new</span> <span class="type">MyHomeAdapter</span>(<span class="type">MyHomeActivity</span>.<span class="keyword">this</span>,myHomeLists);
-    lvMyHome.setAdapter(adapter);
-
-    setContentView(lvMyHome);
-}
-
-
-}
-</code></pre><h2 id="listview绑定adapter之感悟">listview绑定adapter之感悟</h2><p>首先在这里面的设置：</p>
-<ul>
-<li>1.首先需要准备的数据listview承载数据，Adapter适配数据，data是数据。还需要一个装data的list集合</li>
-<li>找到listview并实例化。（并不需要实例化）</li>
-<li>实例化list和data，并把data装进list中</li>
-<li>把list装进adapter中</li>
-<li>绑定adapter</li>
-<li>setContentView(lvMyHome)；（错误：这也重新覆盖掉了布局）</li>
-</ul>
-<p>-<br>更改后的代码</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.myOneLine;
-
-<span class="keyword">import</span> android.support.v7.app.<span class="type">AppCompatActivity</span>;
-<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
-<span class="keyword">import</span> android.view.<span class="type">Window</span>;
-<span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
-
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.<span class="type">R</span>;
-
-<span class="keyword">import</span> java.util.<span class="type">ArrayList</span>;
-<span class="keyword">import</span> java.util.<span class="type">List</span>;
-
-public <span class="class"><span class="keyword">class</span> <span class="title">MyBillctivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AppCompatActivity</span> {</span>
-
-<span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">MyBillData</span>&gt; myBillDataList;
-<span class="keyword">private</span> <span class="type">MyBillAdapter</span> adapter;
-<span class="keyword">private</span> <span class="type">ListView</span> lvMyBill;
-<span class="keyword">private</span> <span class="type">MyBillData</span> myBillData;
-
-<span class="annotation">@Override</span>
-<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
-    <span class="keyword">super</span>.onCreate(savedInstanceState);
-    setContentView(<span class="type">R</span>.layout.activity_my_bill);
-    lvMyBill= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lvMyBill);
-<span class="comment">//不要        lvMyBill=new ListView(this);</span>
-    myBillDataList=<span class="keyword">new</span> <span class="type">ArrayList</span>&lt;&gt;();
-    <span class="keyword">for</span> (int i=<span class="number">1</span>;i&lt;<span class="number">5</span>;i++){
-        myBillData=<span class="keyword">new</span> <span class="type">MyBillData</span>(<span class="string">"2015-1-1至2015-1-31"</span>,<span class="string">"未交"</span>,<span class="string">"35"</span>+i);
-        myBillDataList.add(myBillData);
-    }
-    adapter=<span class="keyword">new</span> <span class="type">MyBillAdapter</span>(<span class="keyword">this</span>,myBillDataList);
-    lvMyBill.setAdapter(adapter);
-<span class="comment">//不要        setContentView(lvMyBill);</span>
-
-}
-
-
-}
-</code></pre><h2 id="Adapter的操作">Adapter的操作</h2><p>错误之：setTag（）这里是传入整个类。而不是字符串</p>
-<pre><code><span class="keyword">package</span> com.zsz.develop.wisdomcommunity.myOneLine;
-
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.view.LayoutInflater;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.view.ViewGroup;
-<span class="keyword">import</span> android.widget.BaseAdapter;
-<span class="keyword">import</span> android.widget.TextView;
-
-<span class="keyword">import</span> com.zsz.develop.wisdomcommunity.R;
-
-<span class="keyword">import</span> java.util.List;
-
-<span class="javadoc">/**
- * Created by shengzhong on 2015/8/25.
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyBillAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
-<span class="keyword">private</span> Context context;
-<span class="keyword">private</span> List&lt;MyBillData&gt; myBillDataList;
-
-<span class="function"><span class="keyword">public</span> <span class="title">MyBillAdapter</span><span class="params">(Context context,List&lt;MyBillData&gt; myBillDataList)</span></span>{
-    <span class="keyword">this</span>.context=context;
-    <span class="keyword">this</span>.myBillDataList=myBillDataList;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
-    <span class="function"><span class="keyword">return</span> myBillDataList.<span class="title">size</span><span class="params">()</span></span>;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
-    <span class="function"><span class="keyword">return</span> myBillDataList.<span class="title">get</span><span class="params">(i)</span></span>;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
-    <span class="keyword">return</span> i;
-}
-
-<span class="annotation">@Override</span>
-<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
-
-    ViewHolder holder;
-    <span class="keyword">if</span> (view==<span class="keyword">null</span>) {
-        view= LayoutInflater.from(context).inflate(R.layout.my_bill_layout,<span class="keyword">null</span>);
-        holder=<span class="keyword">new</span> ViewHolder();
-        holder.tv_my_bill_layout_Time= (TextView) view.findViewById(R.id.tv_my_bill_layout_Time);
-        holder.tv_my_bill_layout_CostState= (TextView) view.findViewById(R.id.tv_my_bill_layout_CostState);
-        holder.tv_my_bill_layout_Cost= (TextView) view.findViewById(R.id.tv_my_bill_layout_Cost);
-        holder.tv_my_bill_layout_Time.setText(myBillDataList.get(i).getTime());
-        holder.tv_my_bill_layout_CostState.setText(myBillDataList.get(i).getCoatState());
-        holder.tv_my_bill_layout_Cost.setText(myBillDataList.get(i).getCoat());
-        view.setTag(holder);
-    }<span class="keyword">else</span> {
-        holder= (ViewHolder) view.getTag();
-        holder.tv_my_bill_layout_Time.setText(myBillDataList.get(i).getTime());
-        holder.tv_my_bill_layout_CostState.setText(myBillDataList.get(i).getCoatState());
-        holder.tv_my_bill_layout_Cost.setText(myBillDataList.get(i).getCoat());
-
-    }
-
-    <span class="keyword">return</span> view;
-}
-<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span></span>{
-    TextView tv_my_bill_layout_Time;
-    TextView tv_my_bill_layout_CostState;
-    TextView tv_my_bill_layout_Cost;
-}
-}
-</code></pre><h2 id="如果要对listview的每个item添加一个点击事件操作">如果要对listview的每个item添加一个点击事件操作</h2><pre><code>lvMyInterflowMain.setOnItemClickListener(<span class="keyword">new</span> AdapterView.OnItemClickListener() {
-      <span class="annotation">@Override</span>
-      <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onItemClick</span><span class="params">(AdapterView&lt;?&gt; adapterView, View view, <span class="keyword">int</span> i, <span class="keyword">long</span> l)</span> </span>{
-          Intent intent=<span class="keyword">new</span> Intent(MyInterflowMainActivity.<span class="keyword">this</span>,MyInterflowActivity.class);
-          startActivity(intent);
-      }
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/25/2015-8-25/" data-id="cifaydlgm0013vcb2ms6iznes" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/26/2015-8-26-2/" data-id="cifytg3bd0012pwb2vxfrd961" class="article-share-link">Share</a>
       
       
     </footer>

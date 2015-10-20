@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        83
+        85
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,587 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-8-16" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/16/2015-8-16/">聚合数据API使用</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/16/2015-8-16/">
+    <time datetime="2015-08-16T10:56:23.000Z" itemprop="datePublished">2015-08-16</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="2015/8/16问题集">2015/8/16问题集</h1><h2 id="聚合数据API使用">聚合数据API使用</h2><p>MainActivity里的代码：使用的时候只需要更改Parameters</p>
+<pre><code><span class="keyword">package</span> com.thinkland.juheapi.demo;
+
+<span class="keyword">import</span> android.app.Activity;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.content.Intent;
+<span class="keyword">import</span> android.os.Bundle;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.widget.Button;
+<span class="keyword">import</span> android.widget.TextView;
+<span class="keyword">import</span> android.widget.Toast;
+
+<span class="keyword">import</span> com.thinkland.sdk.android.DataCallBack;
+<span class="keyword">import</span> com.thinkland.sdk.android.JuheData;
+<span class="keyword">import</span> com.thinkland.sdk.android.Parameters;
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span> </span>{
+
+<span class="keyword">private</span> Context mContext;
+TextView tv;
+<span class="keyword">private</span> Button btn,btnWeather;
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>{
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    mContext = <span class="keyword">this</span>;
+    tv = (TextView) findViewById(R.id.tv);
+
+
+
+    <span class="javadoc">/**
+     * 请不要添加key参数.
+     */</span>
+    Parameters params = <span class="keyword">new</span> Parameters();
+    params.add(<span class="string">"ip"</span>, <span class="string">"www.juhe.cn"</span>);
+    params.add(<span class="string">"dtype"</span>, <span class="string">"xml"</span>);
+    <span class="javadoc">/**
+     * 请求的方法 参数: 第一个参数 当前请求的context;
+     *                   第二个参数 接口id;
+     *                   第三个参数 接口请求的url;
+     *                   第四个参数 接口请求的方式;
+     *                   第五个参数 接口请求的参数,键值对com.thinkland.sdk.android.Parameters类型;
+     *                   第六个参数请求的回调方法,com.thinkland.sdk.android.DataCallBack;
+     * 
+     */</span>
+    JuheData.executeWithAPI(mContext, <span class="number">1</span>, <span class="string">"http://apis.juhe.cn/ip/ip2addr"</span>,
+            JuheData.GET, params, <span class="keyword">new</span> DataCallBack() {
+                <span class="javadoc">/**
+                 * 请求成功时调用的方法 statusCode为http状态码,responseString为请求返回数据.
+                 */</span>
+                <span class="annotation">@Override</span>
+                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(<span class="keyword">int</span> statusCode, String responseString)</span> </span>{
+                    <span class="comment">// TODO Auto-generated method stub</span>
+                    tv.append(responseString + <span class="string">"\n"</span>);
+                }
+
+                <span class="javadoc">/**
+                 * 请求完成时调用的方法,无论成功或者失败都会调用.
+                 */</span>
+                <span class="annotation">@Override</span>
+                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFinish</span><span class="params">()</span> </span>{
+                    <span class="comment">// TODO Auto-generated method stub</span>
+                    Toast.makeText(getApplicationContext(), <span class="string">"finish"</span>,
+                            Toast.LENGTH_SHORT).show();
+                }
+
+                <span class="javadoc">/**
+                 * 请求失败时调用的方法,statusCode为http状态码,throwable为捕获到的异常
+                 * statusCode:30002 没有检测到当前网络.
+                 *               30003 没有进行初始化.
+                 *               0 未明异常,具体查看Throwable信息.
+                 *               其他异常请参照http状态码.
+                 */</span>
+                <span class="annotation">@Override</span>
+                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(<span class="keyword">int</span> statusCode,
+                        String responseString, Throwable throwable)</span> </span>{
+                    <span class="comment">// TODO Auto-generated method stub</span>
+                    tv.append(throwable.getMessage() + <span class="string">"\n"</span>);
+                }
+            });
+
+}
+
+<span class="annotation">@Override</span>
+<span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onDestroy</span><span class="params">()</span> </span>{
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onDestroy();
+    <span class="javadoc">/**
+     * 关闭当前页面正在进行中的请求.
+     */</span>
+    JuheData.cancelRequests(mContext);
+}
+
+}
+</code></pre><p>需要继承Application</p>
+<pre><code><span class="keyword">package</span> com.thinkland.juheapi.demo;
+
+<span class="keyword">import</span> com.thinkland.sdk.android.<span class="type">JuheSDKInitializer</span>;
+
+<span class="keyword">import</span> android.app.<span class="type">Application</span>;
+<span class="keyword">import</span> android.widget.<span class="type">Button</span>;
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MyApplication</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">Application</span> {</span>
+
+
+
+<span class="annotation">@Override</span>
+public void onCreate() {
+    <span class="comment">// TODO Auto-generated method stub</span>
+    <span class="keyword">super</span>.onCreate();
+    <span class="type">JuheSDKInitializer</span>.initialize(getApplicationContext());
+
+}
+}
+</code></pre><p>更改manifest的设置即可</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;manifest xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+<span class="variable">package=</span><span class="string">"com.thinkland.juheapi.demo"</span>
+android:<span class="variable">versionCode=</span><span class="string">"1"</span>
+android:<span class="variable">versionName=</span><span class="string">"1.0"</span> &gt;
+
+&lt;uses-sdk
+    android:<span class="variable">minSdkVersion=</span><span class="string">"9"</span>
+    android:<span class="variable">targetSdkVersion=</span><span class="string">"15"</span> /&gt;
+
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.READ_PHONE_STATE"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.INTERNET"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.ACCESS_NETWORK_STATE"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.ACCESS_WIFI_STATE"</span> /&gt;
+&lt;uses-permission android:<span class="variable">name=</span><span class="string">"android.permission.ACCESS_COARSE_LOCATION"</span> /&gt;
+
+&lt;android:uses-permission
+    android:<span class="variable">name=</span><span class="string">"android.permission.WRITE_EXTERNAL_STORAGE"</span>
+    android:<span class="variable">maxSdkVersion=</span><span class="string">"18"</span> /&gt;
+&lt;android:uses-permission
+    android:<span class="variable">name=</span><span class="string">"android.permission.READ_EXTERNAL_STORAGE"</span>
+    android:<span class="variable">maxSdkVersion=</span><span class="string">"18"</span> /&gt;
+
+&lt;application
+    android:<span class="variable">name=</span><span class="string">".MyApplication"</span>
+    android:<span class="variable">allowBackup=</span><span class="string">"true"</span>
+    android:<span class="variable">icon=</span><span class="string">"@drawable/ic_launcher"</span>
+    android:<span class="variable">label=</span><span class="string">"@string/app_name"</span>
+    android:<span class="variable">theme=</span><span class="string">"@style/AppTheme"</span> &gt;
+    &lt;meta-data
+        android:<span class="variable">name=</span><span class="string">"com.thinkland.juheapi.openid"</span>
+        android:<span class="variable">value=</span><span class="string">"JHf2946fb83e4a9d7dbd854fa65bd130b1"</span> /&gt;
+
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".MainActivity"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/app_name"</span> &gt;
+        &lt;intent-filter&gt;
+            &lt;action android:<span class="variable">name=</span><span class="string">"android.intent.action.MAIN"</span> /&gt;
+
+            &lt;category android:<span class="variable">name=</span><span class="string">"android.intent.category.LAUNCHER"</span> /&gt;
+        &lt;/intent-filter&gt;
+    &lt;/activity&gt;
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".CaptchaActicity"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/title_activity_captcha_acticity"</span> &gt;
+    &lt;/activity&gt;
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".Captcha"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/title_activity_captcha"</span> &gt;
+    &lt;/activity&gt;
+    &lt;activity
+        android:<span class="variable">name=</span><span class="string">".WeatherActivity"</span>
+        android:<span class="variable">label=</span><span class="string">"@string/title_activity_weather"</span> &gt;
+    &lt;/activity&gt;
+&lt;/application&gt;
+
+&lt;/manifest&gt;
+</code></pre><h2 id="Activity继承错误">Activity继承错误</h2><p>错误代码提示：</p>
+<pre><code>java<span class="class">.lang</span><span class="class">.IllegalStateException</span>: You need to use <span class="tag">a</span> Theme<span class="class">.AppCompat</span> theme (or descendant) with this activity.
+</code></pre><p>原因：<br>从错误提示中提到Theme.AppCompat theme，这是因为我们的activity一定是继承了兼容包中的类，<br>比如我这里就无意中继承了ActionBarActivity，它来自android.support.v7.app.ActionBarActivity。<br>所以就要使用与其配合的AppCompat的theme才行。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/16/2015-8-16/" data-id="cifytg3bv001cpwb20fesgvud" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-8-15" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/08/15/2015-8-15/">Android手机的通讯录</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/08/15/2015-8-15/">
+    <time datetime="2015-08-15T12:16:59.000Z" itemprop="datePublished">2015-08-15</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android手机的通讯录">Android手机的通讯录</h1><p>Android手机的通讯录联系人全部都存在系统的数据库中，如果须要获得通讯里联系人的信息就须要访问系统的数据库，才能将信息拿出来。</p>
+<h2 id="contacts_表">contacts 表</h2><ul>
+<li>_id ：表的ID，主要用于其它表通过contacts 表中的ID可以查到相应的数据。</li>
+<li>display_name:  联系人名称</li>
+<li>photo_id:头像的ID，如果没有设置联系人头像，这个字段就为空</li>
+<li>times_contacted:通话记录的次数</li>
+<li>last_time_contacted: 最后的通话时间 </li>
+<li>lookup :是一个持久化的储存 因为用户可能会改名子 但是它改不了lookup</li>
+</ul>
+<h2 id="简单实例">简单实例</h2><p>要先添加权限</p>
+<pre><code><span class="tag">&lt;<span class="title">uses-permission</span> <span class="attribute">android:name</span>=<span class="value">"android.permission.READ_CONTACTS"</span>&gt;</span><span class="tag">&lt;/<span class="title">uses-permission</span>&gt;</span>
+</code></pre><p>这个简单实例只是把数据显示在控制台上。</p>
+<pre><code>package com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.ContentResolver;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.database.Cursor;
+<span class="keyword">import</span> android.provider.ContactsContract;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/15.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">GetNumber</span> </span>{
+
+public static <span class="built_in">String</span> getNumber(Context context){
+    <span class="comment">/**得到手机通讯录联系人信息**/</span>
+    ContentResolver resolver= context.getContentResolver();
+    <span class="comment">// 获取手机联系人</span>
+   Cursor phoneCursor= resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
+    <span class="keyword">if</span> (phoneCursor!=<span class="literal">null</span>){
+
+        <span class="built_in">String</span> phoneNumber;
+        <span class="built_in">String</span> phoneName;
+        <span class="keyword">while</span> (phoneCursor.moveToNext()){
+            <span class="comment">//得到手机号码和名字</span>
+             phoneNumber=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            phoneName=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+
+            System.out.println(<span class="string">"联系人："</span>+phoneName +<span class="string">"     电话号码："</span>+phoneNumber);
+        }
+
+
+    }
+
+
+    <span class="keyword">return</span> <span class="literal">null</span>;
+}
+}
+</code></pre><h2 id="把通讯录显示在页面上">把通讯录显示在页面上</h2><p>MainActivity中的代码：主要加载页面信息</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.support.v7.app.<span class="type">ActionBarActivity</span>;
+<span class="keyword">import</span> android.os.<span class="type">Bundle</span>;
+<span class="keyword">import</span> android.view.<span class="type">Menu</span>;
+<span class="keyword">import</span> android.view.<span class="type">MenuItem</span>;
+<span class="keyword">import</span> android.widget.<span class="type">ListView</span>;
+
+<span class="keyword">import</span> java.util.<span class="type">List</span>;
+
+
+public <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">ActionBarActivity</span> {</span>
+<span class="keyword">private</span> <span class="type">ListView</span> lv;
+<span class="keyword">private</span> <span class="type">MyAdapter</span> adapter;
+
+<span class="annotation">@Override</span>
+<span class="keyword">protected</span> void onCreate(<span class="type">Bundle</span> savedInstanceState) {
+    <span class="keyword">super</span>.onCreate(savedInstanceState);
+    setContentView(<span class="type">R</span>.layout.activity_main);
+    <span class="type">GetNumber</span>.getNumber(<span class="keyword">this</span>);
+
+    lv= (<span class="type">ListView</span>) findViewById(<span class="type">R</span>.id.lv);
+    adapter=<span class="keyword">new</span> <span class="type">MyAdapter</span>(<span class="type">GetNumber</span>.lists,<span class="keyword">this</span>);
+    lv.setAdapter(adapter);
+}
+}
+</code></pre><p>GetNumber中的代码主要获得通讯录信息</p>
+<pre><code>package com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.ContentResolver;
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.database.Cursor;
+<span class="keyword">import</span> android.provider.ContactsContract;
+
+<span class="keyword">import</span> java.util.ArrayList;
+<span class="keyword">import</span> java.util.List;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/15.
+ */</span>
+public <span class="class"><span class="keyword">class</span> <span class="title">GetNumber</span> </span>{
+
+public static List&lt;PhoneInfo&gt; lists=<span class="keyword">new</span> ArrayList&lt;PhoneInfo&gt;();
+
+public static <span class="built_in">String</span> getNumber(Context context){
+    <span class="comment">/**得到手机通讯录联系人信息**/</span>
+    ContentResolver resolver= context.getContentResolver();
+    <span class="comment">// 获取手机联系人</span>
+   Cursor phoneCursor= resolver.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>, <span class="literal">null</span>);
+    <span class="keyword">if</span> (phoneCursor!=<span class="literal">null</span>){
+
+        <span class="built_in">String</span> phoneNumber;
+        <span class="built_in">String</span> phoneName;
+        <span class="keyword">while</span> (phoneCursor.moveToNext()){
+            <span class="comment">//得到手机号码和名字</span>
+             phoneNumber=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+            phoneName=phoneCursor.getString(phoneCursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME));
+            PhoneInfo phoneInfo=<span class="keyword">new</span> PhoneInfo(phoneName,phoneNumber);
+            lists.add(phoneInfo);
+            System.out.println(<span class="string">"联系人："</span>+phoneName +<span class="string">"     电话号码："</span>+phoneNumber);
+        }
+    }
+    <span class="keyword">return</span> <span class="literal">null</span>;
+}
+}
+</code></pre><p>PhoneInfo对数据进行封装</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="comment">/**
+ * Created by shengzhong on 2015/8/16.
+ */</span>
+<span class="keyword">public</span> class PhoneInfo {
+
+   <span class="keyword">private</span> <span class="keyword">String</span> phoneName;
+<span class="keyword">private</span> <span class="keyword">String</span> phoneNumber;
+
+<span class="keyword">public</span> PhoneInfo(<span class="keyword">String</span> phoneName,<span class="keyword">String</span> phoneNumber){
+    setPhoneName(phoneName);
+    setPhoneNumber(phoneNumber);
+}
+
+
+<span class="keyword">public</span> <span class="keyword">String</span> getPhoneName() {
+    <span class="keyword">return</span> phoneName;
+}
+
+<span class="keyword">public</span> <span class="keyword">void</span> setPhoneName(<span class="keyword">String</span> phoneName) {
+    <span class="keyword">this</span>.phoneName = phoneName;
+}
+
+<span class="keyword">public</span> <span class="keyword">String</span> getPhoneNumber() {
+    <span class="keyword">return</span> phoneNumber;
+}
+
+<span class="keyword">public</span> <span class="keyword">void</span> setPhoneNumber(<span class="keyword">String</span> phoneNumber) {
+    <span class="keyword">this</span>.phoneNumber = phoneNumber;
+}
+}
+</code></pre><p>MyAdapter对listview进行适配。</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.view.LayoutInflater;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.ViewGroup;
+<span class="keyword">import</span> android.widget.BaseAdapter;
+<span class="keyword">import</span> android.widget.LinearLayout;
+<span class="keyword">import</span> android.widget.ListView;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">import</span> java.util.List;
+
+<span class="javadoc">/**
+ * Created by shengzhong on 2015/8/16.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
+<span class="keyword">private</span> List&lt;PhoneInfo&gt; lists;
+<span class="keyword">private</span> Context context;
+<span class="keyword">private</span> LayoutInflater layoutInflater;
+<span class="keyword">private</span> LinearLayout layout;
+
+<span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(List&lt;PhoneInfo&gt; lists, Context context)</span></span>{
+    <span class="keyword">this</span>.lists=lists;
+    <span class="keyword">this</span>.context=context;
+}
+
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">size</span><span class="params">()</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">get</span><span class="params">(i)</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="keyword">return</span> i;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
+    layoutInflater=LayoutInflater.from(context);
+    layout= (LinearLayout) layoutInflater.inflate(R.layout.call,<span class="keyword">null</span>);
+    TextView tvName= (TextView) layout.findViewById(R.id.tvName);
+    TextView tvNumber= (TextView) layout.findViewById(R.id.tvNumber);
+    tvName.setText(lists.get(i).getPhoneName());
+    tvNumber.setText(lists.get(i).getPhoneNumber());
+
+    <span class="keyword">return</span> layout;
+}
+}
+</code></pre><p>call的layout。在main中有一个list</p>
+<pre><code>&lt;?xml <span class="variable">version=</span><span class="string">"1.0"</span> <span class="variable">encoding=</span><span class="string">"utf-8"</span>?&gt;
+&lt;LinearLayout xmlns:<span class="variable">android=</span><span class="string">"http://schemas.android.com/apk/res/android"</span>
+android:<span class="variable">layout_width=</span><span class="string">"match_parent"</span> android:<span class="variable">layout_height=</span><span class="string">"match_parent"</span>
+android:<span class="variable">orientation=</span><span class="string">"vertical"</span>&gt;
+
+&lt;LinearLayout
+    android:<span class="variable">layout_width=</span><span class="string">"fill_parent"</span>
+    android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+    android:<span class="variable">orientation=</span><span class="string">"horizontal"</span>
+    &gt;
+    &lt;ImageView
+        android:<span class="variable">layout_width=</span><span class="string">"45dp"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"45dp"</span>
+        android:<span class="variable">src=</span><span class="string">"@drawable/jiamin"</span>
+        /&gt;
+    &lt;LinearLayout
+        android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+        android:<span class="variable">orientation=</span><span class="string">"vertical"</span>
+        &gt;
+        &lt;TextView
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/tvName"</span>
+            /&gt;
+        &lt;TextView
+            android:<span class="variable">layout_width=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">layout_height=</span><span class="string">"wrap_content"</span>
+            android:<span class="variable">id=</span><span class="string">"@+id/tvNumber"</span>
+            /&gt;
+
+
+    &lt;/LinearLayout&gt;
+
+
+&lt;/LinearLayout&gt;
+
+&lt;/LinearLayout&gt;
+</code></pre><h2 id="listView优化">listView优化</h2><p>使用holder新建textview来操作。</p>
+<p>重用了convertView，很大程度上的减少了内存的消耗。通过判断convertView是否为null，是的话就需要产生一个视图出来，然后给这个视图数据，最后将这个视图返回给底层，呈献给用户。<br>特点：如果当前的convertView为null，则通过LayoutInflat产生一个view。</p>
+<p>其中converView会反复使用，目的是为了提高ListView效率。</p>
+<pre><code><span class="keyword">package</span> com.zsz.develop.getmyphonenumber;
+
+<span class="keyword">import</span> android.content.Context;
+<span class="keyword">import</span> android.view.LayoutInflater;
+<span class="keyword">import</span> android.view.View;
+<span class="keyword">import</span> android.view.ViewGroup;
+<span class="keyword">import</span> android.widget.BaseAdapter;
+<span class="keyword">import</span> android.widget.LinearLayout;
+<span class="keyword">import</span> android.widget.ListView;
+<span class="keyword">import</span> android.widget.TextView;
+
+<span class="keyword">import</span> java.util.List;
+
+<span class="javadoc">/**
+ * Created by shengzhong on 2015/8/16.
+ */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyAdapter</span> <span class="keyword">extends</span> <span class="title">BaseAdapter</span> </span>{
+<span class="keyword">private</span> List&lt;PhoneInfo&gt; lists;
+<span class="keyword">private</span> Context context;
+<span class="keyword">private</span> LayoutInflater layoutInflater;
+<span class="keyword">private</span> LinearLayout layout;
+
+<span class="function"><span class="keyword">public</span> <span class="title">MyAdapter</span><span class="params">(List&lt;PhoneInfo&gt; lists, Context context)</span></span>{
+    <span class="keyword">this</span>.lists=lists;
+    <span class="keyword">this</span>.context=context;
+}
+
+
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">int</span> <span class="title">getCount</span><span class="params">()</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">size</span><span class="params">()</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">Object <span class="title">getItem</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="function"><span class="keyword">return</span> lists.<span class="title">get</span><span class="params">(i)</span></span>;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function"><span class="keyword">long</span> <span class="title">getItemId</span><span class="params">(<span class="keyword">int</span> i)</span> </span>{
+    <span class="keyword">return</span> i;
+}
+
+<span class="annotation">@Override</span>
+<span class="keyword">public</span> <span class="function">View <span class="title">getView</span><span class="params">(<span class="keyword">int</span> i, View view, ViewGroup viewGroup)</span> </span>{
+<span class="comment">//        layoutInflater=LayoutInflater.from(context);</span>
+<span class="comment">//        layout= (LinearLayout) layoutInflater.inflate(R.layout.call,null);</span>
+<span class="comment">//        TextView tvName= (TextView) layout.findViewById(R.id.tvName);</span>
+<span class="comment">//        TextView tvNumber= (TextView) layout.findViewById(R.id.tvNumber);</span>
+<span class="comment">//        tvName.setText(lists.get(i).getPhoneName());</span>
+<span class="comment">//        tvNumber.setText(lists.get(i).getPhoneNumber());</span>
+<span class="comment">//</span>
+    ViewHolder holder;
+    <span class="keyword">if</span> (view==<span class="keyword">null</span>){
+        view=LayoutInflater.from(context).inflate(R.layout.call,<span class="keyword">null</span>);
+        holder=<span class="keyword">new</span> ViewHolder();
+        holder.tvName= (TextView) view.findViewById(R.id.tvName);
+        holder.tvNumber= (TextView) view.findViewById(R.id.tvNumber);
+        holder.tvName.setText(lists.get(i).getPhoneName());
+        holder.tvNumber.setText(lists.get(i).getPhoneNumber());
+        view.setTag(holder);
+
+    }<span class="keyword">else</span> {
+        holder= (ViewHolder) view.getTag();
+        holder.tvName.setText(lists.get(i).getPhoneName());
+        holder.tvNumber.setText(lists.get(i).getPhoneNumber());
+
+    }
+
+    <span class="keyword">return</span> view;
+}
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ViewHolder</span></span>{
+
+    TextView tvName;
+    TextView tvNumber;
+}
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/08/15/2015-8-15/" data-id="cifytg3by001dpwb27mup836t" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-8-10" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -148,7 +729,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cifaydlhk001evcb2sbf8kvee" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/10/2015-8-10/" data-id="cifytg3c1001epwb2gm5tnbfp" class="article-share-link">Share</a>
       
       
     </footer>
@@ -233,7 +814,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cifaydlg6000vvcb2g4hqp22z" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/08/06/2015-8-6/" data-id="cifytg3ax000vpwb2sy4whtmv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -349,7 +930,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cifaydlhm001fvcb2erx1oq4m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/30/2015-7-30/" data-id="cifytg3c3001fpwb2n62l4tyn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -515,7 +1096,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cifaydlhr001hvcb23tqq1ddp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29-1/" data-id="cifytg3c7001hpwb2j3pacec1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1323,7 +1904,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cifaydlho001gvcb296as3vb2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/29/2015-7-29/" data-id="cifytg3c5001gpwb2ppetvmfu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1437,7 +2018,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cifaydlhu001ivcb293mba9v0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/28/2015-7-28/" data-id="cifytg3c9001ipwb27a70qqi8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1513,7 +2094,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cifaydlhx001jvcb2wv8t84ug" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-27/" data-id="cifytg3ca001jpwb2ox08dm5f" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1641,253 +2222,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cifaydli2001lvcb27i1zr271" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-26" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/26/2015-7-26/">从服务器得到所有图片信息，图片压缩代码</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/26/2015-7-26/">
-    <time datetime="2015-07-26T04:54:15.000Z" itemprop="datePublished">2015-07-26</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/26问题集">2015/7/26问题集</h1><h2 id="从服务器得到所有图片信息">从服务器得到所有图片信息</h2><p>servlet</p>
-<pre><code>package com.zsz.man;
-
-<span class="keyword">import</span> java.io.IOException;
-<span class="keyword">import</span> java.io.PrintWriter;
-<span class="keyword">import</span> java.util.ArrayList;
-<span class="keyword">import</span> java.util.List;
-
-<span class="keyword">import</span> javax.servlet.ServletContext;
-<span class="keyword">import</span> javax.servlet.ServletException;
-<span class="keyword">import</span> javax.servlet.annotation.WebServlet;
-<span class="keyword">import</span> javax.servlet.http.HttpServlet;
-<span class="keyword">import</span> javax.servlet.http.HttpServletRequest;
-<span class="keyword">import</span> javax.servlet.http.HttpServletResponse;
-
-<span class="keyword">import</span> com.google.gson.Gson;
-<span class="keyword">import</span> com.zsz.develop.UserInfoBean;
-<span class="keyword">import</span> com.zsz.develop.UserinfoDao;
-<span class="keyword">import</span> com.zsz.main.ImageUtil;
-
-<span class="comment">/**
- * Servlet implementation class GetAllManServlet
- */</span>
-@WebServlet(<span class="string">"/GetAllManServlet"</span>)
-public <span class="class"><span class="keyword">class</span> <span class="title">GetAllManServlet</span> <span class="keyword">extends</span> <span class="title">HttpServlet</span> </span>{
-private static final long serialVersionUID = <span class="number">1</span>L;
-
-<span class="comment">/**
- * @see HttpServlet#HttpServlet()
- */</span>
-public GetAllManServlet() {
-    <span class="keyword">super</span>();
-    <span class="comment">// TODO Auto-generated constructor stub</span>
-}
-
-<span class="comment">/**
- * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
- */</span>
-protected <span class="keyword">void</span> doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    <span class="comment">// TODO Auto-generated method stub</span>
-}
-
-<span class="comment">/**
- * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
- */</span>
-protected <span class="keyword">void</span> doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
-    ServletContext context = getServletContext();
-    <span class="built_in">String</span> contentType = context.getInitParameter(<span class="string">"contentType"</span>);
-    <span class="built_in">String</span> jsonAction = request.getParameter(<span class="string">"action"</span>);
-    int jsonImageSize =Integer.parseInt(request.getParameter(<span class="string">"imageSize"</span>)); 
-    <span class="built_in">String</span> jsonName = request.getParameter(<span class="string">"name"</span>);
-    System.out.println(<span class="string">"jsonName:"</span>+jsonName);
-    <span class="built_in">String</span> outStr = <span class="string">""</span>;
-    Gson gson = <span class="keyword">new</span> Gson();
-    ManDao manDao=<span class="keyword">new</span> ManDaoImpl();
-
-
-    <span class="keyword">if</span> (jsonAction.equals(<span class="string">"getAll"</span>)) {
-        List&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
-        <span class="comment">// 將所有照片縮小</span>
-        <span class="keyword">for</span> (int i = <span class="number">0</span>; i &lt; manList.size(); i++) {
-            ManBean manBean = manList.get(i);
-            manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
-        }
-        outStr = gson.toJson(manList);
-    }
-
-    response.setContentType(contentType);
-    PrintWriter out = response.getWriter();
-    System.out.println(outStr);
-    out.print(outStr);
-    out.close();
-
-    }
-
-}
-</code></pre><p><strong>重点</strong>在这一段：</p>
-<ul>
-<li>判断功能选项</li>
-<li>取得实体类集合</li>
-<li>循环取出每张图片、并对他进行压缩</li>
-<li><p>把压缩后的数据传递给实体类，并转为json格式输出</p>
-<p>  if (jsonAction.equals(“getAll”)) {</p>
-<pre><code>    <span class="built_in">List</span>&lt;ManBean&gt; manList=manDao.getAllMan(jsonName);;
-    <span class="comment">// 將所有照片縮小</span>
-    <span class="keyword">for</span> (<span class="built_in">int</span> i = <span class="number">0</span>; i &lt; manList.size(); i++) {
-        ManBean manBean = manList.<span class="literal">get</span>(i);
-        manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));
-    }
-    outStr = gson.toJson(manList);
-}
-</code></pre><h2 id="图片压缩代码">图片压缩代码</h2></li>
-</ul>
-<p>调用方法：manBean.setImage(ImageUtil.shrink(manBean.getImage(), jsonImageSize));</p>
-<pre><code><span class="keyword">package</span> com.zsz.main;
-
-<span class="keyword">import</span> java.awt.Graphics;
-<span class="keyword">import</span> java.awt.image.BufferedImage;
-<span class="keyword">import</span> java.io.ByteArrayInputStream;
-<span class="keyword">import</span> java.io.ByteArrayOutputStream;
-<span class="keyword">import</span> java.io.IOException;
-
-<span class="keyword">import</span> javax.imageio.ImageIO;
-
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ImageUtil</span> </span>{
-
-<span class="javadoc">/**
- * 將圖形縮小後回傳，如果發生錯誤就直接回傳原圖， 例如：imageSize值&lt;=1、無法取得圖的寬高、發生Exception
- * 
- *<span class="javadoctag"> @param</span> srcImageData
- *            來源圖形資料
- *<span class="javadoctag"> @param</span> scaleSize
- *            欲將圖形縮至多少尺寸以下，50代表將尺寸縮小至50x50以內
- *<span class="javadoctag"> @return</span> 縮小完畢的圖形資料
- */</span>
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">byte</span>[] shrink(<span class="keyword">byte</span>[] srcImageData, <span class="keyword">int</span> scaleSize) {
-    ByteArrayInputStream bais = <span class="keyword">new</span> ByteArrayInputStream(srcImageData);
-    <span class="comment">// 縮小比例，4代表除以4</span>
-    <span class="keyword">int</span> sampleSize = <span class="number">1</span>;
-    <span class="keyword">int</span> imageWidth = <span class="number">0</span>;
-    <span class="keyword">int</span> imageHeight = <span class="number">0</span>;
-
-    <span class="comment">// 如果imageSize為0、負數(代表錯誤)或1(1代表與原圖一樣大小)，就直接回傳原圖資料</span>
-    <span class="keyword">if</span> (scaleSize &lt;= <span class="number">1</span>) {
-        <span class="keyword">return</span> srcImageData;
-    }
-
-    <span class="keyword">try</span> {
-        BufferedImage srcBufferedImage = ImageIO.read(bais);
-        <span class="comment">// 如果無法識別圖檔格式(TYPE_CUSTOM)就回傳TYPE_INT_ARGB；否則回傳既有格式</span>
-        <span class="keyword">int</span> type = srcBufferedImage.getType() == BufferedImage.TYPE_CUSTOM ? BufferedImage.TYPE_INT_RGB
-                : srcBufferedImage.getType();
-        imageWidth = srcBufferedImage.getWidth();
-        imageHeight = srcBufferedImage.getHeight();
-        <span class="keyword">if</span> (imageWidth == <span class="number">0</span> || imageHeight == <span class="number">0</span>) {
-            <span class="keyword">return</span> srcImageData;
-        }
-        <span class="comment">// 只要圖檔較長的一邊超過指定長度(desireSize)，就計算欲縮小的比例</span>
-        <span class="comment">// 並將圖檔寬高都除以欲縮小比例</span>
-        <span class="keyword">int</span> longer = Math.max(imageWidth, imageHeight);
-        <span class="keyword">if</span> (longer &gt; scaleSize) {
-            sampleSize = longer / scaleSize;
-            imageWidth = srcBufferedImage.getWidth() / sampleSize;
-            imageHeight = srcBufferedImage.getHeight() / sampleSize;
-        }
-        BufferedImage scaledBufferedImage = <span class="keyword">new</span> BufferedImage(imageWidth,
-                imageHeight, type);
-        Graphics graphics = scaledBufferedImage.createGraphics();
-        graphics.drawImage(srcBufferedImage, <span class="number">0</span>, <span class="number">0</span>, imageWidth, imageHeight,
-                <span class="keyword">null</span>);
-        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();
-        ImageIO.write(scaledBufferedImage, <span class="string">"jpg"</span>, baos);
-        <span class="function"><span class="keyword">return</span> baos.<span class="title">toByteArray</span><span class="params">()</span></span>;
-    } <span class="keyword">catch</span> (IOException e) {
-        e.printStackTrace();
-        <span class="keyword">return</span> srcImageData;
-    }
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cifaydli0001kvcb22tbgh6zd" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-25" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/25/2015-7-25/">servlet与404错误，清空Tomcat缓存</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/25/2015-7-25/">
-    <time datetime="2015-07-25T10:00:01.000Z" itemprop="datePublished">2015-07-25</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="2015/7/25">2015/7/25</h1><p>被两个非代码错误折腾了一天！！！奔溃 </p>
-<h2 id="servlet与404错误">servlet与404错误</h2><p>servlet在tomcat8之后无需自己配置信息。<br>404错误是因为servlet没有找到控制的页面显示！！</p>
-<p>。。。。。。。。一上午！</p>
-<h2 id="清空Tomcat缓存">清空Tomcat缓存</h2><p>因为没有清空缓存，以至于一直显示错误的信息。明明已经没有代码在里面了。关闭eclipse也没用</p>
-<p>点击eclipse菜单栏中的project-选择clean</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cifaydlib001mvcb2r9sbp5cd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cifytg3ce001lpwb24rv58szr" class="article-share-link">Share</a>
       
       
     </footer>

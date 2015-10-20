@@ -3,41 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>子线程中使用的Toast | zszBlog</title>
+  <title>2015/10/8 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="膜拜大神亮之——可以在子线程中使用的Toastpackage com.zsz.develop.registerutils;
-
-import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
-
-/**
- * @author 作者：LigthWang
- * @date 创建时间：2015">
+  <meta name="description" content="this zszdeveloper blog��welcome��">
 <meta property="og:type" content="article">
-<meta property="og:title" content="子线程中使用的Toast">
-<meta property="og:url" content="http://yoursite.com/2015/09/15/2015-9-15-3/index.html">
+<meta property="og:title" content="2015/10/8">
+<meta property="og:url" content="http://yoursite.com/2015/10/08/2015-10-8/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="膜拜大神亮之——可以在子线程中使用的Toastpackage com.zsz.develop.registerutils;
-
-import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
-
-/**
- * @author 作者：LigthWang
- * @date 创建时间：2015">
+<meta property="og:description" content="this zszdeveloper blog��welcome��">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="子线程中使用的Toast">
-<meta name="twitter:description" content="膜拜大神亮之——可以在子线程中使用的Toastpackage com.zsz.develop.registerutils;
-
-import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
-
-/**
- * @author 作者：LigthWang
- * @date 创建时间：2015">
+<meta name="twitter:title" content="2015/10/8">
+<meta name="twitter:description" content="this zszdeveloper blog��welcome��">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -135,7 +111,7 @@ import android.widget.Toast;
     
   </div>
 </aside>
-      <section id="main"><article id="post-2015-9-15-3" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-2015-10-8" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -144,15 +120,15 @@ import android.widget.Toast;
         
   
     <h1 class="article-title" itemprop="name">
-      子线程中使用的Toast
+      2015/10/8
     </h1>
   
 
         <div class="article-meta">
           <div class="article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/09/15/2015-9-15-3/">
-    <time datetime="2015-09-15T02:56:50.000Z" itemprop="datePublished">2015-09-15</time>
+  <a href="/2015/10/08/2015-10-8/">
+    <time datetime="2015-10-08T11:14:27.000Z" itemprop="datePublished">2015-10-08</time>
   </a>
 </div>
           
@@ -161,56 +137,11 @@ import android.widget.Toast;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="膜拜大神亮之——可以在子线程中使用的Toast">膜拜大神亮之——可以在子线程中使用的Toast</h1><pre><code><span class="keyword">package</span> com.zsz.develop.registerutils;
-
-<span class="keyword">import</span> android.app.Activity;
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.widget.Toast;
-
-<span class="javadoc">/**
- *<span class="javadoctag"> @author</span> 作者：LigthWang
- *<span class="javadoctag"> @date</span> 创建时间：2015年9月9日 下午5:57:27
- *<span class="javadoctag"> @version</span> 1.0
- *<span class="javadoctag"> @parameter</span> 内容描述：土司的工具
- *<span class="javadoctag"> @since</span>
- *<span class="javadoctag"> @return</span>
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToastUtil</span> </span>{
-
-<span class="keyword">public</span> <span class="keyword">static</span> Toast mToast;
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">(Context mContext, String msg)</span> </span>{
-    <span class="keyword">if</span> (mToast == <span class="keyword">null</span>) {
-        mToast = Toast.makeText(mContext, <span class="string">""</span>, Toast.LENGTH_SHORT);
-    }
-    mToast.setText(msg);
-    mToast.show();
-}
-
-<span class="javadoc">/**
- * 可以直接在子线程中使用的土司
- * 
- *<span class="javadoctag"> @param</span> context
- *<span class="javadoctag"> @param</span> msg
- */</span>
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showSuperToast</span><span class="params">(<span class="keyword">final</span> Activity context, <span class="keyword">final</span> String msg)</span> </span>{
-    <span class="keyword">if</span> (<span class="string">"main"</span>.equals(Thread.currentThread().getName())) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-    } <span class="keyword">else</span> {
-        context.runOnUiThread(<span class="keyword">new</span> Runnable() {
-            <span class="annotation">@Override</span>
-            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-}
-}
-</code></pre>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cifytg3ah000opwb2hu1ymtcr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/08/2015-10-8/" data-id="cifytg3dx0029pwb2c2npdxv5" class="article-share-link">Share</a>
       
       
     </footer>
@@ -219,19 +150,19 @@ import android.widget.Toast;
     
 <nav id="article-nav">
   
-    <a href="/2015/09/15/2015-9-15-4/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2015/10/19/2015-10-19/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          2015/9/15-4
+          #Listview 的优化原理 
         
       </div>
     </a>
   
   
-    <a href="/2015/09/15/2015-9-15-2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/10/03/2015-10-3-2/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">判断网络是否可以用</div>
+      <div class="article-nav-title">相对于屏幕的两边、相对于屏幕的中间、多控件位于屏幕的右边</div>
     </a>
   
 </nav>

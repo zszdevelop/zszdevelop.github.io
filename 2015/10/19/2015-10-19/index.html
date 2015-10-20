@@ -3,41 +3,32 @@
 <head>
   <meta charset="utf-8">
   
-  <title>子线程中使用的Toast | zszBlog</title>
+  <title>#Listview 的优化原理  | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="膜拜大神亮之——可以在子线程中使用的Toastpackage com.zsz.develop.registerutils;
+  <meta name="description" content="Listview 的优化原理if（convertView!=null）{}
 
-import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
+保存已经加载过的布局文件，没加载的继续加载，如果加载过后就复用加载。所以他只加载了第一个页面，往后的都采用复用的形式。这样就不会卡顿了。（解决90的问题）
 
-/**
- * @author 作者：LigthWang
- * @date 创建时间：2015">
+
+item里面的view是通过二叉树进行查找的，如果查找多了也会变得十分耗时的。这时候就要复用View，把他放在viewHolder容器里。每次都从里面开始找就好。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="子线程中使用的Toast">
-<meta property="og:url" content="http://yoursite.com/2015/09/15/2015-9-15-3/index.html">
+<meta property="og:title" content="#Listview 的优化原理 ">
+<meta property="og:url" content="http://yoursite.com/2015/10/19/2015-10-19/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="膜拜大神亮之——可以在子线程中使用的Toastpackage com.zsz.develop.registerutils;
+<meta property="og:description" content="Listview 的优化原理if（convertView!=null）{}
 
-import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
+保存已经加载过的布局文件，没加载的继续加载，如果加载过后就复用加载。所以他只加载了第一个页面，往后的都采用复用的形式。这样就不会卡顿了。（解决90的问题）
 
-/**
- * @author 作者：LigthWang
- * @date 创建时间：2015">
+
+item里面的view是通过二叉树进行查找的，如果查找多了也会变得十分耗时的。这时候就要复用View，把他放在viewHolder容器里。每次都从里面开始找就好。">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="子线程中使用的Toast">
-<meta name="twitter:description" content="膜拜大神亮之——可以在子线程中使用的Toastpackage com.zsz.develop.registerutils;
+<meta name="twitter:title" content="#Listview 的优化原理 ">
+<meta name="twitter:description" content="Listview 的优化原理if（convertView!=null）{}
 
-import android.app.Activity;
-import android.content.Context;
-import android.widget.Toast;
+保存已经加载过的布局文件，没加载的继续加载，如果加载过后就复用加载。所以他只加载了第一个页面，往后的都采用复用的形式。这样就不会卡顿了。（解决90的问题）
 
-/**
- * @author 作者：LigthWang
- * @date 创建时间：2015">
+
+item里面的view是通过二叉树进行查找的，如果查找多了也会变得十分耗时的。这时候就要复用View，把他放在viewHolder容器里。每次都从里面开始找就好。">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -135,7 +126,7 @@ import android.widget.Toast;
     
   </div>
 </aside>
-      <section id="main"><article id="post-2015-9-15-3" class="article article-type-post" itemscope itemprop="blogPost">
+      <section id="main"><article id="post-2015-10-19" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     
@@ -144,15 +135,15 @@ import android.widget.Toast;
         
   
     <h1 class="article-title" itemprop="name">
-      子线程中使用的Toast
+      #Listview 的优化原理 
     </h1>
   
 
         <div class="article-meta">
           <div class="article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/09/15/2015-9-15-3/">
-    <time datetime="2015-09-15T02:56:50.000Z" itemprop="datePublished">2015-09-15</time>
+  <a href="/2015/10/19/2015-10-19/">
+    <time datetime="2015-10-19T15:10:33.000Z" itemprop="datePublished">2015-10-19</time>
   </a>
 </div>
           
@@ -161,56 +152,25 @@ import android.widget.Toast;
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="膜拜大神亮之——可以在子线程中使用的Toast">膜拜大神亮之——可以在子线程中使用的Toast</h1><pre><code><span class="keyword">package</span> com.zsz.develop.registerutils;
+        <h1 id="Listview_的优化原理">Listview 的优化原理</h1><p>if（convertView!=null）{}</p>
+<ul>
+<li>保存已经加载过的布局文件，没加载的继续加载，如果加载过后就复用加载。所以他只加载了第一个页面，往后的都采用复用的形式。这样就不会卡顿了。（解决90的问题）</li>
+</ul>
+<ul>
+<li><p>item里面的view是通过二叉树进行查找的，如果查找多了也会变得十分耗时的。这时候就要复用Vi<br>ew，把他放在viewHolder容器里。每次都从里面开始找就好。（解决10的问题）</p>
+</li>
+<li><p>如果把他定义成static的形式，那么当他重复创建时。就只会创建一次。</p>
+</li>
+</ul>
+<h1 id="PopupWindow和对话框的区别">PopupWindow和对话框的区别</h1><ul>
+<li>PopupWindow可以显示在屏幕的任意地方（对话框显示在中间）</li>
+<li>可以设置动画</li>
+</ul>
 
-<span class="keyword">import</span> android.app.Activity;
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.widget.Toast;
-
-<span class="javadoc">/**
- *<span class="javadoctag"> @author</span> 作者：LigthWang
- *<span class="javadoctag"> @date</span> 创建时间：2015年9月9日 下午5:57:27
- *<span class="javadoctag"> @version</span> 1.0
- *<span class="javadoctag"> @parameter</span> 内容描述：土司的工具
- *<span class="javadoctag"> @since</span>
- *<span class="javadoctag"> @return</span>
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToastUtil</span> </span>{
-
-<span class="keyword">public</span> <span class="keyword">static</span> Toast mToast;
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">(Context mContext, String msg)</span> </span>{
-    <span class="keyword">if</span> (mToast == <span class="keyword">null</span>) {
-        mToast = Toast.makeText(mContext, <span class="string">""</span>, Toast.LENGTH_SHORT);
-    }
-    mToast.setText(msg);
-    mToast.show();
-}
-
-<span class="javadoc">/**
- * 可以直接在子线程中使用的土司
- * 
- *<span class="javadoctag"> @param</span> context
- *<span class="javadoctag"> @param</span> msg
- */</span>
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showSuperToast</span><span class="params">(<span class="keyword">final</span> Activity context, <span class="keyword">final</span> String msg)</span> </span>{
-    <span class="keyword">if</span> (<span class="string">"main"</span>.equals(Thread.currentThread().getName())) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-    } <span class="keyword">else</span> {
-        context.runOnUiThread(<span class="keyword">new</span> Runnable() {
-            <span class="annotation">@Override</span>
-            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-}
-}
-</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cifytg3ah000opwb2hu1ymtcr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/19/2015-10-19/" data-id="cifytg3870000pwb2ixm6hkfc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -219,19 +179,10 @@ import android.widget.Toast;
     
 <nav id="article-nav">
   
-    <a href="/2015/09/15/2015-9-15-4/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          2015/9/15-4
-        
-      </div>
-    </a>
   
-  
-    <a href="/2015/09/15/2015-9-15-2/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2015/10/08/2015-10-8/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">判断网络是否可以用</div>
+      <div class="article-nav-title">2015/10/8</div>
     </a>
   
 </nav>

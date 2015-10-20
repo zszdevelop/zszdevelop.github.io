@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        83
+        85
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,163 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-13-2" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/13/2015-7-13-2/">获取上下文路径，get和post</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/13/2015-7-13-2/">
+    <time datetime="2015-07-13T09:09:29.000Z" itemprop="datePublished">2015-07-13</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="问题集">问题集</h1><h2 id="request-getContextPath()获取上下文路径">request.getContextPath()获取上下文路径</h2><p>超级实用的小技巧</p>
+<p>《form action=”&lt;%=request.getContextPath() %&gt;/loginServlet” method=”post”&gt;</p>
+<h2 id="Servlet添加到web。xml中的信息">Servlet添加到web。xml中的信息</h2><p>其中url中的值要与上面相对应。<br>    <servlet><br>          <servlet-name>LoginServlet</servlet-name><br>          <servlet-class>com.zsz.develop.servlet.LoginServlet</servlet-class><br>      </servlet></p>
+<pre><code><span class="tag">&lt;<span class="title">servlet-mapping</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">servlet-name</span>&gt;</span>LoginServlet<span class="tag">&lt;/<span class="title">servlet-name</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">url-pattern</span>&gt;</span>/loginServlet<span class="tag">&lt;/<span class="title">url-pattern</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">servlet-mapping</span>&gt;</span>
+</code></pre><h2 id="get和post">get和post</h2><p><img src="http://cl.ly/image/2A2O3e2H3v27/E%7BKO]~HE348]90%252~9%7D9HGS.png" alt=""></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cifytg3d8001wpwb2jngmnmo4" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-7-13" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/12/2015-7-13/">JDBC API，JDBC Driver API，JDBC的操作流程，事务的四个特征，JDBC事务处理</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/12/2015-7-13/">
+    <time datetime="2015-07-12T11:31:21.000Z" itemprop="datePublished">2015-07-12</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="7-13日问题集">7.13日问题集</h1><h2 id="JDBC_API">JDBC API</h2><p>DriverManager：这是一个驱动程序管理类，用来装载驱动程序。并为创建数据库连接提供支持</p>
+<ul>
+<li><p>Connection：connection是一个接口，用来连接某一特定的数据库。</p>
+</li>
+<li><p>Statement：statement接口提供了执行SQL语句。获取查询结果的方法</p>
+</li>
+<li><p>PreparedStatement：是statement的子接口，用来执行编译的sql语句</p>
+</li>
+<li><p>ResultSet：该接口提供了对结果集的处理方法</p>
+</li>
+</ul>
+<h2 id="JDBC_Driver_API">JDBC Driver API</h2><p>JDBC Driver API是面向驱动程序开发商的接口</p>
+<p>主要有四种:</p>
+<ul>
+<li>JDBC-ODBC bridge：这种驱动程序会把jdbc的调用委托给其他接口</li>
+<li>部分java技术的本地api驱动程序</li>
+<li>全部基于java技术的本地api驱动程序</li>
+<li>全部基于java技术的本地协议驱动程序</li>
+</ul>
+<h2 id="JDBC的操作流程">JDBC的操作流程</h2><p><img src="http://cl.ly/image/0X0q2w0F3l2M/Image%202015-07-13%20at%201.38.03%20%E4%B8%8B%E5%8D%88.png" alt=""></p>
+<h2 id="Class-forName（）">Class.forName（）</h2><p>Class：这个类封装了要装载到JVM中类的信息。比如类的成员方法，成员变量，以及这个类实现的接口。</p>
+<p>forName（）：这个方法用来初始化指定参数的类。并创建一个对应的实例对象</p>
+<p>参数中的字符串：是mysql指定的字符串驱动程序</p>
+<h2 id="事务的四个特征">事务的四个特征</h2><p>事务是作为一个逻辑单元执行的一系列操作，一个逻辑工作单元必须有四个属性，称为 ACID（原子性、一致性、隔离性和持久性）属性，只有这样才能成为一个事务：</p>
+<ul>
+<li><p>原子性<br>事务必须是原子工作单元；对于其数据修改，要么全都执行，要么全都不执行。</p>
+</li>
+<li><p>一致性<br>事务在完成时，必须使所有的数据都保持一致状态。在相关数据库中，所有规则都必须应用于事务的修改，以保持所有数据的完整性。事务结束时，所有的内部数据结构（如 B 树索引或双向链表）都必须是正确的。</p>
+</li>
+<li><p>隔离性<br>由并发事务所作的修改必须与任何其它并发事务所作的修改隔离。事务查看数据时数据所处的状态，要么是另一并发事务修改它之前的状态，要么是另一事务修改它之后的状态，事务不会查看中间状态的数据。这称为可串行性，因为它能够重新装载起始数据，并且重播一系列事务，以使数据结束时的状态与原始事务执行的状态相同。</p>
+</li>
+<li><p>持久性<br>事务完成之后，它对于系统的影响是永久性的。该修改即使出现系统故障也将一直保持。</p>
+</li>
+</ul>
+<h2 id="JDBC事务处理">JDBC事务处理</h2><p><a href="http://blog.csdn.net/csc0211/article/details/6232047" title="JDBC事务处理" target="_blank" rel="external">http://blog.csdn.net/csc0211/article/details/6232047</a></p>
+<blockquote>
+<p>在JDBC的数据库操作中，一项事务是由一条或是多条表达式所组成的一个不可分割的工作单元。我们通过提交commit()或是回退rollback()来结束事务的操作。关于事务操作的方法都位于接口java.sql.Connection中。</p>
+<p>首先我们要注意，在JDBC中，事务操作默认是自动提交。也就是说，一条对数据库的更新表达式代表一项事务操作。操作成功后，系统将自动调用commit()来提交，否则将调用rollback()来回退。<br>    其次，在JDBC中，可以通过调用setAutoCommit(false)来禁止自动提交。之后就可以把多个数据库操作的表达式作为一个事务，在操作完成后调用commit()来进行整体提交。倘若其中一个表达式操作失败，都不会执行到commit()，并且将产生响应的异常。此时就可以在异常捕获时调用rollback()进行回退。这样做可以保持多次更新操作后，相关数据的一致性。<br>    具体事例如下：</p>
+</blockquote>
+<pre><code>        <span class="keyword">try</span> {
+    <span class="keyword">Class</span>.forName(<span class="string">"oracle.jdbc.driver.OracleDriver"</span>);
+    conn = DriverManager.getConnection(<span class="string">"jdbc:oracle:thin:@127.0.0.1:1521:luecc"</span>, <span class="string">"scott"</span>, <span class="string">"tiger"</span>);
+                <span class="comment">//点禁止自动提交，设置回退</span>
+    conn.setAutoCommit(<span class="keyword">false</span>);
+    stmt = conn.createStatement();
+                <span class="comment">//数据更新</span>
+    stmt.addBatch(<span class="string">"insert into dept values (51, '500', 'ccc')"</span>);
+    stmt.addBatch(<span class="string">"insert into dept values (52, '600', 'ddd')"</span>);
+    stmt.addBatch(<span class="string">"insert into dept values (53, '700', 'eee')"</span>);
+    stmt.executeBatch();
+                <span class="comment">//事务提交 </span>
+    conn.commit();
+    conn.setAutoCommit(<span class="keyword">true</span>);
+} <span class="keyword">catch</span> (ClassNotFoundException e) {
+    e.printStackTrace();
+} <span class="keyword">catch</span>(SQLException e) {
+    e.printStackTrace();
+    <span class="keyword">try</span> {
+        <span class="keyword">if</span>(conn != <span class="keyword">null</span>)
+        {
+                                <span class="comment">//操作不成功则回退</span>
+            conn.rollback();
+                                <span class="comment">//重新设置恢复默认值</span>
+            conn.setAutoCommit(<span class="keyword">true</span>);
+        }
+    } <span class="keyword">catch</span> (SQLException e1) {
+        e1.printStackTrace();
+    }
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cifytg3d6001vpwb28zug1j7u" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-12" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -548,7 +705,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cifaydliy001xvcb24qb2hbkk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cifytg3da001xpwb21eloex3o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -702,7 +859,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cifaydliz001yvcb2wrtm1l1k" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cifytg3dc001ypwb2v7a0l7l8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -796,7 +953,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cifaydlj1001zvcb2dqu90rwn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cifytg3de001zpwb2gtcdynaa" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1000,7 +1157,7 @@ public <span class="keyword">static</span> <span class="type">void</span> main(<
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cifaydlj30021vcb2y8a3g5gu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cifytg3di0021pwb2d4r3mq47" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1137,7 +1294,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cifaydlj20020vcb2iyw2cn9n" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cifytg3dg0020pwb23was8t7c" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1252,7 +1409,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cifaydlj50022vcb2itm60vme" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cifytg3dj0022pwb21lnmy40m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1355,7 +1512,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cifaydlj60023vcb2zgpy5izm" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cifytg3dl0023pwb2ez4ik5us" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1441,127 +1598,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cifaydlj70024vcb2st6gimjw" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-5-24" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/24/2015-5-24/">Dao模式</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/05/24/2015-5-24/">
-    <time datetime="2015-05-24T14:08:39.000Z" itemprop="datePublished">2015-05-24</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="DAO模式">DAO模式</h2><p>信息系统的架构分为：</p>
-<p>客户层———-显示层———-业务层————-数据层————-数据库</p>
-<ul>
-<li>1.客户层：客户层就是客户端，简单的来说就是浏览器。</li>
-<li>2.显示层：JSP/Servlet，用于给浏览器显示。</li>
-<li>3.业务层：对于数据层的原子操作进行整合。（Dao）</li>
-<li>4.数据层：对于数据库进行的原子操作，增加、删除等；（DaoImpl）</li>
-</ul>
-<p>说直白点就是定义了一个接口（Dao），让（DaoImpl）去实现这个接口。</p>
-<h2 id="Dao层包含的类">Dao层包含的类</h2><p>DAO层一般有接口和该接口的实现类！</p>
-<ul>
-<li>接口用于规范实现类！</li>
-<li>实现类一般用于用于操作数据库！ 一般操作修改，添加，删除数据库操作的步骤很相似，就写了一个公共类DAO类 ，修改，添加，删除数据库操作时 直接调用公共类DAO类！</li>
-</ul>
-<h2 id="为什么使用Dao">为什么使用Dao</h2><p>Dao是接口，他的优势就是接口的优势。</p>
-<p>接口作为系统与外界交互的窗口，接口体现是一种规范。</p>
-<p>对于接口的实现者而言，接口规定了实现者必须向外提供哪些服务(以方法的形式来提供)；</p>
-<p>对于接口调用者而言，接口规定了调用者可以调用哪些服务，以及如何调用这些服务（就是如何来调用方法的）。</p>
-<p>当一个程序中使用接口时，接口是多个模块之间的耦合标准；</p>
-<p>当多个应用程序之间使用时，接口时多个程序之间的通信标准。</p>
-<p>从某种程度来说，接口类型整个系统中的“总纲”，它制定了系统之间各个模块应该遵循的标准，因此一个系统中的接口不应该经常改变。一旦接口改变，对整个系统<br>甚至其他系统的影响将是辐射式的，导致系统中大部分类需要重写。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/24/2015-5-24/" data-id="cifaydlj90025vcb2kypfwd1h" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-5-17" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/17/2015-5-17/">jsp两种设计模型 </a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/05/17/2015-5-17/">
-    <time datetime="2015-05-17T11:14:59.000Z" itemprop="datePublished">2015-05-17</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="jsp两种设计模型">jsp两种设计模型</h1><ul>
-<li>jsp+javaBean</li>
-<li>jsp+javaBean+Servlet</li>
-</ul>
-<p>其实还有第三种，纯粹用jsp来编写。由jsp来处理业务逻辑，显示页面，控制流程。由于这种代码繁琐，可重复性差、不易于维护所以很快被市场抛弃了</p>
-<h2 id="jsp+javaBean">jsp+javaBean</h2><p>页面显示和业务逻辑处理分开，JSP实现页面显示，JavaBean对象用来保存数据和实现商业逻辑</p>
-<p> 工作原理是：当浏览器发出请求时，jsp接受请求并访问javabean。若需要访问数据库后台服务器，则通过javaBean连接数据库或后台服务器，执行相应的处理。javaBean将处理的结果数据交给jsp。jsp提取结果并重新组织后，动态生成HRML页面，返回给浏览器。用户从浏览器显示的页面中得到交互的结果</p>
-<h2 id="jsp+javaBean+Servlet">jsp+javaBean+Servlet</h2><p>把流程控制代码和部分的逻辑处理代码提取到servlet中去。</p>
-<p>mvc架构：model层  +view层 controller层</p>
-<ul>
-<li>model：实现业务逻辑，包括了web应用程序功能的核心，负责存储与<br>应用程序相关的数据</li>
-<li>view：用于用户的页面显示，他可以访问model层数据，但不能更改这些数据</li>
-<li>Controller：主要负责model和view的控制关系，负责处理http的请求等</li>
-</ul>
-<p>并不是说mvc架构就更好。<br>根据实际来选择：</p>
-<ul>
-<li>当事务逻辑比较负责、分支较多或需要涉及很多JavaBean组件时，由于JSP和JavaBean+Servlet模型比JSP和JavaBean模型有更清晰的页面表现、更明确的开发模块的划分，所以使用JSP和JavaBean+Servlet模型比较适合</li>
-<li>对于简单的交互处理，利用JSP和JavaBean模型，JSP主要是使用HTML工具开发，然后再插入少量的Java代码就可以实现动态交互。在这种情况下，使用JSP和JavaBean模型更加方便快捷</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/17/2015-5-17/" data-id="cifaydlja0026vcb2ifjhml2e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cifytg3dn0024pwb22eedc5hy" class="article-share-link">Share</a>
       
       
     </footer>

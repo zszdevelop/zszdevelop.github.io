@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        83
+        85
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,100 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-10-19" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/19/2015-10-19/">#Listview 的优化原理 </a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/10/19/2015-10-19/">
+    <time datetime="2015-10-19T15:10:33.000Z" itemprop="datePublished">2015-10-19</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Listview_的优化原理">Listview 的优化原理</h1><p>if（convertView!=null）{}</p>
+<ul>
+<li>保存已经加载过的布局文件，没加载的继续加载，如果加载过后就复用加载。所以他只加载了第一个页面，往后的都采用复用的形式。这样就不会卡顿了。（解决90的问题）</li>
+</ul>
+<ul>
+<li><p>item里面的view是通过二叉树进行查找的，如果查找多了也会变得十分耗时的。这时候就要复用Vi<br>ew，把他放在viewHolder容器里。每次都从里面开始找就好。（解决10的问题）</p>
+</li>
+<li><p>如果把他定义成static的形式，那么当他重复创建时。就只会创建一次。</p>
+</li>
+</ul>
+<h1 id="PopupWindow和对话框的区别">PopupWindow和对话框的区别</h1><ul>
+<li>PopupWindow可以显示在屏幕的任意地方（对话框显示在中间）</li>
+<li>可以设置动画</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/19/2015-10-19/" data-id="cifytg3870000pwb2ixm6hkfc" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
+      <article id="post-2015-10-8" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/08/2015-10-8/">2015/10/8</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/10/08/2015-10-8/">
+    <time datetime="2015-10-08T11:14:27.000Z" itemprop="datePublished">2015-10-08</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/10/08/2015-10-8/" data-id="cifytg3dx0029pwb2c2npdxv5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-10-3-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -232,7 +326,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/03/2015-10-3-2/" data-id="cifaydljj002avcb29k7vbfem" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/03/2015-10-3-2/" data-id="cifytg3e1002bpwb2y3w2mgvv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -447,7 +541,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/03/2015-10-3-1/" data-id="cifaydl1e0000vcb2zhatb3my" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/03/2015-10-3-1/" data-id="cifytg3e3002cpwb2zv2zqvyi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -521,7 +615,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/10/03/2015-10-3/" data-id="cifaydljg0029vcb2ve9ye4qu" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/10/03/2015-10-3/" data-id="cifytg3e0002apwb232gtm8yd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -568,7 +662,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/27/2015-9-27/" data-id="cifaydlf4000hvcb214xg536i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/27/2015-9-27/" data-id="cifytg39v000hpwb2cjcilttf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -627,7 +721,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/24/2015-9-24/" data-id="cifaydlf8000ivcb2r5e8mntp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/24/2015-9-24/" data-id="cifytg39y000ipwb2pxsw8bvb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -669,7 +763,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/21/2015-9-21/" data-id="cifaydlfb000jvcb2t53bs411" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/21/2015-9-21/" data-id="cifytg3a0000jpwb2091mhj6s" class="article-share-link">Share</a>
       
       
     </footer>
@@ -710,7 +804,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/17/2015-9-17/" data-id="cifaydlfd000kvcb2bcgtbofd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/17/2015-9-17/" data-id="cifytg3a3000kpwb280sx2utu" class="article-share-link">Share</a>
       
       
     </footer>
@@ -919,307 +1013,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-5/" data-id="cifaydlfm000mvcb2ncv3t6i9" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-15-4" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/15/2015-9-15-4/">2015/9/15-4</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/15/2015-9-15-4/">
-    <time datetime="2015-09-15T03:01:13.000Z" itemprop="datePublished">2015-09-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="膜拜大神之—-实现注册完整流程">膜拜大神之—-实现注册完整流程</h1><pre><code><span class="keyword">package</span> com.zsz.develop.registerutils;
-
-<span class="keyword">import</span> net.tsz.afinal.FinalHttp;
-<span class="keyword">import</span> net.tsz.afinal.http.AjaxCallBack;
-<span class="keyword">import</span> net.tsz.afinal.http.AjaxParams;
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.view.View;
-<span class="keyword">import</span> android.view.View.OnClickListener;
-<span class="keyword">import</span> android.widget.Button;
-<span class="keyword">import</span> android.widget.EditText;
-
-<span class="javadoc">/**
- *<span class="javadoctag"> @author</span> LigthWang
- *
- *         描述：注册用的封装
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SmsUitl</span> </span>{
-
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_REGISTER = <span class="number">0</span>;
-
-<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> TYPE_LOGIN = <span class="number">1</span>;
-
-<span class="javadoc">/**
- * 初始化获取验证码
- * 
- *<span class="javadoctag"> @param</span> context
- *<span class="javadoctag"> @param</span> etPhoneNum
- *            手机号输入框
- *<span class="javadoctag"> @param</span> btnAcquire
- *            获取验证码按钮
- *<span class="javadoctag"> @param</span> type
- *            类型
- */</span>
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initAcquireCheckNum</span><span class="params">(<span class="keyword">final</span> Context context,
-        <span class="keyword">final</span> EditText etPhoneNum, <span class="keyword">final</span> Button btnAcquire, <span class="keyword">final</span> <span class="keyword">int</span> type,
-        <span class="keyword">final</span> String url)</span> </span>{
-
-    <span class="comment">// 点击获取验证码</span>
-    btnAcquire.setOnClickListener(<span class="keyword">new</span> OnClickListener() {
-        <span class="annotation">@Override</span>
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span> </span>{
-            String strPhoneNum = etPhoneNum.getText().toString().trim();
-            <span class="keyword">if</span> (strPhoneNum.length() == <span class="number">0</span>) {
-                ToastUtil.showToast(context, <span class="string">"请输入手机号码！"</span>);
-                <span class="keyword">return</span>;
-            }
-            <span class="keyword">if</span> (!(YanZhengUtil.isPhoneNumber(strPhoneNum))) {
-                ToastUtil.showToast(context, <span class="string">"请输入有效的手机号！"</span>);
-                <span class="keyword">return</span>;
-            }
-
-            <span class="keyword">if</span> (!(<span class="keyword">new</span> CheckNetwork(context).CheckNetworkAvailable())) {
-                <span class="keyword">return</span>;
-            }
-            checkPhoneNum(context, strPhoneNum, btnAcquire, type, url);
-        }
-    });
-
-}
-
-<span class="javadoc">/**
- * 检查当前账号是否被注册
- * 
- *<span class="javadoctag"> @param</span> context
- *<span class="javadoctag"> @param</span> phoneNum
- *<span class="javadoctag"> @param</span> btnAcquire
- *<span class="javadoctag"> @param</span> type
- */</span>
-<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">checkPhoneNum</span><span class="params">(<span class="keyword">final</span> Context context,
-        <span class="keyword">final</span> String phoneNum, <span class="keyword">final</span> Button btnAcquire, <span class="keyword">final</span> <span class="keyword">int</span> type,
-        <span class="keyword">final</span> String url)</span> </span>{
-
-    AjaxParams params = <span class="keyword">new</span> AjaxParams();
-    params.put(<span class="string">"user.username"</span>, phoneNum);
-
-    FinalHttp fh = <span class="keyword">new</span> FinalHttp();
-    fh.post(url, params, <span class="keyword">new</span> AjaxCallBack&lt;Object&gt;() {
-
-        <span class="annotation">@Override</span>
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onFailure</span><span class="params">(Throwable t, <span class="keyword">int</span> errorNo, String strMsg)</span> </span>{
-            <span class="keyword">super</span>.onFailure(t, errorNo, strMsg);
-
-        }
-
-        <span class="annotation">@Override</span>
-        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onSuccess</span><span class="params">(Object t)</span> </span>{
-            <span class="keyword">super</span>.onSuccess(t);
-            String result = t.toString();
-            System.out.println(<span class="string">"t ======= "</span> + t.toString());
-            <span class="keyword">if</span> (type == TYPE_LOGIN) {
-                <span class="keyword">if</span> (result.equals(<span class="string">"ok"</span>)) {
-
-                } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(result.equals(<span class="string">"unregis"</span>)</span>) </span>{
-                    <span class="comment">// 此账户不存在，请注册</span>
-                } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(result.equals(<span class="string">"WaitingForCheck"</span>)</span>) </span>{
-                    <span class="comment">// 此手机号已注册，正在审核中，请等待审核</span>
-                } <span class="keyword">else</span> {
-                    ToastUtil.showToast(context, <span class="string">"获取验证码失败"</span>);
-                }
-            } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(type == TYPE_REGISTER)</span> </span>{
-                <span class="keyword">if</span> (result.equals(<span class="string">"ok"</span>)) {
-
-                } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(result.equals(<span class="string">"unregis"</span>)</span>) </span>{
-                    startButtonTimer(btnAcquire);
-                    acquireCheckNum(phoneNum, type, url);
-                } <span class="function"><span class="keyword">else</span> <span class="title">if</span> <span class="params">(result.equals(<span class="string">"WaitingForCheck"</span>)</span>) </span>{
-                    <span class="comment">// 此手机号已注册，正在审核中，请等待审核！</span>
-                } <span class="keyword">else</span> {
-                    ToastUtil.showToast(context, <span class="string">"获取验证码失败"</span>);
-                }
-            } <span class="keyword">else</span> {
-                ToastUtil.showToast(context, <span class="string">"获取验证码失败"</span>);
-            }
-        }
-
-    });
-}
-
-<span class="javadoc">/**
- * 请求验证码
- * 
- *<span class="javadoctag"> @param</span> phoneNum
- *<span class="javadoctag"> @param</span> type
- */</span>
-<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">acquireCheckNum</span><span class="params">(String phoneNum, <span class="keyword">final</span> <span class="keyword">int</span> type,
-        String url)</span> </span>{
-    AjaxParams params = <span class="keyword">new</span> AjaxParams();
-    params.put(<span class="string">"user.phone"</span>, phoneNum);
-    params.put(<span class="string">"type"</span>, type == TYPE_LOGIN ? <span class="string">"login"</span> : <span class="string">"regeist"</span>);
-    FinalHttp fh = <span class="keyword">new</span> FinalHttp();
-    fh.post(url, params, <span class="keyword">null</span>);
-}
-
-<span class="javadoc">/**
- * 开始Button计时
- * 
- *<span class="javadoctag"> @param</span> btnAcquire
- */</span>
-<span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startButtonTimer</span><span class="params">(<span class="keyword">final</span> Button btnAcquire)</span> </span>{
-    btnAcquire.setEnabled(<span class="keyword">false</span>);
-    btnAcquire.setTag(<span class="number">60</span>);
-    btnAcquire.setText(<span class="string">"已发送短信(60)"</span>);
-    btnAcquire.post(<span class="keyword">new</span> ButtonTimerRunable(btnAcquire));
-}
-
-<span class="comment">// 按钮计时</span>
-<span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ButtonTimerRunable</span> <span class="keyword">implements</span> <span class="title">Runnable</span> </span>{
-
-    <span class="keyword">private</span> Button btn;
-
-    <span class="function"><span class="keyword">public</span> <span class="title">ButtonTimerRunable</span><span class="params">(Button btn)</span> </span>{
-        <span class="keyword">this</span>.btn = btn;
-    }
-
-    <span class="annotation">@Override</span>
-    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
-        <span class="keyword">try</span> {
-            Integer leftSeconds = (Integer) btn.getTag();
-            <span class="keyword">if</span> (leftSeconds &lt;= <span class="number">0</span>) {
-                btn.setText(<span class="string">"重新获取"</span>);
-                btn.setEnabled(<span class="keyword">true</span>);
-            } <span class="keyword">else</span> {
-                leftSeconds--;
-                btn.setText(<span class="string">"已发送短信("</span> + leftSeconds + <span class="string">")"</span>);
-                btn.setTag(leftSeconds);
-                btn.postDelayed(<span class="keyword">new</span> ButtonTimerRunable(btn), <span class="number">1000</span>);
-            }
-        } <span class="keyword">catch</span> (Exception e) {
-            btn.setText(<span class="string">"重新获取"</span>);
-            btn.setEnabled(<span class="keyword">true</span>);
-        }
-    }
-}
-
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-4/" data-id="cifaydlfn000nvcb2kza32eaj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-15-3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/15/2015-9-15-3/">子线程中使用的Toast</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/15/2015-9-15-3/">
-    <time datetime="2015-09-15T02:56:50.000Z" itemprop="datePublished">2015-09-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="膜拜大神亮之——可以在子线程中使用的Toast">膜拜大神亮之——可以在子线程中使用的Toast</h1><pre><code><span class="keyword">package</span> com.zsz.develop.registerutils;
-
-<span class="keyword">import</span> android.app.Activity;
-<span class="keyword">import</span> android.content.Context;
-<span class="keyword">import</span> android.widget.Toast;
-
-<span class="javadoc">/**
- *<span class="javadoctag"> @author</span> 作者：LigthWang
- *<span class="javadoctag"> @date</span> 创建时间：2015年9月9日 下午5:57:27
- *<span class="javadoctag"> @version</span> 1.0
- *<span class="javadoctag"> @parameter</span> 内容描述：土司的工具
- *<span class="javadoctag"> @since</span>
- *<span class="javadoctag"> @return</span>
- */</span>
-<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ToastUtil</span> </span>{
-
-<span class="keyword">public</span> <span class="keyword">static</span> Toast mToast;
-
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showToast</span><span class="params">(Context mContext, String msg)</span> </span>{
-    <span class="keyword">if</span> (mToast == <span class="keyword">null</span>) {
-        mToast = Toast.makeText(mContext, <span class="string">""</span>, Toast.LENGTH_SHORT);
-    }
-    mToast.setText(msg);
-    mToast.show();
-}
-
-<span class="javadoc">/**
- * 可以直接在子线程中使用的土司
- * 
- *<span class="javadoctag"> @param</span> context
- *<span class="javadoctag"> @param</span> msg
- */</span>
-<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">showSuperToast</span><span class="params">(<span class="keyword">final</span> Activity context, <span class="keyword">final</span> String msg)</span> </span>{
-    <span class="keyword">if</span> (<span class="string">"main"</span>.equals(Thread.currentThread().getName())) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-    } <span class="keyword">else</span> {
-        context.runOnUiThread(<span class="keyword">new</span> Runnable() {
-            <span class="annotation">@Override</span>
-            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{
-                Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-}
-}
-</code></pre>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cifaydlfp000ovcb2o5kfglgx" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-5/" data-id="cifytg3ac000mpwb28onub8c5" class="article-share-link">Share</a>
       
       
     </footer>
