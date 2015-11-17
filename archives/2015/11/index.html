@@ -3,20 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>2015/9/7/3 | zszBlog</title>
+  <title>Archives: 2015/11 | zszBlog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="adapter通过ViewHolder首先分析下ViewHolder的作用，通过convertView.setTag与convertView进行绑定，然后当convertView复用时，直接从与之对于的ViewHolder(getTag)中拿到convertView布局中的控件，省去了findViewById的时间~
-也就是说，实际上们每个convertView会绑定一个ViewHolder对象，">
-<meta property="og:type" content="article">
-<meta property="og:title" content="2015/9/7/3">
-<meta property="og:url" content="http://yoursite.com/2015/09/07/2015-9-7-3/index.html">
+  <meta name="description" content="this zszdeveloper blog��welcome��">
+<meta property="og:type" content="website">
+<meta property="og:title" content="zszBlog">
+<meta property="og:url" content="http://yoursite.com/archives/2015/11/index.html">
 <meta property="og:site_name" content="zszBlog">
-<meta property="og:description" content="adapter通过ViewHolder首先分析下ViewHolder的作用，通过convertView.setTag与convertView进行绑定，然后当convertView复用时，直接从与之对于的ViewHolder(getTag)中拿到convertView布局中的控件，省去了findViewById的时间~
-也就是说，实际上们每个convertView会绑定一个ViewHolder对象，">
+<meta property="og:description" content="this zszdeveloper blog��welcome��">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2015/9/7/3">
-<meta name="twitter:description" content="adapter通过ViewHolder首先分析下ViewHolder的作用，通过convertView.setTag与convertView进行绑定，然后当convertView复用时，直接从与之对于的ViewHolder(getTag)中拿到convertView布局中的控件，省去了findViewById的时间~
-也就是说，实际上们每个convertView会绑定一个ViewHolder对象，">
+<meta name="twitter:title" content="zszBlog">
+<meta name="twitter:description" content="this zszdeveloper blog��welcome��">
   
   
   <link href='//fonts.useso.com/css?family=Open+Sans:400italic,400,600' rel='stylesheet' type='text/css'>
@@ -114,73 +111,38 @@
     
   </div>
 </aside>
-      <section id="main"><article id="post-2015-9-7-3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
+      <section id="main">
+      <div class="archive-year-wrap">
+        <a href="/archives/2015" class="archive-year">2015</a>
+      </div>
+      <section class="archives-wrap">
+        <div class="archives">
     
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
     
-    
-      <header class="article-header">
-        
+    <header class="archive-article-header">
+      
   
-    <h1 class="article-title" itemprop="name">
-      2015/9/7/3
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2015/11/17/2015-11-17/">2015/11/17</a>
     </h1>
   
 
-        <div class="article-meta">
-          <div class="article-date">
+      
+        <div class="archive-article-date">
   <i class="fa fa-calendar"></i>
-  <a href="/2015/09/07/2015-9-7-3/">
-    <time datetime="2015-09-07T07:16:13.000Z" itemprop="datePublished">2015-09-07</time>
+  <a href="/2015/11/17/2015-11-17/">
+    <time datetime="2015-11-17T07:13:43.000Z" itemprop="datePublished">Nov 17</time>
   </a>
 </div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="adapter">adapter</h1><h2 id="通过ViewHolder">通过ViewHolder</h2><p>首先分析下ViewHolder的作用，通过convertView.setTag与convertView进行绑定，然后当convertView复用时，直接从与之对于的ViewHolder(getTag)中拿到convertView布局中的控件，省去了findViewById的时间~</p>
-<p>也就是说，实际上们每个convertView会绑定一个ViewHolder对象，这个viewHolder主要用于帮convertView存储布局中的控件。</p>
-<p>那么我们只要写出一个通用的ViewHolder，然后对于任意的convertView，提供一个对象让其setTag即可；</p>
-<p>既然是通用，那么我们这个ViewHolder就不可能含有各种控件的成员变量了，因为每个Item的布局是不同的，最好的方式是什么呢？</p>
-<p>提供一个容器，专门存每个Item布局中的所有控件，而且还要能够查找出来；既然需要查找，那么ListView肯定是不行了，需要一个键值对进行保存，键为控件的Id，值为控件的引用，相信大家立刻就能想到Map；但是我们不用Map，因为有更好的替代类，就是我们android提供的SparseArray这个类，和Map类似，但是比Map效率，不过键只能为Integer.</p>
-<p><strong>还需要重温好多边</strong></p>
-<p><a href="http://blog.csdn.net/lmj623565791/article/details/38902805/" target="_blank" rel="external">http://blog.csdn.net/lmj623565791/article/details/38902805/</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/07/2015-9-7-3/" data-id="cih34toxi000dbgb29foe8vsc" class="article-share-link">Share</a>
-      
-      
-    </footer>
+    </header>
   </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/09/08/2015-9-8/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          2015/9/8
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2015/09/07/2015-9-7-2/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">2015/9/9-2</div>
-    </a>
-  
-</nav>
-
-  
 </article>
-
-</section>
+  
+    </div></section>
+  </section>
       
     </div>
     <footer id="footer">

@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        85
+        86
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,134 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-26-TabHost" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/26/2015-7-26-TabHost/">TabHost实现</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/26/2015-7-26-TabHost/">
+    <time datetime="2015-07-26T12:17:29.000Z" itemprop="datePublished">2015-07-26</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="TabHost实现">TabHost实现</h1><p>layout布局文件中的设置</p>
+<pre><code><span class="tag">&lt;<span class="title">LinearLayout</span> <span class="attribute">xmlns:android</span>=<span class="value">"http://schemas.android.com/apk/res/android"</span>
+<span class="attribute">xmlns:tools</span>=<span class="value">"http://schemas.android.com/tools"</span>
+<span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+<span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> 
+<span class="attribute">android:orientation</span>=<span class="value">"vertical"</span>
+<span class="attribute">tools:context</span>=<span class="value">".MainActivity"</span> &gt;</span>
+<span class="tag">&lt;<span class="title">Button</span>
+    <span class="attribute">android:id</span>=<span class="value">"@+id/button1"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+    <span class="attribute">android:text</span>=<span class="value">"Button"</span> /&gt;</span>
+ <span class="tag">&lt;<span class="title">TabHost</span>
+    <span class="attribute">android:id</span>=<span class="value">"@+id/tabhost"</span>
+    <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">LinearLayout</span>
+        <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+        <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span>
+        <span class="attribute">android:orientation</span>=<span class="value">"vertical"</span> &gt;</span>
+
+        <span class="tag">&lt;<span class="title">TabWidget</span>
+            <span class="attribute">android:id</span>=<span class="value">"@android:id/tabs"</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span> &gt;</span>
+        <span class="tag">&lt;/<span class="title">TabWidget</span>&gt;</span>
+
+        <span class="tag">&lt;<span class="title">FrameLayout</span>
+            <span class="attribute">android:id</span>=<span class="value">"@android:id/tabcontent"</span>
+            <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+            <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+            <span class="comment">&lt;!-- 第一个tab的布局 --&gt;</span>
+            <span class="tag">&lt;<span class="title">LinearLayout</span>
+                <span class="attribute">android:id</span>=<span class="value">"@+id/tab1"</span>
+                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+                <span class="tag">&lt;<span class="title">TextView</span>
+                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView1"</span>
+                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:text</span>=<span class="value">"林炳东"</span> /&gt;</span>
+
+            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+
+            <span class="comment">&lt;!-- 第二个tab的布局 --&gt;</span>
+            <span class="tag">&lt;<span class="title">LinearLayout</span>
+                <span class="attribute">android:id</span>=<span class="value">"@+id/tab2"</span>
+                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+                <span class="tag">&lt;<span class="title">TextView</span>
+                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView2"</span>
+                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:text</span>=<span class="value">"张小媛"</span> /&gt;</span>
+
+            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+
+            <span class="comment">&lt;!-- 第三个tab的布局 --&gt;</span>
+            <span class="tag">&lt;<span class="title">LinearLayout</span>
+                <span class="attribute">android:id</span>=<span class="value">"@+id/tab3"</span>
+                <span class="attribute">android:layout_width</span>=<span class="value">"match_parent"</span>
+                <span class="attribute">android:layout_height</span>=<span class="value">"match_parent"</span> &gt;</span>
+
+                <span class="tag">&lt;<span class="title">TextView</span>
+                    <span class="attribute">android:id</span>=<span class="value">"@+id/textView3"</span>
+                    <span class="attribute">android:layout_width</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:layout_height</span>=<span class="value">"wrap_content"</span>
+                    <span class="attribute">android:text</span>=<span class="value">"马贝贝"</span> /&gt;</span>
+
+            <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">FrameLayout</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">TabHost</span>&gt;</span> 
+
+<span class="tag">&lt;/<span class="title">LinearLayout</span>&gt;</span>
+</code></pre><p>于此同时也要在Activiyt中设置</p>
+<pre><code><span class="keyword">th</span>= (TabHost) findViewById(R.id.tabHost);
+  <span class="keyword">th</span>.setup();//初始化TabHost容器  
+
+   //在TabHost创建标签，然后设置：标题／图标／标签页布局 
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag1"</span>).setIndicator(<span class="string">"主页"</span>,getResources().getDrawable(R.drawable.notification_template_icon_bg)).setContent(R.id.tab1));
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag2"</span>).setIndicator(<span class="string">"历史"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab2));
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag3"</span>).setIndicator(<span class="string">"机器人"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab3));
+  <span class="keyword">th</span>.addTab(<span class="keyword">th</span>.newTabSpec(<span class="string">"tag3"</span>).setIndicator(<span class="string">"设置"</span>,getResources().getDrawable(R.drawable.abc_ab_share_pack_mtrl_alpha)).setContent(R.id.tab4));
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26-TabHost/" data-id="cih34tp0d001lbgb2u7ywtg95" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-26" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -303,7 +431,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cifytg3cd001kpwb2ubg8y95q" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/26/2015-7-26/" data-id="cih34tp0c001kbgb260ty5tap" class="article-share-link">Share</a>
       
       
     </footer>
@@ -348,7 +476,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cifytg3cg001mpwb2aynj9yzd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/25/2015-7-25/" data-id="cih34tp0f001mbgb23giyzcjs" class="article-share-link">Share</a>
       
       
     </footer>
@@ -512,7 +640,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cifytg3cj001opwb2uposna90" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23-URI-Intent/" data-id="cih34tp0j001obgb22y1ubq4t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -568,7 +696,7 @@ protected <span class="keyword">void</span> doPost(HttpServletRequest request, H
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cifytg3ch001npwb2koaf6521" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/23/2015-7-23/" data-id="cih34tp0h001nbgb2cau3z5au" class="article-share-link">Share</a>
       
       
     </footer>
@@ -771,7 +899,7 @@ public <span class="class"><span class="keyword">class</span> <span class="title
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cifytg3ck001ppwb20u94i2mc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/22/2015-7-22/" data-id="cih34tp0m001pbgb2sompfoy4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -901,7 +1029,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cifytg3cu001qpwb2b7dql78t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/21/2015-7-21/" data-id="cih34tp0v001qbgb2ntx9c4er" class="article-share-link">Share</a>
       
       
     </footer>
@@ -980,7 +1108,7 @@ protected <span class="keyword">void</span> onActivityResult(int requestCode, in
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cifytg3cv001rpwb2ak7itxqy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/20/2015-7-20/" data-id="cih34tp0y001rbgb29p34w4qd" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1072,7 +1200,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cifytg3cz001tpwb2at29t13p" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/19/2015-7-18-adapter/" data-id="cih34tp13001tbgb2qcskmgee" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1151,69 +1279,7 @@ private ArrayList&lt;<span class="built_in">String</span>&gt; getData(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cifytg3cx001spwb2pb06t64n" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-7-15" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/07/15/2015-7-15/">Android通过httpClient获取网络请求，响应状态码含义，Http请求时要添加权限</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/07/15/2015-7-15/">
-    <time datetime="2015-07-15T00:50:03.000Z" itemprop="datePublished">2015-07-15</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android通过httpClient获取网络请求">Android通过httpClient获取网络请求</h1><p>在HttpClient模块中用到了两个重要的类：HttpGet和HttpPost。这两个类分别用来提交HTTP GET和HTTP POST请求。</p>
-<p>无论是使用HttpGet，还是使用HttpPost，都必须通过如下3步来访问HTTP资源。</p>
-<ul>
-<li>1.创建HttpGet或HttpPost对象，将要请求的URL通过构造方法传入HttpGet或HttpPost对象。</li>
-<li>2.使用DefaultHttpClient类的execute方法发送HTTP GET或HTTP POST请求，并返回HttpResponse对象。</li>
-<li>3.通过HttpResponse接口的getEntity方法返回响应信息，并进行相应的处理。（判断请求响应状态码，状态码为200表示服务端成功响应了客户端的请求。</li>
-</ul>
-<h2 id="响应状态码含义">响应状态码含义</h2><ul>
-<li>◆200 (OK): 找到了该资源，并且一切正常。</li>
-<li>◆304 (NOT MODIFIED): 该资源在上次请求之后没有任何修改。这通常用于浏览器的缓存机制。</li>
-<li>◆401 (UNAUTHORIZED): 客户端无权访问该资源。这通常会使得浏览器要求用户输入用户名和密码，以登录到服务器。</li>
-<li>◆403 (FORBIDDEN): 客户端未能获得授权。这通常是在401之后输入了不正确的用户名或密码。</li>
-<li>◆404 (NOT FOUND): 在指定的位置不存在所申请的资源。<br>）。</li>
-</ul>
-<h2 id="Http请求时要添加权限！！！">Http请求时要添加权限！！！</h2><p>找了一下午真是活该！<br>没加权限竟然。</p>
-<pre><code><span class="number">07</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">05</span>:<span class="number">31.824</span>    <span class="number">1781</span>-<span class="number">1794</span>/com<span class="class">.zsz</span><span class="class">.develop</span><span class="class">.myrobot</span> E/AndroidRuntime﹕ FATAL EXCEPTION: AsyncTask #<span class="number">1</span>
-java<span class="class">.lang</span><span class="class">.RuntimeException</span>: An error occured while executing <span class="function"><span class="title">doInBackground</span><span class="params">()</span></span>
-</code></pre><p>错误行数在</p>
-<pre><code><span class="attribute">httpResponse</span>=<span class="string"> httpClient.execute(httpGet);</span>
-</code></pre><p>和</p>
-<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">HttpData</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AsyncTask&lt;String</span>, <span class="title">Void</span>, <span class="title">String&gt;</span> {</span>
-</code></pre><p>下回涨点记性</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cifytg3d4001upwb2d77a2ztd" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/18/2015-7-18/" data-id="cih34tp0z001sbgb2bh1irhxv" class="article-share-link">Share</a>
       
       
     </footer>

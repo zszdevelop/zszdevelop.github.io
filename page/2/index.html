@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        85
+        86
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,215 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-9-15-5" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/09/15/2015-9-15-5/">2015/9/15-5</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/09/15/2015-9-15-5/">
+    <time datetime="2015-09-15T03:36:04.000Z" itemprop="datePublished">2015-09-15</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="膜拜大神亮之—-日志级别系统">膜拜大神亮之—-日志级别系统</h1><pre><code><span class="keyword">package</span> com.siso.utils;
+
+<span class="keyword">import</span> android.util.Log;
+
+<span class="comment">/**
+ * @author LigthWang
+ *
+ *         描述：控制全局的log的封装
+ */</span>
+<span class="keyword">public</span> class LogUtils {
+<span class="comment">/** 日志输出级别NONE */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> LEVEL_NONE = <span class="number">0</span>;
+
+<span class="comment">/** 日志输出级别V */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> LEVEL_VERBOSE = <span class="number">1</span>;
+
+<span class="comment">/** 日志输出级别D */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> LEVEL_DEBUG = <span class="number">2</span>;
+
+<span class="comment">/** 日志输出级别I */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> LEVEL_INFO = <span class="number">3</span>;
+
+<span class="comment">/** 日志输出级别W */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> LEVEL_WARN = <span class="number">4</span>;
+
+<span class="comment">/** 日志输出级别E */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="built_in">int</span> LEVEL_ERROR = <span class="number">5</span>;
+
+<span class="comment">/** 日志输出时的TAG */</span>
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">String</span> mTag = <span class="string">"googleplay"</span>;
+
+<span class="comment">/** 是否允许输出log */</span>
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="built_in">int</span> mDebuggable = LEVEL_ERROR;
+
+<span class="comment">/** 用于记时的变量 */</span>
+
+<span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">long</span> mTimestamp = <span class="number">0</span>;
+
+<span class="comment">/** 以级别为 v 的形式输出LOG */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> v(<span class="keyword">String</span> msg) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_VERBOSE) {
+
+        Log.v(mTag, msg);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 d 的形式输出LOG */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> d(<span class="keyword">String</span> msg) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_DEBUG) {
+
+        Log.d(mTag, msg);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 i 的形式输出LOG */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> i(<span class="keyword">String</span> msg) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_INFO) {
+
+        Log.i(mTag, msg);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 w 的形式输出LOG */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> w(<span class="keyword">String</span> msg) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_WARN) {
+
+        Log.w(mTag, msg);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 w 的形式输出Throwable */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> w(Throwable tr) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_WARN) {
+
+        Log.w(mTag, <span class="string">""</span>, tr);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 w 的形式输出LOG信息和Throwable */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> w(<span class="keyword">String</span> msg, Throwable tr) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_WARN &amp;&amp; <span class="keyword">null</span> != msg) {
+
+        Log.w(mTag, msg, tr);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 e 的形式输出LOG */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> e(<span class="keyword">String</span> msg) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_ERROR) {
+
+        Log.e(mTag, msg);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 e 的形式输出Throwable */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> e(Throwable tr) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_ERROR) {
+
+        Log.e(mTag, <span class="string">""</span>, tr);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 e 的形式输出LOG信息和Throwable */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> e(<span class="keyword">String</span> msg, Throwable tr) {
+
+    <span class="keyword">if</span> (mDebuggable &gt;= LEVEL_ERROR &amp;&amp; <span class="keyword">null</span> != msg) {
+
+        Log.e(mTag, msg, tr);
+
+    }
+
+}
+
+<span class="comment">/** 以级别为 e 的形式输出msg信息,附带时间戳，用于输出一个时间段结束点* @param msg 需要输出的msg */</span>
+
+<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> elapsed(<span class="keyword">String</span> msg) {
+
+    <span class="keyword">long</span> currentTime = System.currentTimeMillis();
+
+    <span class="keyword">long</span> elapsedTime = currentTime - mTimestamp;
+
+    mTimestamp = currentTime;
+
+    e(<span class="string">"[Elapsed："</span> + elapsedTime + <span class="string">"]"</span> + msg);
+
+}
+
+}
+</code></pre>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-5/" data-id="cih34toyc000mbgb21hd6g3of" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-9-15-4" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -317,7 +526,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-4/" data-id="cifytg3ae000npwb2we317pp5" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-4/" data-id="cih34toye000nbgb26aw52jq7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +611,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cifytg3ah000opwb2hu1ymtcr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-3/" data-id="cih34toyg000obgb28f2cztvm" class="article-share-link">Share</a>
       
       
     </footer>
@@ -540,7 +749,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-2/" data-id="cifytg3aj000ppwb2t3700jft" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15-2/" data-id="cih34toyh000pbgb2mo85gbby" class="article-share-link">Share</a>
       
       
     </footer>
@@ -681,7 +890,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/15/2015-9-15/" data-id="cifytg3a7000lpwb2o0vmdsrv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/15/2015-9-15/" data-id="cih34toy8000lbgb2ydr5nb3j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -726,7 +935,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/14/2015-9-14-1/" data-id="cifytg3ap000rpwb2ldhwblyr" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/14/2015-9-14-1/" data-id="cih34toyn000rbgb2jhprt22y" class="article-share-link">Share</a>
       
       
     </footer>
@@ -900,7 +1109,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/14/2015-9-14/" data-id="cifytg3al000qpwb213am0z8e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/14/2015-9-14/" data-id="cih34toyk000qbgb28s9b2sbv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -940,7 +1149,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/11/2015-9-11/" data-id="cifytg3ar000spwb23vjcgygc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/11/2015-9-11/" data-id="cih34toyq000sbgb2di5bjv5v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1213,7 +1422,7 @@ String latLongString;
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/10/2015-9-10/" data-id="cifytg3at000tpwb21keec4po" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/10/2015-9-10/" data-id="cih34toys000tbgb2hnjqztay" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1355,65 +1564,7 @@ private <span class="keyword">void</span> updateToNewLocation(Location location)
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-4/" data-id="cifytg38u0003pwb2m5dwt3fj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-9-9-3" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/09/09/2015-9-9-3/">2015/9/9/3</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/09/09/2015-9-9-3/">
-    <time datetime="2015-09-09T07:30:20.000Z" itemprop="datePublished">2015-09-09</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="startActivityForResult与startActivity的不同之处">startActivityForResult与startActivity的不同之处</h2><p>1、startActivity( )<br>仅仅是跳转到目标页面，若是想跳回当前页面，则必须再使用一次startActivity( )。<br>2、startActivityForResult( )<br>可以一次性完成这项任务，当程序执行到这段代码的时候，假若从T1Activity跳转到下一个T2Activity，而当这个T2Activity调用了finish()方法以后，程序会自动跳转回T1Activity，并调用前一个T1Activity中的onActivityResult( )方法。</p>
-<pre><code>Intent toChooseCityActivity=new Intent<span class="list">(<span class="keyword">this</span>,ChooseCityActivity.class)</span><span class="comment">;</span>
-            startActivityForResult<span class="list">(<span class="keyword">toChooseCityActivity</span>, <span class="number">1</span>)</span><span class="comment">;</span>
-</code></pre><p>startActivityForResult( )第一个Intent，第二个是个标识，但一定要&gt;=0。</p>
-<p><strong>2.重写onActivityResult方法，用来接收B回传的数据。</strong></p>
-<pre><code> <span class="annotation">@Override</span>
-<span class="keyword">protected</span> <span class="function"><span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span> </span>{
-    <span class="keyword">super</span>.onActivityResult(requestCode, resultCode, data);
-    <span class="keyword">if</span> (resultCode == <span class="number">2</span>){
-        <span class="keyword">if</span> (data != <span class="keyword">null</span>){
-            tvCity.setText(data.getStringExtra(<span class="string">"city"</span>));
-        }
-    }
-</code></pre><p><strong>3.在B中回传数据时采用setResult方法，并且之后要调用finish方法。</strong></p>
-<pre><code><span class="function">setResult</span>(RESULT_OK, intent); <span class="comment">//intent为A传来的带有Bundle的intent，当然也可以自己定义新的Bundle</span>
-<span class="function">finish</span>();<span class="comment">//此处一定要调用finish()方法</span>
-</code></pre><p>Android activity的setResult()在什么时候调用(重点也是难点)</p>
-<p>如果在startActivityForResult起来的Activity里面设置setResult,结果并不会马上返回给parent的Activity,只有当前Activity被finish,结果才会被发送给parent的onActivityResult去处理!</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-3/" data-id="cifytg38x0004pwb2ct0n60fl" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/09/09/2015-9-9-4/" data-id="cih34towp0003bgb260cwcrx3" class="article-share-link">Share</a>
       
       
     </footer>

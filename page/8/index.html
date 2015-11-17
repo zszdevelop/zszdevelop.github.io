@@ -86,7 +86,7 @@
   	</div>
     <div class="article-info profile-block">
       <div class="article-info-block">
-        85
+        86
         <span>posts</span>
       </div>
       <div class="article-info-block">
@@ -112,6 +112,68 @@
   </div>
 </aside>
       <section id="main">
+      <article id="post-2015-7-15" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/15/2015-7-15/">Android通过httpClient获取网络请求，响应状态码含义，Http请求时要添加权限</a>
+    </h1>
+  
+
+        <div class="article-meta">
+          <div class="article-date">
+  <i class="fa fa-calendar"></i>
+  <a href="/2015/07/15/2015-7-15/">
+    <time datetime="2015-07-15T00:50:03.000Z" itemprop="datePublished">2015-07-15</time>
+  </a>
+</div>
+          
+        </div>
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Android通过httpClient获取网络请求">Android通过httpClient获取网络请求</h1><p>在HttpClient模块中用到了两个重要的类：HttpGet和HttpPost。这两个类分别用来提交HTTP GET和HTTP POST请求。</p>
+<p>无论是使用HttpGet，还是使用HttpPost，都必须通过如下3步来访问HTTP资源。</p>
+<ul>
+<li>1.创建HttpGet或HttpPost对象，将要请求的URL通过构造方法传入HttpGet或HttpPost对象。</li>
+<li>2.使用DefaultHttpClient类的execute方法发送HTTP GET或HTTP POST请求，并返回HttpResponse对象。</li>
+<li>3.通过HttpResponse接口的getEntity方法返回响应信息，并进行相应的处理。（判断请求响应状态码，状态码为200表示服务端成功响应了客户端的请求。</li>
+</ul>
+<h2 id="响应状态码含义">响应状态码含义</h2><ul>
+<li>◆200 (OK): 找到了该资源，并且一切正常。</li>
+<li>◆304 (NOT MODIFIED): 该资源在上次请求之后没有任何修改。这通常用于浏览器的缓存机制。</li>
+<li>◆401 (UNAUTHORIZED): 客户端无权访问该资源。这通常会使得浏览器要求用户输入用户名和密码，以登录到服务器。</li>
+<li>◆403 (FORBIDDEN): 客户端未能获得授权。这通常是在401之后输入了不正确的用户名或密码。</li>
+<li>◆404 (NOT FOUND): 在指定的位置不存在所申请的资源。<br>）。</li>
+</ul>
+<h2 id="Http请求时要添加权限！！！">Http请求时要添加权限！！！</h2><p>找了一下午真是活该！<br>没加权限竟然。</p>
+<pre><code><span class="number">07</span>-<span class="number">18</span> <span class="number">09</span>:<span class="number">05</span>:<span class="number">31.824</span>    <span class="number">1781</span>-<span class="number">1794</span>/com<span class="class">.zsz</span><span class="class">.develop</span><span class="class">.myrobot</span> E/AndroidRuntime﹕ FATAL EXCEPTION: AsyncTask #<span class="number">1</span>
+java<span class="class">.lang</span><span class="class">.RuntimeException</span>: An error occured while executing <span class="function"><span class="title">doInBackground</span><span class="params">()</span></span>
+</code></pre><p>错误行数在</p>
+<pre><code><span class="attribute">httpResponse</span>=<span class="string"> httpClient.execute(httpGet);</span>
+</code></pre><p>和</p>
+<pre><code>public <span class="class"><span class="keyword">class</span> <span class="title">HttpData</span> <span class="keyword"><span class="keyword">extends</span></span> <span class="title">AsyncTask&lt;String</span>, <span class="title">Void</span>, <span class="title">String&gt;</span> {</span>
+</code></pre><p>下回涨点记性</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2015/07/15/2015-7-15/" data-id="cih34tp17001ubgb28sq4tei0" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+    
       <article id="post-2015-7-13-2" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -150,7 +212,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cifytg3d8001wpwb2jngmnmo4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/13/2015-7-13-2/" data-id="cih34tp1b001wbgb2dck3l673" class="article-share-link">Share</a>
       
       
     </footer>
@@ -259,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cifytg3d6001vpwb28zug1j7u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-13/" data-id="cih34tp1a001vbgb2e66ulr6m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -705,7 +767,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cifytg3da001xpwb21eloex3o" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/12/2015-7-12/" data-id="cih34tp1d001xbgb2j5vexmjw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -859,7 +921,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cifytg3dc001ypwb2v7a0l7l8" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/07/11/2015-7-11/" data-id="cih34tp1f001ybgb2cmauoibr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -953,7 +1015,7 @@ public ArrayList&lt;UserInfo&gt; getList(){
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cifytg3de001zpwb2gtcdynaa" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/08/2015-6-8/" data-id="cih34tp1g001zbgb2dqitgiyo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1157,7 +1219,7 @@ public <span class="keyword">static</span> <span class="type">void</span> main(<
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cifytg3di0021pwb2d4r3mq47" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/05/2015-6-5-2/" data-id="cih34tp1j0021bgb2g0ssk0ou" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1294,7 +1356,7 @@ android:<span class="variable">orientation=</span><span class="string">"vertical
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cifytg3dg0020pwb23was8t7c" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-5/" data-id="cih34tp1i0020bgb2stupd0ef" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1409,7 +1471,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cifytg3dj0022pwb21lnmy40m" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/06/04/2015-6-4/" data-id="cih34tp1l0022bgb2av2nwa5v" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1512,93 +1574,7 @@ public class DataCleanManager {
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cifytg3dl0023pwb2ez4ik5us" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-    
-      <article id="post-2015-5-27" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/05/27/2015-5-27/">Android 非同步任務 - AsyncTask</a>
-    </h1>
-  
-
-        <div class="article-meta">
-          <div class="article-date">
-  <i class="fa fa-calendar"></i>
-  <a href="/2015/05/27/2015-5-27/">
-    <time datetime="2015-05-27T13:14:38.000Z" itemprop="datePublished">2015-05-27</time>
-  </a>
-</div>
-          
-        </div>
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Android_非同步任務_-_AsyncTask">Android 非同步任務 - AsyncTask</h1><h2 id="Android为什么要使用多线程">Android为什么要使用多线程</h2><ul>
-<li>提高用户体验或者避免ANR（如果在主线程（UI线程）操作一些耗时的操作容易造成卡顿<br>android 规定主线程中不可以做http 连接操作。）</li>
-<li>异步</li>
-<li>多任务</li>
-</ul>
-<p>当主线程（UI线程）操作到一些复杂的IO操作（文件操作，网络操作，数据库操作），复杂运算等耗时操作，容易造成卡顿。</p>
-<p>应用程序弹出“无响应”的对话框（ANR），那是因为在Android主线程中进行了超时的操作，过多的阻塞了主线程就会导致应用出现ANR的Waring。(android 规定主线程中不可以做http 连接操作)</p>
-<h2 id="AsyncTask是什么">AsyncTask是什么</h2><p>  AsyncTask,是android提供的輕量級的非同步類,可以直接繼承AsyncTask,在類中實現非同步操作,並提供介面反饋當前非同步執行的程度(可以通過介面實現UI進度更新),最後反饋執行的結果給UI主線程.</p>
-<h2 id="为什么使用AsyncTask">为什么使用AsyncTask</h2><ul>
-<li>AsyncTask能实现多线程，避免ANR</li>
-<li>简单快捷易操作</li>
-<li>过程可控</li>
-</ul>
-<h2 id="AsyncTask怎么使用">AsyncTask怎么使用</h2><p>AsyncTask定义了三种泛型类型 Params，Progress和Result。<br>Params 启动任务执行的输入参数，比如HTTP请求的URL。<br>Progress 后台任务执行的百分比。<br>Result 后台执行任务最终返回的结果，比如String。 </p>
-<pre><code>`private class <span class="type">TestAsyncTask</span> extends <span class="type">AsyncTask</span>&lt;<span class="type">String</span>, <span class="type">Void</span>, <span class="type">Boolean</span>&gt; 
-
-{
-
- @<span class="type">Override</span>
-  protected <span class="type">void</span> onPreExecute() 
-  {
-    //最先执行的就是这个。一遍添加进度条
- }
-
-  @<span class="type">Override</span>
-  protected <span class="type">Boolean</span> doInBackground(<span class="type">String</span>... params)
-  {
-    //这个是在后台执行的东西，就是说，它自动另外开了个线程运行，不影响你现在做的东西。
-    //复杂的<span class="type">IO</span>操作（文件操作，网络操作，数据库操作），复杂运算等耗时操作
- }
-
-
-@<span class="type">Override</span>
-  protected <span class="type">void</span> onPostExecute(<span class="type">Boolean</span> <span class="literal">result</span>)
-  {
-    <span class="keyword">if</span> (<span class="literal">result</span>)
-    {
-      //后台执行的完毕后，它会用<span class="type">Result</span>通知这里，就是执行这里了。
-  }
-    <span class="keyword">else</span>
-    {
-      //所以最好判断一下<span class="literal">result</span>，写个<span class="keyword">else</span>，判断后台执行的东西是不是出问题了。
-  }
-  }
-}`
-</code></pre><p><a href="http://yuchen.blog.51cto.com/2739238/593019" title="如何在Android中用好多线程" target="_blank" rel="external">http://yuchen.blog.51cto.com/2739238/593019</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2015/05/27/2015-5-27/" data-id="cifytg3dn0024pwb22eedc5hy" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2015/05/31/2015-5-31/" data-id="cih34tp1m0023bgb205kdll0c" class="article-share-link">Share</a>
       
       
     </footer>
